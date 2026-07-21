@@ -33,6 +33,6 @@ export function Icon({ name }: { name: string }) {
   return <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]||paths.plane}</svg>;
 }
 
-export function PillarCard({icon,title,text,bullets}:{icon:string;title:string;text:string;bullets:string[]}) { return <article className="pillar-card"><div className="pillar-image"><Icon name={icon}/></div><div className="round-icon"><Icon name={icon}/></div><h3>{title}</h3><p>{text}</p><ul>{bullets.map(b=><li key={b}>✓ <span>{b}</span></li>)}</ul></article>; }
+export function PillarCard({icon,title,text,bullets}:{icon:string;title:string;text:string;bullets:string[]}) { return <article className="pillar-card"><div className={`pillar-image pillar-image-${icon}`} aria-hidden="true"/><div className="round-icon"><Icon name={icon}/></div><h3>{title}</h3><p>{text}</p><ul>{bullets.map(b=><li key={b}>✓ <span>{b}</span></li>)}</ul></article>; }
 
 export function PageShell({active,children}:{active:string;children:React.ReactNode}) { return <main><div className="concept-pill">SKY RIDERS GATEWAY</div><div className="page-shell"><Header active={active}/>{children}</div><Footer/></main>; }
