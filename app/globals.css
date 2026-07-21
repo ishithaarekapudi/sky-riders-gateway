@@ -114,7 +114,7 @@ button { cursor: pointer; }
 
 .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .pillar-card { overflow: hidden; padding-bottom: 30px; border: 1px solid var(--line); border-radius: 15px; background: white; box-shadow: var(--shadow); text-align: center; }
-.pillar-image { aspect-ratio: 16 / 8.3; background-image: url('/pathways-triptych.png'); background-size: 300% 100%; background-repeat: no-repeat; }
+.pillar-image { aspect-ratio: 16 / 8.3; background-image: url('/pathways-triptych.jpg'); background-size: 300% 100%; background-repeat: no-repeat; }
 .pillar-image-telescope { background-position: left center; }
 .pillar-image-people { background-position: center center; }
 .pillar-image-path { background-position: right center; }
@@ -146,7 +146,7 @@ button { cursor: pointer; }
 .partner-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 30px; margin-bottom: 65px; }
 .partner-row div { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #9baabe; text-align: center; }
 .partner-row .icon { width: 55px; height: 55px; }
-.final-cta { min-height: 270px; display: flex; align-items: center; padding: 50px; border-radius: 14px; color: white; background: linear-gradient(90deg, #031a36 24%, rgba(3,26,54,.62)), url('/pathways-triptych.png') right center/auto 100% no-repeat, #031a36; }
+.final-cta { min-height: 270px; display: flex; align-items: center; padding: 50px; border-radius: 14px; color: white; background: linear-gradient(90deg, #031a36 24%, rgba(3,26,54,.62)), url('/pathways-triptych.jpg') right center/auto 100% no-repeat, #031a36; }
 .final-cta h2 { margin: 0; font-size: 36px; }
 .final-cta p { margin: 12px 0 25px; color: #d5e1ef; }
 
@@ -163,7 +163,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .sub-hero h1 { margin: 0 0 18px; font-size: 54px; line-height: 1.03; letter-spacing: -.04em; }
 .sub-hero p { margin: 0 0 28px; font-size: 22px; line-height: 1.45; }
 .explore-hero { background-image: linear-gradient(90deg, rgba(231,241,248,.95), rgba(238,245,246,.28) 60%, transparent), url('/hero-gateway.png'); background-position: center 42%; }
-.scholarships-hero { min-height: 430px; color: white; background-image: linear-gradient(90deg, #031a36 8%, rgba(3,26,54,.84) 45%, transparent), url('/pathways-triptych.png'); background-position: right center; }
+.scholarships-hero { min-height: 430px; color: white; background-image: linear-gradient(90deg, #031a36 8%, rgba(3,26,54,.84) 45%, transparent), url('/pathways-triptych.jpg'); background-position: right center; }
 .org-hero, .careers-hero, .resources-hero { min-height: 430px; color: white; background-image: linear-gradient(90deg, rgba(3,26,54,.96), rgba(3,26,54,.48)), url('/hero-gateway.png'); }
 .org-hero p, .careers-hero p, .resources-hero p { color: #e2ebf6; }
 .progress { display: flex; align-items: center; gap: 15px; }
