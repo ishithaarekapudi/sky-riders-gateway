@@ -2,14 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sky Riders Gateway",
-  description: "Structured roadmaps that help students turn their passion into real-world opportunities.",
+  title: { default: "Sky Riders Gateway", template: "%s | Sky Riders Gateway" },
+  description: "Accessible aviation pathways, mentors, scholarships, and opportunities for young people.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+  return <html lang="en"><body>{children}</body></html>;
 }
