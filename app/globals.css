@@ -15,3 +15,53 @@
 @media(max-width:680px){.hero-copy{padding-top:125px}}
 .gateway-hero{min-height:730px}
 .hero-copy{min-height:490px;padding-top:125px}
+
+/* Keep the gateway artwork, message, and feature band in one stable flow. */
+.gateway-hero{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  background-image:linear-gradient(to bottom,rgba(255,255,255,0) 0 54%,rgba(3,26,54,.12) 67%,rgba(3,26,54,.78) 82%,#031a36 100%),url('/hero-gateway.png');
+  background-position:center top;
+  background-size:100% auto;
+  background-repeat:no-repeat;
+  background-color:var(--navy);
+}
+.hero-copy{
+  position:relative;
+  z-index:1;
+  flex:0 0 520px;
+  min-height:520px;
+  justify-content:flex-start;
+  padding:165px 40px 25px;
+  color:var(--ink);
+  text-shadow:0 1px 14px rgba(255,255,255,.72);
+}
+.hero-copy h1{font-size:clamp(38px,3.4vw,58px)}
+.hero-copy p{font-size:clamp(20px,1.7vw,25px);margin:16px 0}
+.hero-copy .primary-button,.hero-copy small{text-shadow:none}
+.feature-row{
+  position:relative;
+  left:auto;
+  right:auto;
+  bottom:auto;
+  z-index:1;
+  flex:0 0 auto;
+  min-height:235px;
+  height:auto;
+  padding:36px 45px 30px;
+  background:linear-gradient(to bottom,rgba(3,26,54,.32),rgba(3,26,54,.94) 34%,#031a36 100%);
+}
+@media(max-width:1000px){
+  .gateway-hero{background-size:auto 760px;background-position:center top}
+  .hero-copy{flex-basis:520px;min-height:520px;padding:165px 30px 25px}
+  .feature-row{position:relative;min-height:0;padding:45px 20px 24px}
+}
+@media(max-width:680px){
+  .gateway-hero{background-size:auto 650px}
+  .hero-copy{flex-basis:500px;min-height:500px;padding:145px 22px 20px}
+  .hero-copy h1{font-size:38px}
+  .hero-copy p{font-size:18px}
+  .feature-row{padding:40px 10px 20px}
+}
