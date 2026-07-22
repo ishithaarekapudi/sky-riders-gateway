@@ -100,7 +100,12 @@ button { cursor: pointer; }
 .live-home .gateway-stage { aspect-ratio: 1442 / 908; }
 .live-home .gateway-art { object-fit: cover; }
 .live-home .hero-copy { top: 24%; }
-.live-home .hero-copy h1 { font-weight: 750; }
+.live-home .hero-copy h1 { font-weight: 650; }
+.live-home .site-header nav a { font-weight: 600; }
+.live-home .ghost-button,
+.live-home .small-button,
+.live-home .primary-button { font-weight: 650; }
+.live-home .feature-item strong { font-weight: 600; }
 .live-home .site-header a,
 .live-home .feature-item,
 .live-home .primary-button,
