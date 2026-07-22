@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Footer, Header, Icon, PillarCard } from "./ui";
+import { Footer, Header, Icon } from "./ui";
 
 const features = [
   ["user", "Personalized for You", "Tailored to your interests and goals"],
@@ -9,13 +9,20 @@ const features = [
   ["calendar", "Events", "Find events and opportunities"],
 ] as const;
 
-const resources = [
-  ["user", "Personalized Guidance", "Get recommendations based on your interests, goals, and stage."],
-  ["video", "Live Mentor Sessions", "Join live Q&As and small-group sessions with aviation professionals."],
-  ["document", "Career Guide", "Explore career paths, skills, and education requirements."],
-  ["headphones", "Podcasts & Stories", "Hear real stories from people across the world of aviation."],
-  ["presentation", "School Talks", "Bring aviation education directly to your school or organization."],
-  ["handshake", "Partnership Opportunities", "Help expand aviation access in communities nationwide."],
+const aviationPaths = [
+  ["✈", "Pilot", "Fly the skies and lead the way."],
+  ["🚀", "Space", "Explore beyond our atmosphere."],
+  ["⚙", "Engineer", "Design, build, and innovate."],
+  ["☁", "Meteorology", "Understand the power of weather."],
+  ["🛠", "Maintenance", "Keep aircraft safe and soaring."],
+  ["⌘", "Drones", "The future is unmanned."],
+] as const;
+
+const journeySteps = [
+  ["Tell us about", "yourself"],
+  ["Receive personalized", "opportunities"],
+  ["Save your", "favorites"],
+  ["Build your", "aviation future"],
 ] as const;
 
 export default function Home() {
@@ -42,35 +49,39 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section light-section">
-        <div className="section-heading"><span>YOUR JOURNEY</span><h2>A Clear Path to Aviation</h2><p>We connect students to opportunities, mentors, and resources that turn curiosity into a career.</p></div>
-        <div className="pillar-grid">
-          <PillarCard icon="telescope" title="Exposure" text="Discover aviation through hands-on experiences." bullets={["Hands-on STEM experiences", "Aviation events & competitions", "School clubs & simulators"]} />
-          <PillarCard icon="people" title="Mentorship" text="Learn from those who have paved the way." bullets={["Connect with pilots", "Learn from engineers", "Guidance from aviation experts"]} />
-          <PillarCard icon="path" title="Pathways" text="Build your future with structure and support." bullets={["Structured roadmaps", "Scholarships & funding", "Real-world opportunities"]} />
+      <section className="homepage-pathways">
+        <div className="section-heading"><span>YOUR JOURNEY</span><h2>A Clear Path to Aviation</h2><p>Explore the many ways you can build a future in flight.</p></div>
+        <div className="aviation-path-grid">
+          {aviationPaths.map(([symbol, title, text]) => (
+            <Link href="/careers" className="aviation-path-card" key={title}>
+              <span className="path-symbol" aria-hidden="true">{symbol}</span>
+              <strong>{title}</strong>
+              <small>{text}</small>
+            </Link>
+          ))}
         </div>
-      </section>
-
-      <section className="section navy-section">
-        <div className="section-heading inverse"><span>THE GATEWAY PLATFORM</span><h2>Everything You Need to Move Forward</h2><p>Resources and support designed to help you take the next step with confidence.</p></div>
-        <div className="resource-grid">
-          {resources.map(([icon,title,text]) => <article key={title}><Icon name={icon} /><h3>{title}</h3><p>{text}</p></article>)}
+        <div className="how-it-works">
+          <h3>How It Works</h3>
+          <div className="journey-line" aria-hidden="true" />
+          <div className="journey-steps">
+            {journeySteps.map(([lineOne, lineTwo], index) => (
+              <div className="journey-step" key={lineOne}>
+                <span>{index + 1}</span>
+                <strong>{lineOne}<br />{lineTwo}</strong>
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
-
-      <section className="impact-section">
-        <div className="section-heading inverse"><span>OUR VISION</span><h2>Building a More Inclusive Future in Aviation</h2></div>
-        <div className="impact-grid">
-          <div><Icon name="people" /><strong>10,000+</strong><span>Students empowered to explore</span></div>
-          <div><Icon name="school" /><strong>100+</strong><span>School partners nationwide</span></div>
-          <div><Icon name="globe" /><strong>Nationwide</strong><span>Access from every community</span></div>
+        <div className="featured-organizations">
+          <div className="featured-heading"><h3>Featured Organizations</h3><Link href="/organizations">View All →</Link></div>
+          <div className="organization-logo-row">
+            <Link href="/organizations" className="org-mark eaa-mark"><b>EAA</b></Link>
+            <Link href="/organizations" className="org-mark cap-mark"><b>△</b><span>CIVIL AIR PATROL<small>U.S. AIR FORCE AUXILIARY</small></span></Link>
+            <Link href="/organizations" className="org-mark eagles-mark"><b>YOUNG<br />EAGLES</b></Link>
+            <Link href="/organizations" className="org-mark women-mark"><b>Women in Aviation</b><small>INTERNATIONAL</small></Link>
+            <Link href="/organizations" className="org-mark nasa-mark"><b>NASA</b></Link>
+          </div>
         </div>
-      </section>
-
-      <section className="section partner-section">
-        <div className="section-heading"><span>COLLABORATION</span><h2>Proudly Building With Aviation Communities</h2></div>
-        <div className="partner-row">{["Schools", "Flight Clubs", "STEM Programs", "Mentor Networks", "Community Partners"].map(x=><div key={x}><Icon name="wing" /><span>{x}</span></div>)}</div>
-        <div className="final-cta"><div><h2>Ready to find your path?</h2><p>Join students already exploring their future in aviation.</p><Link className="primary-button" href="/explore">Start My Journey →</Link></div></div>
       </section>
       <Footer />
     </main>

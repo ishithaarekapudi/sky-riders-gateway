@@ -143,6 +143,57 @@ button { cursor: pointer; }
 .page-shell .collection-grid article:hover,
 .page-shell .org-grid article:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(4,25,54,.14); }
 
+/* Compact homepage journey section based on the approved lower-page reference. */
+.homepage-pathways {
+  padding: 52px max(3vw, calc((100% - 1420px) / 2)) 36px;
+  background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+  font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif;
+}
+.homepage-pathways .section-heading { margin-bottom: 30px; }
+.homepage-pathways .section-heading h2 { font-weight: 650; }
+.aviation-path-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
+.aviation-path-card {
+  min-height: 154px;
+  padding: 20px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5ebf3;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #f4f8ff, #fffaf7);
+  box-shadow: 0 6px 18px rgba(5, 35, 74, .07);
+  text-align: center;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.aviation-path-card:nth-child(2n) { background: linear-gradient(145deg, #fff9f5, #f8fbff); }
+.aviation-path-card:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(5, 35, 74, .12); }
+.path-symbol { min-height: 44px; display: grid; place-items: center; color: #126dce; font-family: Arial, sans-serif; font-size: 38px; line-height: 1; }
+.aviation-path-card strong { margin-top: 9px; font-size: 18px; font-weight: 650; }
+.aviation-path-card small { max-width: 150px; margin-top: 6px; color: #51627b; font-size: 12px; line-height: 1.35; }
+.how-it-works { position: relative; margin: 34px 0 28px; }
+.how-it-works h3, .featured-heading h3 { margin: 0; font-size: 20px; font-weight: 650; text-align: center; }
+.journey-line { position: absolute; z-index: 0; top: 55px; left: 12.5%; right: 12.5%; height: 2px; background: #cfe1f6; }
+.journey-steps { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
+.journey-step { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.journey-step span { width: 34px; height: 34px; display: grid; place-items: center; border: 4px solid white; border-radius: 50%; background: #0b72d8; box-shadow: 0 0 0 1px #cfe1f6; color: white; font-weight: 700; }
+.journey-step strong { margin-top: 8px; color: #263c5f; font-size: 13px; font-weight: 600; line-height: 1.25; }
+.featured-organizations { padding: 17px 20px 22px; border: 1px solid #e7edf5; border-radius: 15px; background: white; box-shadow: 0 7px 22px rgba(5,35,74,.06); }
+.featured-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
+.featured-heading h3 { text-align: left; }
+.featured-heading a { color: #1672cf; font-size: 12px; font-weight: 650; }
+.organization-logo-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.org-mark { min-height: 80px; padding: 10px 16px; display: flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid #e5ebf2; border-radius: 9px; background: #fff; color: #1766ad; text-align: center; }
+.org-mark b { font-size: 19px; font-weight: 700; line-height: 1; }
+.org-mark span, .org-mark small { display: block; font-size: 11px; font-weight: 700; line-height: 1.15; }
+.eaa-mark b { font-size: 31px; font-style: italic; }
+.cap-mark > b { color: #e44a48; font-size: 34px; }
+.eagles-mark { border-color: #ead49c; }
+.eagles-mark b { color: #1465a8; }
+.women-mark b { color: #45729d; font-family: Georgia, serif; font-size: 17px; font-style: italic; }
+.women-mark small { margin-top: 4px; color: #c33b4f; font-size: 8px; letter-spacing: .08em; }
+.nasa-mark b { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; background: #1469ae; color: white; font-size: 17px; font-style: italic; }
+
 /* The hero is proportional to the source artwork. Nothing is cropped or independently sized. */
 .gateway-stage {
   position: relative;
@@ -352,6 +403,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .choice-grid.five { grid-template-columns: repeat(3, 1fr); }
   .scholar-layout { grid-template-columns: 1fr; }
   .match-card { min-height: 220px; }
+  .aviation-path-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 680px) {
@@ -388,6 +440,13 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .footer-bottom { flex-direction: column; gap: 10px; }
   .sub-hero { padding: 45px 25px; }
   .sub-hero h1 { font-size: 39px; }
+  .homepage-pathways { padding: 44px 18px 28px; }
+  .aviation-path-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .aviation-path-card { min-height: 140px; }
+  .journey-line { display: none; }
+  .journey-steps { grid-template-columns: 1fr 1fr; gap: 22px 8px; }
+  .organization-logo-row { grid-template-columns: 1fr 1fr; }
+  .organization-logo-row .org-mark:last-child { grid-column: 1 / -1; }
   .choice-grid.five, .choice-grid.four { grid-template-columns: 1fr 1fr; }
   .question-layout { padding: 10px; }
   .mentor-promo { grid-template-columns: 1fr; }
