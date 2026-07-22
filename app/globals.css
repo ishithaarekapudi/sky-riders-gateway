@@ -117,6 +117,26 @@ button { cursor: pointer; }
 .live-home .ghost-button:hover { border-color: white; }
 .live-home .feature-item:hover { transform: translateY(-4px); color: #9ac9ff; }
 
+/* Secondary pages share the homepage brand and typography without changing their content. */
+.page-shell { font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif; }
+.page-shell .site-header nav a { font-weight: 600; }
+.page-shell .ghost-button,
+.page-shell .small-button,
+.page-shell .primary-button { font-weight: 650; }
+.page-shell .sub-hero h1,
+.page-shell .section-heading h2,
+.page-shell .directory-heading h2 { font-weight: 650; }
+.page-shell button,
+.page-shell a,
+.page-shell article { transition: transform .18s ease, filter .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.page-shell .primary-button:hover,
+.page-shell .small-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.page-shell .ghost-button:hover { border-color: white; }
+.page-shell .scholar-card:hover,
+.page-shell .career-grid article:hover,
+.page-shell .collection-grid article:hover,
+.page-shell .org-grid article:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(4,25,54,.14); }
+
 /* The hero is proportional to the source artwork. Nothing is cropped or independently sized. */
 .gateway-stage {
   position: relative;
@@ -212,7 +232,7 @@ button { cursor: pointer; }
 .resource-grid h3 { font-size: 19px; }
 .resource-grid p { color: #c3d1e2; line-height: 1.55; }
 
-.impact-section { padding: 82px max(5vw, calc((100% - 1260px)/2)); color: white; background: linear-gradient(rgba(3,20,43,.80), rgba(3,20,43,.90)), url('/hero-gateway.png') center 69%/cover; }
+.impact-section { padding: 82px max(5vw, calc((100% - 1260px)/2)); color: white; background: linear-gradient(rgba(3,20,43,.80), rgba(3,20,43,.90)), url('/hero-gateway-live.jpg') center 69%/cover; }
 .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
 .impact-grid div { display: flex; flex-direction: column; align-items: center; border-right: 1px solid rgba(255,255,255,.34); }
 .impact-grid div:last-child { border: 0; }
@@ -238,9 +258,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .sub-hero > div { max-width: 750px; }
 .sub-hero h1 { margin: 0 0 18px; font-size: 54px; line-height: 1.03; letter-spacing: -.04em; }
 .sub-hero p { margin: 0 0 28px; font-size: 22px; line-height: 1.45; }
-.explore-hero { background-image: linear-gradient(90deg, rgba(231,241,248,.95), rgba(238,245,246,.28) 60%, transparent), url('/hero-gateway.png'); background-position: center 42%; }
+.explore-hero { background-image: linear-gradient(90deg, rgba(231,241,248,.95), rgba(238,245,246,.28) 60%, transparent), url('/hero-gateway-live.jpg'); background-position: center 42%; }
 .scholarships-hero { min-height: 430px; color: white; background-image: linear-gradient(90deg, #031a36 8%, rgba(3,26,54,.84) 45%, transparent), url('/pathways-triptych.jpg'); background-position: right center; }
-.org-hero, .careers-hero, .resources-hero { min-height: 430px; color: white; background-image: linear-gradient(90deg, rgba(3,26,54,.96), rgba(3,26,54,.48)), url('/hero-gateway.png'); }
+.org-hero, .careers-hero, .resources-hero { min-height: 430px; color: white; background-image: linear-gradient(90deg, rgba(3,26,54,.96), rgba(3,26,54,.48)), url('/hero-gateway-live.jpg'); }
 .org-hero p, .careers-hero p, .resources-hero p { color: #e2ebf6; }
 .progress { display: flex; align-items: center; gap: 15px; }
 .progress b { padding: 7px 12px; border-radius: 8px; background: #213b5e; color: white; }
