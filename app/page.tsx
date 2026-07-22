@@ -24,7 +24,7 @@ export default function Home() {
       <section className="live-home" aria-label="Sky Riders Gateway introduction">
         <Header />
         <div className="gateway-stage">
-          <img className="gateway-art" src="/hero-gateway.png" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
+          <img className="gateway-art" src="/hero-gateway-live.jpg" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
           <div className="gateway-shade" aria-hidden="true" />
           <div className="hero-copy">
             <h1>Welcome to<br />Sky Riders Gateway</h1>
