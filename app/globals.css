@@ -87,6 +87,27 @@ button { cursor: pointer; }
 .art-feature-organizations { left: 59%; top: 74.3%; width: 19%; height: 23%; }
 .art-feature-events { left: 78.5%; top: 74.3%; width: 19%; height: 23%; }
 
+/* Live homepage: same composition as the approved artboard, built from real elements. */
+.live-home {
+  width: 100%;
+  overflow: hidden;
+  background: var(--navy);
+}
+.live-home .site-header { width: 100%; }
+.live-home .gateway-stage { aspect-ratio: 1442 / 908; }
+.live-home .gateway-art { object-fit: cover; }
+.live-home .hero-copy { top: 20.5%; }
+.live-home .site-header a,
+.live-home .feature-item,
+.live-home .primary-button,
+.live-home button { transition: transform .18s ease, filter .18s ease, color .18s ease, border-color .18s ease; }
+.live-home .site-header nav a:hover,
+.live-home .site-header nav a:focus-visible { color: #9ac9ff; }
+.live-home .primary-button:hover,
+.live-home .small-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.live-home .ghost-button:hover { border-color: white; }
+.live-home .feature-item:hover { transform: translateY(-4px); color: #9ac9ff; }
+
 /* The hero is proportional to the source artwork. Nothing is cropped or independently sized. */
 .gateway-stage {
   position: relative;

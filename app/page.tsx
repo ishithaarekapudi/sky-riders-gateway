@@ -21,44 +21,26 @@ const resources = [
 export default function Home() {
   return (
     <main>
-      <section className="reference-home" aria-label="Sky Riders Gateway introduction">
-        <img src="/gateway-homepage-clean.jpg" alt="Sky Riders Gateway homepage with a runway leading through a monumental arch toward an approaching airplane at sunrise" />
-        <Link className="art-hotspot art-explore" href="/explore" aria-label="Explore" />
-        <Link className="art-hotspot art-scholarships" href="/scholarships" aria-label="Scholarships" />
-        <Link className="art-hotspot art-organizations" href="/organizations" aria-label="Organizations" />
-        <Link className="art-hotspot art-careers" href="/careers" aria-label="Careers" />
-        <Link className="art-hotspot art-resources" href="/resources" aria-label="Resources" />
-        <Link className="art-hotspot art-start" href="/explore" aria-label="Start my journey" />
-        <Link className="art-hotspot art-feature-personal" href="/explore" aria-label="Personalized recommendations" />
-        <Link className="art-hotspot art-feature-scholarships" href="/scholarships" aria-label="Find scholarships" />
-        <Link className="art-hotspot art-feature-mentors" href="/resources" aria-label="Connect with mentors" />
-        <Link className="art-hotspot art-feature-organizations" href="/organizations" aria-label="Discover organizations" />
-        <Link className="art-hotspot art-feature-events" href="/explore" aria-label="Find events" />
-      </section>
-
-      <div className="mobile-home">
-        <div className="concept-pill">SKY RIDERS GATEWAY</div>
-        <section className="hero-shell">
-          <Header />
-          <div className="gateway-stage">
-            <img className="gateway-art" src="/hero-gateway.png" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
-            <div className="gateway-shade" aria-hidden="true" />
-            <div className="hero-copy">
-              <h1>Welcome to<br />Sky Riders Gateway</h1>
-              <p>Connecting students to<br />opportunities in aviation.</p>
-              <Link className="primary-button" href="/explore">Start My Journey <span>→</span></Link>
-              <small>◷ &nbsp; Takes less than 3 minutes!</small>
-            </div>
-            <div className="feature-row">
-              {features.map(([icon, title, text]) => (
-                <Link href={title === "Scholarships" ? "/scholarships" : title === "Organizations" ? "/organizations" : title === "Mentors" ? "/resources" : "/explore"} className="feature-item" key={title}>
-                  <Icon name={icon} /><strong>{title}</strong><span>{text}</span>
-                </Link>
-              ))}
-            </div>
+      <section className="live-home" aria-label="Sky Riders Gateway introduction">
+        <Header />
+        <div className="gateway-stage">
+          <img className="gateway-art" src="/hero-gateway.png" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
+          <div className="gateway-shade" aria-hidden="true" />
+          <div className="hero-copy">
+            <h1>Welcome to<br />Sky Riders Gateway</h1>
+            <p>Connecting students to<br />opportunities in aviation.</p>
+            <Link className="primary-button" href="/explore">Start My Journey <span aria-hidden="true">→</span></Link>
+            <small>◷ &nbsp; Takes less than 3 minutes!</small>
           </div>
-        </section>
-      </div>
+          <div className="feature-row">
+            {features.map(([icon, title, text]) => (
+              <Link href={title === "Scholarships" ? "/scholarships" : title === "Organizations" ? "/organizations" : title === "Mentors" ? "/resources" : "/explore"} className="feature-item" key={title}>
+                <Icon name={icon} /><strong>{title}</strong><span>{text}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section light-section">
         <div className="section-heading"><span>YOUR JOURNEY</span><h2>A Clear Path to Aviation</h2><p>We connect students to opportunities, mentors, and resources that turn curiosity into a career.</p></div>
