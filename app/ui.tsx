@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export function Logo() { return <Link href="/" className="logo"><Icon name="wing" /><span><b>SKY RIDERS</b><small>GATEWAY</small></span></Link>; }
 
-export function Header({ active }: { active?: string }) {
+export function Header({ active, originalLogo = false }: { active?: string; originalLogo?: boolean }) {
   const links = [["Explore","/explore"],["Scholarships","/scholarships"],["Organizations","/organizations"],["Careers","/careers"],["Resources","/resources"]];
-  return <header className="site-header"><Logo /><nav>{links.map(([label,href])=><Link className={active===label.toLowerCase()?"active":""} href={href} key={href}>{label}</Link>)}</nav><div className="account-actions"><button className="ghost-button">Log In</button><button className="small-button">Sign Up</button></div></header>;
+  return <header className="site-header">{originalLogo?<Link href="/" className="live-brand-logo" aria-label="Sky Riders Gateway home"><img src="/sky-riders-logo-original.jpg" alt="Sky Riders Gateway" /></Link>:<Logo />}<nav>{links.map(([label,href])=><Link className={active===label.toLowerCase()?"active":""} href={href} key={href}>{label}</Link>)}</nav><div className="account-actions"><button className="ghost-button">Log In</button><button className="small-button">Sign Up</button></div></header>;
 }
 
 export function Footer() { return <footer><div className="footer-grid"><div><Logo /><p>Connecting students to opportunities in aviation and building a more inclusive future.</p></div><div><h4>Explore</h4><Link href="/careers">Career Paths</Link><Link href="/scholarships">Scholarships</Link><Link href="/organizations">Organizations</Link></div><div><h4>Resources</h4><Link href="/resources">Career Guide</Link><Link href="/resources">Podcasts & Stories</Link><Link href="/resources">School Talks</Link></div><div><h4>About</h4><a>Our Mission</a><a>Partners</a><a>Contact</a></div></div><div className="footer-bottom">© 2026 Sky Riders Gateway <span>Privacy · Terms · Accessibility</span></div></footer>; }
