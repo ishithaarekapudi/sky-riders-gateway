@@ -118,7 +118,13 @@ button { cursor: pointer; }
 .live-home .feature-item:hover { transform: translateY(-4px); color: #9ac9ff; }
 
 /* Secondary pages share the homepage brand and typography without changing their content. */
-.page-shell { font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif; }
+.page-shell {
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif;
+}
 .page-shell .site-header nav a { font-weight: 600; }
 .page-shell .ghost-button,
 .page-shell .small-button,
