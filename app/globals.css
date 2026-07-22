@@ -63,6 +63,29 @@ button { cursor: pointer; }
 .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 34px; border: 0; background: linear-gradient(135deg, #1680f5, #165dd0); box-shadow: 0 9px 22px rgba(4, 78, 182, .25); font-size: 18px; }
 .wide { width: 100%; }
 
+/* Exact approved desktop artboard. Interactive areas sit invisibly over the reference. */
+.reference-home {
+  position: relative;
+  width: calc(100% - 24px);
+  max-width: 1468px;
+  margin: 0 auto;
+}
+.reference-home > img { width: 100%; height: auto; display: block; }
+.mobile-home { display: none; }
+.art-hotspot { position: absolute; z-index: 3; display: block; border-radius: 8px; }
+.art-hotspot:focus-visible { outline: 4px solid #ffbd45; outline-offset: 2px; background: rgba(255,255,255,.12); }
+.art-explore { left: 31.8%; top: 5.6%; width: 7.5%; height: 8.5%; }
+.art-scholarships { left: 39.5%; top: 5.6%; width: 10.5%; height: 8.5%; }
+.art-organizations { left: 50.5%; top: 5.6%; width: 11.5%; height: 8.5%; }
+.art-careers { left: 62.2%; top: 5.6%; width: 7.5%; height: 8.5%; }
+.art-resources { left: 69.8%; top: 5.6%; width: 9.5%; height: 8.5%; }
+.art-start { left: 39.5%; top: 51.2%; width: 21%; height: 6.5%; }
+.art-feature-personal { left: 2.5%; top: 75%; width: 17.5%; height: 22%; }
+.art-feature-scholarships { left: 20.5%; top: 75%; width: 19%; height: 22%; }
+.art-feature-mentors { left: 39.7%; top: 75%; width: 19%; height: 22%; }
+.art-feature-organizations { left: 59%; top: 75%; width: 19%; height: 22%; }
+.art-feature-events { left: 78.5%; top: 75%; width: 19%; height: 22%; }
+
 /* The hero is proportional to the source artwork. Nothing is cropped or independently sized. */
 .gateway-stage {
   position: relative;
@@ -273,6 +296,8 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 }
 
 @media (max-width: 680px) {
+  .reference-home { display: none; }
+  .mobile-home { display: block; }
   .concept-pill { font-size: 11px; padding-inline: 24px; }
   .site-header { height: 76px; }
   .account-actions .ghost-button { display: none; }
