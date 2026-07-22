@@ -66,25 +66,26 @@ button { cursor: pointer; }
 /* Exact approved desktop artboard. Interactive areas sit invisibly over the reference. */
 .reference-home {
   position: relative;
-  width: calc(100% - 24px);
-  max-width: 1468px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
+  background: var(--navy);
 }
 .reference-home > img { width: 100%; height: auto; display: block; }
 .mobile-home { display: none; }
 .art-hotspot { position: absolute; z-index: 3; display: block; border-radius: 8px; }
 .art-hotspot:focus-visible { outline: 4px solid #ffbd45; outline-offset: 2px; background: rgba(255,255,255,.12); }
-.art-explore { left: 31.8%; top: 5.6%; width: 7.5%; height: 8.5%; }
-.art-scholarships { left: 39.5%; top: 5.6%; width: 10.5%; height: 8.5%; }
-.art-organizations { left: 50.5%; top: 5.6%; width: 11.5%; height: 8.5%; }
-.art-careers { left: 62.2%; top: 5.6%; width: 7.5%; height: 8.5%; }
-.art-resources { left: 69.8%; top: 5.6%; width: 9.5%; height: 8.5%; }
-.art-start { left: 39.5%; top: 51.2%; width: 21%; height: 6.5%; }
-.art-feature-personal { left: 2.5%; top: 75%; width: 17.5%; height: 22%; }
-.art-feature-scholarships { left: 20.5%; top: 75%; width: 19%; height: 22%; }
-.art-feature-mentors { left: 39.7%; top: 75%; width: 19%; height: 22%; }
-.art-feature-organizations { left: 59%; top: 75%; width: 19%; height: 22%; }
-.art-feature-events { left: 78.5%; top: 75%; width: 19%; height: 22%; }
+.art-explore { left: 31.8%; top: 0; width: 7.5%; height: 9.2%; }
+.art-scholarships { left: 39.5%; top: 0; width: 10.5%; height: 9.2%; }
+.art-organizations { left: 50.5%; top: 0; width: 11.5%; height: 9.2%; }
+.art-careers { left: 62.2%; top: 0; width: 7.5%; height: 9.2%; }
+.art-resources { left: 69.8%; top: 0; width: 9.5%; height: 9.2%; }
+.art-start { left: 39.5%; top: 48.8%; width: 21%; height: 7%; }
+.art-feature-personal { left: 2.5%; top: 74.3%; width: 17.5%; height: 23%; }
+.art-feature-scholarships { left: 20.5%; top: 74.3%; width: 19%; height: 23%; }
+.art-feature-mentors { left: 39.7%; top: 74.3%; width: 19%; height: 23%; }
+.art-feature-organizations { left: 59%; top: 74.3%; width: 19%; height: 23%; }
+.art-feature-events { left: 78.5%; top: 74.3%; width: 19%; height: 23%; }
 
 /* The hero is proportional to the source artwork. Nothing is cropped or independently sized. */
 .gateway-stage {
