@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main>
       <section className="reference-home" aria-label="Sky Riders Gateway introduction">
-        <img src="/gateway-homepage-reference.png" alt="Sky Riders Gateway homepage with a runway leading through a monumental arch toward an approaching airplane at sunrise" />
+        <img src="/gateway-homepage-reference.jpg" alt="Sky Riders Gateway homepage with a runway leading through a monumental arch toward an approaching airplane at sunrise" />
         <Link className="art-hotspot art-explore" href="/explore" aria-label="Explore" />
         <Link className="art-hotspot art-scholarships" href="/scholarships" aria-label="Scholarships" />
         <Link className="art-hotspot art-organizations" href="/organizations" aria-label="Organizations" />
