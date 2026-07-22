@@ -24,7 +24,9 @@ export default function Home() {
       <div className="concept-pill">SKY RIDERS GATEWAY</div>
       <section className="hero-shell">
         <Header />
-        <div className="gateway-hero">
+        <div className="gateway-stage">
+          <img className="gateway-art" src="/hero-gateway.png" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
+          <div className="gateway-shade" aria-hidden="true" />
           <div className="hero-copy">
             <h1>Welcome to<br />Sky Riders Gateway</h1>
             <p>Connecting students to<br />opportunities in aviation.</p>

@@ -63,44 +63,66 @@ button { cursor: pointer; }
 .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 34px; border: 0; background: linear-gradient(135deg, #1680f5, #165dd0); box-shadow: 0 9px 22px rgba(4, 78, 182, .25); font-size: 18px; }
 .wide { width: 100%; }
 
-/* Homepage hero: two real rows, never overlapping. */
-.gateway-hero {
-  min-height: 870px;
-  display: grid;
-  grid-template-rows: 610px 260px;
-  background-image: linear-gradient(to bottom, transparent 0 57%, rgba(3,26,54,.32) 72%, #031a36 96%), url('/hero-gateway.png');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: var(--navy);
+/* The hero is proportional to the source artwork. Nothing is cropped or independently sized. */
+.gateway-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  overflow: hidden;
+  background: var(--navy);
+}
+.gateway-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+.gateway-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0 60%, rgba(3,26,54,.22) 71%, rgba(3,26,54,.88) 88%, #031a36 100%);
 }
 .hero-copy {
+  position: absolute;
+  z-index: 2;
+  top: 23%;
+  left: 50%;
+  width: min(620px, 55%);
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 90px 40px 20px;
+  padding: 0;
   text-align: center;
   color: var(--ink);
   text-shadow: 0 1px 14px rgba(255,255,255,.78);
 }
-.hero-copy h1 { margin: 0; font-size: clamp(42px, 4vw, 64px); line-height: 1.04; letter-spacing: -.04em; }
-.hero-copy p { margin: 20px 0; font-size: clamp(21px, 1.8vw, 27px); line-height: 1.35; }
-.hero-copy small { margin-top: 14px; font-size: 15px; text-shadow: none; }
+.hero-copy h1 { margin: 0; font-size: clamp(30px, 3.55vw, 56px); line-height: 1.04; letter-spacing: -.04em; }
+.hero-copy p { margin: 15px 0; font-size: clamp(17px, 1.65vw, 25px); line-height: 1.35; }
+.hero-copy small { margin-top: 11px; font-size: clamp(11px, 1vw, 15px); text-shadow: none; }
 .hero-copy .primary-button { text-shadow: none; }
 .feature-row {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 27.5%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  padding: 28px 44px 34px;
+  padding: 2.2% 3% 2.5%;
   color: white;
-  background: linear-gradient(to bottom, rgba(3,26,54,.18), rgba(3,26,54,.89) 22%, #031a36 72%);
+  background: linear-gradient(to bottom, transparent, rgba(3,26,54,.80) 24%, #031a36 72%);
 }
-.feature-item { min-height: 165px; padding: 8px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid rgba(255,255,255,.16); }
+.feature-item { height: 100%; padding: 4px 7%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid rgba(255,255,255,.16); }
 .feature-item:last-child { border: 0; }
-.feature-item .icon { width: 48px; height: 48px; margin-bottom: 13px; }
-.feature-item strong { font-size: 19px; }
-.feature-item span { max-width: 185px; margin-top: 9px; color: #d7e1ef; line-height: 1.4; }
+.feature-item .icon { width: clamp(28px, 3.2vw, 48px); height: clamp(28px, 3.2vw, 48px); margin-bottom: 8px; }
+.feature-item strong { font-size: clamp(12px, 1.25vw, 19px); }
+.feature-item span { max-width: 185px; margin-top: 7px; color: #d7e1ef; font-size: clamp(10px, 1vw, 15px); line-height: 1.35; }
 
 .section { padding: 88px max(5vw, calc((100% - 1260px)/2)); }
 .light-section, .partner-section { background: white; }
@@ -240,10 +262,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .site-header { padding: 0 20px; }
   .site-header nav { display: none; }
   .logo { min-width: 0; margin-right: auto; }
-  .gateway-hero { grid-template-rows: 550px auto; min-height: 0; background-size: auto 800px; }
-  .hero-copy { padding-top: 100px; }
-  .feature-row { grid-template-columns: repeat(3, 1fr); padding-top: 45px; }
-  .feature-item { border: 0; }
+  .hero-copy { top: 22%; }
   .pillar-grid, .career-grid, .collection-grid, .scholar-grid { grid-template-columns: 1fr 1fr; }
   .resource-grid { grid-template-columns: 1fr 1fr; }
   .resource-grid article { border: 1px solid rgba(255,255,255,.12); }
@@ -260,12 +279,19 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .logo b { font-size: 14px; }
   .logo .icon { width: 38px; }
   .small-button { padding: 11px 15px; }
-  .gateway-hero { grid-template-rows: 500px auto; background-size: auto 650px; }
-  .hero-copy { padding: 105px 20px 20px; }
-  .hero-copy h1 { font-size: 39px; }
-  .hero-copy p { font-size: 18px; }
-  .feature-row { grid-template-columns: 1fr 1fr; padding: 38px 10px 20px; }
-  .feature-item { min-height: 170px; }
+  .gateway-stage { aspect-ratio: auto; overflow: visible; background: var(--navy); }
+  .gateway-art { position: relative; height: auto; aspect-ratio: 1672 / 941; object-fit: contain; }
+  .gateway-shade { height: auto; aspect-ratio: 1672 / 941; }
+  .hero-copy { position: relative; top: auto; left: auto; width: 100%; transform: none; padding: 28px 20px 30px; background: #f4f7fb; text-shadow: none; }
+  .hero-copy h1 { font-size: clamp(25px, 7vw, 38px); }
+  .hero-copy p { margin: 9px 0; font-size: clamp(14px, 4vw, 18px); }
+  .hero-copy .primary-button { padding: 11px 18px; font-size: 14px; }
+  .hero-copy small { margin-top: 7px; }
+  .feature-row { position: relative; height: auto; grid-template-columns: 1fr 1fr; padding: 28px 10px 18px; background: #031a36; }
+  .feature-item { min-height: 150px; border: 0; }
+  .feature-item .icon { width: 42px; height: 42px; }
+  .feature-item strong { font-size: 16px; }
+  .feature-item span { font-size: 13px; }
   .section { padding: 64px 20px; }
   .section-heading h2 { font-size: 34px; }
   .pillar-grid, .career-grid, .collection-grid, .org-grid, .scholar-grid, .resource-grid { grid-template-columns: 1fr; }
