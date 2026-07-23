@@ -355,6 +355,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .directory-heading h2 { font-size: 31px; }
 .directory-heading span { color: var(--muted); }
 .scholar-layout { display: grid; grid-template-columns: 1fr 220px; gap: 28px; }
+.data-note { max-width: 980px; margin: -12px 0 24px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .scholar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
 .scholar-card { display: flex; gap: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 5px 15px rgba(6,26,53,.12); }
 .square-icon { width: 54px; height: 54px; flex: none; border-radius: 10px; }

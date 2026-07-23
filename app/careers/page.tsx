@@ -1,4 +1,19 @@
 import Link from "next/link";
+import { careerPaths } from "../content";
 import { Icon, PageShell } from "../ui";
-const careers=[["plane","Pilot & Flight Operations","Fly aircraft, coordinate missions, and connect the world."],["wrench","Aircraft Maintenance","Keep aircraft safe through skilled inspection, repair, and technology."],["code","Aerospace Engineering","Design aircraft, spacecraft, systems, and the future of flight."],["globe","Air Traffic & Operations","Guide aircraft safely and manage complex aviation systems."],["people","Aviation Business","Lead airports, airlines, programs, communications, and communities."],["document","Safety & Investigation","Study systems, improve safety, and help aviation learn and evolve."]];
-export default function Careers(){return <PageShell active="careers"><section className="sub-hero careers-hero"><div><span className="eyebrow">MORE THAN THE COCKPIT</span><h1>There’s a Place for You in Aviation</h1><p>Explore careers across flight, engineering, technology, safety, business, and more.</p><Link className="primary-button" href="/explore">Find My Best Fit →</Link></div></section><section className="section"><div className="section-heading"><span>CAREER PATHWAYS</span><h2>Where Could Aviation Take You?</h2><p>Start with what you enjoy. We’ll show you where those strengths can lead.</p></div><div className="career-grid">{careers.map(([icon,title,text])=><article key={title}><div className="round-icon"><Icon name={icon}/></div><h3>{title}</h3><p>{text}</p><a>Explore this pathway →</a></article>)}</div><div className="roadmap-banner"><div><span>YOUR NEXT STEP</span><h2>Turn an interest into a plan.</h2><p>Answer a few questions and receive a personalized aviation roadmap.</p></div><Link className="primary-button" href="/explore">Build My Roadmap →</Link></div></section></PageShell>}
+
+export default function Careers() {
+  return <PageShell active="careers">
+    <section className="sub-hero careers-hero"><div>
+      <span className="eyebrow">MORE THAN THE COCKPIT</span>
+      <h1>There’s a Place for You in Aviation</h1>
+      <p>The aviation world connects flight with engineering, healthcare, law, business, technology, weather, safety, and service.</p>
+      <Link className="primary-button" href="/explore">Find My Best Fit →</Link>
+    </div></section>
+    <section className="section">
+      <div className="section-heading"><span>FROM CLEARED FOR TAKEOFF</span><h2>Where Could Aviation Take You?</h2><p>Start with what you enjoy. Your interests can lead to a role in the cockpit, at an airport, in a laboratory, or beyond Earth.</p></div>
+      <div className="career-grid">{careerPaths.map(([icon,title,text])=><article key={title}><div className="round-icon"><Icon name={icon}/></div><h3>{title}</h3><p>{text}</p><Link href="/explore">Add to my roadmap →</Link></article>)}</div>
+      <div className="roadmap-banner"><div><span>ISHITHA’S ADVICE</span><h2>Where you start is not always where you’ll end up.</h2><p>Aviation keeps evolving. Explore widely, follow your strengths, and stay open to careers you may not have discovered yet.</p></div><Link className="primary-button" href="/explore">Build My Roadmap →</Link></div>
+    </section>
+  </PageShell>;
+}
