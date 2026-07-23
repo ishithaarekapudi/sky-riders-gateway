@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { SaveButton } from "../components/SaveButton";
-import { scholarships } from "../content";
+import { scholarships, slugify } from "../content";
 import { Icon, PageShell } from "../ui";
 
 const filters = ["All Opportunities","Flight Training","Gliders","College","Youth Programs"] as const;
@@ -31,7 +32,7 @@ export default function Scholarships() {
     <section className="directory">
       <div className="directory-heading"><h2>Scholarship Starting Points</h2><span>Showing {visible.length} of {scholarships.length}</span></div>
       <p className="data-note">*Awards, eligibility, and deadlines can change. Always verify the current application cycle on the sponsoring organization’s official website before applying.</p>
-      <div className="scholar-layout"><div className="scholar-grid">{visible.map(([icon,title,amount,tags])=><article className="scholar-card" key={title}><div className="square-icon"><Icon name={icon}/></div><div><h3>{title}</h3><strong>{amount} <small>Manuscript reference</small></strong><p>▣ &nbsp; Deadline: Verify current cycle</p><span className="tag">{tags}</span><SaveButton id={`scholarship:${title}`} label="Save Opportunity"/></div></article>)}</div>
+      <div className="scholar-layout"><div className="scholar-grid">{visible.map(([icon,title,amount,tags])=><article className="scholar-card" key={title}><div className="square-icon"><Icon name={icon}/></div><div><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><strong>{amount}</strong><p>▣ &nbsp; Deadline: Verify current cycle</p><span className="tag">{tags}</span><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View Details →</Link><SaveButton id={`scholarship:${title}`} label="Save"/></div></div></article>)}</div>
       <aside className="match-card"><div className="round-icon"><Icon name="user"/></div><h2>Build a stronger application</h2><p>Check eligibility first, track deadlines, save reusable answers, and tell the story behind your aviation goal.</p><a className="small-button" href="/explore">Find My Matches →</a></aside></div>
     </section>
   </PageShell>;

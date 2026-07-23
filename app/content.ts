@@ -42,7 +42,7 @@ export const organizations = [
   ["Red-Tailed Hawks Flying Club", "A Seattle-based community expanding aviation access through mentorship, workshops, flight experiences, and the FLY training program.", ["Community", "Mentorship", "Youth"]],
   ["Women in Aviation International", "Scholarships, conferences, mentoring, education, and a global network supporting women across aviation and aerospace.", ["Women", "Scholarships", "Network"]],
   ["The Ninety-Nines", "An international community of women pilots offering scholarships, mentorship, education, and support from first flight through advanced ratings.", ["Women pilots", "Mentorship", "Scholarships"]],
-  ["National Organization of Black Aerospace Professionals", "Networking, mentorship, education, and career development focused on increasing Black representation in aviation and aerospace.", ["Diversity", "Careers", "Mentorship"]],
+  ["Organization of Black Aerospace Professionals", "Networking, mentorship, education, and career development focused on increasing Black representation in aviation and aerospace.", ["Diversity", "Careers", "Mentorship"]],
   ["Soaring Society of America", "Training resources, local club connections, competitions, workshops, safety education, and scholarships for glider pilots.", ["Gliders", "Training", "Scholarships"]],
   ["Women's Soaring Pilots Association", "Mentorship, fly-ins, workshops, community, and scholarships that support women learning and advancing in soaring.", ["Women", "Gliders", "Community"]],
 ] as const;
@@ -55,3 +55,7 @@ export const manuscriptResources = [
   ["path", "Nine Tips for Getting Started", "Research, find mentors, set milestones, seek funding, stay resilient, gain experience, train early, follow industry changes, and embrace curiosity.", "Read the Tips"],
   ["headphones", "Ishitha’s Journey", "From a Young Eagles flight at 14 to glider solo, pilot certificates, scholarships, and a mission to make aviation easier to enter.", "Discover the Story"],
 ] as const;
+
+export function slugify(value: string) {
+  return value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
