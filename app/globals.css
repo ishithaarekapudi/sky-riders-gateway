@@ -53,7 +53,7 @@ button { cursor: pointer; }
 .logo span { display: flex; flex-direction: column; letter-spacing: .12em; }
 .logo b { font-size: 19px; }
 .logo small { font-size: 10px; letter-spacing: .45em; }
-.site-header nav { flex: 1; align-self: stretch; display: flex; align-items: center; justify-content: center; gap: 42px; }
+.site-header nav { flex: 1; align-self: stretch; display: flex; align-items: center; justify-content: center; gap: 30px; }
 .site-header nav a { height: 100%; display: flex; align-items: center; border-bottom: 3px solid transparent; font-weight: 700; }
 .site-header nav a:hover, .site-header nav a.active { color: #8bc2ff; border-color: var(--blue); }
 .account-actions { display: flex; gap: 12px; }
@@ -142,6 +142,37 @@ button { cursor: pointer; }
 .page-shell .career-grid article:hover,
 .page-shell .collection-grid article:hover,
 .page-shell .org-grid article:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(4,25,54,.14); }
+.saved-button { color: #08704e !important; }
+.primary-button:disabled { cursor: not-allowed; filter: grayscale(.45); opacity: .55; transform: none !important; }
+
+.about-hero { background: linear-gradient(90deg, rgba(3,19,41,.94), rgba(3,24,53,.56)), url('/hero-gateway-live.jpg') center 56%/cover; }
+.about-hero, .about-hero h1, .about-hero p { color: white; }
+.about-intro { display: grid; grid-template-columns: 1.35fr .75fr; gap: 70px; align-items: center; }
+.about-intro h2 { margin: 10px 0 20px; font-size: clamp(34px, 4vw, 54px); line-height: 1.08; }
+.about-intro p { color: var(--muted); font-size: 17px; line-height: 1.75; }
+.about-intro blockquote { margin: 0; padding: 44px; border-radius: 18px; background: linear-gradient(145deg, #061f41, #0b4b89); box-shadow: var(--shadow); color: white; font-family: Georgia, serif; font-size: 29px; line-height: 1.35; }
+.about-intro blockquote small { display: block; margin-top: 24px; color: #bed4ee; font-family: Inter, sans-serif; font-size: 13px; line-height: 1.5; }
+.about-timeline-section { background: #edf5ff; }
+.about-timeline { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.about-timeline article { padding: 28px; border: 1px solid #d5e2f1; border-radius: 14px; background: white; box-shadow: 0 8px 25px rgba(5,35,74,.07); }
+.about-timeline strong { color: var(--blue); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.about-timeline p { margin-bottom: 0; color: var(--muted); line-height: 1.6; }
+.about-guidance .collection-grid article { min-height: 245px; }
+
+.account-page { min-height: 100vh; padding: 42px 20px; display: grid; place-items: center; background: linear-gradient(rgba(3,20,43,.78), rgba(3,20,43,.9)), url('/hero-gateway-live.jpg') center/cover; font-family: Inter, "Avenir Next", "Segoe UI", sans-serif; }
+.account-brand { position: absolute; top: 28px; left: 34px; color: white; font-size: 18px; font-weight: 750; letter-spacing: .12em; }
+.account-brand span { display: block; font-size: 9px; letter-spacing: .4em; }
+.account-panel { width: min(480px, 100%); padding: 42px; border-radius: 20px; background: white; box-shadow: 0 25px 70px rgba(0,0,0,.28); }
+.account-panel h1 { margin: 8px 0; font-size: 38px; }
+.account-panel > p { color: var(--muted); line-height: 1.55; }
+.account-tabs { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0; padding: 4px; border-radius: 10px; background: #edf3fa; }
+.account-tabs button { padding: 10px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); }
+.account-tabs button.active { background: white; color: var(--ink); box-shadow: 0 3px 10px rgba(5,35,74,.09); font-weight: 700; }
+.account-panel form { display: grid; gap: 17px; margin-bottom: 20px; }
+.account-panel label { display: grid; gap: 7px; color: var(--ink); font-size: 13px; font-weight: 650; }
+.account-panel input { padding: 13px 14px; border: 1px solid #ccd8e6; border-radius: 8px; outline: none; }
+.account-panel input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(20,117,233,.1); }
+.account-message, .account-setup-note { margin: 14px 0 !important; padding: 12px; border-radius: 8px; background: #edf5ff; color: #244a74 !important; font-size: 13px; }
 
 /* Compact homepage journey section based on the approved lower-page reference. */
 .homepage-pathways {
@@ -405,6 +436,8 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .scholar-layout { grid-template-columns: 1fr; }
   .match-card { min-height: 220px; }
   .aviation-path-grid { grid-template-columns: repeat(3, 1fr); }
+  .about-intro { grid-template-columns: 1fr; gap: 34px; }
+  .about-timeline { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 680px) {
@@ -448,6 +481,10 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .journey-steps { grid-template-columns: 1fr 1fr; gap: 22px 8px; }
   .organization-logo-row { grid-template-columns: 1fr 1fr; }
   .organization-logo-row .org-mark:last-child { grid-column: 1 / -1; }
+  .about-timeline { grid-template-columns: 1fr; }
+  .about-intro blockquote { padding: 30px; font-size: 23px; }
+  .account-panel { padding: 30px 22px; }
+  .account-brand { position: static; margin-bottom: -10px; justify-self: start; }
   .choice-grid.five, .choice-grid.four { grid-template-columns: 1fr 1fr; }
   .question-layout { padding: 10px; }
   .mentor-promo { grid-template-columns: 1fr; }
