@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Logo() { return <Link href="/" className="logo"><Icon name="wing" /><span><b>SKY RIDERS</b><small>GATEWAY</small></span></Link>; }
 
 export function Header({ active, originalLogo = false }: { active?: string; originalLogo?: boolean }) {
-  const links = [["Explore","/explore"],["Scholarships","/scholarships"],["Organizations","/organizations"],["Careers","/careers"],["Resources","/resources"],["About","/about"]];
+  const links = [["Home","/"],["Explore","/explore"],["Scholarships","/scholarships"],["Organizations","/organizations"],["Careers","/careers"],["Resources","/resources"],["About","/about"]];
   return <header className="site-header">{originalLogo?<Link href="/" className="live-brand-logo" aria-label="Sky Riders Gateway home"><img src="/sky-riders-logo-original.jpg" alt="Sky Riders Gateway" /></Link>:<Logo />}<nav>{links.map(([label,href])=><Link className={active===label.toLowerCase()?"active":""} href={href} key={href}>{label}</Link>)}</nav><div className="account-actions"><Link href="/account" className="ghost-button">Log In</Link><Link href="/account" className="small-button">Sign Up</Link></div></header>;
 }
 
@@ -30,6 +30,10 @@ export function Icon({ name }: { name: string }) {
     wrench:<><path d="M14 6a5 5 0 0 0-6 6L3 17l4 4 5-5a5 5 0 0 0 6-6l-3 3-4-4 3-3Z"/></>,
     code:<><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></>,
     cloud:<><path d="M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 4.8 4.8 0 0 0 7 18Z"/></>,
+    rocket:<><path d="M14 4c3-2 5-1 6-1 0 1 1 3-1 6l-6 6-5-1-1-5 6-6Z"/><path d="m11 13-4 4M8 12l-4 1-2 3 5 1M12 16l1 5 3-2 1-4"/><circle cx="16" cy="7" r="1.5"/></>,
+    gear:<><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></>,
+    drone:<><path d="M8 11h8l2 4H6l2-4ZM10 15v3M14 15v3M5 7h4M15 7h4M7 7l2 4M17 7l-2 4"/><circle cx="4" cy="7" r="2"/><circle cx="20" cy="7" r="2"/></>,
+    tower:<><path d="M8 21h8l-2-12h-4L8 21ZM6 9h12M9 5h6v4H9zM12 2v3M5 14h14"/></>,
   };
   return <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]||paths.plane}</svg>;
 }

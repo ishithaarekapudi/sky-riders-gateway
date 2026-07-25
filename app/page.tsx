@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main>
       <section className="live-home" aria-label="Sky Riders Gateway introduction">
-        <Header originalLogo />
+        <Header active="home" originalLogo />
         <div className="gateway-stage">
           <img className="gateway-art" src="/hero-gateway-live.jpg" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
           <div className="gateway-shade" aria-hidden="true" />
@@ -46,6 +46,29 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="gateway-vision">
+        <div className="vision-copy">
+          <span>GATEWAY’S VISION</span>
+          <h2>Making aviation reachable for every young person</h2>
+          <p>Too many students are held back by limited access, a lack of awareness, and the cost of training. Sky Riders Gateway is designed to break those barriers—giving young people the resources, relationships, and clear next steps to imagine themselves in aviation.</p>
+          <p className="vision-mission">Our mission is not just to inform—it is to transform curiosity into a tangible path forward.</p>
+          <Link className="primary-button" href="/about#guidance">Discover Our Mission →</Link>
+        </div>
+        <div className="vision-pillars">
+          {[
+            ["plane", "Exposure", "Hands-on STEM experiences, school-based programs, aviation events, simulators, and drones introduce students to what is possible."],
+            ["people", "Mentorship", "Pilots, engineers, and aviation professionals help students see themselves in the field and guide their next steps."],
+            ["path", "Pathways", "Personalized roadmaps connect interests to careers, scholarships, organizations, and real-world opportunities."],
+          ].map(([icon, title, text]) => (
+            <article key={title}>
+              <div><Icon name={icon} /></div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
         </div>
       </section>
 

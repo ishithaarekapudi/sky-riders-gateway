@@ -1,94 +1,132 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Icon, PageShell } from "../ui";
 
 const interests = [
-  ["plane", "I love flying"],
-  ["wrench", "I like building and fixing"],
-  ["code", "I enjoy technology"],
-  ["people", "I want to help people"],
-  ["path", "I’m still exploring"],
-];
+  ["plane", "Pilot"],
+  ["rocket", "Space Exploration"],
+  ["gear", "Aerospace Engineering"],
+  ["cloud", "Weather & Meteorology"],
+  ["wrench", "Aircraft Mechanics"],
+  ["drone", "Drones"],
+  ["tower", "Air Traffic Control"],
+  ["people", "Aviation Service"],
+  ["path", "Still Exploring"],
+] as const;
 
 const stages = [
   ["school", "Middle School"],
   ["cap", "High School"],
   ["school", "College"],
   ["path", "Other"],
+] as const;
+
+const ageRanges = ["8–12", "13–15", "16–18", "College", "Adult"] as const;
+
+const states = [
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+  "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+  "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+  "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
+  "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+  "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
+  "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "Outside the United States",
 ];
 
 const opportunities = [
   {
-    icon: "plane",
-    title: "EAA Young Eagles",
+    icon: "plane", title: "EAA Young Eagles",
     text: "Discover free introductory flights and a welcoming first step into aviation.",
     href: "/organizations/experimental-aircraft-association-and-young-eagles",
-    interests: ["I love flying", "I’m still exploring"],
+    interests: ["Pilot", "Still Exploring"],
   },
   {
-    icon: "people",
-    title: "Civil Air Patrol",
-    text: "Build leadership skills and explore aerospace through its cadet program.",
-    href: "/organizations/civil-air-patrol",
-    interests: ["I want to help people", "I love flying", "I’m still exploring"],
+    icon: "rocket", title: "NASA Student Opportunities",
+    text: "Explore NASA challenges, internships, activities, and learning experiences for students.",
+    href: "https://www.nasa.gov/learning-resources/nasa-stem-opportunities-activities/",
+    interests: ["Space Exploration", "Aerospace Engineering", "Still Exploring"], external: true,
   },
   {
-    icon: "code",
-    title: "Drone Pilot",
-    text: "Explore how uncrewed aircraft support photography, mapping, and public safety.",
-    href: "/careers/drone-pilot",
-    interests: ["I enjoy technology", "I like building and fixing"],
+    icon: "gear", title: "Aeronautical Engineering",
+    text: "See how engineers design and improve aircraft, structures, systems, and technology.",
+    href: "/careers/aeronautical-engineering",
+    interests: ["Aerospace Engineering", "Space Exploration"],
   },
   {
-    icon: "wrench",
-    title: "Aircraft Maintenance",
+    icon: "cloud", title: "Meteorology",
+    text: "Learn how aviation forecasters help flight crews understand weather and fly safely.",
+    href: "/careers/meteorology",
+    interests: ["Weather & Meteorology", "Aviation Service"],
+  },
+  {
+    icon: "wrench", title: "Aircraft Maintenance",
     text: "Learn how aviation technicians inspect, troubleshoot, and repair aircraft.",
     href: "/careers/aircraft-maintenance",
-    interests: ["I like building and fixing", "I enjoy technology"],
+    interests: ["Aircraft Mechanics", "Aerospace Engineering"],
   },
   {
-    icon: "school",
-    title: "AOPA Foundation Scholarship",
-    text: "Explore flight-training funding and check the current eligibility details.",
-    href: "/scholarships/aopa-foundation-scholarship",
-    interests: ["I love flying", "I’m still exploring"],
+    icon: "drone", title: "Drone Pilot",
+    text: "Explore how uncrewed aircraft support photography, mapping, and public safety.",
+    href: "/careers/drone-pilot",
+    interests: ["Drones", "Aerospace Engineering"],
   },
   {
-    icon: "globe",
-    title: "Air Traffic Control",
+    icon: "tower", title: "Air Traffic Control",
     text: "See how focused teams safely direct aircraft in the air and on the ground.",
     href: "/careers/air-traffic-control",
-    interests: ["I enjoy technology", "I want to help people"],
+    interests: ["Air Traffic Control", "Aviation Service"],
+  },
+  {
+    icon: "people", title: "Civil Air Patrol",
+    text: "Build leadership skills and explore aerospace through its cadet program.",
+    href: "/organizations/civil-air-patrol",
+    interests: ["Aviation Service", "Pilot", "Still Exploring"],
+  },
+  {
+    icon: "school", title: "AOPA Foundation Scholarship",
+    text: "Explore flight-training funding and check the current eligibility details.",
+    href: "/scholarships/aopa-foundation-scholarship",
+    interests: ["Pilot", "Still Exploring"],
   },
 ];
 
 export default function ExplorePage() {
-  const router = useRouter();
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-  const [region, setRegion] = useState("");
-  const [interest, setInterest] = useState("");
+  const [state, setState] = useState("");
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [stage, setStage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const resultsRef = useRef<HTMLElement>(null);
 
   const recommendations = useMemo(() => {
-    if (!interest) return opportunities.slice(0, 4);
-    const matched = opportunities.filter((item) => item.interests.includes(interest));
+    if (!selectedInterests.length) return opportunities.slice(0, 6);
+    const matched = opportunities.filter((item) =>
+      item.interests.some((interest) => selectedInterests.includes(interest)),
+    );
     const remaining = opportunities.filter((item) => !matched.includes(item));
-    return [...matched, ...remaining].slice(0, 4);
-  }, [interest]);
+    return [...matched, ...remaining].slice(0, 6);
+  }, [selectedInterests]);
 
-  const ready = Boolean(age && region && interest && stage);
+  const ready = Boolean(age && state && selectedInterests.length && stage);
+
+  function toggleInterest(label: string) {
+    setSubmitted(false);
+    setSelectedInterests((current) =>
+      current.includes(label) ? current.filter((item) => item !== label) : [...current, label],
+    );
+  }
 
   function buildRoadmap() {
     if (!ready) return;
     localStorage.setItem(
       "sky-riders-roadmap",
-      JSON.stringify({ name, age, region, interest, stage }),
+      JSON.stringify({ name, age, state, interests: selectedInterests, stage }),
     );
-    router.push("/careers");
+    setSubmitted(true);
+    window.setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   }
 
   return (
@@ -105,91 +143,89 @@ export default function ExplorePage() {
         <div className="explore-form-panel">
           <div className="explore-section-heading">
             <span>YOUR GATEWAY</span>
-            <h2>Let’s discover your future</h2>
+            <h2><Icon name="user" /> About You</h2>
             <p>A few quick details help us highlight paths that fit you.</p>
           </div>
 
-          <div className="profile-fields">
-            <label>
-              <span>Name <small>optional</small></span>
-              <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" />
-            </label>
-            <label>
-              <span>Age range</span>
-              <select value={age} onChange={(event) => setAge(event.target.value)}>
-                <option value="">Choose your age</option>
-                <option>Under 13</option>
-                <option>13–15</option>
-                <option>16–18</option>
-                <option>19–24</option>
-                <option>25+</option>
-              </select>
-            </label>
-            <label>
-              <span>Region</span>
-              <select value={region} onChange={(event) => setRegion(event.target.value)}>
-                <option value="">Choose your region</option>
-                <option>Northeast</option>
-                <option>Midwest</option>
-                <option>South</option>
-                <option>West</option>
-                <option>Outside the United States</option>
-              </select>
-            </label>
+          <div className="about-you-grid">
+            <div className="about-you-details">
+              <label className="name-field">
+                <span>Name <small>optional</small></span>
+                <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
+              </label>
+
+              <fieldset className="explore-choice-group age-choice-group">
+                <legend>Age</legend>
+                <div className="age-button-grid">
+                  {ageRanges.map((range) => (
+                    <button type="button" className={age === range ? "selected" : ""} onClick={() => setAge(range)} key={range}>{range}</button>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="state-field">
+                <span>State</span>
+                <select value={state} onChange={(event) => setState(event.target.value)}>
+                  <option value="">Select your state</option>
+                  {states.map((item) => <option key={item}>{item}</option>)}
+                </select>
+              </label>
+
+              <fieldset className="explore-choice-group stage-choice-group">
+                <legend>What best describes your current stage?</legend>
+                <div className="explore-stage-grid">
+                  {stages.map(([icon, label]) => (
+                    <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
+                      <Icon name={icon} /><span>{label}</span>
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+            </div>
+
+            <fieldset className="explore-choice-group interest-choice-group">
+              <legend>Interests <small>Select all that apply</small></legend>
+              <div className="interest-tile-grid">
+                {interests.map(([icon, label]) => (
+                  <button
+                    type="button"
+                    aria-pressed={selectedInterests.includes(label)}
+                    className={selectedInterests.includes(label) ? "selected" : ""}
+                    onClick={() => toggleInterest(label)}
+                    key={label}
+                  >
+                    <Icon name={icon} /><span>{label}</span>
+                    <b aria-hidden="true">{selectedInterests.includes(label) ? "✓" : "+"}</b>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
           </div>
 
-          <fieldset className="explore-choice-group">
-            <legend>What interests you most?</legend>
-            <p>Choose one that feels most like you.</p>
-            <div className="explore-chip-grid">
-              {interests.map(([icon, label]) => (
-                <button
-                  type="button"
-                  className={interest === label ? "selected" : ""}
-                  onClick={() => setInterest(label)}
-                  key={label}
-                >
-                  <Icon name={icon} /><span>{label}</span>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset className="explore-choice-group">
-            <legend>What best describes your current stage?</legend>
-            <p>This helps us personalize your recommendations.</p>
-            <div className="explore-stage-grid">
-              {stages.map(([icon, label]) => (
-                <button
-                  type="button"
-                  className={stage === label ? "selected" : ""}
-                  onClick={() => setStage(label)}
-                  key={label}
-                >
-                  <Icon name={icon} /><span>{label}</span>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-
           <button className="primary-button explore-submit" disabled={!ready} onClick={buildRoadmap}>
-            Build My Roadmap →
+            Show My Opportunities →
           </button>
-          {!ready && <small className="explore-helper">Choose your age, region, interest, and stage to continue.</small>}
+          {!ready && <small className="explore-helper">Choose your age, state, at least one interest, and current stage to continue.</small>}
         </div>
 
-        <aside className="explore-results">
+        <aside className={`explore-results ${submitted ? "results-ready" : ""}`} ref={resultsRef}>
           <div className="results-heading">
             <div>
               <span>OPPORTUNITIES FOR YOU</span>
               <h2>{name ? `${name}’s starting points` : "Your starting points"}</h2>
             </div>
-            <small>{interest ? "Updated for your interest" : "A preview of what you can discover"}</small>
+            <small>{selectedInterests.length ? `Matched to ${selectedInterests.length} interest${selectedInterests.length > 1 ? "s" : ""}` : "A preview of what you can discover"}</small>
+          </div>
+
+          <div className="account-opportunity-note">
+            <Icon name="user" />
+            <div><strong>Want the full list?</strong><p>Create an account to access all matching opportunities, scholarships, and career paths—and save your favorites.</p></div>
+            <Link href="/account">Make an Account →</Link>
           </div>
 
           <div className="opportunity-preview-grid">
             {recommendations.map((item) => (
-              <Link href={item.href} className="opportunity-preview" key={item.title}>
+              <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined} className="opportunity-preview" key={item.title}>
                 <div className="opportunity-art"><Icon name={item.icon} /></div>
                 <div>
                   <h3>{item.title}</h3>
@@ -205,9 +241,9 @@ export default function ExplorePage() {
             <Icon name="path" />
             <div>
               <h3>Your Gateway Roadmap</h3>
-              <p>{ready ? `${interest} · ${stage} · ${region}` : "Complete your profile to unlock personalized next steps."}</p>
+              <p>{ready ? `${selectedInterests.join(" · ")} · ${stage} · ${state}` : "Complete your profile to unlock personalized next steps."}</p>
             </div>
-            <span>{ready ? "Ready" : "Locked"}</span>
+            <span>{submitted ? "Ready" : "Preview"}</span>
           </div>
         </aside>
       </section>
