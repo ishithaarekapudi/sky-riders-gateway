@@ -57,23 +57,8 @@ export default function Home() {
           <p className="vision-mission">Our mission is not just to inform—it is to transform curiosity into a tangible path forward.</p>
           <Link className="vision-button" href="/about#guidance">See Our Vision <span aria-hidden="true">→</span></Link>
         </div>
-        <div className="vision-roadmap" aria-label="Gateway roadmap from exposure to pathways">
-          <div className="vision-flight" aria-hidden="true"><Icon name="plane" /></div>
-          <svg className="roadmap-line" viewBox="0 0 620 520" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M90 455 C250 410 330 340 240 280 C150 220 250 170 390 126 C475 100 520 62 540 30" />
-            <path className="roadmap-dash" d="M90 455 C250 410 330 340 240 280 C150 220 250 170 390 126 C475 100 520 62 540 30" />
-          </svg>
-          {[
-            ["search", "Exposure", "See what is possible", "exposure"],
-            ["people", "Mentorship", "Learn from people who have been there", "mentorship"],
-            ["path", "Pathways", "Know exactly where to go next", "pathways"],
-          ].map(([icon, title, text, position]) => (
-            <div className={`roadmap-point roadmap-${position}`} key={title}>
-              <div className="roadmap-icon"><Icon name={icon} /></div>
-              <div><h3>{title}</h3><p>{text}</p></div>
-            </div>
-          ))}
-          <div className="vision-sun" aria-hidden="true" />
+        <div className="vision-roadmap-image">
+          <img src="/gateway-vision-roadmap.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
         </div>
       </section>
 
