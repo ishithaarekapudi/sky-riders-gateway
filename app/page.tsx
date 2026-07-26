@@ -58,7 +58,7 @@ export default function Home() {
           <Link className="vision-button" href="/about#guidance">See Our Vision <span aria-hidden="true">→</span></Link>
         </div>
         <div className="vision-roadmap-image">
-          <img src="/gateway-vision-roadmap.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
+          <img src="/gateway-vision-roadmap-original.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
         </div>
       </section>
 

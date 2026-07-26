@@ -225,8 +225,8 @@ button { cursor: pointer; }
 .vision-button { display: inline-flex; align-items: center; gap: 22px; padding: 14px 22px; border: 2px solid var(--blue); border-radius: 7px; color: var(--blue); font-weight: 700; transition: background .18s ease, color .18s ease, transform .18s ease; }
 .vision-button:hover { transform: translateY(-2px); background: var(--blue); color: white; }
 .vision-button span { font-size: 21px; }
-.vision-roadmap-image { overflow: hidden; border: 1px solid #d7e6f5; border-radius: 25px; background: #f1f7fe; box-shadow: 0 18px 45px rgba(5,35,74,.12); }
-.vision-roadmap-image img { width: 100%; height: auto; display: block; }
+.vision-roadmap-image { position: relative; overflow: hidden; aspect-ratio: 768 / 811; border-radius: 25px; background: #f1f7fe; box-shadow: 0 18px 45px rgba(5,35,74,.12); }
+.vision-roadmap-image img { position: absolute; top: -7.8%; left: -108.7%; width: 217.7%; max-width: none; height: auto; display: block; }
 
 /* Compact homepage journey section based on the approved lower-page reference. */
 .homepage-pathways {
