@@ -51,24 +51,29 @@ export default function Home() {
 
       <section className="gateway-vision">
         <div className="vision-copy">
-          <span>GATEWAY’S VISION</span>
-          <h2>Making aviation reachable for every young person</h2>
-          <p>Too many students are held back by limited access, a lack of awareness, and the cost of training. Sky Riders Gateway is designed to break those barriers—giving young people the resources, relationships, and clear next steps to imagine themselves in aviation.</p>
+          <span>WHY GATEWAY</span>
+          <h2>The Sky Shouldn’t Have Barriers</h2>
+          <p>Aviation should feel possible for every young person—regardless of background, location, or resources. Sky Riders Gateway brings the guidance, community, and opportunities together in one clear place.</p>
           <p className="vision-mission">Our mission is not just to inform—it is to transform curiosity into a tangible path forward.</p>
-          <Link className="primary-button" href="/about#guidance">Discover Our Mission →</Link>
+          <Link className="vision-button" href="/about#guidance">See Our Vision <span aria-hidden="true">→</span></Link>
         </div>
-        <div className="vision-pillars">
+        <div className="vision-roadmap" aria-label="Gateway roadmap from exposure to pathways">
+          <div className="vision-flight" aria-hidden="true"><Icon name="plane" /></div>
+          <svg className="roadmap-line" viewBox="0 0 620 520" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M90 455 C250 410 330 340 240 280 C150 220 250 170 390 126 C475 100 520 62 540 30" />
+            <path className="roadmap-dash" d="M90 455 C250 410 330 340 240 280 C150 220 250 170 390 126 C475 100 520 62 540 30" />
+          </svg>
           {[
-            ["plane", "Exposure", "Hands-on STEM experiences, school-based programs, aviation events, simulators, and drones introduce students to what is possible."],
-            ["people", "Mentorship", "Pilots, engineers, and aviation professionals help students see themselves in the field and guide their next steps."],
-            ["path", "Pathways", "Personalized roadmaps connect interests to careers, scholarships, organizations, and real-world opportunities."],
-          ].map(([icon, title, text]) => (
-            <article key={title}>
-              <div><Icon name={icon} /></div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
+            ["search", "Exposure", "See what is possible", "exposure"],
+            ["people", "Mentorship", "Learn from people who have been there", "mentorship"],
+            ["path", "Pathways", "Know exactly where to go next", "pathways"],
+          ].map(([icon, title, text, position]) => (
+            <div className={`roadmap-point roadmap-${position}`} key={title}>
+              <div className="roadmap-icon"><Icon name={icon} /></div>
+              <div><h3>{title}</h3><p>{text}</p></div>
+            </div>
           ))}
+          <div className="vision-sun" aria-hidden="true" />
         </div>
       </section>
 
