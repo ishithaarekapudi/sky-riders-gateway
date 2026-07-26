@@ -219,7 +219,7 @@ button { cursor: pointer; }
   font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif;
 }
 .vision-copy > span { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .18em; }
-.vision-copy h2 { max-width: 580px; margin: 12px 0 20px; font-size: clamp(42px, 4.8vw, 68px); font-family: Georgia, "Times New Roman", serif; font-weight: 600; line-height: .98; letter-spacing: -.045em; }
+.vision-copy h2 { max-width: 580px; margin: 12px 0 20px; font-size: clamp(42px, 4.8vw, 68px); font-family: Georgia, "Times New Roman", serif; font-weight: 500; line-height: .98; letter-spacing: -.045em; }
 .vision-copy > p { max-width: 600px; color: var(--muted); font-size: 17px; line-height: 1.7; }
 .vision-copy .vision-mission { margin: 22px 0 28px; padding-left: 18px; border-left: 3px solid var(--blue); color: #263d5c; font-weight: 600; }
 .vision-button { display: inline-flex; align-items: center; gap: 22px; padding: 14px 22px; border: 2px solid var(--blue); border-radius: 7px; color: var(--blue); font-weight: 700; transition: background .18s ease, color .18s ease, transform .18s ease; }
