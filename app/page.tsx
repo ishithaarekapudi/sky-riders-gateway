@@ -10,8 +10,8 @@ const features = [
 ] as const;
 
 const aviationPaths = [
-  ["plane", "Pilot", "Learn how to begin a path toward the flight deck."],
-  ["rocket", "Space", "Explore spacecraft, missions, and careers beyond Earth."],
+  ["airplane", "Pilot", "Learn how to begin a path toward the flight deck."],
+  ["spacecraft", "Space", "Explore spacecraft, missions, and careers beyond Earth."],
   ["gear", "Aerospace Engineering", "Design and build the systems that make flight possible."],
   ["cloud", "Weather & Climate", "Understand the atmosphere that shapes every mission."],
   ["wrench", "Aircraft Maintenance", "Help keep aircraft safe, reliable, and ready to fly."],
