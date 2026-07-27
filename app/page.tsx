@@ -98,16 +98,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="featured-organizations">
-          <div className="featured-heading"><div><h3>Organizations to Explore</h3><p>Trusted programs that can help you learn, connect, and get involved.</p></div><Link href="/organizations">View All →</Link></div>
-          <div className="organization-logo-row">
-            <Link href="/organizations" className="org-mark eaa-mark"><b>EAA</b></Link>
-            <Link href="/organizations" className="org-mark cap-mark"><b>△</b><span>CIVIL AIR PATROL<small>U.S. AIR FORCE AUXILIARY</small></span></Link>
-            <Link href="/organizations" className="org-mark eagles-mark"><b>YOUNG<br />EAGLES</b></Link>
-            <Link href="/organizations" className="org-mark women-mark"><b>Women in Aviation</b><small>INTERNATIONAL</small></Link>
-            <Link href="/organizations" className="org-mark nasa-mark"><b>NASA</b></Link>
-          </div>
-        </div>
       </section>
       <Footer />
     </main>
