@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Footer, Header, Icon } from "./ui";
+import { VisionScrollButton } from "./vision-scroll-button";
 
 const features = [
   ["user", "Personalized for You", "Tailored to your interests and goals"],
@@ -55,7 +56,7 @@ export default function Home() {
           <h2>The Sky Shouldn’t Have Barriers</h2>
           <p>Aviation and aerospace should feel possible for every young person, regardless of background, location, or resources. Sky Riders Gateway brings guidance, community, and opportunities together in one clear place.</p>
           <p className="vision-mission">Our mission is not just to inform. It is to transform curiosity into a tangible path forward.</p>
-          <Link className="vision-button" href="#mission">See Our Vision <span aria-hidden="true">→</span></Link>
+          <VisionScrollButton />
         </div>
         <div className="vision-roadmap-image">
           <img src="/gateway-vision-roadmap-clean.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
