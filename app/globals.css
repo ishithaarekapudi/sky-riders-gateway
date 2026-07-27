@@ -280,13 +280,22 @@ button { cursor: pointer; }
 .path-symbol .icon { width: 39px; height: 39px; }
 .aviation-path-card strong { margin-top: 9px; font-size: 18px; font-weight: 650; }
 .aviation-path-card small { max-width: 175px; margin-top: 7px; color: #51627b; font-size: 12px; line-height: 1.45; }
-.how-it-works { position: relative; margin: 38px 0 32px; }
+.how-it-works {
+  max-width: 1260px;
+  position: relative;
+  margin: 52px auto 0;
+  padding: 28px 30px 32px;
+  border: 1px solid #d6e7f8;
+  border-radius: 18px;
+  background: #edf6ff;
+  box-shadow: 0 10px 28px rgba(5, 35, 74, .07);
+}
 .how-it-works h3, .featured-heading h3 { margin: 0; font-size: 20px; font-weight: 650; text-align: center; }
 .how-it-works > p { max-width: 680px; margin: 9px auto 0; color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; }
-.journey-line { position: absolute; z-index: 0; top: 88px; left: 12.5%; right: 12.5%; height: 2px; background: #cfe1f6; }
 .journey-steps { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
-.journey-step { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.journey-step span { width: 34px; height: 34px; display: grid; place-items: center; border: 4px solid white; border-radius: 50%; background: #0b72d8; box-shadow: 0 0 0 1px #cfe1f6; color: white; font-weight: 700; }
+.journey-line { position: absolute; z-index: 0; top: 17px; left: 12.5%; right: 12.5%; height: 2px; background: #bfd9f5; }
+.journey-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.journey-step span { width: 34px; height: 34px; display: grid; place-items: center; border: 4px solid #edf6ff; border-radius: 50%; background: #0b72d8; box-shadow: 0 0 0 1px #bfd9f5; color: white; font-weight: 700; }
 .journey-step strong { margin-top: 8px; color: #263c5f; font-size: 13px; font-weight: 600; line-height: 1.25; }
 .featured-organizations { padding: 17px 20px 22px; border: 1px solid #e7edf5; border-radius: 15px; background: white; box-shadow: 0 7px 22px rgba(5,35,74,.06); }
 .featured-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
@@ -669,6 +678,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .vision-roadmap-image { border-radius: 18px; }
   .aviation-path-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .aviation-path-card { min-height: 178px; }
+  .how-it-works { margin-top: 38px; padding: 26px 16px 28px; }
   .journey-line { display: none; }
   .journey-steps { grid-template-columns: 1fr 1fr; gap: 22px 8px; }
   .organization-logo-row { grid-template-columns: 1fr 1fr; }

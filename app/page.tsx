@@ -88,8 +88,8 @@ export default function Home() {
         <div className="how-it-works">
           <h3>How Gateway Guides You</h3>
           <p>Start with what interests you. Gateway turns that interest into personalized opportunities and practical next steps.</p>
-          <div className="journey-line" aria-hidden="true" />
           <div className="journey-steps">
+            <div className="journey-line" aria-hidden="true" />
             {journeySteps.map(([lineOne, lineTwo], index) => (
               <div className="journey-step" key={lineOne}>
                 <span>{index + 1}</span>
