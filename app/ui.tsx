@@ -5,7 +5,7 @@ export function Logo() { return <BrandLogo />; }
 export function BrandLogo({ footer = false }: { footer?: boolean }) {
   return <Link href="/" className={`brand-logo${footer ? " brand-logo-footer" : ""}`} aria-label="Sky Riders Gateway home">
     <span className="brand-mark-wrap" aria-hidden="true">
-      <img className="brand-mark" src="/brand/sky-riders-mark.png" alt="" />
+      <img className="brand-mark" src="/brand/sky-riders-mark-v2.png" alt="" />
     </span>
     <span className="brand-words"><b>SKY RIDERS</b><small>GATEWAY</small></span>
   </Link>;
