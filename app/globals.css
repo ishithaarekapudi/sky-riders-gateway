@@ -95,8 +95,9 @@ button { cursor: pointer; }
   font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif;
 }
 .live-home .site-header { width: 100%; }
-.brand-logo { min-width: 270px; display: flex; align-items: center; gap: 11px; color: white; }
-.brand-mark { width: 66px; height: 48px; flex: none; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+.brand-logo { min-width: 270px; display: flex; align-items: center; gap: 12px; color: white; }
+.brand-mark-wrap { width: 76px; height: 58px; flex: none; display: grid; place-items: center; overflow: hidden; padding: 2px; border-radius: 12px; background: #fffdf8; }
+.brand-mark { width: 100%; height: 100%; display: block; object-fit: contain; }
 .brand-words { display: flex; flex-direction: column; white-space: nowrap; }
 .brand-words b { font-size: 20px; font-weight: 650; letter-spacing: .105em; line-height: 1.05; }
 .brand-words small { margin-top: 5px; font-size: 9px; font-weight: 600; letter-spacing: .55em; line-height: 1; }
@@ -393,7 +394,11 @@ button { cursor: pointer; }
 
 footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(--navy); color: white; }
 .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 60px; }
-.footer-grid .logo { margin-bottom: 15px; }
+.footer-grid .logo, .footer-grid .brand-logo { margin-bottom: 18px; }
+.brand-logo-footer { width: max-content; min-width: 0; }
+.brand-logo-footer .brand-mark-wrap { width: 88px; height: 67px; }
+.brand-logo-footer .brand-words b { font-size: 21px; }
+.brand-logo-footer .brand-words small { font-size: 9px; }
 .footer-grid p, .footer-grid a { display: block; color: #aebdd0; line-height: 1.75; }
 .footer-grid h4 { margin-top: 0; }
 .footer-bottom { display: flex; justify-content: space-between; margin-top: 35px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); color: #91a2b8; font-size: 13px; }
@@ -562,7 +567,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 @media (max-width: 1350px) and (min-width: 1001px) {
   .site-header { padding: 0 22px; gap: 18px; }
   .brand-logo { min-width: 180px; gap: 7px; }
-  .brand-mark { width: 48px; height: 40px; }
+  .brand-mark-wrap { width: 58px; height: 46px; border-radius: 9px; }
   .brand-words b { font-size: 15px; }
   .brand-words small { font-size: 7px; }
   .site-header nav { gap: 13px; }

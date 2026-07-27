@@ -1,14 +1,12 @@
 import Link from "next/link";
 
-export function Logo() { return <Link href="/" className="logo"><Icon name="wing" /><span><b>SKY RIDERS</b><small>GATEWAY</small></span></Link>; }
+export function Logo() { return <BrandLogo />; }
 
-export function BrandLogo() {
-  return <Link href="/" className="brand-logo" aria-label="Sky Riders Gateway home">
-    <svg className="brand-mark" viewBox="0 0 92 58" aria-hidden="true">
-      <path d="M44 29C34 14 20 10 4 12c6 11 16 18 31 20-11 0-20 3-27 9 12 5 24 3 36-6" />
-      <path d="M48 29c10-15 24-19 40-17-6 11-16 18-31 20 11 0 20 3 27 9-12 5-24 3-36-6" />
-      <path d="M46 28v24M39 25c3 4 5 6 7 6s4-2 7-6" />
-    </svg>
+export function BrandLogo({ footer = false }: { footer?: boolean }) {
+  return <Link href="/" className={`brand-logo${footer ? " brand-logo-footer" : ""}`} aria-label="Sky Riders Gateway home">
+    <span className="brand-mark-wrap" aria-hidden="true">
+      <img className="brand-mark" src="/brand/sky-riders-mark.png" alt="" />
+    </span>
     <span className="brand-words"><b>SKY RIDERS</b><small>GATEWAY</small></span>
   </Link>;
 }
@@ -18,7 +16,7 @@ export function Header({ active, originalLogo = false }: { active?: string; orig
   return <header className="site-header">{originalLogo?<BrandLogo />:<Logo />}<nav>{links.map(([label,href])=><Link className={active===label.toLowerCase()?"active":""} href={href} key={href}>{label}</Link>)}</nav><div className="account-actions"><Link href="/account" className="ghost-button">Log In</Link><Link href="/account" className="small-button">Sign Up</Link></div></header>;
 }
 
-export function Footer() { return <footer><div className="footer-grid"><div><Logo /><p>Connecting students to opportunities in aviation and building a more inclusive future.</p></div><div><h4>Explore</h4><Link href="/careers">Career Paths</Link><Link href="/scholarships">Scholarships</Link><Link href="/organizations">Organizations</Link></div><div><h4>Resources</h4><Link href="/resources">Career Guide</Link><Link href="/resources">Getting Started</Link><Link href="/explore">Build a Roadmap</Link></div><div><h4>About</h4><Link href="/about">Ishitha’s Story</Link><Link href="/about#guidance">Our Mission</Link><Link href="/organizations">Community</Link></div></div><div className="footer-bottom">© 2026 Sky Riders Gateway <span>Privacy · Terms · Accessibility</span></div></footer>; }
+export function Footer() { return <footer><div className="footer-grid"><div><BrandLogo footer /><p>Connecting students to opportunities in aviation and building a more inclusive future.</p></div><div><h4>Explore</h4><Link href="/careers">Career Paths</Link><Link href="/scholarships">Scholarships</Link><Link href="/organizations">Organizations</Link></div><div><h4>Resources</h4><Link href="/resources">Career Guide</Link><Link href="/resources">Getting Started</Link><Link href="/explore">Build a Roadmap</Link></div><div><h4>About</h4><Link href="/about">Ishitha’s Story</Link><Link href="/about#guidance">Our Mission</Link><Link href="/organizations">Community</Link></div></div><div className="footer-bottom">© 2026 Sky Riders Gateway <span>Privacy · Terms · Accessibility</span></div></footer>; }
 
 export function Icon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
