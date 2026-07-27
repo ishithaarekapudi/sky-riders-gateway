@@ -219,7 +219,7 @@ export default function ExplorePage() {
 
           <div className="account-opportunity-note">
             <Icon name="user" />
-            <div><strong>Want the full list?</strong><p>Create an account to access all matching opportunities, scholarships, and career paths—and save your favorites.</p></div>
+            <div><strong>Want the full list?</strong><p>Create an account to access all matching opportunities, scholarships, and career paths, and save your favorites.</p></div>
             <Link href="/account">Make an Account →</Link>
           </div>
 

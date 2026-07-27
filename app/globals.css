@@ -109,7 +109,7 @@ button { cursor: pointer; }
 .live-home .ghost-button,
 .live-home .small-button,
 .live-home .primary-button { font-weight: 650; }
-.live-home .hero-copy .primary-button { letter-spacing: .035em; }
+.live-home .hero-copy .primary-button { padding: 15px 32px; font-size: 17px; letter-spacing: .035em; }
 .live-home .feature-item strong { font-weight: 600; }
 .live-home .site-header a,
 .live-home .feature-item,
@@ -223,7 +223,7 @@ button { cursor: pointer; }
   color: var(--ink);
   font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif;
 }
-.vision-copy > span { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .18em; }
+.vision-copy > span { color: var(--blue); font-size: 14px; font-weight: 800; letter-spacing: .18em; }
 .vision-copy h2 { max-width: 580px; margin: 12px 0 20px; font-size: clamp(39px, 4.3vw, 61px); font-family: Georgia, "Times New Roman", serif; font-weight: 500; line-height: .98; letter-spacing: -.045em; }
 .vision-copy > p { max-width: 600px; color: var(--muted); font-size: 17px; line-height: 1.7; }
 .vision-copy .vision-mission { margin: 22px 0 28px; padding-left: 18px; border-left: 3px solid var(--blue); color: #263d5c; font-weight: 600; }
@@ -232,6 +232,23 @@ button { cursor: pointer; }
 .vision-button span { font-size: 21px; }
 .vision-roadmap-image { overflow: hidden; border-radius: 25px; background: #f1f7fe; box-shadow: 0 18px 45px rgba(5,35,74,.12); }
 .vision-roadmap-image img { width: 100%; height: auto; display: block; }
+
+.mission-statement {
+  padding: 58px max(5vw, calc((100% - 1260px) / 2));
+  display: grid;
+  grid-template-columns: .78fr 1.22fr;
+  align-items: center;
+  gap: clamp(42px, 6vw, 86px);
+  background: linear-gradient(115deg, #02162f, #082b55);
+  color: white;
+  scroll-margin-top: 24px;
+}
+.mission-visual { min-height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: radial-gradient(circle at 50% 35%, rgba(29,122,223,.24), transparent 60%); text-align: center; }
+.mission-visual img { width: min(100%, 360px); height: 190px; object-fit: contain; }
+.mission-visual span { margin-top: 10px; color: #dce9f8; font-size: 15px; font-weight: 600; line-height: 1.55; letter-spacing: .025em; }
+.mission-copy > span { color: #7fbcff; font-size: 13px; font-weight: 800; letter-spacing: .2em; }
+.mission-copy blockquote { max-width: 720px; margin: 14px 0 20px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 4vw, 56px); font-weight: 500; line-height: 1.08; letter-spacing: -.03em; }
+.mission-copy p { max-width: 740px; margin: 0; color: #cfdeef; font-size: 18px; line-height: 1.72; }
 
 /* Compact homepage journey section based on the approved lower-page reference. */
 .homepage-pathways {
@@ -243,7 +260,7 @@ button { cursor: pointer; }
 .homepage-pathways .section-heading h2 { font-weight: 650; }
 .aviation-path-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
 .aviation-path-card {
-  min-height: 154px;
+  min-height: 188px;
   padding: 20px 12px 16px;
   display: flex;
   flex-direction: column;
@@ -258,12 +275,14 @@ button { cursor: pointer; }
 }
 .aviation-path-card:nth-child(2n) { background: linear-gradient(145deg, #fff9f5, #f8fbff); }
 .aviation-path-card:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(5, 35, 74, .12); }
-.path-symbol { min-height: 44px; display: grid; place-items: center; color: #126dce; font-family: Arial, sans-serif; font-size: 38px; line-height: 1; }
+.path-symbol { min-height: 44px; display: grid; place-items: center; color: #126dce; line-height: 1; }
+.path-symbol .icon { width: 39px; height: 39px; }
 .aviation-path-card strong { margin-top: 9px; font-size: 18px; font-weight: 650; }
-.aviation-path-card small { max-width: 150px; margin-top: 6px; color: #51627b; font-size: 12px; line-height: 1.35; }
-.how-it-works { position: relative; margin: 34px 0 28px; }
+.aviation-path-card small { max-width: 175px; margin-top: 7px; color: #51627b; font-size: 12px; line-height: 1.45; }
+.how-it-works { position: relative; margin: 38px 0 32px; }
 .how-it-works h3, .featured-heading h3 { margin: 0; font-size: 20px; font-weight: 650; text-align: center; }
-.journey-line { position: absolute; z-index: 0; top: 55px; left: 12.5%; right: 12.5%; height: 2px; background: #cfe1f6; }
+.how-it-works > p { max-width: 680px; margin: 9px auto 0; color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; }
+.journey-line { position: absolute; z-index: 0; top: 88px; left: 12.5%; right: 12.5%; height: 2px; background: #cfe1f6; }
 .journey-steps { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
 .journey-step { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .journey-step span { width: 34px; height: 34px; display: grid; place-items: center; border: 4px solid white; border-radius: 50%; background: #0b72d8; box-shadow: 0 0 0 1px #cfe1f6; color: white; font-weight: 700; }
@@ -271,6 +290,7 @@ button { cursor: pointer; }
 .featured-organizations { padding: 17px 20px 22px; border: 1px solid #e7edf5; border-radius: 15px; background: white; box-shadow: 0 7px 22px rgba(5,35,74,.06); }
 .featured-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
 .featured-heading h3 { text-align: left; }
+.featured-heading p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
 .featured-heading a { color: #1672cf; font-size: 12px; font-weight: 650; }
 .organization-logo-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
 .org-mark { min-height: 80px; padding: 10px 16px; display: flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid #e5ebf2; border-radius: 9px; background: #fff; color: #1766ad; text-align: center; }
@@ -598,6 +618,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .explore-builder { grid-template-columns: 1fr; }
   .explore-form-panel { border-right: 0; border-bottom: 1px solid var(--line); }
   .gateway-vision { grid-template-columns: 1fr; }
+  .mission-statement { grid-template-columns: 1fr; }
   .vision-roadmap-image { max-width: 760px; margin: auto; }
 }
 
@@ -639,10 +660,14 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .sub-hero h1 { font-size: 39px; }
   .homepage-pathways { padding: 44px 18px 28px; }
   .gateway-vision { padding: 58px 20px; gap: 38px; }
+  .mission-statement { padding: 52px 20px; gap: 32px; }
+  .mission-visual { min-height: 220px; }
+  .mission-visual img { height: 155px; }
+  .mission-copy p { font-size: 16px; }
   .vision-copy h2 { font-size: 39px; }
   .vision-roadmap-image { border-radius: 18px; }
   .aviation-path-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .aviation-path-card { min-height: 140px; }
+  .aviation-path-card { min-height: 178px; }
   .journey-line { display: none; }
   .journey-steps { grid-template-columns: 1fr 1fr; gap: 22px 8px; }
   .organization-logo-row { grid-template-columns: 1fr 1fr; }

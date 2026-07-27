@@ -48,7 +48,7 @@ export const organizations = [
 ] as const;
 
 export const manuscriptResources = [
-  ["document", "Pilot Certificate Guide", "Understand Student, Private, Commercial, CFI, CFII, ATP, Sport, and Recreational pilot certificates—and what each one lets you do.", "Explore Certificates"],
+  ["document", "Pilot Certificate Guide", "Understand Student, Private, Commercial, CFI, CFII, ATP, Sport, and Recreational pilot certificates, and what each one lets you do.", "Explore Certificates"],
   ["plane", "Scholarship Application Toolkit", "Start early, check eligibility first, track every deadline, save reusable answers, and tell a clear story about your goals.", "Find Funding"],
   ["people", "Mentors & Aviation Networks", "Learn how local clubs, flight schools, aviation events, and national organizations can help open doors.", "Meet the Community"],
   ["school", "College & Training Pathways", "Compare Part 141 flight programs, aviation degrees, aerospace engineering programs, and technical education.", "Explore Education"],

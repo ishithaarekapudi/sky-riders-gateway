@@ -30,11 +30,11 @@ export default function AboutPage() {
     <section className="section about-intro">
       <div>
         <span className="eyebrow">MY MISSION</span>
-        <h2>Make aviation easier to enter—and easier to imagine yourself in.</h2>
+        <h2>Make aviation easier to enter, and easier to imagine yourself in.</h2>
         <p>Ishitha’s path began with a goal of becoming an astronaut and a realization: young people often have the curiosity and determination to pursue aviation, but not one clear place to find careers, training pathways, scholarships, mentors, and organizations.</p>
         <p>Her book, <i>Cleared for Takeoff: Bridging Gaps to Access for Youth in Aviation</i>, gathered the knowledge she developed while learning to fly. Sky Riders Gateway brings that mission online so students can move from wondering where to begin to taking a practical first step.</p>
       </div>
-      <blockquote>“Often, the hardest part is figuring out where to begin.”<small>— Ishitha Arekapudi, <i>Cleared for Takeoff</i></small></blockquote>
+      <blockquote>“Often, the hardest part is figuring out where to begin.”<small>Ishitha Arekapudi, <i>Cleared for Takeoff</i></small></blockquote>
     </section>
     <section className="section about-timeline-section">
       <div className="section-heading"><span>THE JOURNEY</span><h2>From a First Flight to Building a Gateway</h2></div>
@@ -47,4 +47,3 @@ export default function AboutPage() {
     </section>
   </PageShell>;
 }
-

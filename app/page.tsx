@@ -4,25 +4,25 @@ import { Footer, Header, Icon } from "./ui";
 const features = [
   ["user", "Personalized for You", "Tailored to your interests and goals"],
   ["cap", "Scholarships", "Find funding for your dreams"],
-  ["people", "Mentors", "Connect with aviation professionals"],
+  ["people", "Mentors", "Connect with aviation and aerospace professionals"],
   ["globe", "Organizations", "Discover programs and communities"],
   ["calendar", "Events", "Find events and opportunities"],
 ] as const;
 
 const aviationPaths = [
-  ["✈", "Pilot", "Fly the skies and lead the way."],
-  ["🚀", "Space", "Explore beyond our atmosphere."],
-  ["⚙", "Engineer", "Design, build, and innovate."],
-  ["☁", "Meteorology", "Understand the power of weather."],
-  ["🛠", "Maintenance", "Keep aircraft safe and soaring."],
-  ["⌘", "Drones", "The future is unmanned."],
+  ["plane", "Pilot", "Learn how to begin a path toward the flight deck."],
+  ["rocket", "Space", "Explore spacecraft, missions, and careers beyond Earth."],
+  ["gear", "Aerospace Engineering", "Design and build the systems that make flight possible."],
+  ["cloud", "Weather & Climate", "Understand the atmosphere that shapes every mission."],
+  ["wrench", "Aircraft Maintenance", "Help keep aircraft safe, reliable, and ready to fly."],
+  ["drone", "Drones & Robotics", "Build and operate the next generation of flight technology."],
 ] as const;
 
 const journeySteps = [
+  ["Choose your", "interests"],
   ["Tell us about", "yourself"],
-  ["Receive personalized", "opportunities"],
-  ["Save your", "favorites"],
-  ["Build your", "aviation future"],
+  ["Review your", "best matches"],
+  ["Save and plan", "your next steps"],
 ] as const;
 
 export default function Home() {
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="gateway-shade" aria-hidden="true" />
           <div className="hero-copy">
             <h1>Welcome to<br />Sky Riders Gateway</h1>
-            <p>Connecting students to<br />opportunities in aviation.</p>
+            <p>Connecting students to opportunities in<br />aviation and aerospace.</p>
             <Link className="primary-button" href="/explore">Start My Journey <span aria-hidden="true">→</span></Link>
             <small>◷ &nbsp; Takes less than 3 minutes!</small>
           </div>
@@ -53,28 +53,41 @@ export default function Home() {
         <div className="vision-copy">
           <span>WHY GATEWAY</span>
           <h2>The Sky Shouldn’t Have Barriers</h2>
-          <p>Aviation should feel possible for every young person—regardless of background, location, or resources. Sky Riders Gateway brings the guidance, community, and opportunities together in one clear place.</p>
-          <p className="vision-mission">Our mission is not just to inform—it is to transform curiosity into a tangible path forward.</p>
-          <Link className="vision-button" href="/about#guidance">See Our Vision <span aria-hidden="true">→</span></Link>
+          <p>Aviation and aerospace should feel possible for every young person, regardless of background, location, or resources. Sky Riders Gateway brings guidance, community, and opportunities together in one clear place.</p>
+          <p className="vision-mission">Our mission is not just to inform. It is to transform curiosity into a tangible path forward.</p>
+          <Link className="vision-button" href="#mission">See Our Vision <span aria-hidden="true">→</span></Link>
         </div>
         <div className="vision-roadmap-image">
           <img src="/gateway-vision-roadmap-clean.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
         </div>
       </section>
 
+      <section className="mission-statement" id="mission">
+        <div className="mission-visual" aria-hidden="true">
+          <img src="/brand/sky-riders-mark-v3.png" alt="" />
+          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
+        </div>
+        <div className="mission-copy">
+          <span>OUR MISSION</span>
+          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
+          <p>Sky Riders Gateway exists to make aviation and aerospace pathways easier to see, understand, and pursue. We connect young people with trustworthy guidance, mentors, scholarships, organizations, and practical next steps so curiosity can become a real future.</p>
+        </div>
+      </section>
+
       <section className="homepage-pathways">
-        <div className="section-heading"><span>YOUR JOURNEY</span><h2>A Clear Path to Aviation</h2><p>Explore the many ways you can build a future in flight.</p></div>
+        <div className="section-heading"><span>EXPLORE YOUR FUTURE</span><h2>Find Your Place in Aviation and Aerospace</h2><p>Choose an area that interests you. Then Gateway will help you discover relevant careers, programs, scholarships, and clear next steps.</p></div>
         <div className="aviation-path-grid">
-          {aviationPaths.map(([symbol, title, text]) => (
+          {aviationPaths.map(([icon, title, text]) => (
             <Link href="/careers" className="aviation-path-card" key={title}>
-              <span className="path-symbol" aria-hidden="true">{symbol}</span>
+              <span className="path-symbol" aria-hidden="true"><Icon name={icon} /></span>
               <strong>{title}</strong>
               <small>{text}</small>
             </Link>
           ))}
         </div>
         <div className="how-it-works">
-          <h3>How It Works</h3>
+          <h3>How Gateway Guides You</h3>
+          <p>Start with what interests you. Gateway turns that interest into personalized opportunities and practical next steps.</p>
           <div className="journey-line" aria-hidden="true" />
           <div className="journey-steps">
             {journeySteps.map(([lineOne, lineTwo], index) => (
@@ -86,7 +99,7 @@ export default function Home() {
           </div>
         </div>
         <div className="featured-organizations">
-          <div className="featured-heading"><h3>Featured Organizations</h3><Link href="/organizations">View All →</Link></div>
+          <div className="featured-heading"><div><h3>Organizations to Explore</h3><p>Trusted programs that can help you learn, connect, and get involved.</p></div><Link href="/organizations">View All →</Link></div>
           <div className="organization-logo-row">
             <Link href="/organizations" className="org-mark eaa-mark"><b>EAA</b></Link>
             <Link href="/organizations" className="org-mark cap-mark"><b>△</b><span>CIVIL AIR PATROL<small>U.S. AIR FORCE AUXILIARY</small></span></Link>
