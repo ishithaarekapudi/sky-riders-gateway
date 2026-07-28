@@ -46,7 +46,8 @@ export default function Scholarships() {
       <p className="data-note">*Awards, eligibility, and deadlines can change. Always verify the current application cycle on the sponsoring organization’s official website before applying.</p>
       <div className="scholar-layout"><div className="scholar-grid">{visible.map(([,title,amount,tags])=><article className="scholar-card" key={title}>
         <div className="scholar-sponsor">{sponsorLogo(title) ? <img src={sponsorLogo(title)} alt="" /> : <strong>{sponsor(title)}</strong>}</div>
-        <div className="scholar-copy"><span className="scholar-type">{tags}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><div className="scholar-meta"><strong>{amount}</strong><span>Deadline: verify current cycle</span></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View scholarship →</Link><SaveButton id={`scholarship:${title}`} label="Save"/></div></div>
+        <div className="scholar-copy"><span className="scholar-type">{tags}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><div className="scholar-meta"><strong>{amount}</strong><span>Deadline: verify current cycle</span></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View scholarship →</Link></div></div>
+        <SaveButton id={`scholarship:${title}`} label={title}/>
       </article>)}</div>
       <aside className="match-card"><span className="eyebrow">APPLICATION DESK</span><div className="round-icon"><Icon name="user"/></div><h2>Build a stronger application</h2><p>Check eligibility first, track deadlines, save reusable answers, and tell the story behind your aviation goal.</p><a className="small-button" href="/explore">Find My Matches →</a></aside></div>
     </section>
