@@ -18,6 +18,12 @@ const organizationMarks: Record<string, string> = {
   "Women's Soaring Pilots Association": "WSPA",
 };
 
+const organizationLogos: Record<string, string> = {
+  "Experimental Aircraft Association & Young Eagles": "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/EAA_logo_2color-png.png?o=1",
+  "Civil Air Patrol": "https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png",
+  "Women in Aviation International": "https://assets.noviams.com/novi-file-uploads/wai/structure/wai-full-color-logo.png",
+};
+
 const highlightIcons = ["telescope", "people", "globe", "handshake"] as const;
 
 export function OrganizationProfile({ title, summary, tags, info }: {
@@ -27,6 +33,7 @@ export function OrganizationProfile({ title, summary, tags, info }: {
   info: DetailInfo;
 }) {
   const mark = organizationMarks[title] || title.split(" ").map((word) => word[0]).join("").slice(0, 4);
+  const logo = organizationLogos[title];
 
   return (
     <PageShell active="organizations">
@@ -37,7 +44,11 @@ export function OrganizationProfile({ title, summary, tags, info }: {
         </div>
 
         <div className="organization-profile-header">
-          <div className="organization-profile-mark" aria-hidden="true">{mark}</div>
+          <div className={`organization-profile-mark${logo ? " has-logo" : ""}`}>
+            {logo
+              ? <img src={logo} alt={`${title} official logo`} width="180" height="100" />
+              : <span aria-hidden="true">{mark}</span>}
+          </div>
           <div className="organization-profile-title">
             <span>FEATURED ORGANIZATION</span>
             <h1>{title}</h1>
