@@ -667,6 +667,13 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .match-card p { color: var(--muted); line-height: 1.5; }
 .org-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .org-grid article { display: flex; gap: 20px; padding: 26px; border: 1px solid var(--line); border-radius: 13px; background: white; box-shadow: var(--shadow); }
+.org-grid .organization-directory-card { position: relative; overflow: hidden; border-top: 4px solid var(--org-accent); background: linear-gradient(145deg, #fff 72%, var(--org-soft)); }
+.organization-directory-brand { width: 96px; min-width: 96px; height: 78px; padding: 12px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--org-accent) 25%, white); border-radius: 13px; }
+.organization-directory-brand strong { font-size: 19px; font-weight: 850; letter-spacing: -.02em; }
+.organization-directory-brand.has-logo { background: white !important; }
+.organization-directory-brand img { width: 100%; height: 100%; object-fit: contain; }
+.organization-directory-card .tag-row span { border: 1px solid color-mix(in srgb, var(--org-accent) 15%, white); background: var(--org-soft); }
+.organization-directory-card .card-actions a { color: var(--org-accent); }
 .org-grid h3, .org-grid p { margin-top: 0; }
 .org-grid p, .career-grid p, .collection-grid p { color: var(--muted); line-height: 1.55; }
 .tag-row span { display: inline-block; margin-right: 5px; padding: 5px 9px; border-radius: 20px; background: var(--sky); font-size: 11px; }
@@ -817,6 +824,8 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 }
 
 @media (max-width: 520px) {
+  .org-grid .organization-directory-card { flex-direction: column; }
+  .organization-directory-brand { width: 100%; height: 74px; }
   .organization-profile-sky { min-height: 230px; padding: 24px 20px; }
   .organization-profile-back { left: 20px; }
   .organization-profile-header { grid-template-columns: 112px 1fr; gap: 14px; padding: 22px 20px 18px; }
