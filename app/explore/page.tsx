@@ -97,7 +97,7 @@ const featuredOrganizations = [
   { className: "cap-mark", href: "/organizations/civil-air-patrol", logo: "https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png", title: "Civil Air Patrol", description: "Leadership, aerospace education, and service." },
   { className: "eagles-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", logo: "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/YE_logo_color-png.png?o=1", title: "Young Eagles", description: "Free discovery flights for youth ages 8 to 17." },
   { className: "women-mark", href: "/organizations/women-in-aviation-international", logo: "https://assets.noviams.com/novi-file-uploads/wai/structure/wai-full-color-logo.png", title: "Women in Aviation", description: "Education, mentoring, and a global network." },
-  { className: "nasa-mark", href: "https://www.nasa.gov/learning-resources/", title: "NASA STEM", description: "Explore, learn, build, and innovate.", external: true },
+  { className: "nasa-mark", href: "https://www.nasa.gov/learning-resources/", logo: "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg", title: "NASA STEM", description: "Explore, learn, build, and innovate.", external: true },
 ];
 
 export default function ExplorePage() {
