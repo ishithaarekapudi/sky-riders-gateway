@@ -40,6 +40,10 @@ export default function AboutPage() {
       <div className="section-heading"><span>THE JOURNEY</span><h2>From a First Flight to Building a Gateway</h2></div>
       <div className="about-timeline">{milestones.map(([time,text])=><article key={time}><strong>{time}</strong><p>{text}</p></article>)}</div>
     </section>
+    <section className="section about-book" id="book">
+      <div className="book-cover"><span>CLEARED FOR</span><strong>TAKEOFF</strong><small>Bridging Gaps to Access<br/>for Youth in Aviation</small><i>ISHITHA AREKAPUDI</i></div>
+      <div><span className="eyebrow">THE BOOK BEHIND THE MISSION</span><h2>A roadmap for the student who does not know where to begin.</h2><p><i>Cleared for Takeoff</i> brings together career paths, organizations, scholarships, practical advice, and the lessons Ishitha learned while becoming a young pilot.</p><blockquote>“The future of aviation and space is waiting, and it’s calling for people like you to answer.”</blockquote><Link className="primary-button" href="/book">Read an Excerpt & Buy →</Link></div>
+    </section>
     <section className="section about-guidance" id="guidance">
       <div className="section-heading"><span>WHAT I WISH I KNEW</span><h2>Guidance for Your First Steps</h2></div>
       <div className="collection-grid">{guidance.map(([icon,title,text])=><article key={title}><div className="square-icon"><Icon name={icon}/></div><h3>{title}</h3><p>{text}</p></article>)}</div>
