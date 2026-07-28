@@ -725,8 +725,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .resource-editorial { background: #fff; }
 .resource-editorial-intro { max-width: 900px; margin-bottom: 65px; }
 .resource-editorial-intro > span { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .18em; }
-.resource-editorial-intro h2 { max-width: 820px; margin: 16px 0; font-family: Georgia, serif; font-size: clamp(38px,5vw,64px); font-weight: 600; line-height: 1.02; }
-.resource-editorial-intro p { max-width: 700px; color: var(--muted); font-size: 18px; line-height: 1.65; }
+.resource-editorial-intro h2 { max-width: 760px; margin: 16px 0 22px; font-family: Georgia, serif; font-size: clamp(34px,4.3vw,54px); font-weight: 500; line-height: 1.08; }
+.resource-editorial-intro blockquote { max-width: 720px; margin: 0; color: var(--muted); font-size: 19px; line-height: 1.65; }
+.resource-editorial-intro small { display: block; margin-top: 10px; color: #75889c; }
 .resource-groups { border-top: 1px solid #cad6e2; }
 .resource-groups > section { display: grid; grid-template-columns: .7fr 1.3fr; gap: 50px; padding: 45px 0; border-bottom: 1px solid #cad6e2; }
 .resource-groups header { display: grid; grid-template-columns: 50px 1fr; gap: 18px; }
@@ -737,26 +738,20 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .resource-groups article { display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 24px; border: 1px solid #dce4ec; background: #f8fafc; }
 .resource-groups article h3 { margin: 0 0 8px; }
 .resource-groups article p { color: var(--muted); line-height: 1.5; }
-.book-resource-feature, .about-book, .book-page-hero, .book-purchase { display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 70px; margin-top: 70px; padding: 64px; background: #061f41; color: white; }
+.book-resource-feature, .about-book { display: grid; grid-template-columns: .72fr 1.28fr; align-items: center; gap: 70px; margin-top: 70px; padding: 64px; background: #061f41; color: white; }
 .book-resource-feature h2 { font-family: Georgia, serif; font-weight: 600; }
 .about-book h2, .book-page-hero h1, .book-excerpt h2, .book-purchase h2 { font-weight: 750; }
 .book-resource-feature h2 { font-size: 48px; }
 .book-resource-feature blockquote { margin: 22px 0; font-size: 21px; line-height: 1.55; }
 .actual-book-cover { width: min(390px,100%); max-height: 590px; justify-self: center; object-fit: contain; border-radius: 3px; box-shadow: 18px 22px 0 #e1ae48, 0 24px 50px rgba(0,0,0,.24); }
+.inline-book-excerpt p { color: #d4deea; font-size: 15px; line-height: 1.68; }
+.resource-book-purchase { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 32px 42px; border: 1px solid #d6e0ea; background: #f2f6fa; scroll-margin-top: 100px; }
+.resource-book-purchase h2 { margin: 6px 0; font-size: 28px; }
+.resource-book-purchase p { margin: 0; color: var(--muted); }
+.resource-book-purchase button { flex: none; padding: 14px 22px; border: 0; background: #9fb0c2; color: white; font-weight: 800; }
 .about-book { margin-top: 0; background: #f2f6fa; color: var(--ink); }
 .about-book > div:last-child p { color: var(--muted); font-size: 18px; line-height: 1.65; }
 .about-book blockquote { margin: 28px 0; padding-left: 22px; border-left: 3px solid #e8ae3d; font-size: 22px; line-height: 1.5; }
-.book-page-hero { min-height: 720px; margin: 0; padding: 90px 10%; }
-.book-page-hero h1 { margin: 12px 0; font-size: clamp(52px,7vw,88px); }
-.book-deck { max-width: 620px; color: #ccd9e7; font-size: 21px; line-height: 1.6; }
-.book-excerpt { max-width: 1000px; text-align: center; }
-.excerpt-copy { max-width: 820px; margin: 32px auto; text-align: left; }
-.excerpt-copy p { color: #30465f; font-size: 18px; line-height: 1.8; }
-.excerpt-credit { color: var(--muted); font-size: 13px; }
-.book-purchase { margin-top: 0; background: #f1f5f9; color: var(--ink); }
-.purchase-panel { display: flex; flex-direction: column; gap: 12px; padding: 30px; border: 1px solid #d5dfe9; background: white; }
-.purchase-panel strong { font-size: 24px; }
-.purchase-panel button { padding: 14px; border: 0; background: #9fb0c2; color: white; font-weight: 800; }
 
 @media (max-width: 1350px) and (min-width: 1001px) {
   .site-header { padding: 0 22px; gap: 18px; }
@@ -903,6 +898,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .book-page-hero { min-height: 0; }
   .book-cover { min-height: 340px; padding: 32px; }
   .book-cover strong { font-size: 44px; }
+  .resource-book-purchase { align-items: flex-start; flex-direction: column; padding: 28px 22px; }
 }
 
 @media (max-width: 520px) {
