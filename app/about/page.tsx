@@ -41,7 +41,7 @@ export default function AboutPage() {
       <div className="about-timeline">{milestones.map(([time,text])=><article key={time}><strong>{time}</strong><p>{text}</p></article>)}</div>
     </section>
     <section className="section about-book" id="book">
-      <div className="book-cover"><span>CLEARED FOR</span><strong>TAKEOFF</strong><small>Bridging Gaps to Access<br/>for Youth in Aviation</small><i>ISHITHA AREKAPUDI</i></div>
+      <img className="actual-book-cover" src="/cleared-for-takeoff-cover.png" alt="Cleared for Takeoff book cover by Ishitha Arekapudi"/>
       <div><span className="eyebrow">THE BOOK BEHIND THE MISSION</span><h2>A roadmap for the student who does not know where to begin.</h2><p><i>Cleared for Takeoff</i> brings together career paths, organizations, scholarships, practical advice, and the lessons Ishitha learned while becoming a young pilot.</p><blockquote>“The future of aviation and space is waiting, and it’s calling for people like you to answer.”</blockquote><Link className="primary-button" href="/book">Read an Excerpt & Buy →</Link></div>
     </section>
     <section className="section about-guidance" id="guidance">
