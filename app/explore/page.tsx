@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
+import { SaveButton } from "../components/SaveButton";
 import { Icon, PageShell } from "../ui";
 
 const interests = [
@@ -17,13 +18,15 @@ const interests = [
 ] as const;
 
 const stages = [
+  ["school", "Elementary School"],
   ["school", "Middle School"],
   ["cap", "High School"],
   ["school", "College"],
+  ["people", "Post-College"],
   ["path", "Other"],
 ] as const;
 
-const ageRanges = ["8–12", "13–15", "16–18", "College", "Adult"] as const;
+const ageRanges = ["5–7", "8–12", "13–15", "16–18", "College", "Adult"] as const;
 
 const states = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -150,6 +153,11 @@ export default function ExplorePage() {
       <section className={`explore-builder ${submitted ? "showing-results" : "showing-form"}`}>
         {!submitted ? (
           <div className="explore-form-panel">
+            <div className="explore-form-progress" aria-label="Gateway progress">
+              <div className="active"><span>1</span><strong>About You</strong></div>
+              <div><span>2</span><strong>Your Interests</strong></div>
+              <div><span>3</span><strong>Your Matches</strong></div>
+            </div>
             <div className="explore-section-heading">
               <span>YOUR GATEWAY</span>
               <h2><Icon name="user" /> About You</h2>
@@ -161,6 +169,9 @@ export default function ExplorePage() {
                 <label className="name-field">
                   <span>Name <small>optional</small></span>
                   <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
+                  <small className={`live-name-greeting${name.trim() ? " has-name" : ""}`}>
+                    {name.trim() ? `Hi, ${name.trim()}! Let’s find a path that feels like you.` : "Add your name for a more personal Gateway."}
+                  </small>
                 </label>
 
                 <fieldset className="explore-choice-group age-choice-group">
@@ -262,15 +273,17 @@ export default function ExplorePage() {
 
             <div className="opportunity-preview-grid">
               {recommendations.map((item) => (
-                <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined} className="opportunity-preview" key={item.title}>
-                  <div className="opportunity-art"><Icon name={item.icon} /></div>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                    <strong>Explore opportunity <span>→</span></strong>
-                  </div>
-                  <b className="opportunity-plus" aria-hidden="true">+</b>
-                </Link>
+                <article className="opportunity-preview" key={item.title}>
+                  <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>
+                    <div className="opportunity-art"><Icon name={item.icon} /></div>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                      <strong>Explore opportunity <span>→</span></strong>
+                    </div>
+                  </Link>
+                  <SaveButton id={`opportunity:${item.title}`} label={item.title} />
+                </article>
               ))}
             </div>
 
