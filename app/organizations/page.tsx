@@ -42,8 +42,9 @@ export default function Organizations() {
             <h3><Link href={`/organizations/${slugify(title)}`}>{title}</Link></h3>
             <p>{text}</p>
             <div className="tag-row">{tags.map(tag=><span key={tag}>{tag}</span>)}</div>
-            <div className="card-actions"><Link href={`/organizations/${slugify(title)}`}>View organization →</Link><SaveButton id={`organization:${title}`} label="Save"/></div>
+            <div className="card-actions"><Link href={`/organizations/${slugify(title)}`}>View organization →</Link></div>
           </div>
+          <SaveButton id={`organization:${title}`} label={title}/>
         </article>;
       })}</div>
       <div className="blue-callout"><Icon name="handshake"/><div><h2>Do not overlook your local aviation community.</h2><p>Smaller clubs and nearby flight organizations can offer mentoring, volunteer experience, discovery flights, and local funding with less competition.</p></div><Link className="small-button" href="/explore">Build My Network</Link></div>
