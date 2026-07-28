@@ -18,10 +18,13 @@ const organizationMarks: Record<string, string> = {
   "Women's Soaring Pilots Association": "WSPA",
 };
 
-const organizationLogos: Record<string, string> = {
-  "Experimental Aircraft Association & Young Eagles": "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/EAA_logo_2color-png.png?o=1",
-  "Civil Air Patrol": "https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png",
-  "Women in Aviation International": "https://assets.noviams.com/novi-file-uploads/wai/structure/wai-full-color-logo.png",
+const organizationLogos: Record<string, string[]> = {
+  "Experimental Aircraft Association & Young Eagles": [
+    "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/EAA_logo_2color-png.png?o=1",
+    "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/YE_logo_color-png.png?o=1",
+  ],
+  "Civil Air Patrol": ["https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png"],
+  "Women in Aviation International": ["https://assets.noviams.com/novi-file-uploads/wai/structure/wai-full-color-logo.png"],
 };
 
 const highlightIcons = ["telescope", "people", "globe", "handshake"] as const;
@@ -46,7 +49,9 @@ export function OrganizationProfile({ title, summary, tags, info }: {
         <div className="organization-profile-header">
           <div className={`organization-profile-mark${logo ? " has-logo" : ""}`}>
             {logo
-              ? <img src={logo} alt={`${title} official logo`} width="180" height="100" />
+              ? <span className={logo.length > 1 ? "organization-logo-pair" : "organization-logo-single"}>
+                  {logo.map((source, index) => <img src={source} alt={`${title} official logo${logo.length > 1 ? ` ${index + 1}` : ""}`} width="180" height="100" key={source} />)}
+                </span>
               : <span aria-hidden="true">{mark}</span>}
           </div>
           <div className="organization-profile-title">
