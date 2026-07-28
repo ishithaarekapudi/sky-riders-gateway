@@ -24,8 +24,8 @@ export default function Resources() {
         <div>{indexes.map(index=>{const [icon,title,text,action]=manuscriptResources[index]; return <article key={title}><div className="square-icon"><Icon name={icon}/></div><div><h3>{title}</h3><p>{text}</p><Link href={links[index]}>{action} →</Link></div></article>})}</div>
       </section>)}</div>
       <section className="book-resource-feature">
-        <div><span className="eyebrow">FROM THE BOOK</span><h2>Cleared for Takeoff</h2><blockquote>“Consider this book your roadmap, a way to help you find direction, gain confidence, and explore all the opportunities that aviation and space have to offer.”</blockquote><p>Read an excerpt and discover the story behind Sky Riders Gateway.</p><Link className="primary-button" href="/book">Explore the Book →</Link></div>
-        <div className="book-cover"><span>CLEARED FOR</span><strong>TAKEOFF</strong><small>Bridging Gaps to Access<br/>for Youth in Aviation</small><i>ISHITHA AREKAPUDI</i></div>
+        <div><span className="eyebrow">FROM THE BOOK</span><h2>Cleared for Takeoff</h2><blockquote>“Consider this book your roadmap, a way to help you find direction, gain confidence, and explore all the opportunities that aviation and space have to offer.”</blockquote><p>Read a full excerpt and discover the story behind Sky Riders Gateway.</p><Link className="primary-button" href="/book">Read the Excerpt →</Link></div>
+        <img className="actual-book-cover" src="/cleared-for-takeoff-cover.png" alt="Cleared for Takeoff book cover by Ishitha Arekapudi"/>
       </section>
     </section>
   </PageShell>;
