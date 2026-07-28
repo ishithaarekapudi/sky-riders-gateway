@@ -19,7 +19,8 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref 
       <h1>{title}</h1>
       <p>{summary}</p>
       {tags && <div className="tag-row">{tags.map(tag=><span key={tag}>{tag}</span>)}</div>}
-      <div className="detail-actions"><a className="primary-button" href={info.officialUrl} target="_blank" rel="noreferrer">Visit Official Website ↗</a><SaveButton id={`${kind.toLowerCase()}:${title}`} label={`Save ${kind}`}/></div>
+      <div className="detail-actions"><a className="primary-button" href={info.officialUrl} target="_blank" rel="noreferrer">Visit Official Website ↗</a></div>
+      <SaveButton id={`${kind.toLowerCase()}:${title}`} label={title}/>
     </div></section>
     <section className="detail-content">
       <article className="detail-main">
@@ -36,4 +37,3 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref 
     </section>
   </PageShell>;
 }
-
