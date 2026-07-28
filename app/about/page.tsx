@@ -41,8 +41,8 @@ export default function AboutPage() {
       <div className="about-timeline">{milestones.map(([time,text])=><article key={time}><strong>{time}</strong><p>{text}</p></article>)}</div>
     </section>
     <section className="section about-book" id="book">
-      <img className="actual-book-cover" src="/cleared-for-takeoff-cover.png" alt="Cleared for Takeoff book cover by Ishitha Arekapudi"/>
-      <div><span className="eyebrow">THE BOOK BEHIND THE MISSION</span><h2>A roadmap for the student who does not know where to begin.</h2><p><i>Cleared for Takeoff</i> brings together career paths, organizations, scholarships, practical advice, and the lessons Ishitha learned while becoming a young pilot.</p><blockquote>“The future of aviation and space is waiting, and it’s calling for people like you to answer.”</blockquote><Link className="primary-button" href="/book">Read an Excerpt & Buy →</Link></div>
+      <img className="actual-book-cover" src="/cleared-for-takeoff-cover.jpg" alt="Cleared for Takeoff book cover by Ishitha Arekapudi"/>
+      <div><span className="eyebrow">THE BOOK BEHIND THE MISSION</span><h2>A roadmap for the student who does not know where to begin.</h2><p><i>Cleared for Takeoff</i> brings together career paths, organizations, scholarships, practical advice, and the lessons Ishitha learned while becoming a young pilot.</p><blockquote>“The future of aviation and space is waiting, and it’s calling for people like you to answer.”</blockquote><Link className="primary-button" href="/resources#book-excerpt">Read the Excerpt & Buy →</Link></div>
     </section>
     <section className="section about-guidance" id="guidance">
       <div className="section-heading"><span>WHAT I WISH I KNEW</span><h2>Guidance for Your First Steps</h2></div>
