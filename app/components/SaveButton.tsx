@@ -17,6 +17,20 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
     setSaved(items.has(id));
   }
 
-  return <button type="button" className={saved ? "saved-button" : ""} onClick={toggleSaved}>{saved ? "✓ Saved" : `${label} →`}</button>;
-}
+  const itemLabel = label === "Save" ? "item" : label.replace(/^Save\s*/i, "") || "item";
 
+  return (
+    <button
+      type="button"
+      className={`heart-save-button${saved ? " saved" : ""}`}
+      aria-label={saved ? `Remove ${itemLabel} from saved items` : `Save ${itemLabel}`}
+      aria-pressed={saved}
+      title={saved ? "Saved" : "Save"}
+      onClick={toggleSaved}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" />
+      </svg>
+    </button>
+  );
+}
