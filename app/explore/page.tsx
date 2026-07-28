@@ -5,8 +5,8 @@ import { useMemo, useRef, useState } from "react";
 import { Icon, PageShell } from "../ui";
 
 const interests = [
-  ["plane", "Pilot"],
-  ["rocket", "Space Exploration"],
+  ["airplane", "Pilot"],
+  ["spacecraft", "Space Exploration"],
   ["gear", "Aerospace Engineering"],
   ["cloud", "Weather & Meteorology"],
   ["wrench", "Aircraft Mechanics"],
@@ -37,13 +37,13 @@ const states = [
 
 const opportunities = [
   {
-    icon: "plane", title: "EAA Young Eagles",
+    icon: "airplane", title: "EAA Young Eagles",
     text: "Discover free introductory flights and a welcoming first step into aviation.",
     href: "/organizations/experimental-aircraft-association-and-young-eagles",
     interests: ["Pilot", "Still Exploring"],
   },
   {
-    icon: "rocket", title: "NASA Student Opportunities",
+    icon: "spacecraft", title: "NASA Student Opportunities",
     text: "Explore NASA challenges, internships, activities, and learning experiences for students.",
     href: "https://www.nasa.gov/learning-resources/nasa-stem-opportunities-activities/",
     interests: ["Space Exploration", "Aerospace Engineering", "Still Exploring"], external: true,
@@ -93,11 +93,11 @@ const opportunities = [
 ];
 
 const featuredOrganizations = [
-  { className: "eaa-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", mark: <b>EAA</b>, label: null },
-  { className: "cap-mark", href: "/organizations/civil-air-patrol", mark: <b>△</b>, label: <span>CIVIL AIR PATROL<br /><small>U.S. AIR FORCE AUXILIARY</small></span> },
-  { className: "eagles-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", mark: <b>YOUNG<br />EAGLES</b>, label: null },
-  { className: "women-mark", href: "/organizations/women-in-aviation-international", mark: <b>Women in Aviation</b>, label: <small>INTERNATIONAL</small> },
-  { className: "nasa-mark", href: "https://www.nasa.gov/learning-resources/", mark: <b>NASA</b>, label: null, external: true },
+  { className: "eaa-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", mark: <b>EAA</b>, title: "EAA", description: "A welcoming worldwide aviation community." },
+  { className: "cap-mark", href: "/organizations/civil-air-patrol", mark: <b>△</b>, title: "Civil Air Patrol", description: "Leadership, aerospace education, and service." },
+  { className: "eagles-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", mark: <b>YOUNG<br />EAGLES</b>, title: "Young Eagles", description: "Free discovery flights for youth ages 8 to 17." },
+  { className: "women-mark", href: "/organizations/women-in-aviation-international", mark: <b>Women in Aviation</b>, title: "Women in Aviation", description: "Education, mentoring, and a global network." },
+  { className: "nasa-mark", href: "https://www.nasa.gov/learning-resources/", mark: <b>NASA</b>, title: "NASA STEM", description: "Explore, learn, build, and innovate.", external: true },
 ];
 
 export default function ExplorePage() {
@@ -221,16 +221,19 @@ export default function ExplorePage() {
                 <div><h3>Featured Organizations</h3><p>A preview of the communities and programs Gateway can help you discover.</p></div>
                 <Link href="/organizations">View all →</Link>
               </div>
-              <div className="organization-logo-row">
+              <div className="explore-featured-card-row">
                 {featuredOrganizations.map((organization) => (
                   <Link
-                    className={`org-mark ${organization.className}`}
+                    className="explore-featured-card"
                     href={organization.href}
                     target={organization.external ? "_blank" : undefined}
                     rel={organization.external ? "noreferrer" : undefined}
                     key={organization.className}
                   >
-                    {organization.mark}{organization.label}
+                    <span className={`org-mark ${organization.className}`}>{organization.mark}</span>
+                    <strong>{organization.title}</strong>
+                    <p>{organization.description}</p>
+                    <small>Learn More →</small>
                   </Link>
                 ))}
               </div>
