@@ -35,7 +35,7 @@ export default function Organizations() {
         const logo = officialLogos[title];
         return <article className="organization-directory-card" key={title}>
           <div className="organization-directory-brand">
-            {logo ? <img src={logo} alt={`${title} official logo`} loading="lazy" /> : <div className="organization-wordmark"><span>{String(index + 1).padStart(2,"0")}</span><strong>{shortNames[title] || title}</strong></div>}
+            {logo ? <img src={logo} alt={`${title} official logo`} loading="lazy" /> : <div className="organization-wordmark"><span>ORGANIZATION</span><strong>{shortNames[title] || title}</strong></div>}
           </div>
           <div className="organization-card-copy">
             <span className="organization-type">AVIATION COMMUNITY</span>
