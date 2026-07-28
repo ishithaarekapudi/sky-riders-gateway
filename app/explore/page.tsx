@@ -92,6 +92,14 @@ const opportunities = [
   },
 ];
 
+const featuredOrganizations = [
+  { className: "eaa-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", mark: <b>EAA</b>, label: null },
+  { className: "cap-mark", href: "/organizations/civil-air-patrol", mark: <b>△</b>, label: <span>CIVIL AIR PATROL<br /><small>U.S. AIR FORCE AUXILIARY</small></span> },
+  { className: "eagles-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", mark: <b>YOUNG<br />EAGLES</b>, label: null },
+  { className: "women-mark", href: "/organizations/women-in-aviation-international", mark: <b>Women in Aviation</b>, label: <small>INTERNATIONAL</small> },
+  { className: "nasa-mark", href: "https://www.nasa.gov/learning-resources/", mark: <b>NASA</b>, label: null, external: true },
+];
+
 export default function ExplorePage() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -135,117 +143,152 @@ export default function ExplorePage() {
         <div>
           <h1>Explore Your Path<br />in Aviation</h1>
           <p>Tell us what inspires you,<br />and we’ll help you find a direction.</p>
-          <div className="progress"><b>Step 1 of 3</b><span><i /></span></div>
+          <div className={`progress ${submitted ? "progress-step-two" : ""}`}><b>Step {submitted ? "2" : "1"} of 3</b><span><i /></span></div>
         </div>
       </section>
 
-      <section className="explore-builder">
-        <div className="explore-form-panel">
-          <div className="explore-section-heading">
-            <span>YOUR GATEWAY</span>
-            <h2><Icon name="user" /> About You</h2>
-            <p>A few quick details help us highlight paths that fit you.</p>
-          </div>
+      <section className={`explore-builder ${submitted ? "showing-results" : "showing-form"}`}>
+        {!submitted ? (
+          <div className="explore-form-panel">
+            <div className="explore-section-heading">
+              <span>YOUR GATEWAY</span>
+              <h2><Icon name="user" /> About You</h2>
+              <p>A few quick details help us highlight paths that fit you.</p>
+            </div>
 
-          <div className="about-you-grid">
-            <div className="about-you-details">
-              <label className="name-field">
-                <span>Name <small>optional</small></span>
-                <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
-              </label>
+            <div className="about-you-grid">
+              <div className="about-you-details">
+                <label className="name-field">
+                  <span>Name <small>optional</small></span>
+                  <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
+                </label>
 
-              <fieldset className="explore-choice-group age-choice-group">
-                <legend>Age</legend>
-                <div className="age-button-grid">
-                  {ageRanges.map((range) => (
-                    <button type="button" className={age === range ? "selected" : ""} onClick={() => setAge(range)} key={range}>{range}</button>
-                  ))}
-                </div>
-              </fieldset>
+                <fieldset className="explore-choice-group age-choice-group">
+                  <legend>Age</legend>
+                  <div className="age-button-grid">
+                    {ageRanges.map((range) => (
+                      <button type="button" className={age === range ? "selected" : ""} onClick={() => setAge(range)} key={range}>{range}</button>
+                    ))}
+                  </div>
+                </fieldset>
 
-              <label className="state-field">
-                <span>State</span>
-                <select value={state} onChange={(event) => setState(event.target.value)}>
-                  <option value="">Select your state</option>
-                  {states.map((item) => <option key={item}>{item}</option>)}
-                </select>
-              </label>
+                <label className="state-field">
+                  <span>State</span>
+                  <select value={state} onChange={(event) => setState(event.target.value)}>
+                    <option value="">Select your state</option>
+                    {states.map((item) => <option key={item}>{item}</option>)}
+                  </select>
+                </label>
 
-              <fieldset className="explore-choice-group stage-choice-group">
-                <legend>What best describes your current stage?</legend>
-                <div className="explore-stage-grid">
-                  {stages.map(([icon, label]) => (
-                    <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
+                <fieldset className="explore-choice-group stage-choice-group">
+                  <legend>What best describes your current stage?</legend>
+                  <div className="explore-stage-grid">
+                    {stages.map(([icon, label]) => (
+                      <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
+                        <Icon name={icon} /><span>{label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+
+              <fieldset className="explore-choice-group interest-choice-group">
+                <legend>Interests <small>Select all that apply</small></legend>
+                <div className="interest-tile-grid">
+                  {interests.map(([icon, label]) => (
+                    <button
+                      type="button"
+                      aria-pressed={selectedInterests.includes(label)}
+                      className={selectedInterests.includes(label) ? "selected" : ""}
+                      onClick={() => toggleInterest(label)}
+                      key={label}
+                    >
                       <Icon name={icon} /><span>{label}</span>
+                      <b aria-hidden="true">{selectedInterests.includes(label) ? "✓" : "+"}</b>
                     </button>
                   ))}
                 </div>
               </fieldset>
             </div>
 
-            <fieldset className="explore-choice-group interest-choice-group">
-              <legend>Interests <small>Select all that apply</small></legend>
-              <div className="interest-tile-grid">
-                {interests.map(([icon, label]) => (
-                  <button
-                    type="button"
-                    aria-pressed={selectedInterests.includes(label)}
-                    className={selectedInterests.includes(label) ? "selected" : ""}
-                    onClick={() => toggleInterest(label)}
-                    key={label}
+            <button className="primary-button explore-submit" disabled={!ready} onClick={buildRoadmap}>
+              Show My Opportunities →
+            </button>
+            {!ready && <small className="explore-helper">Choose your age, state, at least one interest, and current stage to continue.</small>}
+
+            <div className="explore-featured-teaser">
+              <div className="featured-heading">
+                <div><h3>Featured Organizations</h3><p>A preview of the communities and programs Gateway can help you discover.</p></div>
+                <Link href="/organizations">View all →</Link>
+              </div>
+              <div className="organization-logo-row">
+                {featuredOrganizations.map((organization) => (
+                  <Link
+                    className={`org-mark ${organization.className}`}
+                    href={organization.href}
+                    target={organization.external ? "_blank" : undefined}
+                    rel={organization.external ? "noreferrer" : undefined}
+                    key={organization.className}
                   >
-                    <Icon name={icon} /><span>{label}</span>
-                    <b aria-hidden="true">{selectedInterests.includes(label) ? "✓" : "+"}</b>
-                  </button>
+                    {organization.mark}{organization.label}
+                  </Link>
                 ))}
               </div>
-            </fieldset>
-          </div>
-
-          <button className="primary-button explore-submit" disabled={!ready} onClick={buildRoadmap}>
-            Show My Opportunities →
-          </button>
-          {!ready && <small className="explore-helper">Choose your age, state, at least one interest, and current stage to continue.</small>}
-        </div>
-
-        <aside className={`explore-results ${submitted ? "results-ready" : ""}`} ref={resultsRef}>
-          <div className="results-heading">
-            <div>
-              <span>OPPORTUNITIES FOR YOU</span>
-              <h2>{name ? `${name}’s starting points` : "Your starting points"}</h2>
             </div>
-            <small>{selectedInterests.length ? `Matched to ${selectedInterests.length} interest${selectedInterests.length > 1 ? "s" : ""}` : "A preview of what you can discover"}</small>
           </div>
-
-          <div className="account-opportunity-note">
-            <Icon name="user" />
-            <div><strong>Want the full list?</strong><p>Create an account to access all matching opportunities, scholarships, and career paths, and save your favorites.</p></div>
-            <Link href="/account">Make an Account →</Link>
-          </div>
-
-          <div className="opportunity-preview-grid">
-            {recommendations.map((item) => (
-              <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined} className="opportunity-preview" key={item.title}>
-                <div className="opportunity-art"><Icon name={item.icon} /></div>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <strong>Explore opportunity <span>→</span></strong>
-                </div>
-                <b className="opportunity-plus" aria-hidden="true">+</b>
-              </Link>
-            ))}
-          </div>
-
-          <div className="roadmap-preview">
-            <Icon name="path" />
-            <div>
-              <h3>Your Gateway Roadmap</h3>
-              <p>{ready ? `${selectedInterests.join(" · ")} · ${stage} · ${state}` : "Complete your profile to unlock personalized next steps."}</p>
+        ) : (
+          <section className="explore-results results-ready" ref={resultsRef}>
+            <button className="edit-profile-button" type="button" onClick={() => setSubmitted(false)}>← Edit my answers</button>
+            <div className="results-heading">
+              <div>
+                <span>OPPORTUNITIES FOR YOU</span>
+                <h2>{name ? `${name}’s starting points` : "Your starting points"}</h2>
+              </div>
+              <small>Matched to {selectedInterests.length} interest{selectedInterests.length > 1 ? "s" : ""}</small>
             </div>
-            <span>{submitted ? "Ready" : "Preview"}</span>
-          </div>
-        </aside>
+
+            <div className="account-opportunity-note">
+              <Icon name="user" />
+              <div><strong>Want your full personalized list?</strong><p>Sign up or log in to see all matching opportunities, scholarships, and career paths, and save your favorites.</p></div>
+              <div className="account-note-actions"><Link href="/account">Sign Up</Link><Link href="/account">Log In</Link></div>
+            </div>
+
+            <div className="opportunity-preview-grid">
+              {recommendations.map((item) => (
+                <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined} className="opportunity-preview" key={item.title}>
+                  <div className="opportunity-art"><Icon name={item.icon} /></div>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                    <strong>Explore opportunity <span>→</span></strong>
+                  </div>
+                  <b className="opportunity-plus" aria-hidden="true">+</b>
+                </Link>
+              ))}
+            </div>
+
+            <div className="results-next-step">
+              <div>
+                <span>NEXT STEP</span>
+                <h3>Keep your personalized Gateway</h3>
+                <p>Create an account or log in to unlock the full list, save opportunities, and continue to your roadmap.</p>
+              </div>
+              <div>
+                <Link className="primary-button" href="/account">Sign Up →</Link>
+                <Link className="ghost-button" href="/account">Log In</Link>
+              </div>
+            </div>
+
+            <div className="roadmap-preview">
+              <Icon name="path" />
+              <div>
+                <h3>Your Gateway Roadmap</h3>
+                <p>{selectedInterests.join(" · ")} · {stage} · {state}</p>
+              </div>
+              <span>Step 3</span>
+            </div>
+          </section>
+        )}
       </section>
     </PageShell>
   );
