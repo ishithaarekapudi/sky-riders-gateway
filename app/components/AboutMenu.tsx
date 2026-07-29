@@ -9,8 +9,8 @@ export function AboutMenu({ active }: { active?: string }) {
   return (
     <div
       className={`about-nav-menu${active === "about" || active === "gateway" ? " active" : ""}`}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onPointerEnter={() => setOpen(true)}
+      onPointerLeave={() => setOpen(false)}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
