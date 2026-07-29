@@ -79,11 +79,11 @@ export default function Home() {
         <div className="section-heading"><span>EXPLORE YOUR FUTURE</span><h2>Find Your Place in Aviation and Aerospace</h2><p>Choose an area that interests you. Then Gateway will help you discover relevant careers, programs, scholarships, and clear next steps.</p></div>
         <div className="aviation-path-grid">
           {aviationPaths.map(([icon, title, text]) => (
-            <Link href="/careers" className="aviation-path-card" key={title}>
+            <article className="aviation-path-card" key={title}>
               <span className="path-symbol" aria-hidden="true"><Icon name={icon} /></span>
               <strong>{title}</strong>
               <small>{text}</small>
-            </Link>
+            </article>
           ))}
         </div>
         <div className="how-it-works">
