@@ -124,10 +124,10 @@ button { cursor: pointer; }
 .brand-words { display: flex; flex-direction: column; white-space: nowrap; }
 .brand-words b { font-size: 20px; font-weight: 600; letter-spacing: .13em; line-height: 1.05; }
 .brand-words small { margin-top: 6px; font-size: 9px; font-weight: 600; letter-spacing: .58em; line-height: 1; }
-.live-home .gateway-stage { aspect-ratio: 1672 / 760; }
-.live-home .gateway-art { object-fit: cover; object-position: center top; }
-.live-home .gateway-shade { background: linear-gradient(to bottom, transparent 0 68%, rgba(3,26,54,.2) 84%, rgba(3,26,54,.42) 100%); }
-.live-home .hero-copy { top: 24%; }
+.live-home .gateway-stage { aspect-ratio: 1442 / 760; }
+.live-home .gateway-art { height: 119.48%; object-fit: cover; object-position: center top; }
+.live-home .gateway-shade { height: 119.48%; }
+.live-home .hero-copy { top: 28.68%; }
 .live-home .hero-copy h1 { font-weight: 650; letter-spacing: -.015em; }
 .live-home .site-header nav a { font-weight: 600; }
 .live-home .ghost-button,
@@ -915,6 +915,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .brand-words b { font-size: 15px; }
   .brand-words small { font-size: 7px; }
   .small-button { padding: 11px 15px; }
+  .live-home .gateway-stage { aspect-ratio: auto; }
+  .live-home .gateway-art { height: auto; object-fit: contain; object-position: center; }
+  .live-home .gateway-shade { height: auto; }
   .gateway-stage { aspect-ratio: auto; overflow: visible; background: var(--navy); }
   .gateway-art { position: relative; height: auto; aspect-ratio: 1672 / 941; object-fit: contain; }
   .gateway-shade { height: auto; aspect-ratio: 1672 / 941; }
