@@ -2,14 +2,6 @@ import Link from "next/link";
 import { Footer, Header, Icon } from "./ui";
 import { VisionScrollButton } from "./vision-scroll-button";
 
-const features = [
-  ["user", "Personalized for You", "Tailored to your interests and goals"],
-  ["cap", "Scholarships", "Find funding for your dreams"],
-  ["people", "Mentors", "Connect with aviation and aerospace professionals"],
-  ["globe", "Organizations", "Discover programs and communities"],
-  ["calendar", "Events", "Find events and opportunities"],
-] as const;
-
 const aviationPaths = [
   ["airplane", "Pilot", "Learn how to begin a path toward the flight deck."],
   ["spacecraft", "Space", "Explore spacecraft, missions, and careers beyond Earth."],
@@ -39,13 +31,6 @@ export default function Home() {
             <p>Connecting students to opportunities in<br />aviation and aerospace.</p>
             <Link className="primary-button" href="/explore">Start My Journey <span aria-hidden="true">→</span></Link>
             <small>◷ &nbsp; Takes less than 3 minutes!</small>
-          </div>
-          <div className="feature-row">
-            {features.map(([icon, title, text]) => (
-              <Link href={title === "Scholarships" ? "/scholarships" : title === "Organizations" ? "/organizations" : title === "Mentors" ? "/resources" : "/explore"} className="feature-item" key={title}>
-                <Icon name={icon} /><strong>{title}</strong><span>{text}</span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
