@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Icon, PageShell } from "../ui";
+import { PageShell } from "../ui";
 
 const milestones = [
   ["Sixth grade", "A classroom conversation about astrophysics helped Ishitha recognize her goal of becoming an astronaut."],
@@ -10,44 +10,41 @@ const milestones = [
   ["Today", "Sky Riders Gateway turns the lessons, organizations, and opportunities she gathered into a clearer starting point for other students."],
 ] as const;
 
-const guidance = [
-  ["search", "Start Early & Research", "Explore careers, certificates, local programs, and the steps between your current stage and your goal."],
-  ["people", "Find Mentors", "Meet people through airports, clubs, aviation events, schools, and organizations. Guidance can prevent avoidable mistakes."],
-  ["path", "Set Clear Milestones", "Break a large dream into achievable steps while allowing your plan to change as you learn."],
-  ["document", "Track Funding", "Organize scholarships, requirements, deadlines, essays, and recommendation letters well in advance."],
-  ["wrench", "Gain Practical Experience", "Volunteer, attend events, use simulators, take a discovery flight, and look for entry-level ways to participate."],
-  ["plane", "Stay Resilient & Curious", "Setbacks are part of aviation. Keep learning, follow new interests, and share what you discover with others."],
-] as const;
-
 export default function AboutPage() {
   return <PageShell active="about">
-    <section className="sub-hero about-hero"><div>
-      <span className="eyebrow">ABOUT V1 · PILOT · AUTHOR · FOUNDER</span>
+    <section className="sub-hero about-hero founder-hero"><div>
+      <span className="eyebrow">TEEN PILOT · ADVOCATE · RESEARCHER · AUTHOR</span>
       <h1>Meet Ishitha Arekapudi</h1>
-      <p>A young pilot building the resource she wished she had when she first began exploring aviation.</p>
-      <Link className="primary-button" href="/explore">Start Your Journey →</Link>
+      <p className="founder-title">Founder of Sky Riders Gateway</p>
+      <p>A young pilot and future astronaut turning her experience in aviation into clearer pathways for the next generation.</p>
     </div></section>
-    <section className="section about-intro">
-      <div>
-        <span className="eyebrow">MY MISSION</span>
-        <h2>Make aviation easier to enter, and easier to imagine yourself in.</h2>
-        <p>Ishitha’s path began with a goal of becoming an astronaut and a realization: young people often have the curiosity and determination to pursue aviation, but not one clear place to find careers, training pathways, scholarships, mentors, and organizations.</p>
-        <p>Her book, <i>Cleared for Takeoff: Bridging Gaps to Access for Youth in Aviation</i>, gathered the knowledge she developed while learning to fly. Sky Riders Gateway brings that mission online so students can move from wondering where to begin to taking a practical first step.</p>
-      </div>
-      <blockquote>“Often, the hardest part is figuring out where to begin.”<small>Ishitha Arekapudi, <i>Cleared for Takeoff</i></small></blockquote>
-    </section>
-    <section className="section about-timeline-section">
-      <div className="section-heading"><span>THE JOURNEY</span><h2>From a First Flight to Building a Gateway</h2></div>
-      <div className="about-timeline">{milestones.map(([time,text])=><article key={time}><strong>{time}</strong><p>{text}</p></article>)}</div>
-    </section>
-    <section className="section about-book" id="book">
+    <section className="section about-book founder-book" id="book">
       <img className="actual-book-cover" src="/cleared-for-takeoff-cover.jpg" alt="Cleared for Takeoff book cover by Ishitha Arekapudi"/>
-      <div><span className="eyebrow">THE BOOK BEHIND THE MISSION</span><h2>A roadmap for the student who does not know where to begin.</h2><p><i>Cleared for Takeoff</i> brings together career paths, organizations, scholarships, practical advice, and the lessons Ishitha learned while becoming a young pilot.</p><blockquote>“The future of aviation and space is waiting, and it’s calling for people like you to answer.”</blockquote><Link className="primary-button" href="/resources#book-excerpt">Read the Excerpt & Buy →</Link></div>
+      <div><span className="eyebrow">CLEARED FOR TAKEOFF</span><h2>The book behind the Gateway mission.</h2><p>Ishitha wrote <i>Cleared for Takeoff: Bridging Gaps to Access for Youth in Aviation</i> as a guide for students navigating paths into aviation and space. It brings together careers, organizations, scholarships, practical advice, and the lessons she learned while becoming a young pilot.</p><blockquote>“The future of aviation and space is waiting, and it’s calling for people like you to answer.”</blockquote><Link className="primary-button" href="/resources#book-excerpt">Read the Excerpt & Buy →</Link></div>
     </section>
-    <section className="section about-guidance" id="guidance">
-      <div className="section-heading"><span>WHAT I WISH I KNEW</span><h2>Guidance for Your First Steps</h2></div>
-      <div className="collection-grid">{guidance.map(([icon,title,text])=><article key={title}><div className="square-icon"><Icon name={icon}/></div><h3>{title}</h3><p>{text}</p></article>)}</div>
-      <div className="final-cta"><div><h2>Your path does not have to look like anyone else’s.</h2><p>Start with curiosity, find a community, and take the next useful step.</p><Link className="primary-button" href="/explore">Build My Roadmap →</Link></div></div>
+    <section className="section about-timeline-section founder-accomplishments">
+      <div className="section-heading"><span>MILESTONES BY AGE</span><h2>Built in the Air, Then Built for Others</h2><p>Each milestone strengthened Ishitha’s belief that access, guidance, and representation can change who feels welcome in aviation and aerospace.</p></div>
+      <div className="about-timeline">{milestones.map(([time,text], index)=><article key={time}><span>{String(index + 1).padStart(2, "0")}</span><strong>{time}</strong><p>{text}</p></article>)}</div>
+    </section>
+    <section className="section founder-story">
+      <span className="eyebrow">ON THE FLIGHT LINE</span>
+      <h2>Flying With Purpose</h2>
+      <div className="founder-story-grid">
+        <p>Ishitha began in aviation at 14 with a passion for space. Two years of consistent glider training led to her private glider pilot certificate at the youngest eligible age. Early mornings, weather cancellations, written and oral exams, and difficult setbacks taught her that progress in aviation is built through patience and persistence.</p>
+        <p>As an Irish-born Indian young woman, Ishitha has often been one of the only teen girls and one of the only people of color in aviation spaces. She uses her work to make the industry more visible and reachable for young people who may not yet see themselves represented in it.</p>
+      </div>
+    </section>
+    <section className="section founder-media">
+      <div className="section-heading"><span>MEDIA & PRESS</span><h2>Ideas That Travel Beyond the Flight Line</h2><p>Explore Ishitha’s interviews, advocacy, writing, and public work across aviation, aerospace, access, and representation.</p></div>
+      <div className="founder-media-grid">
+        <a href="https://ishithaarekapudi6.wixsite.com/on-the-flight-line/press" target="_blank" rel="noreferrer"><span>PRESS</span><h3>Interviews & Features</h3><p>Read and watch conversations about flying, youth access, and the future of aviation.</p><b>View Media Coverage ↗</b></a>
+        <a href="https://ishithaarekapudi6.wixsite.com/on-the-flight-line/blog-1" target="_blank" rel="noreferrer"><span>WRITING</span><h3>On the Flight Line</h3><p>Follow reflections, updates, and lessons from Ishitha’s aviation and aerospace journey.</p><b>Read the Blog ↗</b></a>
+        <a href="https://ishithaarekapudi6.wixsite.com/on-the-flight-line/about-8" target="_blank" rel="noreferrer"><span>PORTFOLIO</span><h3>Projects & Research</h3><p>See the work connecting aviation, space, advocacy, research, and education.</p><b>Explore the Portfolio ↗</b></a>
+      </div>
+    </section>
+    <section className="section founder-connect">
+      <div><span className="eyebrow">CONNECT WITH ISHITHA</span><h2>For media, speaking, and collaboration.</h2><p>Connect with Ishitha about youth aviation, aerospace pathways, research, representation, the book, or the Sky Riders Gateway mission.</p></div>
+      <div className="founder-connect-actions"><a className="primary-button" href="https://ishithaarekapudi6.wixsite.com/on-the-flight-line/contact" target="_blank" rel="noreferrer">Contact Ishitha ↗</a><a className="ghost-button" href="https://ishithaarekapudi6.wixsite.com/on-the-flight-line" target="_blank" rel="noreferrer">Visit On the Flight Line ↗</a></div>
     </section>
   </PageShell>;
 }
