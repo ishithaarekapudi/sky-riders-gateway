@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 const links = [
-  ["Explore", "/explore"],
   ["Scholarships", "/scholarships"],
   ["Organizations", "/organizations"],
   ["Careers", "/careers"],
@@ -30,6 +29,7 @@ export function MobileNav({ active }: { active?: string }) {
         <div className="mobile-nav-panel" id="mobile-site-menu">
           <nav aria-label="Mobile navigation">
             <Link className={active === "home" ? "active" : ""} href="/" onClick={() => setOpen(false)}>Home</Link>
+            <Link className={active === "explore" ? "active" : ""} href="/explore" onClick={() => setOpen(false)}>Explore</Link>
             <span className="mobile-about-label">About</span>
             <Link className={active === "gateway" ? "active mobile-about-link" : "mobile-about-link"} href="/about/gateway" onClick={() => setOpen(false)}>Gateway</Link>
             <Link className={active === "about" ? "active mobile-about-link" : "mobile-about-link"} href="/about" onClick={() => setOpen(false)}>Ishitha Arekapudi</Link>
