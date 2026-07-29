@@ -18,10 +18,11 @@ const journeySteps = [
 ] as const;
 
 const gatewayBenefits = [
-  ["user", "Personalized for You", "Opportunities tailored to your interests and goals."],
-  ["cap", "Discover Opportunities", "Scholarships, programs, mentors, and events."],
-  ["heart", "Save Your Favorites", "Keep the opportunities that inspire you in one place."],
-  ["rocket", "Build Your Future", "Get a personalized roadmap and take the next step."],
+  ["user", "Personalized for You", "Tailored to your interests and goals."],
+  ["cap", "Scholarships", "Find funding for your dreams."],
+  ["people", "Mentors", "Connect with aviation and aerospace professionals."],
+  ["globe", "Organizations", "Discover programs and communities."],
+  ["calendar", "Events", "Find events and opportunities."],
 ] as const;
 
 export default function Home() {
