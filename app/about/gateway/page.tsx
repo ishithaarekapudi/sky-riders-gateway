@@ -13,19 +13,32 @@ export default function GatewayAboutPage() {
       <section className="sub-hero gateway-about-hero">
         <div>
           <span className="eyebrow">ABOUT SKY RIDERS GATEWAY</span>
-          <h1>A Clearer Way Into Aviation and Aerospace</h1>
-          <p>Gateway brings scattered opportunities, guidance, and pathways together so young people can spend less time wondering where to begin.</p>
+          <h1>Our mission is not just to inform, it is to transform.</h1>
+          <p>Sky Riders Gateway turns curiosity into a tangible path forward by making aviation and aerospace opportunities easier to see, understand, and pursue.</p>
           <Link className="primary-button" href="/explore">Explore Your Gateway →</Link>
         </div>
       </section>
-      <section className="section gateway-about-intro">
-        <div>
+      <section className="gateway-vision gateway-about-vision">
+        <div className="vision-copy">
           <span className="eyebrow">WHY GATEWAY</span>
-          <h2>The sky should not have barriers.</h2>
+          <h2>The Sky Shouldn’t Have Barriers</h2>
           <p>Aviation and aerospace should feel possible for every young person, regardless of background, location, resources, or whether they already know someone in the field.</p>
-          <p>Sky Riders Gateway makes pathways easier to see, understand, and pursue by gathering reliable guidance, organizations, scholarships, careers, and practical next steps in one welcoming place.</p>
+          <p className="vision-mission">Gateway brings reliable guidance, organizations, scholarships, careers, and practical next steps together in one welcoming place.</p>
         </div>
-        <blockquote>Sky Riders is here to rewrite the narrative.<small>Curiosity can become possibility, and possibility can become a path.</small></blockquote>
+        <div className="vision-roadmap-image">
+          <img src="/gateway-vision-roadmap-clean.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
+        </div>
+      </section>
+      <section className="mission-statement gateway-mission-statement">
+        <div className="mission-visual" aria-hidden="true">
+          <img src="/brand/sky-riders-mark-v3.png" alt="" />
+          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
+        </div>
+        <div className="mission-copy">
+          <span>THE NARRATIVE WE ARE CHANGING</span>
+          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
+          <p>Talent is everywhere, but access to information, mentors, training, and opportunity is not. Gateway helps young people recognize that there is a place for them in aviation and aerospace, then shows them a practical way forward.</p>
+        </div>
       </section>
       <section className="section gateway-about-pillars">
         <div className="section-heading">
