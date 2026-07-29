@@ -50,9 +50,11 @@ export default function Home() {
             </article>
           ))}
         </div>
+      </section>
+      <section className="homepage-guide">
         <div className="how-it-works">
           <h3>How Gateway Guides You</h3>
-          <p>Start with what interests you. Gateway turns that interest into personalized opportunities and practical next steps.</p>
+          <p>When you are ready, Explore turns your interests and current stage into a focused list of opportunities you can understand, compare, and act on.</p>
           <div className="journey-steps">
             <div className="journey-line" aria-hidden="true" />
             {journeySteps.map(([lineOne, lineTwo], index) => (
