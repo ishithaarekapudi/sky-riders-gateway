@@ -39,16 +39,15 @@ export default function Home() {
             <Link className="primary-button" href="/explore">Start My Journey <span aria-hidden="true">→</span></Link>
             <small>◷ &nbsp; Takes less than 3 minutes!</small>
           </div>
+          <div className="gateway-benefit-strip" aria-label="What Sky Riders Gateway helps you discover">
+            {gatewayBenefits.map(([icon, title, text]) => (
+              <article key={title}>
+                <span aria-hidden="true"><Icon name={icon} /></span>
+                <div><strong>{title}</strong><small>{text}</small></div>
+              </article>
+            ))}
+          </div>
         </div>
-      </section>
-
-      <section className="gateway-benefit-strip" aria-label="What Sky Riders Gateway helps you do">
-        {gatewayBenefits.map(([icon, title, text]) => (
-          <article key={title}>
-            <span aria-hidden="true"><Icon name={icon} /></span>
-            <div><strong>{title}</strong><small>{text}</small></div>
-          </article>
-        ))}
       </section>
 
       <section className="homepage-guide">
