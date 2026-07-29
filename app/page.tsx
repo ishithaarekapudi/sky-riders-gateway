@@ -17,6 +17,14 @@ const journeySteps = [
   ["Save and plan", "your next steps"],
 ] as const;
 
+const gatewayBenefits = [
+  ["user", "Personalized Matches", "Opportunities shaped around your age, interests, and goals."],
+  ["search", "Discover What Fits", "See pathways you may not have known existed."],
+  ["people", "Guidance & Mentors", "Learn from trustworthy people and practical resources."],
+  ["calendar", "Local Possibilities", "Find programs, events, and experiences near you."],
+  ["path", "A Plan You Can Use", "Turn curiosity into clear, manageable next steps."],
+] as const;
+
 export default function Home() {
   return (
     <main>
@@ -34,27 +42,20 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="homepage-pathways">
-        <div className="section-heading"><span>YOUR STARTING POINT</span><h2>Find Your Place in Aviation and Aerospace</h2><p>Sky Riders Gateway is a pathway finder. Start with an area that interests you, learn what it can lead to, then use Explore to discover matching careers, programs, scholarships, organizations, and practical next steps.</p></div>
-        <div className="pathway-explainer" aria-label="How to use this resource">
-          <div><strong>1</strong><span><b>Choose an interest</b>Begin with the part of aviation or aerospace that catches your attention.</span></div>
-          <div><strong>2</strong><span><b>See where it can lead</b>Understand the careers, training, and communities connected to it.</span></div>
-          <div><strong>3</strong><span><b>Build your next step</b>Use Explore to receive opportunities that fit your age, location, and goals.</span></div>
-        </div>
-        <div className="aviation-path-grid">
-          {aviationPaths.map(([icon, title, text]) => (
-            <article className="aviation-path-card" key={title}>
-              <span className="path-symbol" aria-hidden="true"><Icon name={icon} /></span>
-              <strong>{title}</strong>
-              <small>{text}</small>
-            </article>
-          ))}
-        </div>
+      <section className="gateway-benefit-strip" aria-label="What Sky Riders Gateway helps you do">
+        {gatewayBenefits.map(([icon, title, text]) => (
+          <article key={title}>
+            <span aria-hidden="true"><Icon name={icon} /></span>
+            <div><strong>{title}</strong><small>{text}</small></div>
+          </article>
+        ))}
       </section>
+
       <section className="homepage-guide">
         <div className="how-it-works">
-          <h3>How Gateway Guides You</h3>
-          <p>When you are ready, Explore turns your interests and current stage into a focused list of opportunities you can understand, compare, and act on.</p>
+          <span className="guide-eyebrow">HOW IT WORKS</span>
+          <h3>Four Steps From Curiosity to Direction</h3>
+          <p>Tell us what interests you, then Gateway helps turn that starting point into opportunities and a practical plan.</p>
           <div className="journey-steps">
             <div className="journey-line" aria-hidden="true" />
             {journeySteps.map(([lineOne, lineTwo], index) => (
@@ -64,6 +65,45 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="homepage-pathways">
+        <div className="section-heading"><span>EXPLORE YOUR PATH</span><h2>Find Your Place in Aviation and Aerospace</h2><p>These six areas are starting points, not limits. Choose what catches your attention to understand the work, skills, and possibilities connected to it.</p></div>
+        <div className="aviation-path-grid">
+          {aviationPaths.map(([icon, title, text]) => (
+            <article className="aviation-path-card" key={title}>
+              <span className="path-symbol" aria-hidden="true"><Icon name={icon} /></span>
+              <strong>{title}</strong>
+              <small>{text}</small>
+            </article>
+          ))}
+        </div>
+        <div className="homepage-journey-preview">
+          <div>
+            <span>YOUR PERSONAL GATEWAY</span>
+            <h3>Answer a few questions and see what fits you.</h3>
+            <p>Gateway matches your interests and current stage with relevant careers, programs, scholarships, organizations, and next steps.</p>
+            <Link className="primary-button" href="/explore">Start My Journey →</Link>
+            <small>◷ &nbsp; Takes less than 3 minutes!</small>
+          </div>
+          <div className="journey-preview-card" aria-hidden="true">
+            <header><span>Question 3 of 7</span><b>43%</b></header>
+            <div className="preview-progress"><i /></div>
+            <strong>What interests you most?</strong>
+            <div>{aviationPaths.slice(0, 4).map(([icon, title]) => <span key={title}><Icon name={icon} /><small>{title}</small></span>)}</div>
+          </div>
+        </div>
+      </section>
+      <section className="mission-statement homepage-narrative">
+        <div className="mission-visual" aria-hidden="true">
+          <img src="/brand/sky-riders-mark-v3.png" alt="" />
+          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
+        </div>
+        <div className="mission-copy">
+          <span>THE NARRATIVE WE ARE CHANGING</span>
+          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
+          <p>Talent is everywhere, but access to information, mentors, training, and opportunity is not. Gateway helps young people recognize that there is a place for them in aviation and aerospace, then shows them a practical way forward.</p>
         </div>
       </section>
       <Footer />
