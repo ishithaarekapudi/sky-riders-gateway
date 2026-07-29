@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Footer, Header, Icon } from "./ui";
-import { VisionScrollButton } from "./vision-scroll-button";
 
 const aviationPaths = [
   ["airplane", "Pilot", "Learn how to begin a path toward the flight deck."],
@@ -35,33 +34,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="gateway-vision">
-        <div className="vision-copy">
-          <span>WHY GATEWAY</span>
-          <h2>The Sky Shouldn’t Have Barriers</h2>
-          <p>Aviation and aerospace should feel possible for every young person, regardless of background, location, or resources. Sky Riders Gateway brings guidance, community, and opportunities together in one clear place.</p>
-          <p className="vision-mission">Our mission is not just to inform. It is to transform curiosity into a tangible path forward.</p>
-          <VisionScrollButton />
-        </div>
-        <div className="vision-roadmap-image">
-          <img src="/gateway-vision-roadmap-clean.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
-        </div>
-      </section>
-
-      <section className="mission-statement" id="mission">
-        <div className="mission-visual" aria-hidden="true">
-          <img src="/brand/sky-riders-mark-v3.png" alt="" />
-          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
-        </div>
-        <div className="mission-copy">
-          <span>OUR MISSION</span>
-          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
-          <p>Sky Riders Gateway exists to make aviation and aerospace pathways easier to see, understand, and pursue. We connect young people with trustworthy guidance, mentors, scholarships, organizations, and practical next steps so curiosity can become a real future.</p>
-        </div>
-      </section>
-
       <section className="homepage-pathways">
-        <div className="section-heading"><span>EXPLORE YOUR FUTURE</span><h2>Find Your Place in Aviation and Aerospace</h2><p>Choose an area that interests you. Then Gateway will help you discover relevant careers, programs, scholarships, and clear next steps.</p></div>
+        <div className="section-heading"><span>YOUR STARTING POINT</span><h2>Find Your Place in Aviation and Aerospace</h2><p>Sky Riders Gateway is a pathway finder. Start with an area that interests you, learn what it can lead to, then use Explore to discover matching careers, programs, scholarships, organizations, and practical next steps.</p></div>
+        <div className="pathway-explainer" aria-label="How to use this resource">
+          <div><strong>1</strong><span><b>Choose an interest</b>Begin with the part of aviation or aerospace that catches your attention.</span></div>
+          <div><strong>2</strong><span><b>See where it can lead</b>Understand the careers, training, and communities connected to it.</span></div>
+          <div><strong>3</strong><span><b>Build your next step</b>Use Explore to receive opportunities that fit your age, location, and goals.</span></div>
+        </div>
         <div className="aviation-path-grid">
           {aviationPaths.map(([icon, title, text]) => (
             <article className="aviation-path-card" key={title}>
