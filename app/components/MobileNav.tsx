@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 const links = [
-  ["Home", "/"],
   ["Explore", "/explore"],
   ["Scholarships", "/scholarships"],
   ["Organizations", "/organizations"],
@@ -30,12 +29,13 @@ export function MobileNav({ active }: { active?: string }) {
       {open && (
         <div className="mobile-nav-panel" id="mobile-site-menu">
           <nav aria-label="Mobile navigation">
-            {links.map(([label, href]) => (
-              <Link className={active === label.toLowerCase() ? "active" : ""} href={href} onClick={() => setOpen(false)} key={href}>{label}</Link>
-            ))}
+            <Link className={active === "home" ? "active" : ""} href="/" onClick={() => setOpen(false)}>Home</Link>
             <span className="mobile-about-label">About</span>
             <Link className={active === "gateway" ? "active mobile-about-link" : "mobile-about-link"} href="/about/gateway" onClick={() => setOpen(false)}>Gateway</Link>
             <Link className={active === "about" ? "active mobile-about-link" : "mobile-about-link"} href="/about" onClick={() => setOpen(false)}>Ishitha Arekapudi</Link>
+            {links.map(([label, href]) => (
+              <Link className={active === label.toLowerCase() ? "active" : ""} href={href} onClick={() => setOpen(false)} key={href}>{label}</Link>
+            ))}
           </nav>
           <div className="mobile-account-actions">
             <Link href="/account" onClick={() => setOpen(false)}>Log In</Link>
