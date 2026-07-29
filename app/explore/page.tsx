@@ -183,16 +183,6 @@ export default function ExplorePage() {
                   </select>
                 </label>
 
-                <fieldset className="explore-choice-group stage-choice-group">
-                  <legend>What best describes your current stage?</legend>
-                  <div className="explore-stage-grid">
-                    {stages.map(([icon, label]) => (
-                      <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
-                        <Icon name={icon} /><span>{label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
               </div>
 
               <fieldset className="explore-choice-group interest-choice-group">
@@ -213,6 +203,17 @@ export default function ExplorePage() {
                 </div>
               </fieldset>
             </div>
+
+            <fieldset className="explore-choice-group stage-choice-group explore-stage-wide">
+              <legend>What best describes your current stage?</legend>
+              <div className="explore-stage-grid">
+                {stages.map(([icon, label]) => (
+                  <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
+                    <Icon name={icon} /><span>{label}</span>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
 
             <button className="primary-button explore-submit" disabled={!ready} onClick={buildRoadmap}>
               Show My Opportunities →
