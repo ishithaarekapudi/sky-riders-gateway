@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AboutMenu } from "./components/AboutMenu";
 import { MobileNav } from "./components/MobileNav";
 
 export function Logo() { return <BrandLogo />; }
@@ -14,7 +15,7 @@ export function BrandLogo({ footer = false }: { footer?: boolean }) {
 
 export function Header({ active, originalLogo = false }: { active?: string; originalLogo?: boolean }) {
   const links = [["Explore","/explore"],["Scholarships","/scholarships"],["Organizations","/organizations"],["Careers","/careers"],["Resources","/resources"]];
-  return <header className="site-header">{originalLogo?<BrandLogo />:<Logo />}<nav><Link className={active==="home"?"active":""} href="/">Home</Link><details className={`about-nav-menu${active==="about"||active==="gateway"?" active":""}`}><summary>About</summary><div className="about-nav-dropdown"><Link href="/about/gateway">Gateway</Link><Link href="/about">Ishitha Arekapudi</Link></div></details>{links.map(([label,href])=><Link className={active===label.toLowerCase()?"active":""} href={href} key={href}>{label}</Link>)}</nav><div className="account-actions"><Link href="/account" className="ghost-button">Log In</Link><Link href="/account" className="small-button">Sign Up</Link></div><MobileNav active={active}/></header>;
+  return <header className="site-header">{originalLogo?<BrandLogo />:<Logo />}<nav><Link className={active==="home"?"active":""} href="/">Home</Link><AboutMenu active={active}/>{links.map(([label,href])=><Link className={active===label.toLowerCase()?"active":""} href={href} key={href}>{label}</Link>)}</nav><div className="account-actions"><Link href="/account" className="ghost-button">Log In</Link><Link href="/account" className="small-button">Sign Up</Link></div><MobileNav active={active}/></header>;
 }
 
 export function Footer() { return <footer><div className="footer-grid"><div><BrandLogo footer /><p>Connecting students to opportunities in aviation and aerospace, and building a more inclusive future.</p></div><div><h4>Explore</h4><Link href="/careers">Career Paths</Link><Link href="/scholarships">Scholarships</Link><Link href="/organizations">Organizations</Link></div><div><h4>Resources</h4><Link href="/resources">Career Guide</Link><Link href="/resources">Getting Started</Link><Link href="/explore">Build a Roadmap</Link></div><div><h4>About</h4><Link href="/about/gateway">About Gateway</Link><Link href="/about">Ishitha Arekapudi</Link><Link href="/organizations">Community</Link></div></div><div className="footer-bottom">© 2026 Sky Riders Gateway <span>Privacy · Terms · Accessibility</span></div></footer>; }
