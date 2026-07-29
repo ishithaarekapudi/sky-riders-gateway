@@ -350,7 +350,8 @@ button { cursor: pointer; }
 .gateway-benefit-strip article { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 0; padding: 18px 14px 20px; border-right: 1px solid rgba(126,163,202,.28); text-align: center; }
 .gateway-benefit-strip article:last-child { border-right: 0; }
 .gateway-benefit-strip article > span { width: 54px; height: 54px; display: grid; place-items: center; color: white; }
-.gateway-benefit-strip .icon { width: 46px; height: 46px; stroke-width: 1.65; }
+.gateway-benefit-strip .icon { width: 46px; height: 46px; stroke-width: 1.65; transition: transform .2s ease; }
+.gateway-benefit-strip article:hover .icon { transform: scale(1.14); }
 .gateway-benefit-strip strong { display: block; margin-top: 7px; color: #fff; font-size: clamp(14px, 1.35vw, 21px); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
 .gateway-benefit-strip small { max-width: 230px; display: block; margin-top: 8px; color: #d3deeb; font-size: clamp(10px, .9vw, 14px); line-height: 1.35; }
 .homepage-guide { padding: 54px max(3vw, calc((100% - 1420px) / 2)) 58px; border-bottom: 1px solid #dce8f4; background: linear-gradient(180deg, #f7faff, #eef5fc); }
