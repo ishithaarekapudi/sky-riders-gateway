@@ -24,6 +24,7 @@ export function Icon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
     wing:<><path d="M4 10c4 0 7 1 10 4-5 1-8 0-10-4Zm16 0c-4 0-7 1-10 4 5 1 8 0 10-4ZM12 14v6"/></>,
     user:<><circle cx="12" cy="7" r="4"/><path d="M4 21c0-5 3-8 8-8s8 3 8 8"/></>,
+    heart:<><path d="M20.8 4.8a5.4 5.4 0 0 0-7.6 0L12 6l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.6a5.4 5.4 0 0 0 0-7.6Z"/></>,
     cap:<><path d="m3 10 9-5 9 5-9 5-9-5Z"/><path d="M7 12v5c3 2 7 2 10 0v-5"/></>,
     people:<><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-5 2-8 6-8s6 3 6 8M14 14c4 0 7 2 7 6"/></>,
     globe:<><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/></>,
