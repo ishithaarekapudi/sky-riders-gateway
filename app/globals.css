@@ -346,7 +346,7 @@ button { cursor: pointer; }
 }
 .homepage-pathways .section-heading { margin-bottom: 30px; }
 .homepage-pathways .section-heading h2 { font-weight: 650; }
-.gateway-benefit-strip { display: grid; grid-template-columns: repeat(5, 1fr); padding: 0 max(3vw, calc((100% - 1420px) / 2)); background: linear-gradient(110deg, #031a36, #06294f); color: white; }
+.gateway-benefit-strip { display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 max(3vw, calc((100% - 1420px) / 2)); background: linear-gradient(110deg, #031a36, #06294f); color: white; }
 .gateway-benefit-strip article { min-height: 132px; display: grid; grid-template-columns: 46px 1fr; gap: 13px; align-items: center; padding: 22px 18px; border-right: 1px solid rgba(255,255,255,.12); }
 .gateway-benefit-strip article:last-child { border-right: 0; }
 .gateway-benefit-strip article > span { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(139,194,255,.36); border-radius: 50%; color: #9dccff; }
@@ -967,9 +967,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .scholar-layout { grid-template-columns: 1fr; }
   .match-card { min-height: 220px; }
   .aviation-path-grid { grid-template-columns: repeat(3, 1fr); }
-  .gateway-benefit-strip { grid-template-columns: repeat(3, 1fr); }
-  .gateway-benefit-strip article:nth-child(3) { border-right: 0; }
-  .gateway-benefit-strip article:nth-child(n+4) { border-top: 1px solid rgba(255,255,255,.12); }
+  .gateway-benefit-strip { grid-template-columns: repeat(2, 1fr); }
+  .gateway-benefit-strip article:nth-child(2n) { border-right: 0; }
+  .gateway-benefit-strip article:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.12); }
   .homepage-journey-preview { grid-template-columns: 1fr; }
   .about-intro { grid-template-columns: 1fr; gap: 34px; }
   .gateway-about-intro { grid-template-columns: 1fr; gap: 34px; }
