@@ -29,6 +29,23 @@ export default function GatewayAboutPage() {
           <img src="/gateway-vision-roadmap-clean.png" alt="A curved Gateway roadmap connecting Exposure, Mentorship, and Pathways" />
         </div>
       </section>
+      <section className="section gateway-about-pillars">
+        <div className="section-heading">
+          <span>HOW GATEWAY WORKS</span>
+          <h2>From Curiosity to a Real Next Step</h2>
+          <p>Gateway is designed to answer three questions that can make an unfamiliar field feel possible: What exists? What fits me? What can I do next?</p>
+        </div>
+        <div className="collection-grid">
+          {gatewayPillars.map(([icon, title, text], index) => (
+            <article key={title}>
+              <span className="gateway-pillar-number">0{index + 1}</span>
+              <div className="square-icon"><Icon name={icon} /></div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
       <section className="mission-statement gateway-mission-statement">
         <div className="mission-visual" aria-hidden="true">
           <img src="/brand/sky-riders-mark-v3.png" alt="" />
@@ -38,25 +55,6 @@ export default function GatewayAboutPage() {
           <span>THE NARRATIVE WE ARE CHANGING</span>
           <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
           <p>Talent is everywhere, but access to information, mentors, training, and opportunity is not. Gateway helps young people recognize that there is a place for them in aviation and aerospace, then shows them a practical way forward.</p>
-        </div>
-      </section>
-      <section className="section gateway-about-pillars">
-        <div className="section-heading">
-          <span>HOW IT HELPS</span>
-          <h2>From Curiosity to a Real Next Step</h2>
-        </div>
-        <div className="collection-grid">
-          {gatewayPillars.map(([icon, title, text]) => (
-            <article key={title}>
-              <div className="square-icon"><Icon name={icon} /></div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-        <div className="blue-callout">
-          <Icon name="plane" />
-          <div><h2>Every journey begins differently.</h2><p>Gateway meets people where they are, whether they are five years old, changing careers, already training, or simply curious about what exists.</p></div>
           <Link className="small-button" href="/explore">Find My Starting Point</Link>
         </div>
       </section>
