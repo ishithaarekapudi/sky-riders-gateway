@@ -342,7 +342,7 @@ button { cursor: pointer; }
   transition: transform .18s ease, box-shadow .18s ease;
 }
 .aviation-path-card:nth-child(2n) { background: linear-gradient(145deg, #fff9f5, #f8fbff); }
-.aviation-path-card:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(5, 35, 74, .12); }
+.aviation-path-card:hover { z-index: 2; transform: translateY(-4px) scale(1.045); box-shadow: 0 16px 32px rgba(5, 35, 74, .16); }
 .path-symbol { min-height: 44px; display: grid; place-items: center; color: #126dce; line-height: 1; }
 .path-symbol .icon { width: 39px; height: 39px; }
 .aviation-path-card strong { margin-top: 9px; font-size: 18px; font-weight: 650; }
