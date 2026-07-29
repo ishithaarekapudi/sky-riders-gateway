@@ -22,7 +22,7 @@ const guidance = [
 export default function AboutPage() {
   return <PageShell active="about">
     <section className="sub-hero about-hero"><div>
-      <span className="eyebrow">PILOT · AUTHOR · FOUNDER</span>
+      <span className="eyebrow">ABOUT V1 · PILOT · AUTHOR · FOUNDER</span>
       <h1>Meet Ishitha Arekapudi</h1>
       <p>A young pilot building the resource she wished she had when she first began exploring aviation.</p>
       <Link className="primary-button" href="/explore">Start Your Journey →</Link>
