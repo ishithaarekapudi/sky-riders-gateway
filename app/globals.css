@@ -580,7 +580,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .explore-form-progress .active strong { color: var(--ink); }
 .explore-section-heading > span, .results-heading > div > span { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .16em; }
 .explore-section-heading h2, .results-heading h2 { margin: 8px 0; color: var(--ink); font-size: 30px; letter-spacing: -.025em; }
-.explore-section-heading h2 { display: flex; align-items: center; gap: 12px; }
+.explore-section-heading h2 { display: flex; align-items: center; gap: 12px; font-weight: 620; }
 .explore-section-heading h2 .icon { color: var(--blue); }
 .explore-section-heading p { margin: 0 0 28px; color: var(--muted); line-height: 1.5; }
 .profile-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
