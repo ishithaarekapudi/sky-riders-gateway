@@ -46,18 +46,6 @@ export default function GatewayAboutPage() {
           ))}
         </div>
       </section>
-      <section className="mission-statement gateway-mission-statement">
-        <div className="mission-visual" aria-hidden="true">
-          <img src="/brand/sky-riders-mark-v3.png" alt="" />
-          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
-        </div>
-        <div className="mission-copy">
-          <span>THE NARRATIVE WE ARE CHANGING</span>
-          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
-          <p>Talent is everywhere, but access to information, mentors, training, and opportunity is not. Gateway helps young people recognize that there is a place for them in aviation and aerospace, then shows them a practical way forward.</p>
-          <Link className="small-button" href="/explore">Find My Starting Point</Link>
-        </div>
-      </section>
     </PageShell>
   );
 }
