@@ -22,7 +22,7 @@ const stages = [
   ["school", "Middle School"],
   ["cap", "High School"],
   ["school", "College"],
-  ["people", "Post-College"],
+  ["people", "Adult or Working"],
   ["path", "Other"],
 ] as const;
 
@@ -93,14 +93,6 @@ const opportunities = [
     href: "/scholarships/aopa-foundation-scholarship",
     interests: ["Pilot", "Still Exploring"],
   },
-];
-
-const featuredOrganizations = [
-  { className: "eaa-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", logo: "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/EAA_logo_2color-png.png?o=1", title: "EAA", description: "A welcoming worldwide aviation community." },
-  { className: "cap-mark", href: "/organizations/civil-air-patrol", logo: "https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png", title: "Civil Air Patrol", description: "Leadership, aerospace education, and service." },
-  { className: "eagles-mark", href: "/organizations/experimental-aircraft-association-and-young-eagles", logo: "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/YE_logo_color-png.png?o=1", title: "Young Eagles", description: "Free discovery flights for youth ages 8 to 17." },
-  { className: "women-mark", href: "/organizations/women-in-aviation-international", logo: "https://assets.noviams.com/novi-file-uploads/wai/structure/wai-full-color-logo.png", title: "Women in Aviation", description: "Education, mentoring, and a global network." },
-  { className: "nasa-mark", href: "https://www.nasa.gov/learning-resources/", logo: "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg", title: "NASA STEM", description: "Explore, learn, build, and innovate.", external: true },
 ];
 
 export default function ExplorePage() {
@@ -227,32 +219,6 @@ export default function ExplorePage() {
             </button>
             {!ready && <small className="explore-helper">Choose your age, state, at least one interest, and current stage to continue.</small>}
 
-            <div className="explore-featured-teaser">
-              <div className="featured-heading">
-                <div><h3>Featured Organizations</h3><p>A preview of the communities and programs Gateway can help you discover.</p></div>
-                <Link href="/organizations">View all →</Link>
-              </div>
-              <div className="explore-featured-card-row">
-                {featuredOrganizations.map((organization) => (
-                  <Link
-                    className="explore-featured-card"
-                    href={organization.href}
-                    target={organization.external ? "_blank" : undefined}
-                    rel={organization.external ? "noreferrer" : undefined}
-                    key={organization.className}
-                  >
-                    <span className={`org-mark ${organization.className}`}>
-                      {organization.logo
-                        ? <img src={organization.logo} alt={`${organization.title} official logo`} width="180" height="90" loading="lazy" />
-                        : <span className="nasa-custom-mark" aria-hidden="true">✦<small>NASA STEM</small></span>}
-                    </span>
-                    <strong>{organization.title}</strong>
-                    <p>{organization.description}</p>
-                    <small>Learn More →</small>
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
         ) : (
           <section className="explore-results results-ready" ref={resultsRef}>
