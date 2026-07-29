@@ -346,8 +346,8 @@ button { cursor: pointer; }
 }
 .homepage-pathways .section-heading { margin-bottom: 30px; }
 .homepage-pathways .section-heading h2 { font-weight: 650; }
-.gateway-benefit-strip { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; height: 23%; display: grid; grid-template-columns: repeat(5, 1fr); padding: 0 2.5%; border-top: 1px solid rgba(131,173,216,.2); background: linear-gradient(180deg, rgba(2,23,48,.72), rgba(2,21,44,.98)); color: white; }
-.gateway-benefit-strip article { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 18px 14px 16px; border-right: 1px solid rgba(126,163,202,.28); text-align: center; }
+.gateway-benefit-strip { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; height: 30%; display: grid; grid-template-columns: repeat(5, 1fr); padding: 0 2.5%; background: linear-gradient(180deg, rgba(2,23,48,0) 0%, rgba(2,23,48,.16) 17%, rgba(2,23,48,.58) 43%, rgba(2,21,44,.9) 70%, #02152c 100%); color: white; }
+.gateway-benefit-strip article { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 0; padding: 18px 14px 20px; border-right: 1px solid rgba(126,163,202,.28); text-align: center; }
 .gateway-benefit-strip article:last-child { border-right: 0; }
 .gateway-benefit-strip article > span { width: 54px; height: 54px; display: grid; place-items: center; color: white; }
 .gateway-benefit-strip .icon { width: 46px; height: 46px; stroke-width: 1.65; }
@@ -967,7 +967,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .scholar-layout { grid-template-columns: 1fr; }
   .match-card { min-height: 220px; }
   .aviation-path-grid { grid-template-columns: repeat(3, 1fr); }
-  .gateway-benefit-strip { height: 25%; padding-inline: 1%; }
+  .gateway-benefit-strip { height: 31%; padding-inline: 1%; }
   .gateway-benefit-strip article { padding-inline: 8px; }
   .gateway-benefit-strip .icon { width: 36px; height: 36px; }
   .homepage-journey-preview { grid-template-columns: 1fr; }
