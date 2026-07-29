@@ -346,6 +346,11 @@ button { cursor: pointer; }
 }
 .homepage-pathways .section-heading { margin-bottom: 30px; }
 .homepage-pathways .section-heading h2 { font-weight: 650; }
+.pathway-explainer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: -5px 0 30px; }
+.pathway-explainer > div { display: grid; grid-template-columns: 40px 1fr; gap: 13px; align-items: start; padding: 17px 18px; border: 1px solid #dbe7f4; border-radius: 12px; background: #f4f8fd; }
+.pathway-explainer strong { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: white; font-size: 13px; }
+.pathway-explainer span { color: var(--muted); font-size: 12px; line-height: 1.45; }
+.pathway-explainer b { display: block; margin-bottom: 3px; color: var(--ink); font-size: 14px; }
 .aviation-path-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
 .aviation-path-card {
   min-height: 188px;
@@ -850,6 +855,34 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .about-book { margin-top: 0; background: #f2f6fa; color: var(--ink); }
 .about-book > div:last-child p { color: var(--muted); font-size: 18px; line-height: 1.65; }
 .about-book blockquote { margin: 28px 0; padding-left: 22px; border-left: 3px solid #e8ae3d; font-size: 22px; line-height: 1.5; }
+.founder-hero > div { max-width: 870px; }
+.founder-hero h1 { max-width: 820px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(50px, 6vw, 78px); font-weight: 500; letter-spacing: -.04em; }
+.founder-hero .founder-title { margin: 12px 0 4px; color: #8bc3ff; font-size: clamp(20px, 2.2vw, 29px); font-weight: 700; }
+.founder-book { background: #f3f7fb; }
+.founder-book h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(36px, 4vw, 54px); font-weight: 500; letter-spacing: -.025em; }
+.founder-accomplishments .section-heading { max-width: 900px; }
+.founder-accomplishments .section-heading p { max-width: 780px; }
+.founder-accomplishments .about-timeline article { position: relative; overflow: hidden; padding-top: 58px; }
+.founder-accomplishments .about-timeline article > span { position: absolute; top: 17px; right: 22px; color: #dceafa; font-size: 34px; font-weight: 850; }
+.founder-story { background: #fff; }
+.founder-story > h2 { max-width: 740px; margin: 10px 0 30px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px, 4vw, 55px); font-weight: 500; }
+.founder-story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; padding-top: 28px; border-top: 1px solid #ccd9e6; }
+.founder-story-grid p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.8; }
+.founder-media { background: linear-gradient(135deg, #061f41, #0a3a70); color: white; }
+.founder-media .section-heading span { color: #7fbcff; }
+.founder-media .section-heading p { color: #c8d9ec; }
+.founder-media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.founder-media-grid a { min-height: 270px; display: flex; flex-direction: column; padding: 30px; border: 1px solid rgba(255,255,255,.15); border-radius: 15px; background: rgba(255,255,255,.06); color: white; transition: transform .18s ease, background .18s ease; }
+.founder-media-grid a:hover { transform: translateY(-4px); background: rgba(255,255,255,.11); }
+.founder-media-grid span { color: #7fbcff; font-size: 12px; font-weight: 800; letter-spacing: .18em; }
+.founder-media-grid h3 { margin: 22px 0 10px; font-size: 24px; }
+.founder-media-grid p { color: #c8d9ec; line-height: 1.65; }
+.founder-media-grid b { margin-top: auto; color: #8fc7ff; font-size: 13px; }
+.founder-connect { display: grid; grid-template-columns: 1fr auto; gap: 50px; align-items: center; }
+.founder-connect h2 { max-width: 760px; margin: 9px 0 14px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(36px, 4vw, 52px); font-weight: 500; }
+.founder-connect p { max-width: 760px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+.founder-connect-actions { display: flex; gap: 12px; }
+.founder-connect .ghost-button { color: var(--blue); border-color: #a9bed5; }
 
 @media (max-width: 1350px) and (min-width: 1001px) {
   .site-header { padding: 0 22px; gap: 18px; }
@@ -882,6 +915,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .about-intro { grid-template-columns: 1fr; gap: 34px; }
   .gateway-about-intro { grid-template-columns: 1fr; gap: 34px; }
   .about-timeline { grid-template-columns: 1fr 1fr; }
+  .founder-media-grid { grid-template-columns: 1fr 1fr; }
+  .founder-media-grid a:last-child { grid-column: 1 / -1; }
+  .founder-connect { grid-template-columns: 1fr; gap: 20px; }
   .detail-content { grid-template-columns: 1fr; }
   .detail-sidebar { grid-template-columns: 1fr 1fr; }
   .organization-profile-header { grid-template-columns: 142px 1fr; }
@@ -946,6 +982,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .sub-hero { padding: 45px 25px; }
   .sub-hero h1 { font-size: 39px; }
   .homepage-pathways { padding: 44px 18px 28px; }
+  .pathway-explainer { grid-template-columns: 1fr; }
   .gateway-vision { padding: 58px 20px; gap: 38px; }
   .mission-statement { padding: 52px 20px; gap: 32px; }
   .mission-visual { min-height: 220px; }
@@ -961,6 +998,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .organization-logo-row { grid-template-columns: 1fr 1fr; }
   .organization-logo-row .org-mark:last-child { grid-column: 1 / -1; }
   .about-timeline { grid-template-columns: 1fr; }
+  .founder-story-grid, .founder-media-grid { grid-template-columns: 1fr; gap: 20px; }
+  .founder-media-grid a:last-child { grid-column: auto; }
+  .founder-connect-actions { align-items: stretch; flex-direction: column; }
   .about-intro blockquote { padding: 30px; font-size: 23px; }
   .account-panel { padding: 30px 22px; }
   .account-brand { position: static; margin-bottom: -10px; justify-self: start; }
