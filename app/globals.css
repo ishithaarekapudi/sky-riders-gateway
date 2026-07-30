@@ -346,15 +346,15 @@ button { cursor: pointer; }
 }
 .homepage-pathways .section-heading { margin-bottom: 30px; }
 .homepage-pathways .section-heading h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.035em; }
-.gateway-benefit-strip { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; height: 30%; display: grid; grid-template-columns: repeat(5, 1fr); padding: 0 2.5%; background: linear-gradient(180deg, rgba(2,23,48,0) 0%, rgba(2,23,48,.16) 17%, rgba(2,23,48,.58) 43%, rgba(2,21,44,.9) 70%, #02152c 100%); color: white; }
+.gateway-benefit-strip { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; height: 30%; display: grid; grid-template-columns: repeat(5, 1fr); padding: 0 2.5%; background: linear-gradient(180deg, rgba(2,23,48,0) 0%, rgba(2,23,48,.16) 17%, rgba(2,23,48,.58) 43%, rgba(2,21,44,.9) 70%, #02152c 100%); color: white; font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; }
 .gateway-benefit-strip article { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 58px 14px 28px; text-align: center; }
 .gateway-benefit-strip article:not(:last-child)::after { content: ""; position: absolute; top: 20%; right: 0; bottom: 12%; width: 1px; background: rgba(126,163,202,.3); }
-.gateway-benefit-strip article > span { width: 54px; height: 54px; display: grid; place-items: center; color: white; }
-.gateway-benefit-strip .icon { width: 46px; height: 46px; stroke-width: 1.65; transition: transform .2s ease; }
+.gateway-benefit-strip article > span { width: 58px; height: 58px; display: grid; place-items: center; color: #f8fbff; }
+.gateway-benefit-strip .icon { width: 50px; height: 50px; stroke-width: 1.7; transition: transform .2s ease, color .2s ease; }
 .gateway-benefit-strip article:hover .icon { transform: scale(1.14); }
-.gateway-benefit-strip strong { display: block; margin-top: 15px; color: #fff; font-size: clamp(14px, 1.35vw, 21px); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; transition: color .2s ease; }
-.gateway-benefit-strip small { max-width: 230px; display: block; margin-top: 10px; color: #d3deeb; font-size: clamp(10px, .9vw, 14px); line-height: 1.45; }
-.gateway-benefit-strip article:hover strong { color: #9dccff; }
+.gateway-benefit-strip strong { display: block; margin-top: 15px; color: #f7f9fc; font-size: clamp(14px, 1.35vw, 21px); font-weight: 600; line-height: 1.22; letter-spacing: 0; transition: color .2s ease; }
+.gateway-benefit-strip small { max-width: 230px; display: block; margin-top: 10px; color: #c8d3e0; font-size: clamp(10px, .92vw, 15px); font-weight: 400; line-height: 1.42; letter-spacing: 0; }
+.gateway-benefit-strip article:hover strong, .gateway-benefit-strip article:hover .icon { color: #9bc9ff; }
 .homepage-guide { padding: 54px max(3vw, calc((100% - 1420px) / 2)) 58px; border-bottom: 1px solid #dce8f4; background: linear-gradient(180deg, #f7faff, #eef5fc); font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif; }
 .pathway-explainer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: -5px 0 30px; }
 .pathway-explainer > div { display: grid; grid-template-columns: 40px 1fr; gap: 13px; align-items: start; padding: 17px 18px; border: 1px solid #dbe7f4; border-radius: 12px; background: #f4f8fd; }
