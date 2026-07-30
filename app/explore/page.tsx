@@ -93,6 +93,42 @@ const opportunities = [
     href: "/scholarships/aopa-foundation-scholarship",
     interests: ["Pilot", "Still Exploring"],
   },
+  {
+    icon: "people", title: "OBAP ACE Academy",
+    text: "Join an immersive summer academy with aerospace career exposure, hands-on learning, mentors, and, at many locations, a discovery flight.",
+    href: "https://obap.org/outreach-programs/ace-academy/",
+    interests: ["Pilot", "Aerospace Engineering", "Aviation Service", "Still Exploring"], external: true,
+  },
+  {
+    icon: "people", title: "Girls in Aviation Day",
+    text: "Find a free Women in Aviation International event with role models, aviation activities, and aerospace career exploration.",
+    href: "https://www.wai.org/giad",
+    interests: ["Pilot", "Space Exploration", "Aerospace Engineering", "Aircraft Mechanics", "Aviation Service", "Still Exploring"], external: true,
+  },
+  {
+    icon: "spacecraft", title: "NASA Internships and Challenges",
+    text: "Search current NASA internships, student challenges, research experiences, and mission-connected learning programs.",
+    href: "https://stemgateway.nasa.gov/public/s/explore-opportunities",
+    interests: ["Space Exploration", "Aerospace Engineering", "Weather & Meteorology"], external: true,
+  },
+  {
+    icon: "airplane", title: "FAA ACE Academies",
+    text: "Explore regional youth academies that introduce aviation careers through airports, professionals, activities, and hands-on experiences.",
+    href: "https://www.faa.gov/education/ace_academy",
+    interests: ["Pilot", "Air Traffic Control", "Aircraft Mechanics", "Aviation Service", "Still Exploring"], external: true,
+  },
+  {
+    icon: "airplane", title: "Academy of Model Aeronautics Youth Programs",
+    text: "Build practical flight knowledge through model aviation, local clubs, STEM activities, and youth events.",
+    href: "/organizations/academy-of-model-aeronautics",
+    interests: ["Pilot", "Aerospace Engineering", "Drones", "Still Exploring"],
+  },
+  {
+    icon: "school", title: "AOPA High School Flight Training Scholarship",
+    text: "Check the current AOPA Foundation cycle for student flight-training awards and application requirements.",
+    href: "/scholarships/aopa-high-school-flight-training",
+    interests: ["Pilot"],
+  },
 ];
 
 export default function ExplorePage() {
