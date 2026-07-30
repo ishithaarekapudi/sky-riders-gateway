@@ -50,6 +50,7 @@ export default function Scholarships() {
         <SaveButton id={`scholarship:${title}`} label={title}/>
       </article>)}</div>
       <aside className="match-card"><span className="eyebrow">APPLICATION DESK</span><div className="round-icon"><Icon name="user"/></div><h2>Build a stronger application</h2><p>Check eligibility first, track deadlines, save reusable answers, and tell the story behind your aviation goal.</p><a className="small-button" href="/explore">Find My Matches →</a></aside></div>
+      <div className="community-submit-callout"><div><span>HELP THE DIRECTORY GROW</span><h2>Know a scholarship we should include?</h2><p>Share the official source and eligibility information. Gateway will verify it before adding it to the directory.</p></div><Link className="small-button" href="/get-involved/submit">Submit a Scholarship →</Link></div>
     </section>
   </PageShell>;
 }
