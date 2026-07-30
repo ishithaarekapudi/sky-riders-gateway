@@ -8,6 +8,7 @@ const links = [
   ["Organizations", "/organizations"],
   ["Careers", "/careers"],
   ["Resources", "/resources"],
+  ["Get Involved", "/get-involved"],
 ] as const;
 
 export function MobileNav({ active }: { active?: string }) {
@@ -34,7 +35,7 @@ export function MobileNav({ active }: { active?: string }) {
             <Link className={active === "gateway" ? "active mobile-about-link" : "mobile-about-link"} href="/about/gateway" onClick={() => setOpen(false)}>Gateway</Link>
             <Link className={active === "about" ? "active mobile-about-link" : "mobile-about-link"} href="/about" onClick={() => setOpen(false)}>Ishitha Arekapudi</Link>
             {links.map(([label, href]) => (
-              <Link className={active === label.toLowerCase() ? "active" : ""} href={href} onClick={() => setOpen(false)} key={href}>{label}</Link>
+              <Link className={active === label.toLowerCase().replace(" ", "-") ? "active" : ""} href={href} onClick={() => setOpen(false)} key={href}>{label}</Link>
             ))}
           </nav>
           <div className="mobile-account-actions">
