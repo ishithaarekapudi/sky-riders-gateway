@@ -4,10 +4,10 @@ import { careerPaths, slugify } from "../content";
 import { Icon, PageShell } from "../ui";
 
 const families = [
-  { icon: "plane", prompt: "I want to fly", label: "Flight & Instruction", note: "Operate aircraft, teach new pilots, or work with remotely piloted systems.", titles: ["Professional Pilot Careers","Flight Instructor","Drone Pilot"] },
-  { icon: "tower", prompt: "I like coordination", label: "Operations & Safety", note: "Keep people, aircraft, airports, and the national airspace moving safely.", titles: ["Air Traffic Control","Airport Operations","Flight Dispatch","Cabin Crew & Customer Experience"] },
-  { icon: "wrench", prompt: "I like building things", label: "Engineering & Technical", note: "Design, maintain, test, and understand the systems that make flight possible.", titles: ["Aircraft Maintenance","Aeronautical Engineering","Meteorology"] },
-  { icon: "document", prompt: "I want to support the industry", label: "Business, Health & Policy", note: "Support aerospace through medicine, leadership, law, strategy, and service.", titles: ["Aerospace Medicine","Aviation Law & Business"] },
+  { icon: "plane", prompt: "I want to fly", label: "Flight & Instruction", note: "Operate aircraft, teach new pilots, or work with remotely piloted systems.", titles: ["Professional Pilot Careers","Airline Pilot","Corporate, Charter & Air Taxi Pilot","Cargo & Ferry Pilot","Medical & Air Ambulance Pilot","Government, Military & Law Enforcement Pilot","Firefighting & Agricultural Pilot","Air Tour, Media & Banner Pilot","Test, Airshow & Space Pilot","Flight Instructor","Drone Pilot"] },
+  { icon: "tower", prompt: "I like coordination", label: "Operations & Safety", note: "Keep people, aircraft, airports, and the national airspace moving safely.", titles: ["Air Traffic Control","Airport Operations","Flight Dispatch","Cabin Crew & Customer Experience","Airport Customer Service","Airport Emergency Response","Airport Police & Security"] },
+  { icon: "wrench", prompt: "I like building things", label: "Engineering, Space & Technical", note: "Design, maintain, test, and understand the systems that make flight and space missions possible.", titles: ["Aircraft Maintenance","Avionics Technician","Aeronautical Engineering","Airport Engineering & Construction","Meteorology","Space Science & Astronautics"] },
+  { icon: "document", prompt: "I want to support the industry", label: "Business, Health & Policy", note: "Support aerospace through medicine, leadership, law, education, strategy, and service.", titles: ["Aerospace Medicine","Aviation Law & Business","Aviation Insurance & Risk","Aviation Training & Education"] },
 ] as const;
 
 export default function Careers() {
