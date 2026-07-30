@@ -419,8 +419,8 @@ button { cursor: pointer; }
 .journey-preview-card > div:last-child > span { min-height: 86px; display: grid; place-items: center; padding: 10px 5px; border: 1px solid #dae4ee; border-radius: 9px; color: var(--blue); text-align: center; }
 .journey-preview-card .icon { width: 27px; height: 27px; }
 .journey-preview-card small { display: block; color: var(--ink); font-size: 9px; }
-.homepage-narrative { margin-top: 0; background: linear-gradient(120deg, #0a3767, #12639d 58%, #1780b8); }
-.homepage-narrative .mission-visual { background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.16), transparent 62%); }
+.homepage-narrative { margin-top: 0; background: linear-gradient(120deg, #02152c, #062746 58%, #09365c); }
+.homepage-narrative .mission-visual { background: radial-gradient(circle at 50% 35%, rgba(40,132,224,.2), transparent 62%); }
 .featured-organizations { padding: 17px 20px 22px; border: 1px solid #e7edf5; border-radius: 15px; background: white; box-shadow: 0 7px 22px rgba(5,35,74,.06); }
 .featured-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
 .featured-heading h3 { text-align: left; }
