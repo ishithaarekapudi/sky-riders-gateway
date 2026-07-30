@@ -354,7 +354,7 @@ button { cursor: pointer; }
 .gateway-benefit-strip article:hover .icon { transform: scale(1.14); }
 .gateway-benefit-strip strong { display: block; margin-top: 7px; color: #fff; font-size: clamp(14px, 1.35vw, 21px); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
 .gateway-benefit-strip small { max-width: 230px; display: block; margin-top: 8px; color: #d3deeb; font-size: clamp(10px, .9vw, 14px); line-height: 1.35; }
-.homepage-guide { padding: 54px max(3vw, calc((100% - 1420px) / 2)) 58px; border-bottom: 1px solid #dce8f4; background: linear-gradient(180deg, #f7faff, #eef5fc); }
+.homepage-guide { padding: 54px max(3vw, calc((100% - 1420px) / 2)) 58px; border-bottom: 1px solid #dce8f4; background: linear-gradient(180deg, #f7faff, #eef5fc); font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif; }
 .pathway-explainer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: -5px 0 30px; }
 .pathway-explainer > div { display: grid; grid-template-columns: 40px 1fr; gap: 13px; align-items: start; padding: 17px 18px; border: 1px solid #dbe7f4; border-radius: 12px; background: #f4f8fd; }
 .pathway-explainer strong { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: white; font-size: 13px; }
