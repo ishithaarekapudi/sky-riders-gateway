@@ -48,6 +48,7 @@ export default function Organizations() {
         </article>;
       })}</div>
       <div className="blue-callout"><Icon name="handshake"/><div><h2>Do not overlook your local aviation community.</h2><p>Smaller clubs and nearby flight organizations can offer mentoring, volunteer experience, discovery flights, and local funding with less competition.</p></div><Link className="small-button" href="/explore">Build My Network</Link></div>
+      <div className="community-submit-callout"><div><span>HELP THE DIRECTORY GROW</span><h2>Know an organization we should include?</h2><p>Share a trustworthy aviation or aerospace community and its official website. Gateway will review it before publication.</p></div><Link className="small-button" href="/get-involved/submit">Submit an Organization →</Link></div>
     </section>
   </PageShell>;
 }
