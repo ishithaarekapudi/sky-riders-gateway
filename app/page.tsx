@@ -67,6 +67,18 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mission-statement homepage-narrative">
+        <div className="mission-visual" aria-hidden="true">
+          <img src="/brand/sky-riders-mark-v3.png" alt="" />
+          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
+        </div>
+        <div className="mission-copy">
+          <span>WHY THIS MATTERS</span>
+          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
+          <p>Talent is everywhere, but access to information, mentors, training, and opportunity is not. Gateway helps young people recognize that there is a place for them in aviation and aerospace, then shows them a practical way forward.</p>
+        </div>
+      </section>
+
       <section className="homepage-pathways">
         <div className="section-heading"><span>EXPLORE YOUR PATH</span><h2>Find Your Place in Aviation and Aerospace</h2><p>These six areas are starting points, not limits. Choose what catches your attention to understand the work, skills, and possibilities connected to it.</p></div>
         <div className="aviation-path-grid">
@@ -92,17 +104,6 @@ export default function Home() {
             <strong>What interests you most?</strong>
             <div>{aviationPaths.slice(0, 4).map(([icon, title]) => <span key={title}><Icon name={icon} /><small>{title}</small></span>)}</div>
           </div>
-        </div>
-      </section>
-      <section className="mission-statement homepage-narrative">
-        <div className="mission-visual" aria-hidden="true">
-          <img src="/brand/sky-riders-mark-v3.png" alt="" />
-          <span>Curiosity becomes possibility.<br />Possibility becomes a path.</span>
-        </div>
-        <div className="mission-copy">
-          <span>THE NARRATIVE WE ARE CHANGING</span>
-          <blockquote>Sky Riders is here to rewrite the narrative.</blockquote>
-          <p>Talent is everywhere, but access to information, mentors, training, and opportunity is not. Gateway helps young people recognize that there is a place for them in aviation and aerospace, then shows them a practical way forward.</p>
         </div>
       </section>
       <Footer />
