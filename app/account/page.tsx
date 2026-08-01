@@ -13,6 +13,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    if (params.get("mode") === "signup") setMode("signup");
     setMessage(params.get("message") || "");
   }, []);
 
