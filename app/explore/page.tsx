@@ -138,6 +138,7 @@ export default function ExplorePage() {
   const [state, setState] = useState("");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [stage, setStage] = useState("");
+  const [formStep, setFormStep] = useState<1 | 2>(1);
   const [submitted, setSubmitted] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -169,7 +170,8 @@ export default function ExplorePage() {
     return [...matched, ...remaining].slice(0, userId ? opportunities.length : 6);
   }, [selectedInterests, userId]);
 
-  const ready = Boolean(age && state && selectedInterests.length && stage);
+  const aboutReady = Boolean(age && state && stage);
+  const ready = Boolean(aboutReady && selectedInterests.length);
 
   function toggleInterest(label: string) {
     setSubmitted(false);
@@ -202,26 +204,25 @@ export default function ExplorePage() {
         <div>
           <h1>Explore Your Path<br />in Aviation</h1>
           <p>Tell us what inspires you,<br />and we’ll help you find a direction.</p>
-          <div className={`progress ${submitted ? "progress-step-two" : ""}`}><b>Step {submitted ? "2" : "1"} of 3</b><span><i /></span></div>
+          <div className={`progress ${submitted ? "progress-step-three" : formStep === 2 ? "progress-step-two" : ""}`}><b>Step {submitted ? "3" : formStep} of 3</b><span><i /></span></div>
         </div>
       </section>
 
       <section className={`explore-builder ${submitted ? "showing-results" : "showing-form"}`}>
         {!submitted ? (
           <div className="explore-form-panel">
-            <div className="explore-form-progress" aria-label="Gateway progress">
-              <div className="active"><span>1</span><strong>About You</strong></div>
-              <div><span>2</span><strong>Your Interests</strong></div>
+            <div className={`explore-form-progress step-${formStep}`} aria-label="Gateway progress">
+              <div className={formStep === 1 ? "active" : "complete"}><span>1</span><strong>About You</strong></div>
+              <div className={formStep === 2 ? "active" : ""}><span>2</span><strong>Your Interests</strong></div>
               <div><span>3</span><strong>Your Matches</strong></div>
             </div>
-            <div className="explore-section-heading">
-              <span>YOUR GATEWAY</span>
-              <h2><Icon name="user" /> About You</h2>
-              <p>A few quick details help us highlight paths that fit you.</p>
-            </div>
-
-            <div className="about-you-grid">
-              <div className="about-you-details">
+            {formStep === 1 ? <>
+              <div className="explore-section-heading">
+                <span>YOUR GATEWAY</span>
+                <h2><Icon name="user" /> About You</h2>
+                <p>A few quick details help us highlight paths that fit your age, location, and current stage.</p>
+              </div>
+              <div className="explore-step-card about-you-details">
                 <label className="name-field">
                   <span>Name <small>optional</small></span>
                   <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
@@ -246,48 +247,52 @@ export default function ExplorePage() {
                     {states.map((item) => <option key={item}>{item}</option>)}
                   </select>
                 </label>
-
+                <fieldset className="explore-choice-group stage-choice-group explore-stage-wide">
+                  <legend>What best describes your current stage?</legend>
+                  <div className="explore-stage-grid">
+                    {stages.map(([icon, label]) => (
+                      <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
+                        <Icon name={icon} /><span>{label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
               </div>
-
-              <fieldset className="explore-choice-group interest-choice-group">
+              <button className="primary-button explore-submit" disabled={!aboutReady} onClick={() => { setFormStep(2); window.setTimeout(() => document.querySelector(".explore-builder")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0); }}>
+                Continue to Interests →
+              </button>
+              {!aboutReady && <small className="explore-helper">Choose your age, state, and current stage to continue.</small>}
+            </> : <>
+              <div className="explore-section-heading">
+                <span>EXPLORE YOUR PATH</span>
+                <h2><Icon name="path" /> What interests you?</h2>
+                <p>Select as many areas as you like. Gateway will use them to prioritize your matches.</p>
+              </div>
+              <div className="explore-profile-summary">
+                <span>{name.trim() ? `Hi, ${name.trim()}!` : "Your profile"}</span><b>{age}</b><b>{state}</b><b>{stage}</b>
+                <button type="button" onClick={() => setFormStep(1)}>Edit details</button>
+              </div>
+              <fieldset className="explore-choice-group interest-choice-group explore-interests-step">
                 <legend>Interests <small>Select all that apply</small></legend>
                 <div className="interest-tile-grid">
                   {interests.map(([icon, label]) => (
-                    <button
-                      type="button"
-                      aria-pressed={selectedInterests.includes(label)}
-                      className={selectedInterests.includes(label) ? "selected" : ""}
-                      onClick={() => toggleInterest(label)}
-                      key={label}
-                    >
-                      <Icon name={icon} /><span>{label}</span>
-                      <b aria-hidden="true">{selectedInterests.includes(label) ? "✓" : "+"}</b>
+                    <button type="button" aria-pressed={selectedInterests.includes(label)} className={selectedInterests.includes(label) ? "selected" : ""} onClick={() => toggleInterest(label)} key={label}>
+                      <Icon name={icon} /><span>{label}</span><b aria-hidden="true">{selectedInterests.includes(label) ? "✓" : "+"}</b>
                     </button>
                   ))}
                 </div>
               </fieldset>
-            </div>
-
-            <fieldset className="explore-choice-group stage-choice-group explore-stage-wide">
-              <legend>What best describes your current stage?</legend>
-              <div className="explore-stage-grid">
-                {stages.map(([icon, label]) => (
-                  <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
-                    <Icon name={icon} /><span>{label}</span>
-                  </button>
-                ))}
+              <div className="explore-step-actions">
+                <button className="explore-back-button" type="button" onClick={() => setFormStep(1)}>← Back</button>
+                <button className="primary-button" disabled={!ready || saving} onClick={buildRoadmap}>{saving ? "Saving Your Gateway..." : "Show My Opportunities →"}</button>
               </div>
-            </fieldset>
-
-            <button className="primary-button explore-submit" disabled={!ready || saving} onClick={buildRoadmap}>
-              {saving ? "Saving Your Gateway..." : "Show My Opportunities →"}
-            </button>
-            {!ready && <small className="explore-helper">Choose your age, state, at least one interest, and current stage to continue.</small>}
+              {!selectedInterests.length && <small className="explore-helper">Choose at least one interest to see your matches.</small>}
+            </>}
 
           </div>
         ) : (
           <section className="explore-results results-ready" ref={resultsRef}>
-            <button className="edit-profile-button" type="button" onClick={() => setSubmitted(false)}>← Edit my answers</button>
+            <button className="edit-profile-button" type="button" onClick={() => { setSubmitted(false); setFormStep(1); }}>← Edit my answers</button>
             <div className="results-heading">
               <div>
                 <span>OPPORTUNITIES FOR YOU</span>
@@ -337,6 +342,14 @@ export default function ExplorePage() {
                 <p>{selectedInterests.join(" · ")} · {stage} · {state}</p>
               </div>
               <span>Step 3</span>
+            </div>
+            <div className="gateway-next-steps">
+              <div className="section-heading"><span>YOUR ROADMAP</span><h2>Turn your matches into next steps</h2><p>You do not need to do everything at once. Start with one action and build from there.</p></div>
+              <div>
+                <article><span>1</span><h3>Explore your strongest match</h3><p>Open the first recommendation above and review its requirements, age range, and official source.</p></article>
+                <article><span>2</span><h3>Find funding and community</h3><p>Compare relevant scholarships and organizations that can help you learn, connect, and participate.</p></article>
+                <article><span>3</span><h3>Save what matters</h3><p>{userId ? "Use the hearts to keep promising options connected to your Gateway account." : "Create an account when you are ready to save favorites and keep your roadmap."}</p></article>
+              </div>
             </div>
           </section>
         )}
