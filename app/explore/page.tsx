@@ -18,16 +18,15 @@ const interests = [
   ["path", "Still Exploring"],
 ] as const;
 
-const stages = [
-  ["school", "Elementary School"],
-  ["school", "Middle School"],
-  ["cap", "High School"],
-  ["school", "College"],
-  ["people", "Adult or Working"],
-  ["path", "Other"],
-] as const;
+const ageRanges = ["5–7", "8–12", "13–15", "16–18", "19–24", "25+"] as const;
 
-const ageRanges = ["5–7", "8–12", "13–15", "16–18", "College", "Adult"] as const;
+function stageForAge(age: string) {
+  if (age === "5–7") return "Elementary School";
+  if (age === "8–12") return "Middle School";
+  if (age === "13–15" || age === "16–18") return "High School";
+  if (age === "19–24") return "Young Adult";
+  return "Adult";
+}
 
 const states = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -137,7 +136,6 @@ export default function ExplorePage() {
   const [age, setAge] = useState("");
   const [state, setState] = useState("");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  const [stage, setStage] = useState("");
   const [formStep, setFormStep] = useState<1 | 2>(1);
   const [submitted, setSubmitted] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
@@ -156,7 +154,6 @@ export default function ExplorePage() {
         setAge(profile.age_range);
         setState(profile.state);
         setSelectedInterests(profile.interests);
-        setStage(profile.current_stage);
       }
     });
   }, []);
@@ -170,8 +167,13 @@ export default function ExplorePage() {
     return [...matched, ...remaining].slice(0, userId ? opportunities.length : 6);
   }, [selectedInterests, userId]);
 
-  const aboutReady = Boolean(age && state && stage);
+  const aboutReady = Boolean(age && state);
   const ready = Boolean(aboutReady && selectedInterests.length);
+  const stage = stageForAge(age);
+  const firstName = name.trim().split(/\s+/)[0];
+  const matchedCount = recommendations.filter((item) =>
+    item.interests.some((interest) => selectedInterests.includes(interest)),
+  ).length;
 
   function toggleInterest(label: string) {
     setSubmitted(false);
@@ -220,7 +222,7 @@ export default function ExplorePage() {
               <div className="explore-section-heading">
                 <span>YOUR GATEWAY</span>
                 <h2><Icon name="user" /> About You</h2>
-                <p>A few quick details help us highlight paths that fit your age, location, and current stage.</p>
+                <p>A few quick details help us highlight paths that fit your age and location.</p>
               </div>
               <div className="explore-step-card about-you-details">
                 <label className="name-field">
@@ -247,21 +249,11 @@ export default function ExplorePage() {
                     {states.map((item) => <option key={item}>{item}</option>)}
                   </select>
                 </label>
-                <fieldset className="explore-choice-group stage-choice-group explore-stage-wide">
-                  <legend>What best describes your current stage?</legend>
-                  <div className="explore-stage-grid">
-                    {stages.map(([icon, label]) => (
-                      <button type="button" className={stage === label ? "selected" : ""} onClick={() => setStage(label)} key={label}>
-                        <Icon name={icon} /><span>{label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
               </div>
               <button className="primary-button explore-submit" disabled={!aboutReady} onClick={() => { setFormStep(2); window.setTimeout(() => document.querySelector(".explore-builder")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0); }}>
                 Continue to Interests →
               </button>
-              {!aboutReady && <small className="explore-helper">Choose your age, state, and current stage to continue.</small>}
+              {!aboutReady && <small className="explore-helper">Choose your age range and location to continue.</small>}
             </> : <>
               <div className="explore-section-heading">
                 <span>EXPLORE YOUR PATH</span>
@@ -269,7 +261,7 @@ export default function ExplorePage() {
                 <p>Select as many areas as you like. Gateway will use them to prioritize your matches.</p>
               </div>
               <div className="explore-profile-summary">
-                <span>{name.trim() ? `Hi, ${name.trim()}!` : "Your profile"}</span><b>{age}</b><b>{state}</b><b>{stage}</b>
+                <span>{name.trim() ? `Hi, ${name.trim()}!` : "Your profile"}</span><b>{age}</b><b>{state}</b>
                 <button type="button" onClick={() => setFormStep(1)}>Edit details</button>
               </div>
               <fieldset className="explore-choice-group interest-choice-group explore-interests-step">
@@ -291,65 +283,70 @@ export default function ExplorePage() {
 
           </div>
         ) : (
-          <section className="explore-results results-ready" ref={resultsRef}>
-            <button className="edit-profile-button" type="button" onClick={() => { setSubmitted(false); setFormStep(1); }}>← Edit my answers</button>
-            <div className="results-heading">
-              <div>
-                <span>OPPORTUNITIES FOR YOU</span>
-                <h2>{name ? `${name}’s starting points` : "Your starting points"}</h2>
+          <section className="explore-results gateway-dashboard" ref={resultsRef}>
+            <div className="gateway-dashboard-hero">
+              <div className="gateway-dashboard-topline">
+                <span>YOUR PERSONALIZED GATEWAY</span>
+                <button type="button" onClick={() => { setSubmitted(false); setFormStep(1); }}>Edit my answers</button>
               </div>
-              <small>Matched to {selectedInterests.length} interest{selectedInterests.length > 1 ? "s" : ""}</small>
+              <div className="gateway-dashboard-welcome">
+                <div>
+                  <h2>{firstName ? `Welcome, ${firstName}!` : "Your Gateway is ready."}</h2>
+                  <p>Here are the strongest starting points for your interests, age, and location.</p>
+                  <div className="gateway-profile-chips"><b>{age}</b><b>{state}</b><b>{selectedInterests.length} interests</b></div>
+                </div>
+                {!userId && <div className="gateway-dashboard-account">
+                  <strong>Keep your full Gateway</strong>
+                  <p>Create an account to unlock every match and save favorites.</p>
+                  <div><Link href="/account">Sign Up</Link><Link href="/account">Log In</Link></div>
+                </div>}
+              </div>
+              <div className="gateway-stat-grid">
+                <article><span>Matches found</span><strong>{matchedCount}</strong><small>Selected for you</small></article>
+                <article><span>Interests</span><strong>{selectedInterests.length}</strong><small>Guiding your results</small></article>
+                <article><span>Pathways</span><strong>6</strong><small>Careers to explore</small></article>
+                <article><span>Next steps</span><strong>4</strong><small>For your flight plan</small></article>
+              </div>
             </div>
 
-            {!userId && <div className="account-opportunity-note">
-              <Icon name="user" />
-              <div><strong>Want your full personalized list?</strong><p>Sign up or log in to see all matching opportunities, scholarships, and career paths, and save your favorites.</p></div>
-              <div className="account-note-actions"><Link href="/account">Sign Up</Link><Link href="/account">Log In</Link></div>
-            </div>}
-
-            <div className="opportunity-preview-grid">
-              {recommendations.map((item) => (
-                <article className="opportunity-preview" key={item.title}>
-                  <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>
-                    <div className="opportunity-art"><Icon name={item.icon} /></div>
+            <div className="gateway-recommendations">
+              <div className="gateway-results-title">
+                <div><span>RECOMMENDED FOR YOU</span><h2>Your strongest matches</h2></div>
+                <small>{userId ? "Your complete personalized list" : "A preview of your personalized list"}</small>
+              </div>
+              <div className="gateway-match-grid">
+                {recommendations.map((item, index) => (
+                  <article className="gateway-match-card" key={item.title}>
+                    <div className={`gateway-match-art tone-${index % 4}`}><Icon name={item.icon} /></div>
                     <div>
+                      <small>{item.interests.find((interest) => selectedInterests.includes(interest)) || "Explore a new direction"}</small>
                       <h3>{item.title}</h3>
                       <p>{item.text}</p>
-                      <strong>Explore opportunity <span>→</span></strong>
+                      <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View opportunity →</Link>
                     </div>
-                  </Link>
-                  <SaveButton id={`opportunity:${item.title}`} label={item.title} />
-                </article>
-              ))}
+                    <SaveButton id={`opportunity:${item.title}`} label={item.title} />
+                  </article>
+                ))}
+              </div>
             </div>
 
-            {!userId && <div className="results-next-step">
-              <div>
-                <span>NEXT STEP</span>
-                <h3>Keep your personalized Gateway</h3>
-                <p>Create an account or log in to unlock the full list, save opportunities, and continue to your roadmap.</p>
-              </div>
-              <div>
-                <Link className="primary-button" href="/account">Sign Up →</Link>
-                <Link className="ghost-button" href="/account">Log In</Link>
-              </div>
+            {!userId && <div className="gateway-unlock-strip">
+              <div><span>READY FOR THE FULL LIST?</span><h3>Save your matches and keep building your path.</h3></div>
+              <Link className="primary-button" href="/account">Create My Account →</Link>
             </div>}
 
-            <div className="roadmap-preview">
-              <Icon name="path" />
-              <div>
-                <h3>Your Gateway Roadmap</h3>
-                <p>{selectedInterests.join(" · ")} · {stage} · {state}</p>
+            <div className="gateway-flight-plan">
+              <div className="gateway-flight-plan-copy">
+                <span>YOUR FLIGHT PLAN</span>
+                <h2>A clear path from interest to action.</h2>
+                <p>Your recommendations are the starting point. Follow these steps at your own pace and keep what matters close.</p>
               </div>
-              <span>Step 3</span>
-            </div>
-            <div className="gateway-next-steps">
-              <div className="section-heading"><span>YOUR ROADMAP</span><h2>Turn your matches into next steps</h2><p>You do not need to do everything at once. Start with one action and build from there.</p></div>
-              <div>
-                <article><span>1</span><h3>Explore your strongest match</h3><p>Open the first recommendation above and review its requirements, age range, and official source.</p></article>
-                <article><span>2</span><h3>Find funding and community</h3><p>Compare relevant scholarships and organizations that can help you learn, connect, and participate.</p></article>
-                <article><span>3</span><h3>Save what matters</h3><p>{userId ? "Use the hearts to keep promising options connected to your Gateway account." : "Create an account when you are ready to save favorites and keep your roadmap."}</p></article>
-              </div>
+              <ol>
+                <li><b>1</b><div><strong>Open a top match</strong><span>Learn what it offers and who it is for.</span></div></li>
+                <li><b>2</b><div><strong>Compare opportunities</strong><span>Look at programs, careers, and scholarships.</span></div></li>
+                <li><b>3</b><div><strong>Heart your favorites</strong><span>Keep promising options in one place.</span></div></li>
+                <li><b>4</b><div><strong>Take one real next step</strong><span>Apply, attend, connect, or learn more.</span></div></li>
+              </ol>
             </div>
           </section>
         )}
