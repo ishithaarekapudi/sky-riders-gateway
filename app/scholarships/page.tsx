@@ -35,21 +35,25 @@ export default function Scholarships() {
   }), [query, filter]);
 
   return <PageShell active="scholarships">
-    <section className="sub-hero scholarships-hero"><div>
-      <h1>Fund Your Aviation Journey</h1>
-      <p>Explore flight training, glider, college, technical, and diversity-focused funding gathered in <i>Cleared for Takeoff</i>.</p>
-      <label className="search-box"><Icon name="search"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search scholarships"/></label>
-      <div className="filter-row">{filters.map(x=><button className={filter===x?"active":""} onClick={()=>setFilter(x)} key={x}>{x}</button>)}</div>
+    <section className="scholarship-runway-hero"><div>
+      <span>SCHOLARSHIPS</span>
+      <h1>Fund Your Future<br/>in Flight</h1>
+      <p>Discover aviation and aerospace scholarships, compare your options, and take the next step toward your goals.</p>
+      <Link className="primary-button" href="/explore">Find My Matches →</Link>
     </div></section>
-    <section className="directory scholarship-directory">
-      <div className="directory-heading"><div><span className="eyebrow">SEARCH BY YOUR NEXT STEP</span><h2>Scholarship Starting Points</h2></div><span>Showing {visible.length} of {scholarships.length}</span></div>
+    <section className="scholarship-search-deck">
+      <label className="scholarship-search"><Icon name="search"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search scholarships by name, pathway, or eligibility"/></label>
+      <div className="scholarship-filter-row">{filters.map(x=><button className={filter===x?"active":""} onClick={()=>setFilter(x)} key={x}>{x}</button>)}</div>
+    </section>
+    <section className="directory scholarship-directory runway-directory">
+      <div className="directory-heading"><div><span className="eyebrow">SCHOLARSHIP DIRECTORY</span><h2>Opportunities to move you forward</h2></div><span>{visible.length} scholarships found</span></div>
       <p className="data-note">*Awards, eligibility, and deadlines can change. Always verify the current application cycle on the sponsoring organization’s official website before applying.</p>
-      <div className="scholar-layout"><div className="scholar-grid">{visible.map(([,title,amount,tags])=><article className="scholar-card" key={title}>
+      <div className="scholar-grid runway-scholar-grid">{visible.map(([,title,amount,tags])=><article className="scholar-card runway-scholar-card" key={title}>
         <div className="scholar-sponsor">{sponsorLogo(title) ? <img src={sponsorLogo(title)} alt="" /> : <strong>{sponsor(title)}</strong>}</div>
-        <div className="scholar-copy"><span className="scholar-type">{tags}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><div className="scholar-meta"><strong>{amount}</strong><span>Deadline: verify current cycle</span></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View scholarship →</Link></div></div>
+        <div className="scholar-copy"><span className="scholar-type">{sponsor(title)}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><div className="runway-scholar-facts"><div><span>Award</span><strong>{amount}</strong></div><div><span>Deadline</span><b>Verify current cycle</b></div><div><span>Eligibility</span><b>{tags}</b></div></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View Details</Link><Link className="scholar-apply-action" href={`/scholarships/${slugify(title)}`}>Prepare to Apply →</Link></div></div>
         <SaveButton id={`scholarship:${title}`} label={title}/>
       </article>)}</div>
-      <aside className="match-card"><span className="eyebrow">APPLICATION DESK</span><div className="round-icon"><Icon name="user"/></div><h2>Build a stronger application</h2><p>Check eligibility first, track deadlines, save reusable answers, and tell the story behind your aviation goal.</p><a className="small-button" href="/explore">Find My Matches →</a></aside></div>
+      <div className="scholarship-account-cta"><Icon name="plane"/><div><span>YOUR PERSONAL FUNDING DASHBOARD</span><h2>Save scholarships. Track your progress. Build a stronger application.</h2><p>Create a Gateway account to keep promising scholarships and see your personalized next steps in one place.</p></div><Link className="primary-button" href="/dashboard">Open My Gateway →</Link></div>
       <div className="community-submit-callout"><div><span>HELP THE DIRECTORY GROW</span><h2>Know a scholarship we should include?</h2><p>Share the official source and eligibility information. Gateway will verify it before adding it to the directory.</p></div><Link className="small-button" href="/get-involved/submit">Submit a Scholarship →</Link></div>
     </section>
   </PageShell>;
