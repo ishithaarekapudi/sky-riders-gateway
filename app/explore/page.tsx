@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SaveButton } from "../components/SaveButton";
 import { Icon, PageShell } from "../ui";
+import { createClient } from "../../lib/supabase/client";
 
 const interests = [
   ["airplane", "Pilot"],
@@ -138,7 +139,26 @@ export default function ExplorePage() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [stage, setStage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
   const resultsRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(async ({ data }) => {
+      const user = data.user;
+      setUserId(user?.id || null);
+      if (!user) return;
+      const { data: profile } = await supabase.from("explore_profiles").select("*").eq("user_id", user.id).maybeSingle();
+      if (profile) {
+        setName(profile.display_name || "");
+        setAge(profile.age_range);
+        setState(profile.state);
+        setSelectedInterests(profile.interests);
+        setStage(profile.current_stage);
+      }
+    });
+  }, []);
 
   const recommendations = useMemo(() => {
     if (!selectedInterests.length) return opportunities.slice(0, 6);
@@ -146,8 +166,8 @@ export default function ExplorePage() {
       item.interests.some((interest) => selectedInterests.includes(interest)),
     );
     const remaining = opportunities.filter((item) => !matched.includes(item));
-    return [...matched, ...remaining].slice(0, 6);
-  }, [selectedInterests]);
+    return [...matched, ...remaining].slice(0, userId ? opportunities.length : 6);
+  }, [selectedInterests, userId]);
 
   const ready = Boolean(age && state && selectedInterests.length && stage);
 
@@ -158,12 +178,20 @@ export default function ExplorePage() {
     );
   }
 
-  function buildRoadmap() {
+  async function buildRoadmap() {
     if (!ready) return;
     localStorage.setItem(
       "sky-riders-roadmap",
       JSON.stringify({ name, age, state, interests: selectedInterests, stage }),
     );
+    if (userId) {
+      setSaving(true);
+      await createClient().from("explore_profiles").upsert({
+        user_id: userId, display_name: name.trim() || null, age_range: age, state,
+        interests: selectedInterests, current_stage: stage, updated_at: new Date().toISOString(),
+      });
+      setSaving(false);
+    }
     setSubmitted(true);
     window.setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   }
@@ -251,8 +279,8 @@ export default function ExplorePage() {
               </div>
             </fieldset>
 
-            <button className="primary-button explore-submit" disabled={!ready} onClick={buildRoadmap}>
-              Show My Opportunities →
+            <button className="primary-button explore-submit" disabled={!ready || saving} onClick={buildRoadmap}>
+              {saving ? "Saving Your Gateway..." : "Show My Opportunities →"}
             </button>
             {!ready && <small className="explore-helper">Choose your age, state, at least one interest, and current stage to continue.</small>}
 
@@ -268,11 +296,11 @@ export default function ExplorePage() {
               <small>Matched to {selectedInterests.length} interest{selectedInterests.length > 1 ? "s" : ""}</small>
             </div>
 
-            <div className="account-opportunity-note">
+            {!userId && <div className="account-opportunity-note">
               <Icon name="user" />
               <div><strong>Want your full personalized list?</strong><p>Sign up or log in to see all matching opportunities, scholarships, and career paths, and save your favorites.</p></div>
               <div className="account-note-actions"><Link href="/account">Sign Up</Link><Link href="/account">Log In</Link></div>
-            </div>
+            </div>}
 
             <div className="opportunity-preview-grid">
               {recommendations.map((item) => (
@@ -290,7 +318,7 @@ export default function ExplorePage() {
               ))}
             </div>
 
-            <div className="results-next-step">
+            {!userId && <div className="results-next-step">
               <div>
                 <span>NEXT STEP</span>
                 <h3>Keep your personalized Gateway</h3>
@@ -300,7 +328,7 @@ export default function ExplorePage() {
                 <Link className="primary-button" href="/account">Sign Up →</Link>
                 <Link className="ghost-button" href="/account">Log In</Link>
               </div>
-            </div>
+            </div>}
 
             <div className="roadmap-preview">
               <Icon name="path" />
