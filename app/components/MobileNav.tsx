@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { AccountActions } from "./AccountActions";
 
 const links = [
   ["Scholarships", "/scholarships"],
@@ -38,10 +39,7 @@ export function MobileNav({ active }: { active?: string }) {
               <Link className={active === label.toLowerCase().replace(" ", "-") ? "active" : ""} href={href} onClick={() => setOpen(false)} key={href}>{label}</Link>
             ))}
           </nav>
-          <div className="mobile-account-actions">
-            <Link href="/account" onClick={() => setOpen(false)}>Log In</Link>
-            <Link className="small-button" href="/account" onClick={() => setOpen(false)}>Sign Up</Link>
-          </div>
+          <AccountActions mobile onNavigate={() => setOpen(false)} />
         </div>
       )}
     </div>
