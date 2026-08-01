@@ -282,8 +282,11 @@ button { cursor: pointer; }
 .gateway-about-pillars .collection-grid article { min-height: 250px; }
 
 .account-page { min-height: 100vh; padding: 42px 20px; display: grid; place-items: center; background: linear-gradient(rgba(3,20,43,.78), rgba(3,20,43,.9)), url('/hero-gateway-live.jpg') center/cover; font-family: Inter, "Avenir Next", "Segoe UI", sans-serif; }
-.account-brand { position: absolute; top: 28px; left: 34px; color: white; font-size: 18px; font-weight: 750; letter-spacing: .12em; }
-.account-brand span { display: block; font-size: 9px; letter-spacing: .4em; }
+.account-brand { position: absolute; top: 22px; left: 28px; }
+.account-brand .brand-logo { min-width: 0; gap: 8px; }
+.account-brand .brand-mark-wrap { width: 82px; height: 62px; }
+.account-brand .brand-words b { font-size: 17px; }
+.account-brand .brand-words small { font-size: 8px; }
 .account-panel { width: min(480px, 100%); padding: 42px; border-radius: 20px; background: white; box-shadow: 0 25px 70px rgba(0,0,0,.28); }
 .account-panel h1 { margin: 8px 0; font-size: 38px; }
 .account-panel > p { color: var(--muted); line-height: 1.55; }
