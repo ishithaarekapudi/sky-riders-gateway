@@ -72,6 +72,18 @@ export type Database = {
         Update: never;
         Relationships: [];
       };
+      saved_items: {
+        Row: { user_id: string; item_id: string; item_label: string; created_at: string };
+        Insert: { user_id: string; item_id: string; item_label: string };
+        Update: { item_label?: string };
+        Relationships: [];
+      };
+      explore_profiles: {
+        Row: { user_id: string; display_name: string | null; age_range: string; state: string; interests: string[]; current_stage: string; updated_at: string };
+        Insert: { user_id: string; display_name?: string | null; age_range: string; state: string; interests: string[]; current_stage: string; updated_at?: string };
+        Update: { display_name?: string | null; age_range?: string; state?: string; interests?: string[]; current_stage?: string; updated_at?: string };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
