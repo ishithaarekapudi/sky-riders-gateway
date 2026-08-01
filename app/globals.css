@@ -975,6 +975,8 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .community-form-section li strong { color: white; }
 .community-form { padding: 38px; border: 1px solid #d4e0eb; border-radius: 18px; background: #f8fbfe; box-shadow: 0 18px 48px rgba(7,36,67,.06); }
 .form-preview-notice { margin: 0 0 28px; padding: 14px 16px; border: 1px solid #f0ce87; border-radius: 9px; background: #fff9e9; color: #69501e; font-size: 12px; line-height: 1.55; }
+.form-connection-notice { margin: 0 0 28px; padding: 14px 16px; border: 1px solid #bcd9f2; border-radius: 9px; background: #edf7ff; color: #214c72; font-size: 12px; line-height: 1.55; }
+.form-error { margin: 20px 0 0; padding: 13px 15px; border: 1px solid #e9b7b7; border-radius: 9px; background: #fff3f3; color: #8a2929; font-size: 13px; line-height: 1.5; }
 .community-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .community-form-grid label { display: grid; align-content: start; gap: 7px; color: var(--ink); font-size: 12px; font-weight: 700; }
 .community-form-grid label.full, .mentor-interest-field.full { grid-column: 1 / -1; }
