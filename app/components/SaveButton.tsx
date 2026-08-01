@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { createClient } from "../../lib/supabase/client";
 
@@ -10,6 +10,8 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
   const [userId, setUserId] = useState<string | null>(null);
   const [busy, setBusy] = useState(true);
   const [showAccountPrompt, setShowAccountPrompt] = useState(false);
+  const [promptPosition, setPromptPosition] = useState({ left: 16, top: 16, placement: "below" });
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -29,20 +31,30 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
 
   useEffect(() => {
     if (!showAccountPrompt) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === "Escape") setShowAccountPrompt(false);
     }
+    function closeOnViewportChange() { setShowAccountPrompt(false); }
     document.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("resize", closeOnViewportChange);
+    window.addEventListener("scroll", closeOnViewportChange, true);
     return () => {
-      document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("resize", closeOnViewportChange);
+      window.removeEventListener("scroll", closeOnViewportChange, true);
     };
   }, [showAccountPrompt]);
 
   async function toggleSaved() {
     if (!userId) {
+      const rect = buttonRef.current?.getBoundingClientRect();
+      if (rect) {
+        const width = 340;
+        const estimatedHeight = 205;
+        const left = Math.min(Math.max(12, rect.right - width), window.innerWidth - width - 12);
+        const fitsBelow = rect.bottom + estimatedHeight + 14 < window.innerHeight;
+        setPromptPosition({ left, top: fitsBelow ? rect.bottom + 10 : Math.max(12, rect.top - estimatedHeight - 10), placement: fitsBelow ? "below" : "above" });
+      }
       setShowAccountPrompt(true);
       return;
     }
@@ -63,6 +75,7 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
 
   return <>
     <button
+      ref={buttonRef}
       type="button"
       className={`heart-save-button${saved ? " saved" : ""}`}
       aria-label={saved ? `Remove ${itemLabel} from saved items` : `Save ${itemLabel}`}
@@ -78,11 +91,10 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
     {showAccountPrompt && createPortal(<div className="account-required-overlay" role="presentation" onMouseDown={(event) => {
       if (event.target === event.currentTarget) setShowAccountPrompt(false);
     }}>
-      <section className="account-required-modal" role="dialog" aria-modal="true" aria-labelledby={`account-required-${id.replace(/[^a-z0-9]/gi, "-")}`}>
+      <section className="account-required-modal" data-placement={promptPosition.placement} style={{ "--prompt-left": `${promptPosition.left}px`, "--prompt-top": `${promptPosition.top}px` } as CSSProperties} role="dialog" aria-modal="true" aria-labelledby={`account-required-${id.replace(/[^a-z0-9]/gi, "-")}`}>
         <button className="account-required-close" type="button" aria-label="Close" onClick={() => setShowAccountPrompt(false)}>×</button>
-        <span>SAVE YOUR GATEWAY</span>
-        <h2 id={`account-required-${id.replace(/[^a-z0-9]/gi, "-")}`}>Create an account to save this.</h2>
-        <p>Your favorites stay connected to your profile, so you can return to opportunities, scholarships, organizations, and careers from any device.</p>
+        <h2 id={`account-required-${id.replace(/[^a-z0-9]/gi, "-")}`}>Save this to your Gateway?</h2>
+        <p>Create an account to keep your favorites.</p>
         <div className="account-required-actions">
           <Link className="primary-button" href={`/account?mode=signup&${accountQuery}`}>Sign Up →</Link>
           <Link className="account-login-link" href={`/account?mode=login&${accountQuery}`}>Log In</Link>
