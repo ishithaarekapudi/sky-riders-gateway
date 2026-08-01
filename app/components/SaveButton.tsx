@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { createClient } from "../../lib/supabase/client";
 
 export function SaveButton({ id, label = "Save" }: { id: string; label?: string }) {
@@ -28,11 +29,16 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
 
   useEffect(() => {
     if (!showAccountPrompt) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === "Escape") setShowAccountPrompt(false);
     }
     document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
   }, [showAccountPrompt]);
 
   async function toggleSaved() {
@@ -69,7 +75,7 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" />
       </svg>
     </button>
-    {showAccountPrompt && <div className="account-required-overlay" role="presentation" onMouseDown={(event) => {
+    {showAccountPrompt && createPortal(<div className="account-required-overlay" role="presentation" onMouseDown={(event) => {
       if (event.target === event.currentTarget) setShowAccountPrompt(false);
     }}>
       <section className="account-required-modal" role="dialog" aria-modal="true" aria-labelledby={`account-required-${id.replace(/[^a-z0-9]/gi, "-")}`}>
@@ -83,6 +89,6 @@ export function SaveButton({ id, label = "Save" }: { id: string; label?: string 
         </div>
         <button className="account-not-now" type="button" onClick={() => setShowAccountPrompt(false)}>Not now</button>
       </section>
-    </div>}
+    </div>, document.body)}
   </>;
 }
