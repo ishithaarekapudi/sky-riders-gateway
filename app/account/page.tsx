@@ -28,8 +28,8 @@ export default function AccountPage() {
     const password = String(form.get("password") || "");
     const supabase = createClient();
     const params = new URLSearchParams(window.location.search);
-    const requestedNext = params.get("next") || "/explore";
-    const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/explore";
+    const requestedNext = params.get("next") || "/dashboard";
+    const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
     setBusy(true);
     const result = mode === "login"
       ? await supabase.auth.signInWithPassword({ email, password })
