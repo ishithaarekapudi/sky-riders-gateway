@@ -175,6 +175,17 @@ button { cursor: pointer; }
 .heart-save-button svg { width: 20px; height: 20px; fill: transparent; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .heart-save-button.saved { border-color: #efadba; background: #fff2f5; color: #d83c5a; }
 .heart-save-button.saved svg { fill: currentColor; }
+.account-required-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 22px; background: rgba(2,18,39,.68); backdrop-filter: blur(5px); }
+.account-required-modal { position: relative; width: min(480px,100%); padding: 42px; border: 1px solid #c9dced; border-radius: 20px; background: white; box-shadow: 0 28px 80px rgba(0,20,46,.32); color: var(--ink); text-align: center; }
+.account-required-modal > span { color: var(--blue); font-size: 11px; font-weight: 650; letter-spacing: .2em; }
+.account-required-modal h2 { margin: 13px 0 15px; font-family: Georgia, "Times New Roman", serif; font-size: 36px; font-weight: 400; line-height: 1.08; }
+.account-required-modal p { margin: 0 auto; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.account-required-close { position: absolute; top: 12px; right: 15px; width: 36px; height: 36px; padding: 0; border: 0; background: transparent; color: #63768a; font-size: 29px; font-weight: 300; line-height: 1; cursor: pointer; }
+.account-required-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 27px; }
+.account-required-actions a { display: grid; place-items: center; min-height: 48px; border-radius: 8px; }
+.account-required-actions .primary-button { color: white; }
+.account-login-link { border: 1px solid #9eb6cc; color: var(--ink); font-weight: 650; }
+.account-not-now { margin-top: 17px; padding: 5px 10px; border: 0; background: transparent; color: #66798d; font: inherit; font-size: 13px; cursor: pointer; }
 .primary-button:disabled { cursor: not-allowed; filter: grayscale(.45); opacity: .55; transform: none !important; }
 .card-actions { display: flex; align-items: center; gap: 16px; margin-top: 15px; }
 .card-actions a, .card-actions button { width: auto; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; color: var(--blue); font-size: 13px; font-weight: 700; }
@@ -1162,6 +1173,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .contact-form label.full, .contact-form button, .contact-form small { grid-column: auto; }
   .about-intro blockquote { padding: 30px; font-size: 23px; }
   .account-panel { padding: 30px 22px; }
+  .account-required-modal { padding: 36px 22px 28px; }
+  .account-required-modal h2 { font-size: 31px; }
+  .account-required-actions { grid-template-columns: 1fr; }
   .account-brand { position: static; margin-bottom: -10px; justify-self: start; }
   .detail-hero { padding: 48px 22px; }
   .detail-actions { align-items: stretch; flex-direction: column; }
