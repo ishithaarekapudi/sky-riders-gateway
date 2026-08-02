@@ -15,9 +15,11 @@ const sponsor = (title:string) => /EAA|Ray Aviation|Harrison Ford|Adapt to Fly/.
   : /Women’s Soaring/.test(title) ? "WSPA"
   : /Astronaut/.test(title) ? "ASF" : "FLIGHT FUNDING";
 const sponsorLogo = (title:string) => /EAA|Ray Aviation|Harrison Ford|Adapt to Fly/.test(title)
-  ? "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/YE_logo_color-png.png?o=1"
+  ? "/organization-logos/eaa.png"
   : /Civil Air Patrol/.test(title)
-    ? "https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png"
+    ? "/organization-logos/civil-air-patrol.png"
+    : /Women in Aviation/.test(title)
+      ? "/organization-logos/women-in-aviation.png"
     : "";
 
 export default function Scholarships() {
@@ -48,9 +50,9 @@ export default function Scholarships() {
     <section className="directory scholarship-directory runway-directory">
       <div className="directory-heading"><div><span className="eyebrow">SCHOLARSHIP DIRECTORY</span><h2>Opportunities to move you forward</h2></div><span>{visible.length} scholarships found</span></div>
       <p className="data-note">*Awards, eligibility, and deadlines can change. Always verify the current application cycle on the sponsoring organization’s official website before applying.</p>
-      <div className="scholar-grid runway-scholar-grid">{visible.map(([,title,amount,tags])=><article className="scholar-card runway-scholar-card" key={title}>
-        <div className="scholar-sponsor">{sponsorLogo(title) ? <img src={sponsorLogo(title)} alt="" /> : <strong>{sponsor(title)}</strong>}</div>
-        <div className="scholar-copy"><span className="scholar-type">{sponsor(title)}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><div className="runway-scholar-facts"><div><span>Award</span><strong>{amount}</strong></div><div><span>Deadline</span><b>Verify current cycle</b></div><div><span>Eligibility</span><b>{tags}</b></div></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View Details</Link><Link className="scholar-apply-action" href={`/scholarships/${slugify(title)}`}>Prepare to Apply →</Link></div></div>
+      <div className="scholar-grid runway-scholar-grid">{visible.map(([,title,amount,tags])=><article className="scholar-card runway-scholar-card directory-profile-card" key={title}>
+        <div className="scholar-sponsor directory-profile-brand">{sponsorLogo(title) ? <img src={sponsorLogo(title)} alt={`${sponsor(title)} logo`} /> : <div className="organization-wordmark"><span>SCHOLARSHIP SPONSOR</span><strong>{sponsor(title)}</strong></div>}</div>
+        <div className="scholar-copy directory-profile-copy"><span className="scholar-type">{sponsor(title)}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><p className="scholarship-card-intro">A funding opportunity for students building an aviation or aerospace pathway.</p><div className="runway-scholar-facts"><div><span>Award</span><strong>{amount}</strong></div><div><span>Eligibility</span><b>{tags}</b></div><div><span>Application</span><b>Verify the current official cycle</b></div></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View scholarship →</Link></div></div>
         <SaveButton id={`scholarship:${title}`} label={title}/>
       </article>)}</div>
       <div className="scholarship-account-cta"><Icon name="plane"/><div><span>YOUR PERSONAL FUNDING DASHBOARD</span><h2>Save scholarships. Track your progress. Build a stronger application.</h2><p>Create a Gateway account to keep promising scholarships and see your personalized next steps in one place.</p></div><Link className="primary-button" href="/dashboard">Open My Gateway →</Link></div>
