@@ -1158,6 +1158,17 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .nearby-result-logo.cap-mark { background: linear-gradient(145deg,#184b89,#0a2e60); }
 .nearby-result-logo .icon { width: 34px; height: 34px; }
 .nearby-result-logo strong { color: #fff; font-size: 12px; letter-spacing: .14em; }
+.scholarship-tracker { display: grid; gap: 14px; padding: 20px; border: 1px solid #cddfec; border-radius: 13px; background: linear-gradient(145deg,#f5faff,#e9f4ff); box-shadow: 0 8px 22px rgba(8,49,91,.06); }
+.scholarship-tracker > div > span,.dashboard-application-section .dashboard-section-heading span { color: #0f70e7; font-size: 9px; font-weight: 700; letter-spacing: .16em; }
+.scholarship-tracker h3 { margin: 5px 0 3px; font-size: 18px; }.scholarship-tracker p { margin: 0; color: #60778e; font-size: 10px; }
+.scholarship-tracker label { display: grid; gap: 7px; }.scholarship-tracker label > span { color: #294967; font-size: 10px; font-weight: 650; }
+.scholarship-tracker select { width: 100%; min-height: 42px; padding: 0 12px; border: 1px solid #b9d1e7; border-radius: 9px; background: white; color: #0a294a; font: inherit; font-size: 11px; }
+.scholarship-tracker > a { color: #0f70e7; font-size: 11px; font-weight: 700; }
+.dashboard-application-section { margin-top: 28px; padding: 28px; border-radius: 16px; background: linear-gradient(135deg,#eef7ff,#f9fcff); border: 1px solid #ccdfef; }
+.dashboard-application-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 18px; }
+.scholarship-tracker.compact { grid-template-columns: minmax(0,1fr) 180px; align-items: center; padding: 14px 16px; background: white; }
+.scholarship-tracker.compact label { display: contents; }.scholarship-tracker.compact label > span { overflow: hidden; color: #0a294a; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width:700px){.dashboard-application-list{grid-template-columns:1fr}.scholarship-tracker.compact{grid-template-columns:1fr}.scholarship-tracker.compact label{display:grid}}
 .org-grid h3, .org-grid p { margin-top: 0; }
 .org-grid p, .career-grid p, .collection-grid p { color: var(--muted); line-height: 1.55; }
 .tag-row span { display: inline-block; margin-right: 5px; padding: 5px 9px; border-radius: 20px; background: var(--sky); font-size: 11px; }
