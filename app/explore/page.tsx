@@ -131,6 +131,11 @@ const opportunities = [
   },
 ];
 
+type NearbyResource = {
+  id: string; organization_slug: string; organization_name: string; location_name: string;
+  location_type: string; city: string | null; state: string; official_url: string; description: string;
+};
+
 function matchCategory(item: (typeof opportunities)[number]) {
   if (item.href.startsWith("/scholarships")) return "Scholarship";
   if (item.href.startsWith("/careers")) return "Career Path";
@@ -149,6 +154,8 @@ export default function ExplorePage() {
   const [nearQuery, setNearQuery] = useState("");
   const [nearFilter, setNearFilter] = useState("Flight Programs");
   const [locationMessage, setLocationMessage] = useState("");
+  const [nearbyResources, setNearbyResources] = useState<NearbyResource[]>([]);
+  const [nearbyBusy, setNearbyBusy] = useState(false);
   const [roadmapDone, setRoadmapDone] = useState<number[]>([1]);
   const [matchFilter, setMatchFilter] = useState("All Matches");
   const resultsRef = useRef<HTMLElement>(null);
@@ -168,6 +175,17 @@ export default function ExplorePage() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const chosenState = nearQuery.trim() || state;
+    if (!chosenState || !states.includes(chosenState)) { setNearbyResources([]); return; }
+    setNearbyBusy(true);
+    createClient().from("location_directory").select("*").eq("state", chosenState).eq("published", true)
+      .order("organization_name").then(({ data }) => {
+        setNearbyResources((data || []) as NearbyResource[]);
+        setNearbyBusy(false);
+      });
+  }, [nearQuery, state]);
 
   const recommendations = useMemo(() => {
     if (!selectedInterests.length) return opportunities.slice(0, 6);
@@ -356,20 +374,17 @@ export default function ExplorePage() {
                 {["All Matches","Scholarships","Careers","Opportunities"].map((label)=><button type="button" className={matchFilter===label?"active":""} onClick={()=>setMatchFilter(label)} key={label}>{label}<span>{label==="All Matches"?recommendations.length:opportunities.filter(item=>matchCategory(item)===(label==="Scholarships"?"Scholarship":label==="Careers"?"Career Path":"Opportunity")).length}</span></button>)}
               </div>
               <div className="gateway-match-grid editorial-match-grid">
-                {visibleMatches.map((item, index) => {
+                {visibleMatches.map((item) => {
                   const category=matchCategory(item);
-                  const score=Math.max(78,94-index*2);
+                  const matchedInterests=item.interests.filter((interest)=>selectedInterests.includes(interest));
                   return <article className={`gateway-match-card editorial-match-card category-${category.toLowerCase().replace(" ","-")}`} key={item.title}>
-                    <div className="editorial-match-photo">
-                      <span className="match-type-badge">{category}</span>
-                      <b>{score}% match</b>
-                    </div>
+                    <div className="compact-match-icon"><Icon name={item.icon}/></div>
                     <div className="editorial-match-copy">
-                      <small>{item.interests.find((interest) => selectedInterests.includes(interest)) || "Explore a new direction"}</small>
+                      <small>{category}</small>
                       <h3>{item.title}</h3>
-                      <div className="match-quick-facts"><span><Icon name="path"/> {category === "Scholarship" ? "Funding support" : "Multiple locations"}</span><span><Icon name="user"/> {age}</span></div>
                       <p>{item.text}</p>
-                      <div className="editorial-match-actions"><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View Details →</Link><span>Strong Match</span></div>
+                      <div className="why-match"><strong>Why it matches</strong><span>{matchedInterests.length ? `You selected ${matchedInterests.join(" and ")}.` : "A useful adjacent path to explore."}</span><span>Designed for the {age} stage.</span></div>
+                      <div className="editorial-match-actions"><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View Details →</Link></div>
                     </div>
                     <SaveButton id={`opportunity:${item.title}`} label={item.title} />
                   </article>;
@@ -386,26 +401,22 @@ export default function ExplorePage() {
               <div className="nearby-heading"><div><span>NEAR YOU</span><h2>Opportunities Near You</h2><p>Discover programs, events, mentors, and resources in your area.</p></div><small>{state || "Choose a location"}</small></div>
               <div className="nearby-layout">
                 <aside className="nearby-controls">
-                  <label><Icon name="search"/><input value={nearQuery} onChange={(event) => setNearQuery(event.target.value)} placeholder="Enter city, state, or ZIP code"/></label>
+                  <label><Icon name="search"/><select aria-label="Choose a state" value={nearQuery || state} onChange={(event) => setNearQuery(event.target.value)}><option value="">Choose a state</option>{states.filter(item=>item!=="Outside the United States").map(item=><option key={item}>{item}</option>)}</select></label>
                   <button type="button" className="nearby-location-button" onClick={useLocation}><Icon name="path"/> Use My Location</button>
                   <strong>Filter by</strong>
                   <div className="nearby-filters">{[["airplane","Flight Programs"],["people","Mentors"],["cap","Scholarships"],["calendar","Events"],["spacecraft","NASA & STEM"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
-                  <p className="nearby-location-message">{locationMessage || `Showing ${nearFilter.toLowerCase()} within 250 miles of ${nearQuery || state}.`}</p>
+                  <p className="nearby-location-message" role="status">{locationMessage || (nearQuery || state ? `Showing verified local finders and directory records for ${nearQuery || state}.` : "Choose a state to find verified local resources.")}</p>
                 </aside>
-                <div className="gateway-map" aria-label={`Map of opportunities near ${nearQuery || state}`}>
-                  <img className="us-opportunity-map" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Blank_US_Map_%28states_only%29.svg" alt="United States opportunity map" />
-                  <button className="map-pin pin-one" aria-label="Flight program"><Icon name="airplane"/></button>
-                  <button className="map-pin pin-two" aria-label="Scholarship"><Icon name="cap"/></button>
-                  <button className="map-pin pin-three" aria-label="Mentor"><Icon name="people"/></button>
-                  <button className="map-pin pin-four" aria-label="Event"><Icon name="calendar"/></button>
-                  <div className="map-zoom"><button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button></div>
+                <div className="gateway-map accessible-location-map" aria-hidden="true">
+                  <img className="us-opportunity-map" src="/us-opportunity-map.svg" alt="" />
+                  <div className="map-accessible-note"><Icon name="path"/><strong>{nearQuery || state || "Your state"}</strong><span>Results are listed beside the map so every link works with a keyboard or screen reader.</span></div>
                 </div>
                 <aside className="nearby-results-panel">
-                  <div><strong>3 opportunities found</strong><span>Closest first</span></div>
-                  {recommendations.slice(0,3).map((item,index)=><article key={item.title}>
-                    <div className={`nearby-result-icon tone-${index}`}><Icon name={item.icon}/></div>
-                    <div><small>{nearFilter}</small><h3>{item.title}</h3><span>{8.4 + index*4.3} miles away</span><Link href={item.href}>View details →</Link></div>
-                    <SaveButton id={`opportunity:${item.title}`} label={item.title}/>
+                  <div><strong>{nearbyBusy ? "Searching..." : `${nearbyResources.length} verified resources`}</strong><span>Official sources</span></div>
+                  {!nearbyBusy && nearbyResources.length===0 && <p className="nearby-empty">Choose a state above. Exact chapters, squadrons, clubs, and programs can be added to this directory as they are verified.</p>}
+                  {nearbyResources.map((item)=><article key={item.id}>
+                    <div className="nearby-result-logo"><img src={`/organization-logos/${item.organization_slug === "civil-air-patrol" ? "civil-air-patrol" : "eaa"}.png`} alt=""/></div>
+                    <div><small>{item.location_type === "official_finder" ? "Official local finder" : item.location_type}</small><h3>{item.location_name}</h3><span>{item.description}</span><a href={item.official_url} target="_blank" rel="noreferrer">Open official finder ↗</a></div>
                   </article>)}
                   <Link className="nearby-view-all" href="/organizations">View all opportunities</Link>
                 </aside>
