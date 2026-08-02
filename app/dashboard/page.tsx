@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "../../lib/supabase/client";
 import { slugify } from "../content";
 import { Icon, PageShell } from "../ui";
+import { ScholarshipTracker } from "../components/ScholarshipTracker";
 
 type SavedItem = { item_id: string; item_label: string; created_at: string };
 type Profile = { display_name: string | null; age_range: string; state: string; interests: string[] };
@@ -35,9 +36,11 @@ export default function DashboardPage() {
     });
   }, []);
 
-  const scholarshipSaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("scholarship:")), [saved]);
-  const organizationSaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("organization:")), [saved]);
-  const opportunitySaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("opportunity:") || item.item_id.startsWith("career:")), [saved]);
+  const applicationProgress = useMemo(() => saved.filter((item) => item.item_id.startsWith("application:")), [saved]);
+  const savedItems = useMemo(() => saved.filter((item) => !item.item_id.startsWith("application:")), [saved]);
+  const scholarshipSaves = useMemo(() => savedItems.filter((item) => item.item_id.startsWith("scholarship:")), [savedItems]);
+  const organizationSaves = useMemo(() => savedItems.filter((item) => item.item_id.startsWith("organization:")), [savedItems]);
+  const opportunitySaves = useMemo(() => savedItems.filter((item) => item.item_id.startsWith("opportunity:") || item.item_id.startsWith("career:")), [savedItems]);
   const firstName = (profile?.display_name || accountName).trim().split(/\s+/)[0];
 
   function savedHref(itemId: string) {
@@ -68,7 +71,7 @@ export default function DashboardPage() {
             <div className="dashboard-profile-actions"><Link href="/explore">Edit My Answers</Link><button onClick={signOut}>Sign Out</button></div>
           </div>
           <div className="dashboard-stat-grid">
-            <article><Icon name="search"/><span>Saved matches</span><strong>{saved.length}</strong><small>Across your Gateway</small></article>
+            <article><Icon name="search"/><span>Saved matches</span><strong>{savedItems.length}</strong><small>Across your Gateway</small></article>
             <article><Icon name="cap"/><span>Scholarships</span><strong>{scholarshipSaves.length}</strong><small>Funding to review</small></article>
             <article><Icon name="globe"/><span>Organizations</span><strong>{organizationSaves.length}</strong><small>Communities saved</small></article>
             <article><Icon name="path"/><span>Opportunities</span><strong>{opportunitySaves.length}</strong><small>Possible next steps</small></article>
@@ -84,9 +87,17 @@ export default function DashboardPage() {
           </ol>
         </section>
 
+        <section className="dashboard-application-section">
+          <div className="dashboard-section-heading"><div><span>APPLICATION PROGRESS</span><h2>Keep every scholarship moving.</h2></div><Link href="/scholarships">Find scholarships →</Link></div>
+          {applicationProgress.length ? <div className="dashboard-application-list">{applicationProgress.map(item=>{
+            const title=item.item_id.replace(/^application:/,"");
+            return <ScholarshipTracker key={item.item_id} title={title} compact/>;
+          })}</div> : <div className="dashboard-empty-saves"><Icon name="document"/><div><h3>No applications started yet.</h3><p>Open a scholarship and choose Preparing when you are ready to begin.</p></div><Link href="/scholarships">Browse Scholarships →</Link></div>}
+        </section>
+
         <section className="dashboard-saved-section">
           <div className="dashboard-section-heading"><div><span>SAVED FOR LATER</span><h2>Your saved opportunities</h2></div><Link href="/scholarships">Browse more →</Link></div>
-          {saved.length ? <div className="dashboard-saved-grid">{saved.slice(0,8).map((item) => {
+          {savedItems.length ? <div className="dashboard-saved-grid">{savedItems.slice(0,8).map((item) => {
             const type = item.item_id.split(":")[0];
             return <Link key={item.item_id} href={savedHref(item.item_id)} aria-label={`Open ${item.item_label}`} style={{ display: "block", color: "inherit" }}>
               <article><div className="dashboard-saved-icon"><Icon name={type === "scholarship" ? "cap" : type === "organization" ? "globe" : "path"}/></div><small>{type}</small><h3>{item.item_label}</h3><span>Open saved item →</span></article>
