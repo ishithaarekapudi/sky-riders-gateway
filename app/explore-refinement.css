@@ -1,0 +1,55 @@
+/* Final polish for the location finder and personal roadmap on Explore. */
+.explore-nearby{border-color:#d7e2ed;border-radius:18px;background:#fff;box-shadow:0 18px 48px rgba(5,35,70,.1)}
+.nearby-heading{align-items:center;padding:30px 34px 25px;background:linear-gradient(105deg,#fff 0%,#f5f9fd 100%)}
+.nearby-heading h2{margin-top:9px;font-size:34px;letter-spacing:-.025em}
+.nearby-heading>small{padding:7px 12px;border:1px solid #d6e3ef;border-radius:999px;background:#fff;color:#345b7f;font-size:11px}
+.nearby-layout{grid-template-columns:225px minmax(410px,1fr) 292px;min-height:465px}
+.nearby-controls{padding:22px 18px;background:#f8fbfe}
+.nearby-controls>label{height:48px;border-radius:10px;box-shadow:0 3px 10px rgba(8,45,80,.04)}
+.nearby-location-button{min-height:47px;margin-bottom:22px;border-radius:10px;box-shadow:0 5px 14px rgba(15,112,231,.08)}
+.nearby-filters{gap:8px}
+.nearby-filters button{min-height:51px;border-radius:10px;font-size:9.5px;line-height:1.35;transition:border-color .18s ease,background .18s ease,transform .18s ease}
+.nearby-filters button:hover{transform:translateY(-1px);border-color:#8ebbea}
+.nearby-location-message{padding-top:18px;border-top:1px solid #dfe8f1}
+.gateway-map{min-height:465px;isolation:isolate;background:radial-gradient(circle at 55% 48%,rgba(102,172,235,.19),transparent 40%),linear-gradient(145deg,#f8fcff,#e3f0fb)}
+.gateway-map::before{inset:0;border:0;border-radius:0;transform:none;opacity:.42;background-image:linear-gradient(rgba(96,156,207,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(96,156,207,.12) 1px,transparent 1px);background-size:44px 44px}
+.gateway-map::after{inset:17% 7% 16%;border:2px dashed rgba(59,139,214,.28);border-radius:50%;transform:rotate(-8deg)}
+.map-landmass{inset:17% 8% 14%;opacity:1;background:linear-gradient(150deg,#dcedfa,#bcdcf3);clip-path:polygon(3% 25%,12% 16%,25% 12%,36% 16%,47% 14%,58% 20%,69% 16%,80% 21%,91% 18%,98% 30%,94% 40%,98% 50%,91% 57%,87% 69%,78% 69%,71% 79%,62% 75%,54% 88%,47% 80%,40% 91%,31% 79%,23% 82%,16% 70%,8% 64%,5% 50%);filter:drop-shadow(0 13px 18px rgba(49,106,158,.12))}
+.map-landmass::before{inset:8%;border:1px solid rgba(255,255,255,.72);border-radius:44%;background:radial-gradient(circle at 28% 43%,rgba(255,255,255,.75) 0 3px,transparent 4px),radial-gradient(circle at 63% 38%,rgba(255,255,255,.75) 0 3px,transparent 4px),radial-gradient(circle at 75% 66%,rgba(255,255,255,.75) 0 3px,transparent 4px)}
+.map-landmass span{padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.52);color:#5483ad;font-size:8px;letter-spacing:.09em}
+.map-pin{width:38px;height:44px;border-width:2px;box-shadow:0 7px 18px rgba(3,46,91,.25);transition:transform .18s ease,filter .18s ease}
+.map-pin:hover{transform:rotate(-45deg) scale(1.08);filter:brightness(1.05)}
+.map-pin .icon{width:18px}
+.map-zoom{top:15px;right:15px;border-radius:10px}
+.nearby-results-panel{padding:16px;background:#fbfdff}
+.nearby-results-panel>div:first-child{align-items:center;margin:2px 2px 13px}
+.nearby-results-panel article{grid-template-columns:66px 1fr;gap:12px;min-height:112px;padding:9px 34px 9px 9px;border-color:#d8e3ee;border-radius:12px;box-shadow:0 6px 16px rgba(5,42,78,.045);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.nearby-results-panel article:hover{transform:translateY(-2px);border-color:#9fc4e8;box-shadow:0 11px 23px rgba(5,42,78,.09)}
+.nearby-result-icon{position:relative;overflow:hidden;background:linear-gradient(rgba(7,70,132,.27),rgba(7,70,132,.4)),url('/hero-gateway-live.jpg') 48% 76%/cover;color:#fff}
+.nearby-result-icon.tone-1{background:linear-gradient(rgba(123,74,3,.15),rgba(123,74,3,.34)),url('/pathways-triptych.jpg') center/cover;color:#fff}
+.nearby-result-icon.tone-2{background:linear-gradient(rgba(52,30,118,.18),rgba(52,30,118,.42)),url('/gateway-homepage-clean.jpg') center/cover;color:#fff}
+.nearby-result-icon::after{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(1,22,48,.25));content:''}
+.nearby-result-icon .icon{z-index:1;width:28px;padding:6px;border-radius:50%;background:rgba(255,255,255,.9);color:#0f70e7;box-sizing:content-box}
+.nearby-result-icon.tone-1 .icon{color:#b66a0b}.nearby-result-icon.tone-2 .icon{color:#684cc2}
+.nearby-results-panel h3{margin:4px 0;font-size:12.5px;line-height:1.3}
+.nearby-view-all{min-height:43px;border-radius:10px;background:#f7fbff}
+.gateway-roadmap-builder{padding:36px 34px 32px;border-color:rgba(101,157,210,.45);background:linear-gradient(105deg,rgba(2,23,50,.97),rgba(4,45,87,.89)),url('/hero-gateway-live.jpg') center 75%/cover;color:#fff;box-shadow:0 22px 52px rgba(3,27,59,.2)}
+.roadmap-builder-heading{max-width:720px}
+.roadmap-builder-heading>span{color:#78b8ff}
+.roadmap-builder-heading h2{margin:9px 0 7px;color:#fff;font-size:35px;letter-spacing:-.025em}
+.roadmap-builder-heading p{color:#c8d9ea;font-size:13px}
+.roadmap-builder-layout{grid-template-columns:minmax(0,1fr) 270px;gap:22px;margin-top:27px}
+.roadmap-path{min-height:420px;align-items:center;padding:22px 0}
+.roadmap-path::before{left:7%;right:7%;top:50%;border-top-color:#72b5fa;opacity:.75}
+.roadmap-path article,.roadmap-path article:nth-child(n){min-height:180px;align-content:start;gap:8px;margin-bottom:0;padding:15px 12px;border:1px solid rgba(168,205,241,.2);border-radius:13px;background:rgba(255,255,255,.075);backdrop-filter:blur(7px);box-shadow:0 10px 25px rgba(0,10,28,.12)}
+.roadmap-path article:nth-child(1){transform:translateY(82px)}.roadmap-path article:nth-child(2){transform:translateY(42px)}.roadmap-path article:nth-child(3){transform:translateY(0)}.roadmap-path article:nth-child(4){transform:translateY(-42px)}.roadmap-path article:nth-child(5){transform:translateY(-82px)}
+.roadmap-node{width:54px;height:54px;border-color:rgba(177,210,241,.65);background:rgba(255,255,255,.96);color:#163e67;box-shadow:0 9px 22px rgba(0,15,36,.24)}
+.roadmap-node .icon{width:27px}
+.roadmap-path article.complete .roadmap-node{border-color:#68b1ff;background:#eaf5ff;box-shadow:0 0 0 5px rgba(75,163,255,.16)}
+.roadmap-path h3{color:#fff;font-size:12.5px;line-height:1.3}.roadmap-path p{margin:2px 0 6px;color:#bed0e2;font-size:9.5px}.roadmap-path button{color:#9bc9fa}.roadmap-path article.complete button{color:#78e0bc}
+.roadmap-side-panel{gap:11px}.roadmap-side-panel>div{padding:15px;border-color:rgba(170,203,232,.65);background:rgba(255,255,255,.96);box-shadow:0 9px 22px rgba(0,13,31,.13);color:var(--ink)}
+.roadmap-month li{background:#edf5fc}
+.roadmap-score>b{width:61px;height:61px}
+.roadmap-continue{margin-top:20px;padding-inline:25px;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 25px rgba(0,18,48,.28)}
+@media(max-width:1100px){.nearby-layout{grid-template-columns:220px 1fr}.nearby-results-panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid #d2e0ed;border-left:0}.nearby-results-panel>div:first-child,.nearby-view-all{grid-column:1/-1}.roadmap-builder-layout{grid-template-columns:1fr}.roadmap-side-panel{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.nearby-heading{align-items:flex-start;padding:24px 20px}.nearby-heading h2{font-size:29px}.nearby-heading>small{align-self:flex-start}.nearby-layout{grid-template-columns:1fr}.nearby-controls{border-right:0;border-bottom:1px solid #d2e0ed}.gateway-map{min-height:370px}.nearby-results-panel{display:block}.nearby-results-panel article{margin-bottom:10px}.gateway-roadmap-builder{padding:28px 18px}.roadmap-builder-heading h2{font-size:30px}.roadmap-path{grid-template-columns:1fr;min-height:0;gap:10px}.roadmap-path::before{left:40px;right:auto;top:5%;bottom:5%;width:2px;height:auto;border-top:0;border-left:2px dashed #72b5fa;transform:none}.roadmap-path article,.roadmap-path article:nth-child(n){grid-template-columns:58px 1fr;min-height:0;transform:none;padding:13px}.roadmap-side-panel{grid-template-columns:1fr}.roadmap-continue{width:100%;justify-content:center}}
