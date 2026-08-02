@@ -5,10 +5,6 @@ import { SaveButton } from "./SaveButton";
 
 function sourceLogo(source: string) {
   const value = source.toLowerCase();
-  if (value.includes("young eagles")) return "/organization-logos/young-eagles.png";
-  if (value.includes("eaa")) return "/organization-logos/eaa.png";
-  if (value.includes("civil air patrol")) return "/organization-logos/civil-air-patrol.png";
-  if (value.includes("women in aviation")) return "/organization-logos/women-in-aviation.png";
   if (value.includes("nasa")) return "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg";
   return null;
 }
