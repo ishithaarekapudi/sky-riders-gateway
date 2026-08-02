@@ -415,13 +415,17 @@ export default function ExplorePage() {
                 </aside>
                 <div className="gateway-map accessible-location-map" aria-hidden="true">
                   <img className="us-opportunity-map" src="/us-opportunity-map.svg" alt="" />
-                  <div className="map-accessible-note"><Icon name="path"/><strong>{nearQuery || state || "Your state"}</strong><span>Results are listed beside the map so every link works with a keyboard or screen reader.</span></div>
+                  <span className="live-map-pin pin-west"><Icon name="plane"/></span>
+                  <span className="live-map-pin pin-central"><Icon name="cap"/></span>
+                  <span className="live-map-pin pin-south"><Icon name="people"/></span>
+                  <span className="live-map-pin pin-east"><Icon name="calendar"/></span>
+                  <div className="map-accessible-note"><Icon name="path"/><strong>{nearQuery || state || "Your state"}</strong><span>Verified programs and official local finders appear beside the map.</span></div>
                 </div>
                 <aside className="nearby-results-panel">
                   <div><strong>{nearbyBusy ? "Searching..." : `${nearbyResources.length} verified resources`}</strong><span>Official sources</span></div>
                   {!nearbyBusy && nearbyResources.length===0 && <p className="nearby-empty">Choose a state above. Exact chapters, squadrons, clubs, and programs can be added to this directory as they are verified.</p>}
                   {nearbyResources.map((item)=><article key={item.id}>
-                    <div className="nearby-result-logo"><Icon name={item.organization_slug === "civil-air-patrol" ? "people" : "plane"}/><strong>{item.organization_slug === "civil-air-patrol" ? "CAP" : "EAA"}</strong></div>
+                    <div className={`nearby-result-logo ${item.organization_slug === "civil-air-patrol" ? "cap-mark" : "eaa-mark"}`}><Icon name={item.organization_slug === "civil-air-patrol" ? "people" : "plane"}/><strong>{item.organization_slug === "civil-air-patrol" ? "CAP" : "EAA"}</strong></div>
                     <div><small>{item.location_type === "official_finder" ? "Official local finder" : item.location_type}</small><h3>{item.location_name}</h3><span>{item.description}</span><a href={item.official_url} target="_blank" rel="noreferrer">Open official finder ↗</a></div>
                   </article>)}
                   <Link className="nearby-view-all" href="/organizations">View all opportunities</Link>
