@@ -855,6 +855,11 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .live-location-map { position: relative; min-height: 520px; padding: 0; background: #dcecf7; }
 .live-location-map::before,.live-location-map::after { display: none; }
 .live-location-map iframe { display: block; width: 100%; height: 100%; min-height: 520px; border: 0; filter: saturate(.78) contrast(.98) brightness(1.03); }
+.directory-map-pins { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.directory-map-pin { position: absolute; display: grid; place-items: center; width: 34px; height: 34px; border: 3px solid #fff; border-radius: 50% 50% 50% 8px; background: #1477e8; color: #fff; box-shadow: 0 7px 16px rgba(3,42,82,.28); transform: translate(-50%,-85%) rotate(-45deg); }
+.directory-map-pin b { font-size: 10px; transform: rotate(45deg); }
+.directory-map-pin.pin-squadron { background: #744ed5; }.directory-map-pin.pin-flight_school { background: #0d76dc; }.directory-map-pin.pin-chapter { background: #13a493; }.directory-map-pin.pin-program { background: #efa11c; }
+.directory-map-zoom { top: 18px; right: 18px; }.directory-map-zoom button { cursor: pointer; }
 .live-map-badge { position: absolute; z-index: 2; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 9px; max-width: 250px; padding: 11px 14px; border: 1px solid rgba(183,210,234,.9); border-radius: 11px; background: rgba(255,255,255,.95); box-shadow: 0 10px 25px rgba(5,42,78,.15); backdrop-filter: blur(8px); }
 .live-map-badge .icon { width: 25px; color: #0f70e7; }.live-map-badge div { display: grid; }.live-map-badge strong { overflow: hidden; max-width: 180px; color: #092a4d; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }.live-map-badge span { color: #617b93; font-size: 9px; }
 .open-large-map { position: absolute; z-index: 2; right: 14px; top: 14px; padding: 8px 11px; border: 1px solid #c7dbea; border-radius: 8px; background: rgba(255,255,255,.95); color: #0d67c5; font-size: 9px; font-weight: 650; box-shadow: 0 7px 18px rgba(4,35,69,.1); }
@@ -887,6 +892,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .nearby-results-panel article > .heart-save-button { position: absolute; top: 8px; right: 8px; }
 .nearby-result-icon { display: grid; place-items: center; border-radius: 8px; background: #d6ebfd; color: #0d65bd; }.nearby-result-icon.tone-1 { background: #fff0da; color: #b36b14; }.nearby-result-icon.tone-2 { background: #e9e2ff; color: #6850b3; }.nearby-result-icon .icon { width: 33px; }
 .nearby-results-panel article small { color: #0f70e7; font-size: 8px; }.nearby-results-panel h3 { margin: 3px 0; font-size: 12px; }.nearby-results-panel article span { display: block; color: #63798e; font-size: 9px; }.nearby-results-panel article a { display: inline-block; margin-top: 8px; color: #0f70e7; font-size: 9px; font-weight: 700; }
+.nearby-results-panel article p { margin: 5px 0 0; color: #587086; font-size: 8px; line-height: 1.45; }
 .nearby-view-all { display: grid; place-items: center; min-height: 42px; border: 1px solid #0f70e7; border-radius: 8px; color: #0f70e7; font-size: 10px; font-weight: 700; }
 .gateway-roadmap-builder { position: relative; overflow: hidden; margin-top: 46px; padding: 39px 34px 30px; border: 1px solid #c9dbea; border-radius: 20px; background: linear-gradient(180deg,rgba(249,252,255,.97) 0 44%,rgba(238,246,253,.78)),url('/hero-gateway-live.jpg') center 85%/cover; box-shadow: 0 17px 38px rgba(5,36,70,.1); }
 .roadmap-builder-layout { display: grid; grid-template-columns: 1fr 290px; gap: 24px; margin-top: 30px; }
