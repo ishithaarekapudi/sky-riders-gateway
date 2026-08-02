@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "../../lib/supabase/client";
+import { slugify } from "../content";
 import { Icon, PageShell } from "../ui";
 
 type SavedItem = { item_id: string; item_label: string; created_at: string };
@@ -38,6 +39,15 @@ export default function DashboardPage() {
   const organizationSaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("organization:")), [saved]);
   const opportunitySaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("opportunity:") || item.item_id.startsWith("career:")), [saved]);
   const firstName = (profile?.display_name || accountName).trim().split(/\s+/)[0];
+
+  function savedHref(itemId: string) {
+    const [type, ...rest] = itemId.split(":");
+    const slug = slugify(rest.join(":"));
+    if (type === "scholarship" && slug) return `/scholarships/${slug}`;
+    if (type === "career" && slug) return `/careers/${slug}`;
+    if (type === "organization" && slug) return `/organizations/${slug}`;
+    return "/explore";
+  }
 
   async function signOut() {
     await createClient().auth.signOut();
@@ -78,7 +88,9 @@ export default function DashboardPage() {
           <div className="dashboard-section-heading"><div><span>SAVED FOR LATER</span><h2>Your saved opportunities</h2></div><Link href="/scholarships">Browse more →</Link></div>
           {saved.length ? <div className="dashboard-saved-grid">{saved.slice(0,8).map((item) => {
             const type = item.item_id.split(":")[0];
-            return <article key={item.item_id}><div className="dashboard-saved-icon"><Icon name={type === "scholarship" ? "cap" : type === "organization" ? "globe" : "path"}/></div><small>{type}</small><h3>{item.item_label}</h3><span>Saved to your Gateway</span></article>;
+            return <Link key={item.item_id} href={savedHref(item.item_id)} aria-label={`Open ${item.item_label}`} style={{ display: "block", color: "inherit" }}>
+              <article><div className="dashboard-saved-icon"><Icon name={type === "scholarship" ? "cap" : type === "organization" ? "globe" : "path"}/></div><small>{type}</small><h3>{item.item_label}</h3><span>Open saved item →</span></article>
+            </Link>;
           })}</div> : <div className="dashboard-empty-saves"><Icon name="heart"/><div><h3>Your saved list is ready.</h3><p>Tap the heart on any scholarship, career, organization, or opportunity to keep it here.</p></div><Link href="/scholarships">Explore Scholarships →</Link></div>}
         </section>
 
