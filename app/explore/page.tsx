@@ -142,6 +142,14 @@ function matchCategory(item: (typeof opportunities)[number]) {
   return "Opportunity";
 }
 
+function matchLogo(title: string) {
+  if (/NASA/.test(title)) return "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg";
+  if (/EAA|Young Eagles/.test(title)) return "/organization-logos/young-eagles.png";
+  if (/Civil Air Patrol/.test(title)) return "/organization-logos/civil-air-patrol.png";
+  if (/Girls in Aviation/.test(title)) return "/organization-logos/women-in-aviation.png";
+  return "";
+}
+
 export default function ExplorePage() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -377,14 +385,15 @@ export default function ExplorePage() {
                 {visibleMatches.map((item) => {
                   const category=matchCategory(item);
                   const matchedInterests=item.interests.filter((interest)=>selectedInterests.includes(interest));
+                  const logo=matchLogo(item.title);
                   return <article className={`gateway-match-card editorial-match-card category-${category.toLowerCase().replace(" ","-")}`} key={item.title}>
-                    <div className="compact-match-icon"><Icon name={item.icon}/></div>
+                    <div className="compact-match-icon option-c-brand">{logo ? <img src={logo} alt=""/> : <Icon name={item.icon}/>}</div>
                     <div className="editorial-match-copy">
                       <small>{category}</small>
                       <h3>{item.title}</h3>
+                      <div className="option-c-meta"><span>{matchedInterests[0] || item.interests[0]}</span><span>Ages {age}</span></div>
                       <p>{item.text}</p>
-                      <div className="why-match"><strong>Why it matches</strong><span>{matchedInterests.length ? `You selected ${matchedInterests.join(" and ")}.` : "A useful adjacent path to explore."}</span><span>Designed for the {age} stage.</span></div>
-                      <div className="editorial-match-actions"><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View Details →</Link></div>
+                      <div className="option-c-fit"><Icon name="star"/><span><strong>Strong fit</strong> · {matchedInterests.length ? `You selected ${matchedInterests.join(" and ")}.` : "This adds a useful direction to your Gateway."}</span><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View details →</Link></div>
                     </div>
                     <SaveButton id={`opportunity:${item.title}`} label={item.title} />
                   </article>;
