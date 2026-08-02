@@ -144,9 +144,6 @@ function matchCategory(item: (typeof opportunities)[number]) {
 
 function matchLogo(title: string) {
   if (/NASA/.test(title)) return "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg";
-  if (/EAA|Young Eagles/.test(title)) return "/organization-logos/young-eagles.png";
-  if (/Civil Air Patrol/.test(title)) return "/organization-logos/civil-air-patrol.png";
-  if (/Girls in Aviation/.test(title)) return "/organization-logos/women-in-aviation.png";
   return "";
 }
 
@@ -424,7 +421,7 @@ export default function ExplorePage() {
                   <div><strong>{nearbyBusy ? "Searching..." : `${nearbyResources.length} verified resources`}</strong><span>Official sources</span></div>
                   {!nearbyBusy && nearbyResources.length===0 && <p className="nearby-empty">Choose a state above. Exact chapters, squadrons, clubs, and programs can be added to this directory as they are verified.</p>}
                   {nearbyResources.map((item)=><article key={item.id}>
-                    <div className="nearby-result-logo"><img src={`/organization-logos/${item.organization_slug === "civil-air-patrol" ? "civil-air-patrol" : "eaa"}.png`} alt=""/></div>
+                    <div className="nearby-result-logo"><Icon name={item.organization_slug === "civil-air-patrol" ? "people" : "plane"}/><strong>{item.organization_slug === "civil-air-patrol" ? "CAP" : "EAA"}</strong></div>
                     <div><small>{item.location_type === "official_finder" ? "Official local finder" : item.location_type}</small><h3>{item.location_name}</h3><span>{item.description}</span><a href={item.official_url} target="_blank" rel="noreferrer">Open official finder ↗</a></div>
                   </article>)}
                   <Link className="nearby-view-all" href="/organizations">View all opportunities</Link>
