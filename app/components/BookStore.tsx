@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const price = 24.99;
+const prices = { Paperback: 14.99, Digital: 1.99 } as const;
 
 export function BookStore() {
   const [format, setFormat] = useState<"Paperback" | "Digital">("Paperback");
@@ -16,7 +16,11 @@ export function BookStore() {
     return () => { document.body.style.overflow = ""; };
   }, [cartOpen]);
 
+  const price = prices[format];
   const total = (price * quantity).toFixed(2);
+  const checkoutLink = format === "Paperback"
+    ? process.env.NEXT_PUBLIC_STRIPE_PRINT_LINK
+    : process.env.NEXT_PUBLIC_STRIPE_DIGITAL_LINK;
   const addToCart = () => {
     setInCart(true);
     setCartOpen(true);
@@ -47,7 +51,7 @@ export function BookStore() {
           <button className={format === "Digital" ? "active" : ""} onClick={() => setFormat("Digital")}>Digital</button>
         </div>
         <strong className="book-price">${price.toFixed(2)}</strong>
-        <small>Price can be updated before launch</small>
+        <small>{format === "Paperback" ? "Print edition" : "Digital edition"}</small>
         <label>Quantity</label>
         <div className="quantity-stepper">
           <button onClick={() => setQuantity(value => Math.max(1, value - 1))} aria-label="Decrease quantity">−</button>
@@ -75,7 +79,7 @@ export function BookStore() {
         <button className="promo-toggle" onClick={() => setPromoOpen(value => !value)}>Enter a promo code <span>{promoOpen ? "−" : "+"}</span></button>
         {promoOpen && <div className="promo-entry"><input placeholder="Promo code"/><button>Apply</button></div>}
         <div className="cart-summary"><span>Subtotal <b>${total}</b></span><span>Shipping <b>Calculated at checkout</b></span><strong>Estimated total <b>${total}</b></strong></div>
-        <button className="checkout-button" onClick={() => alert("Secure checkout will be connected when your payment provider is ready.")}>Secure Checkout</button>
+        {checkoutLink ? <a className="checkout-button" href={checkoutLink} target="_blank" rel="noreferrer">Secure Checkout ↗</a> : <button className="checkout-button" onClick={() => alert("Add the Stripe payment link for this format in Vercel to activate checkout.")}>Secure Checkout</button>}
         <button className="continue-button" onClick={() => setCartOpen(false)}>Continue Shopping</button>
         <small>🔒 Secure checkout</small>
       </div>}
