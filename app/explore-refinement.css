@@ -53,3 +53,44 @@
 .roadmap-continue{margin-top:20px;padding-inline:25px;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 25px rgba(0,18,48,.28)}
 @media(max-width:1100px){.nearby-layout{grid-template-columns:220px 1fr}.nearby-results-panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid #d2e0ed;border-left:0}.nearby-results-panel>div:first-child,.nearby-view-all{grid-column:1/-1}.roadmap-builder-layout{grid-template-columns:1fr}.roadmap-side-panel{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:680px){.nearby-heading{align-items:flex-start;padding:24px 20px}.nearby-heading h2{font-size:29px}.nearby-heading>small{align-self:flex-start}.nearby-layout{grid-template-columns:1fr}.nearby-controls{border-right:0;border-bottom:1px solid #d2e0ed}.gateway-map{min-height:370px}.nearby-results-panel{display:block}.nearby-results-panel article{margin-bottom:10px}.gateway-roadmap-builder{padding:28px 18px}.roadmap-builder-heading h2{font-size:30px}.roadmap-path{grid-template-columns:1fr;min-height:0;gap:10px}.roadmap-path::before{left:40px;right:auto;top:5%;bottom:5%;width:2px;height:auto;border-top:0;border-left:2px dashed #72b5fa;transform:none}.roadmap-path article,.roadmap-path article:nth-child(n){grid-template-columns:58px 1fr;min-height:0;transform:none;padding:13px}.roadmap-side-panel{grid-template-columns:1fr}.roadmap-continue{width:100%;justify-content:center}}
+
+/* Reference-faithful Explore map */
+.explore-nearby{border:1px solid #c8dced;border-radius:20px;background:#f5faff;box-shadow:0 16px 40px rgba(13,61,105,.09)}
+.nearby-heading{padding:32px 36px 24px;background:linear-gradient(110deg,#fff 0%,#f2f8fd 100%)}
+.nearby-heading>div>span{font-weight:650;letter-spacing:.22em}
+.nearby-heading h2{font-size:35px;font-weight:650}
+.nearby-layout{grid-template-columns:235px minmax(470px,1fr) 315px;min-height:520px}
+.nearby-controls{padding:27px 22px;background:rgba(255,255,255,.9)}
+.nearby-controls>label,.nearby-location-button,.nearby-filters button{border-color:#c8d9e9;background:#fff}
+.nearby-location-button{font-size:11px}
+.nearby-filters button{min-height:52px;padding:9px 11px;font-size:10px}
+.gateway-map{display:grid;place-items:center;min-height:520px;background:radial-gradient(circle at 53% 48%,rgba(122,188,243,.18),transparent 50%),linear-gradient(180deg,#f4faff,#e8f4fd)}
+.gateway-map::before{opacity:.16;background-size:60px 60px}
+.gateway-map::after{inset:23% 9% 17%;border:2px dashed rgba(87,159,226,.3);transform:rotate(-6deg)}
+.us-opportunity-map{position:relative;z-index:1;width:88%;height:auto;opacity:.38;mix-blend-mode:multiply;filter:sepia(.15) saturate(1.4) hue-rotate(168deg) drop-shadow(0 14px 22px rgba(50,112,166,.1))}
+.pin-one{left:25%;top:39%}.pin-two{left:53%;top:45%}.pin-three{right:24%;top:55%}.pin-four{right:13%;bottom:18%}
+.nearby-results-panel{padding:20px 17px;background:rgba(255,255,255,.94)}
+.nearby-results-panel article{grid-template-columns:80px 1fr;min-height:126px;padding:10px 38px 10px 10px;border-radius:11px;background:#fff;box-shadow:none}
+.nearby-result-icon{border-radius:9px}
+.nearby-results-panel article small{font-size:8px}.nearby-results-panel h3{font-size:13px}.nearby-results-panel article span,.nearby-results-panel article a{font-size:9px}
+
+/* Reference-faithful light runway roadmap */
+.gateway-roadmap-builder{min-height:670px;padding:38px 34px 34px;border:1px solid #c9dbea;border-radius:20px;background:linear-gradient(180deg,rgba(248,252,255,.97) 0%,rgba(242,248,253,.88) 52%,rgba(225,235,245,.72) 100%),url('/hero-gateway-live.jpg') center 78%/cover;color:var(--ink);box-shadow:0 18px 42px rgba(5,36,70,.1)}
+.roadmap-builder-heading>span{color:#0f70e7;font-weight:650;letter-spacing:.22em}
+.roadmap-builder-heading h2{color:var(--ink);font-size:36px;font-weight:650}
+.roadmap-builder-heading p{color:#627991;font-size:13px}
+.roadmap-builder-layout{grid-template-columns:minmax(0,1fr) 285px;gap:25px;margin-top:36px}
+.roadmap-path{min-height:455px;align-items:end;padding:0 0 32px}
+.roadmap-path::before{left:5%;right:5%;top:47%;border-top:3px dashed #78b1eb;transform:rotate(-9deg);opacity:.82}
+.roadmap-path article,.roadmap-path article:nth-child(n){min-height:250px;align-content:end;gap:12px;margin-bottom:0;padding:0 10px;border:0;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;transform:none}
+.roadmap-path article:nth-child(2){margin-bottom:45px}.roadmap-path article:nth-child(3){margin-bottom:90px}.roadmap-path article:nth-child(4){margin-bottom:135px}.roadmap-path article:nth-child(5){margin-bottom:180px}
+.roadmap-node{width:64px;height:64px;border:2px solid #bdd4e9;background:rgba(255,255,255,.96);color:#173b62;box-shadow:0 8px 20px rgba(4,32,67,.1)}
+.roadmap-node .icon{width:31px}
+.roadmap-path article.complete .roadmap-node{border-color:#0f70e7;background:#fff;color:#0f70e7;box-shadow:0 0 0 6px rgba(15,112,231,.12)}
+.roadmap-path h3{color:var(--ink);font-size:13px;line-height:1.35}.roadmap-path p{margin:5px 0 9px;color:#526b84;font-size:10px;line-height:1.45}.roadmap-path button{color:#59748f;font-size:9px}.roadmap-path article.complete button{color:#169665}
+.roadmap-side-panel{gap:12px}.roadmap-side-panel>div{padding:17px;border:1px solid #cfdeeb;border-radius:12px;background:rgba(255,255,255,.95);box-shadow:0 8px 19px rgba(5,35,69,.06);color:var(--ink)}
+.roadmap-month li{padding:9px;background:#f1f6fb}.roadmap-saved>span{padding:10px 0}
+.roadmap-score>b{width:68px;height:68px}
+.roadmap-continue{position:absolute;left:34px;bottom:30px;margin:0;padding:15px 28px;border:0;box-shadow:0 9px 24px rgba(15,112,231,.2)}
+@media(max-width:1100px){.nearby-layout{grid-template-columns:220px 1fr}.nearby-results-panel{grid-column:1/-1}.gateway-roadmap-builder{min-height:auto}.roadmap-builder-layout{grid-template-columns:1fr}.roadmap-side-panel{grid-template-columns:repeat(3,1fr)}.roadmap-continue{position:static;margin:20px auto 0}.roadmap-path article,.roadmap-path article:nth-child(n){min-height:215px}}
+@media(max-width:680px){.nearby-layout{grid-template-columns:1fr}.gateway-map{min-height:390px}.us-opportunity-map{width:96%}.roadmap-path{grid-template-columns:1fr;min-height:0;gap:10px}.roadmap-path::before{left:40px;right:auto;top:5%;bottom:5%;width:2px;height:auto;border-top:0;border-left:2px dashed #78b1eb;transform:none}.roadmap-path article,.roadmap-path article:nth-child(n){grid-template-columns:58px 1fr;min-height:0;margin:0;padding:13px;border:1px solid rgba(190,211,231,.75);border-radius:12px;background:rgba(255,255,255,.78)}.roadmap-side-panel{grid-template-columns:1fr}}
