@@ -140,6 +140,10 @@ export default function ExplorePage() {
   const [submitted, setSubmitted] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [nearQuery, setNearQuery] = useState("");
+  const [nearFilter, setNearFilter] = useState("Flight Programs");
+  const [locationMessage, setLocationMessage] = useState("");
+  const [roadmapDone, setRoadmapDone] = useState<number[]>([1]);
   const resultsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -180,6 +184,19 @@ export default function ExplorePage() {
     setSelectedInterests((current) =>
       current.includes(label) ? current.filter((item) => item !== label) : [...current, label],
     );
+  }
+
+  function useLocation() {
+    if (!navigator.geolocation) { setLocationMessage("Location is not available in this browser."); return; }
+    setLocationMessage("Finding opportunities near you...");
+    navigator.geolocation.getCurrentPosition(
+      () => setLocationMessage("Location added. Showing opportunities within 250 miles."),
+      () => setLocationMessage("Enter your city, state, or ZIP code instead."),
+    );
+  }
+
+  function toggleRoadmap(step: number) {
+    setRoadmapDone((current) => current.includes(step) ? current.filter((item) => item !== step) : [...current, step]);
   }
 
   async function buildRoadmap() {
@@ -284,6 +301,12 @@ export default function ExplorePage() {
           </div>
         ) : (
           <section className="explore-results gateway-dashboard" ref={resultsRef}>
+            <div className="explore-journey-steps" aria-label="Your Gateway journey">
+              <div className="complete"><b>1</b><span>About You</span></div>
+              <div className="complete"><b>2</b><span>Your Matches</span></div>
+              <div><b>3</b><span>Near You</span></div>
+              <div><b>4</b><span>Build Your Plan</span></div>
+            </div>
             <div className="gateway-dashboard-hero">
               <div className="gateway-dashboard-topline">
                 <span>YOUR PERSONALIZED GATEWAY</span>
@@ -335,19 +358,53 @@ export default function ExplorePage() {
               <Link className="primary-button" href="/account">Create My Account →</Link>
             </div>}
 
-            <div className="gateway-flight-plan">
-              <div className="gateway-flight-plan-copy">
-                <span>YOUR FLIGHT PLAN</span>
-                <h2>A clear path from interest to action.</h2>
-                <p>Your recommendations are the starting point. Follow these steps at your own pace and keep what matters close.</p>
+            <section className="explore-nearby">
+              <div className="nearby-heading"><div><span>NEAR YOU</span><h2>Opportunities Near You</h2><p>Discover programs, events, mentors, and resources in your area.</p></div><small>{state || "Choose a location"}</small></div>
+              <div className="nearby-layout">
+                <aside className="nearby-controls">
+                  <label><Icon name="search"/><input value={nearQuery} onChange={(event) => setNearQuery(event.target.value)} placeholder="Enter city, state, or ZIP code"/></label>
+                  <button type="button" className="nearby-location-button" onClick={useLocation}><Icon name="path"/> Use My Location</button>
+                  <strong>Filter by</strong>
+                  <div className="nearby-filters">{[["airplane","Flight Programs"],["people","Mentors"],["cap","Scholarships"],["calendar","Events"],["spacecraft","NASA & STEM"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
+                  <p className="nearby-location-message">{locationMessage || `Showing ${nearFilter.toLowerCase()} within 250 miles of ${nearQuery || state}.`}</p>
+                </aside>
+                <div className="gateway-map" aria-label={`Map of opportunities near ${nearQuery || state}`}>
+                  <div className="map-landmass"><span>WEST</span><span>MIDWEST</span><span>EAST</span><span>SOUTH</span></div>
+                  <button className="map-pin pin-one" aria-label="Flight program"><Icon name="airplane"/></button>
+                  <button className="map-pin pin-two" aria-label="Scholarship"><Icon name="cap"/></button>
+                  <button className="map-pin pin-three" aria-label="Mentor"><Icon name="people"/></button>
+                  <button className="map-pin pin-four" aria-label="Event"><Icon name="calendar"/></button>
+                  <div className="map-zoom"><button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button></div>
+                </div>
+                <aside className="nearby-results-panel">
+                  <div><strong>3 opportunities found</strong><span>Closest first</span></div>
+                  {recommendations.slice(0,3).map((item,index)=><article key={item.title}>
+                    <div className={`nearby-result-icon tone-${index}`}><Icon name={item.icon}/></div>
+                    <div><small>{nearFilter}</small><h3>{item.title}</h3><span>{8.4 + index*4.3} miles away</span><Link href={item.href}>View details →</Link></div>
+                    <SaveButton id={`opportunity:${item.title}`} label={item.title}/>
+                  </article>)}
+                  <Link className="nearby-view-all" href="/organizations">View all opportunities</Link>
+                </aside>
               </div>
-              <ol>
-                <li><b>1</b><div><strong>Open a top match</strong><span>Learn what it offers and who it is for.</span></div></li>
-                <li><b>2</b><div><strong>Compare opportunities</strong><span>Look at programs, careers, and scholarships.</span></div></li>
-                <li><b>3</b><div><strong>Heart your favorites</strong><span>Keep promising options in one place.</span></div></li>
-                <li><b>4</b><div><strong>Take one real next step</strong><span>Apply, attend, connect, or learn more.</span></div></li>
-              </ol>
-            </div>
+            </section>
+
+            <section className="gateway-roadmap-builder">
+              <div className="roadmap-builder-heading"><span>BUILD YOUR PLAN</span><h2>Your Gateway Roadmap</h2><p>Turn your interests into clear, manageable next steps.</p></div>
+              <div className="roadmap-builder-layout">
+                <div className="roadmap-path">
+                  {[ ["search","Explore Your Options","Review programs and opportunities that match your interests."], ["people","Connect With a Community","Find mentors, peers, and organizations that support you."], ["document","Apply for Opportunities","Prepare for programs, events, and scholarships."], ["cap","Build Your Skills","Take courses, train, and earn useful credentials."], ["airplane","Take Flight","Track your progress and achieve your goals."] ].map(([icon,title,text],index)=>{
+                    const step=index+1; const done=roadmapDone.includes(step);
+                    return <article className={done?"complete":""} key={title}><div className="roadmap-node"><Icon name={icon}/></div><div><h3>{step}. {title}</h3><p>{text}</p><button type="button" onClick={()=>toggleRoadmap(step)}>{done?"✓ Completed":"○ Mark complete"}</button></div></article>;
+                  })}
+                </div>
+                <aside className="roadmap-side-panel">
+                  <div className="roadmap-month"><div><Icon name="calendar"/><strong>This Month</strong></div><ul><li>Explore one top match <span>This week</span></li><li>Save a scholarship <span>Next</span></li><li>Connect with a mentor <span>This month</span></li></ul></div>
+                  <div className="roadmap-saved"><div><Icon name="heart"/><strong>Saved Opportunities</strong></div>{recommendations.slice(0,3).map(item=><span key={item.title}>{item.title}</span>)}</div>
+                  <div className="roadmap-score"><div><span>Roadmap</span><strong>{Math.round(roadmapDone.length/5*100)}%</strong><small>{roadmapDone.length} of 5 steps completed</small></div><b>{Math.round(roadmapDone.length/5*100)}%</b></div>
+                </aside>
+              </div>
+              <Link className="primary-button roadmap-continue" href={userId?"/dashboard":"/account?next=/dashboard"}><Icon name="airplane"/> Continue My Journey</Link>
+            </section>
           </section>
         )}
       </section>
