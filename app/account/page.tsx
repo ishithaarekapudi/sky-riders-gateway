@@ -145,7 +145,14 @@ export default function AccountPage() {
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
         </label>}
         {mode !== "forgot" && <label>{mode === "update-password" ? "New password" : "Password"}
-          <input name="password" type="password" required minLength={8} placeholder="At least 8 characters" autoComplete={mode === "login" ? "current-password" : "new-password"} />
+          <input
+            name="password"
+            type="password"
+            required
+            minLength={mode === "login" ? 6 : 8}
+            placeholder={mode === "login" ? "Enter your password" : "At least 8 characters"}
+            autoComplete={mode === "login" ? "current-password" : "new-password"}
+          />
         </label>}
         <button className="primary-button wide" type="submit" disabled={busy}>
           {busy ? "Please wait..." : mode === "login" ? "Log In →" : mode === "signup" ? "Create Account →" : mode === "forgot" ? "Send Reset Link →" : "Update Password →"}
