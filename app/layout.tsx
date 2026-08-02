@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./explore-refinement.css";
 
 export const metadata: Metadata = {
   title: { default: "Sky Riders Gateway", template: "%s | Sky Riders Gateway" },
