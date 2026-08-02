@@ -837,12 +837,15 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .nearby-controls > label { display: flex; align-items: center; gap: 8px; height: 45px; padding: 0 11px; border: 1px solid #cbd9e7; border-radius: 8px; background: white; }
 .nearby-controls label .icon { width: 18px; color: #5d7895; }
 .nearby-controls input,.nearby-controls select { width: 100%; border: 0; outline: 0; background: transparent; font: inherit; font-size: 11px; }
-.accessible-location-map { display: grid; place-items: center; padding: 30px; }
-.accessible-location-map .us-opportunity-map { opacity: .28; }
-.map-accessible-note { position: relative; z-index: 2; width: min(360px,85%); display: grid; place-items: center; gap: 8px; padding: 25px; border: 1px solid #bfd9f1; border-radius: 15px; background: rgba(255,255,255,.92); color: #315775; text-align: center; box-shadow: 0 15px 35px rgba(16,63,105,.09); }
+.accessible-location-map { position: relative; display: grid; place-items: center; overflow: hidden; padding: 24px; }
+.accessible-location-map .us-opportunity-map { width: 94%; height: auto; opacity: .82; filter: drop-shadow(0 14px 22px rgba(55,113,166,.13)); }
+.live-map-pin { position: absolute; z-index: 2; display: grid; place-items: center; width: 38px; height: 38px; border: 4px solid #fff; border-radius: 50% 50% 50% 8px; background: #1477e8; color: #fff; box-shadow: 0 8px 18px rgba(4,49,98,.25); transform: rotate(-45deg); }
+.live-map-pin .icon { width: 18px; transform: rotate(45deg); }
+.live-map-pin.pin-west { left: 24%; top: 45%; }.live-map-pin.pin-central { left: 50%; top: 47%; background: #f2a31b; }.live-map-pin.pin-south { left: 67%; top: 62%; background: #7655d7; }.live-map-pin.pin-east { left: 79%; top: 43%; background: #12a9a3; }
+.map-accessible-note { position: absolute; z-index: 3; left: 24px; bottom: 20px; width: min(245px,52%); display: grid; grid-template-columns: 25px 1fr; align-items: center; gap: 2px 9px; padding: 13px 15px; border: 1px solid #bfd9f1; border-radius: 12px; background: rgba(255,255,255,.94); color: #315775; text-align: left; box-shadow: 0 12px 28px rgba(16,63,105,.11); backdrop-filter: blur(8px); }
 .map-accessible-note .icon { width: 34px; color: #0f70e7; }
-.map-accessible-note strong { color: var(--ink); font-size: 20px; }
-.map-accessible-note span { font-size: 11px; line-height: 1.5; }
+.map-accessible-note strong { color: var(--ink); font-size: 15px; }
+.map-accessible-note span { grid-column: 2; font-size: 9px; line-height: 1.4; }
 .nearby-empty { padding: 20px 8px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .nearby-result-logo { display: grid; place-items: center; padding: 8px; border-radius: 8px; background: #eef6fd; }
 .nearby-result-logo img { width: 100%; max-height: 55px; object-fit: contain; }
@@ -1149,9 +1152,11 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .scholarship-wordmark .icon { width: 42px; height: 42px; color: #0d67c5; margin: 0 auto 4px; }
 .scholarship-wordmark strong { color: #072546; font-size: clamp(25px,2vw,34px); letter-spacing: .08em; line-height: 1; }
 .scholarship-wordmark span { font-size: 9px; letter-spacing: .16em; color: #66809a; }
-.nearby-result-logo { display: grid; place-items: center; align-content: center; gap: 6px; color: #0d67c5; }
+.nearby-result-logo { display: grid; place-items: center; align-content: center; gap: 5px; border-radius: 9px; background: linear-gradient(145deg,#1678e8,#0758b8); color: #fff; }
+.nearby-result-logo.eaa-mark { background: linear-gradient(145deg,#0b70cc,#06488c); }
+.nearby-result-logo.cap-mark { background: linear-gradient(145deg,#184b89,#0a2e60); }
 .nearby-result-logo .icon { width: 34px; height: 34px; }
-.nearby-result-logo strong { font-size: 12px; letter-spacing: .12em; }
+.nearby-result-logo strong { color: #fff; font-size: 12px; letter-spacing: .14em; }
 .org-grid h3, .org-grid p { margin-top: 0; }
 .org-grid p, .career-grid p, .collection-grid p { color: var(--muted); line-height: 1.55; }
 .tag-row span { display: inline-block; margin-right: 5px; padding: 5px 9px; border-radius: 20px; background: var(--sky); font-size: 11px; }
