@@ -14,13 +14,9 @@ const sponsor = (title:string) => /EAA|Ray Aviation|Harrison Ford|Adapt to Fly/.
   : /Soaring Society|Kolstad|Purduski/.test(title) ? "SSA"
   : /Women’s Soaring/.test(title) ? "WSPA"
   : /Astronaut/.test(title) ? "ASF" : "FLIGHT FUNDING";
-const sponsorLogo = (title:string) => /EAA|Ray Aviation|Harrison Ford|Adapt to Fly/.test(title)
-  ? "/organization-logos/eaa.png"
-  : /Civil Air Patrol/.test(title)
-    ? "/organization-logos/civil-air-patrol.png"
-    : /Women in Aviation/.test(title)
-      ? "/organization-logos/women-in-aviation.png"
-    : "";
+const sponsorMark = (title:string) => /Civil Air Patrol/.test(title) ? "CAP"
+  : /Women in Aviation/.test(title) ? "WAI"
+  : sponsor(title);
 
 export default function Scholarships() {
   const [query, setQuery] = useState("");
@@ -51,7 +47,7 @@ export default function Scholarships() {
       <div className="directory-heading"><div><span className="eyebrow">SCHOLARSHIP DIRECTORY</span><h2>Opportunities to move you forward</h2></div><span>{visible.length} scholarships found</span></div>
       <p className="data-note">*Awards, eligibility, and deadlines can change. Always verify the current application cycle on the sponsoring organization’s official website before applying.</p>
       <div className="scholar-grid runway-scholar-grid">{visible.map(([,title,amount,tags])=><article className="scholar-card runway-scholar-card directory-profile-card" key={title}>
-        <div className="scholar-sponsor directory-profile-brand">{sponsorLogo(title) ? <img src={sponsorLogo(title)} alt={`${sponsor(title)} logo`} /> : <div className="organization-wordmark"><span>SCHOLARSHIP SPONSOR</span><strong>{sponsor(title)}</strong></div>}</div>
+        <div className="scholar-sponsor directory-profile-brand"><div className="organization-wordmark scholarship-wordmark" aria-label={`${sponsor(title)} scholarship sponsor`}><Icon name="school"/><strong>{sponsorMark(title)}</strong><span>SCHOLARSHIP SPONSOR</span></div></div>
         <div className="scholar-copy directory-profile-copy"><span className="scholar-type">{sponsor(title)}</span><h3><Link href={`/scholarships/${slugify(title)}`}>{title}</Link></h3><p className="scholarship-card-intro">A funding opportunity for students building an aviation or aerospace pathway.</p><div className="runway-scholar-facts"><div><span>Award</span><strong>{amount}</strong></div><div><span>Eligibility</span><b>{tags}</b></div><div><span>Application</span><b>Verify the current official cycle</b></div></div><div className="card-actions"><Link href={`/scholarships/${slugify(title)}`}>View scholarship →</Link></div></div>
         <SaveButton id={`scholarship:${title}`} label={title}/>
       </article>)}</div>
