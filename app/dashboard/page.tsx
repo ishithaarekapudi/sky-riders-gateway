@@ -83,7 +83,7 @@ export default function DashboardPage() {
         <section className="dashboard-progress-panel">
           <div className="dashboard-progress-score"><strong>{profile ? "75%" : "25%"}</strong><span>Gateway profile strength</span></div>
           <div><span>YOUR NEXT STEPS</span><h2>Keep your journey moving.</h2><ul><li className={profile ? "complete" : ""}>Complete your Explore profile</li><li className={scholarshipSaves.length ? "complete" : ""}>Save a scholarship</li><li className={organizationSaves.length ? "complete" : ""}>Connect with an organization</li><li>Prepare your first application</li></ul></div>
-          <Link className="ghost-button" href="/explore">Continue My Gateway →</Link>
+          <Link className="small-button" href="/explore">Continue My Gateway →</Link>
         </section>
         <small className="dashboard-email">Signed in as {email}</small>
       </>}
