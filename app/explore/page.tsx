@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { SaveButton } from "../components/SaveButton";
 import { Icon, PageShell } from "../ui";
 import { createClient } from "../../lib/supabase/client";
-import { verifiedLocations } from "./verified-locations";
+import { nationwideDirectories, verifiedLocations } from "./verified-locations";
 
 const interests = [
   ["airplane", "Pilot"],
@@ -203,7 +203,7 @@ export default function ExplorePage() {
     createClient().from("location_directory").select("*").eq("state", chosenState).eq("published", true)
       .order("organization_name").then(({ data }) => {
         const database=(data || []) as NearbyResource[];
-        const starter=verifiedLocations.filter((item)=>item.state===chosenState);
+        const starter=[...verifiedLocations.filter((item)=>item.state===chosenState),...nationwideDirectories(chosenState)];
         setNearbyResources([...starter,...database.filter((item)=>!starter.some((entry)=>entry.location_name===item.location_name))]);
         setNearbyBusy(false);
       });
@@ -244,9 +244,9 @@ export default function ExplorePage() {
 
   const nearbyVisible = useMemo(() => {
     const categoryMatch=(item:NearbyResource)=>{
-      if(nearFilter==="Squadrons") return item.location_type==="squadron";
-      if(nearFilter==="Flight Schools") return item.location_type==="flight_school";
-      if(nearFilter==="Youth Programs") return item.location_type==="chapter" || item.location_type==="program";
+      if(nearFilter==="Squadrons") return item.location_type==="squadron" || item.organization_slug==="civil-air-patrol";
+      if(nearFilter==="Flight Schools") return item.location_type==="flight_school" || item.organization_slug==="federal-aviation-administration";
+      if(nearFilter==="Youth Programs") return item.location_type==="chapter" || item.location_type==="program" || item.organization_slug==="experimental-aircraft-association";
       return true;
     };
     const radius=Number(radiusMiles);
@@ -494,7 +494,7 @@ export default function ExplorePage() {
                   <button type="button" className="nearby-location-button" onClick={useLocation}><Icon name="path"/> Use My Location</button>
                   <strong>Filter by</strong>
                   <div className="nearby-filters">{[["map","All Locations"],["people","Squadrons"],["airplane","Flight Schools"],["spacecraft","Youth Programs"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
-                  <p className="nearby-location-message" role="status">{locationMessage || (nearQuery || state ? `Showing verified local finders and directory records for ${nearQuery || state}.` : "Choose a state to find verified local resources.")}</p>
+                  <p className="nearby-location-message" role="status">{locationMessage || (nearQuery || state ? `Showing exact verified locations plus official statewide directories for ${nearQuery || state}.` : "Choose a state to find verified local resources.")}</p>
                 </aside>
                 <div className="gateway-map live-location-map">
                   <iframe title={`Opportunities map for ${locationInput || nearQuery || state || "the United States"}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>
@@ -509,7 +509,7 @@ export default function ExplorePage() {
                   <a className="open-large-map" href={`https://www.openstreetmap.org/?mlat=${mapCenter.lat}&mlon=${mapCenter.lon}#map=9/${mapCenter.lat}/${mapCenter.lon}`} target="_blank" rel="noreferrer">Open larger map ↗</a>
                 </div>
                 <aside className="nearby-results-panel">
-                  <div><strong>{nearbyBusy ? "Searching..." : `${nearbyVisible.length} verified locations`}</strong><span>Nearest first</span></div>
+                  <div><strong>{nearbyBusy ? "Searching..." : `${nearbyVisible.length} trusted results`}</strong><span>Exact pins + official finders</span></div>
                   {!nearbyBusy && nearbyVisible.length===0 && <p className="nearby-empty">No verified locations match this radius and filter yet. Increase the distance or choose All Locations.</p>}
                   {nearbyVisible.map((item,index)=><article key={item.id}>
                     <div className={`nearby-result-logo ${item.organization_slug === "civil-air-patrol" ? "cap-mark" : "eaa-mark"}`}><Icon name={item.organization_slug === "civil-air-patrol" ? "people" : "plane"}/><strong>{item.organization_slug === "civil-air-patrol" ? "CAP" : "EAA"}</strong></div>
