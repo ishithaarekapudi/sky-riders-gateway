@@ -84,6 +84,12 @@ export type Database = {
         Update: { display_name?: string | null; age_range?: string; state?: string; interests?: string[]; current_stage?: string; updated_at?: string };
         Relationships: [];
       };
+      location_directory: {
+        Row: { id: string; organization_slug: string; organization_name: string; location_name: string; location_type: string; city: string | null; state: string; postal_code: string | null; latitude: number | null; longitude: number | null; official_url: string; source_url: string; description: string; published: boolean; created_at: string; updated_at: string };
+        Insert: { id?: string; organization_slug: string; organization_name: string; location_name: string; location_type: string; city?: string | null; state: string; postal_code?: string | null; latitude?: number | null; longitude?: number | null; official_url: string; source_url: string; description: string; published?: boolean };
+        Update: Partial<Database["public"]["Tables"]["location_directory"]["Insert"]>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
