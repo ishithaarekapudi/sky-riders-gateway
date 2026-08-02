@@ -11,6 +11,7 @@ type Profile = { display_name: string | null; age_range: string; state: string; 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
+  const [accountName, setAccountName] = useState("");
   const [profile, setProfile] = useState<Profile | null>(null);
   const [saved, setSaved] = useState<SavedItem[]>([]);
   const [signedIn, setSignedIn] = useState(false);
@@ -22,6 +23,7 @@ export default function DashboardPage() {
       if (!user) { setLoading(false); return; }
       setSignedIn(true);
       setEmail(user.email || "");
+      setAccountName(String(user.user_metadata?.display_name || user.user_metadata?.full_name || ""));
       const [profileResult, savesResult] = await Promise.all([
         supabase.from("explore_profiles").select("display_name,age_range,state,interests").eq("user_id", user.id).maybeSingle(),
         supabase.from("saved_items").select("item_id,item_label,created_at").eq("user_id", user.id).order("created_at", { ascending: false }),
@@ -35,7 +37,7 @@ export default function DashboardPage() {
   const scholarshipSaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("scholarship:")), [saved]);
   const organizationSaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("organization:")), [saved]);
   const opportunitySaves = useMemo(() => saved.filter((item) => item.item_id.startsWith("opportunity:") || item.item_id.startsWith("career:")), [saved]);
-  const firstName = profile?.display_name?.trim().split(/\s+/)[0];
+  const firstName = (profile?.display_name || accountName).trim().split(/\s+/)[0];
 
   async function signOut() {
     await createClient().auth.signOut();
