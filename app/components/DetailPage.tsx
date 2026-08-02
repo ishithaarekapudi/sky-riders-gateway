@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { DetailInfo } from "../detail-content";
 import { Icon, PageShell } from "../ui";
 import { SaveButton } from "./SaveButton";
+import { ScholarshipTracker } from "./ScholarshipTracker";
 
 function sourceLogo(source: string) {
   const value = source.toLowerCase();
@@ -38,6 +39,7 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref 
         <ul className="detail-list">{info.highlights.map(item=><li key={item}><Icon name="plane"/><span>{item}</span></li>)}</ul>
       </article>
       <aside className="detail-sidebar">
+        {kind === "Scholarship" && <ScholarshipTracker title={title}/>} 
         <div className="detail-source">{logo ? <img className="detail-source-logo" src={logo} alt={`${info.sourceLabel} logo`}/> : <Icon name="document"/>}<span>Information checked against</span><strong>{info.sourceLabel}</strong><a href={info.officialUrl} target="_blank" rel="noreferrer">Open official source ↗</a></div>
         <div className="detail-next"><h3>Your Next Steps</h3><ol>{info.nextSteps.map(step=><li key={step}>{step}</li>)}</ol><Link className="small-button" href="/explore">Add to My Roadmap →</Link></div>
       </aside>
