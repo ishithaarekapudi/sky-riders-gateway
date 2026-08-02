@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SaveButton } from "../components/SaveButton";
 import { Icon, PageShell } from "../ui";
@@ -157,6 +158,10 @@ export default function ExplorePage() {
   const [userId, setUserId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [nearQuery, setNearQuery] = useState("");
+  const [locationInput, setLocationInput] = useState("");
+  const [radiusMiles, setRadiusMiles] = useState("100");
+  const [mapCenter, setMapCenter] = useState({ lat: 39.5, lon: -98.35 });
+  const [mapSearching, setMapSearching] = useState(false);
   const [nearFilter, setNearFilter] = useState("Flight Programs");
   const [locationMessage, setLocationMessage] = useState("");
   const [nearbyResources, setNearbyResources] = useState<NearbyResource[]>([]);
@@ -217,6 +222,14 @@ export default function ExplorePage() {
     return [...relevant, ...remaining].slice(0, userId ? pool.length : 6);
   }, [matchFilter, recommendations, selectedInterests, userId]);
 
+  const mapUrl = useMemo(() => {
+    const miles = Number(radiusMiles);
+    const latDelta = Math.max(0.18, miles / 69);
+    const lonDelta = Math.max(0.25, miles / (69 * Math.max(.35, Math.cos(mapCenter.lat * Math.PI / 180))));
+    const bbox = [mapCenter.lon-lonDelta,mapCenter.lat-latDelta,mapCenter.lon+lonDelta,mapCenter.lat+latDelta].join(",");
+    return `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${mapCenter.lat}%2C${mapCenter.lon}`;
+  }, [mapCenter, radiusMiles]);
+
   function toggleInterest(label: string) {
     setSubmitted(false);
     setSelectedInterests((current) =>
@@ -224,11 +237,41 @@ export default function ExplorePage() {
     );
   }
 
+  async function searchLocation(event?: FormEvent) {
+    event?.preventDefault();
+    const query = locationInput.trim() || state;
+    if (!query) { setLocationMessage("Enter an address, city, state, or ZIP code."); return; }
+    setMapSearching(true);
+    setLocationMessage("Finding your location...");
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&countrycodes=us&q=${encodeURIComponent(query)}`);
+      const results = await response.json();
+      if (!results[0]) throw new Error("No location found");
+      const foundState = results[0].address?.state || (states.includes(query) ? query : state);
+      setMapCenter({ lat:Number(results[0].lat), lon:Number(results[0].lon) });
+      if (foundState && states.includes(foundState)) setNearQuery(foundState);
+      setLocationMessage(`Showing verified resources within ${radiusMiles} miles of ${results[0].display_name.split(",").slice(0,2).join(",")}.`);
+    } catch {
+      setLocationMessage("We could not find that location. Try a city, state, or ZIP code.");
+    }
+    setMapSearching(false);
+  }
+
   function useLocation() {
     if (!navigator.geolocation) { setLocationMessage("Location is not available in this browser."); return; }
     setLocationMessage("Finding opportunities near you...");
     navigator.geolocation.getCurrentPosition(
-      () => setLocationMessage("Location added. Showing opportunities within 250 miles."),
+      async ({ coords }) => {
+        setMapCenter({ lat:coords.latitude, lon:coords.longitude });
+        try {
+          const response=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.latitude}&lon=${coords.longitude}`);
+          const result=await response.json();
+          const foundState=result.address?.state;
+          if(foundState && states.includes(foundState)) setNearQuery(foundState);
+          setLocationInput([result.address?.city || result.address?.town || result.address?.village,foundState].filter(Boolean).join(", "));
+        } catch {}
+        setLocationMessage(`Showing verified resources within ${radiusMiles} miles of your location.`);
+      },
       () => setLocationMessage("Enter your city, state, or ZIP code instead."),
     );
   }
@@ -407,19 +450,20 @@ export default function ExplorePage() {
               <div className="nearby-heading"><div><span>NEAR YOU</span><h2>Opportunities Near You</h2><p>Discover programs, events, mentors, and resources in your area.</p></div><small>{state || "Choose a location"}</small></div>
               <div className="nearby-layout">
                 <aside className="nearby-controls">
-                  <label><Icon name="search"/><select aria-label="Choose a state" value={nearQuery || state} onChange={(event) => setNearQuery(event.target.value)}><option value="">Choose a state</option>{states.filter(item=>item!=="Outside the United States").map(item=><option key={item}>{item}</option>)}</select></label>
+                  <form className="nearby-search-form" onSubmit={searchLocation}>
+                    <label><Icon name="search"/><input aria-label="Address, city, state, or ZIP code" value={locationInput} onChange={(event)=>setLocationInput(event.target.value)} placeholder="City, state, or ZIP code"/></label>
+                    <label className="nearby-radius"><span>Search radius</span><select aria-label="Search radius" value={radiusMiles} onChange={(event)=>setRadiusMiles(event.target.value)}><option value="25">25 miles</option><option value="50">50 miles</option><option value="100">100 miles</option><option value="250">250 miles</option><option value="500">500 miles</option></select></label>
+                    <button type="submit" disabled={mapSearching}>{mapSearching ? "Searching..." : "Search Area"}</button>
+                  </form>
                   <button type="button" className="nearby-location-button" onClick={useLocation}><Icon name="path"/> Use My Location</button>
                   <strong>Filter by</strong>
                   <div className="nearby-filters">{[["airplane","Flight Programs"],["people","Mentors"],["cap","Scholarships"],["calendar","Events"],["spacecraft","NASA & STEM"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
                   <p className="nearby-location-message" role="status">{locationMessage || (nearQuery || state ? `Showing verified local finders and directory records for ${nearQuery || state}.` : "Choose a state to find verified local resources.")}</p>
                 </aside>
-                <div className="gateway-map accessible-location-map" aria-hidden="true">
-                  <img className="us-opportunity-map" src="/us-opportunity-map.svg" alt="" />
-                  <span className="live-map-pin pin-west"><Icon name="plane"/></span>
-                  <span className="live-map-pin pin-central"><Icon name="cap"/></span>
-                  <span className="live-map-pin pin-south"><Icon name="people"/></span>
-                  <span className="live-map-pin pin-east"><Icon name="calendar"/></span>
-                  <div className="map-accessible-note"><Icon name="path"/><strong>{nearQuery || state || "Your state"}</strong><span>Verified programs and official local finders appear beside the map.</span></div>
+                <div className="gateway-map live-location-map">
+                  <iframe title={`Interactive opportunities map for ${locationInput || nearQuery || state || "the United States"}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>
+                  <div className="live-map-badge"><Icon name="path"/><div><strong>{locationInput || nearQuery || state || "United States"}</strong><span>{radiusMiles}-mile search radius</span></div></div>
+                  <a className="open-large-map" href={`https://www.openstreetmap.org/?mlat=${mapCenter.lat}&mlon=${mapCenter.lon}#map=9/${mapCenter.lat}/${mapCenter.lon}`} target="_blank" rel="noreferrer">Open larger map ↗</a>
                 </div>
                 <aside className="nearby-results-panel">
                   <div><strong>{nearbyBusy ? "Searching..." : `${nearbyResources.length} verified resources`}</strong><span>Official sources</span></div>
