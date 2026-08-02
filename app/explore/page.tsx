@@ -131,6 +131,12 @@ const opportunities = [
   },
 ];
 
+function matchCategory(item: (typeof opportunities)[number]) {
+  if (item.href.startsWith("/scholarships")) return "Scholarship";
+  if (item.href.startsWith("/careers")) return "Career Path";
+  return "Opportunity";
+}
+
 export default function ExplorePage() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -144,6 +150,7 @@ export default function ExplorePage() {
   const [nearFilter, setNearFilter] = useState("Flight Programs");
   const [locationMessage, setLocationMessage] = useState("");
   const [roadmapDone, setRoadmapDone] = useState<number[]>([1]);
+  const [matchFilter, setMatchFilter] = useState("All Matches");
   const resultsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -178,6 +185,14 @@ export default function ExplorePage() {
   const matchedCount = recommendations.filter((item) =>
     item.interests.some((interest) => selectedInterests.includes(interest)),
   ).length;
+  const visibleMatches = useMemo(() => {
+    if (matchFilter === "All Matches") return recommendations;
+    const category = matchFilter === "Scholarships" ? "Scholarship" : matchFilter === "Careers" ? "Career Path" : "Opportunity";
+    const pool = opportunities.filter((item) => matchCategory(item) === category);
+    const relevant = pool.filter((item) => item.interests.some((interest) => selectedInterests.includes(interest)));
+    const remaining = pool.filter((item) => !relevant.includes(item));
+    return [...relevant, ...remaining].slice(0, userId ? pool.length : 6);
+  }, [matchFilter, recommendations, selectedInterests, userId]);
 
   function toggleInterest(label: string) {
     setSubmitted(false);
@@ -337,19 +352,28 @@ export default function ExplorePage() {
                 <div><span>RECOMMENDED FOR YOU</span><h2>Your strongest matches</h2></div>
                 <small>{userId ? "Your complete personalized list" : "A preview of your personalized list"}</small>
               </div>
-              <div className="gateway-match-grid">
-                {recommendations.map((item, index) => (
-                  <article className="gateway-match-card" key={item.title}>
-                    <div className={`gateway-match-art tone-${index % 4}`}><Icon name={item.icon} /></div>
-                    <div>
+              <div className="match-category-tabs" aria-label="Filter personalized matches">
+                {["All Matches","Scholarships","Careers","Opportunities"].map((label)=><button type="button" className={matchFilter===label?"active":""} onClick={()=>setMatchFilter(label)} key={label}>{label}<span>{label==="All Matches"?recommendations.length:opportunities.filter(item=>matchCategory(item)===(label==="Scholarships"?"Scholarship":label==="Careers"?"Career Path":"Opportunity")).length}</span></button>)}
+              </div>
+              <div className="gateway-match-grid editorial-match-grid">
+                {visibleMatches.map((item, index) => {
+                  const category=matchCategory(item);
+                  const score=Math.max(78,94-index*2);
+                  return <article className={`gateway-match-card editorial-match-card category-${category.toLowerCase().replace(" ","-")}`} key={item.title}>
+                    <div className="editorial-match-photo">
+                      <span className="match-type-badge">{category}</span>
+                      <b>{score}% match</b>
+                    </div>
+                    <div className="editorial-match-copy">
                       <small>{item.interests.find((interest) => selectedInterests.includes(interest)) || "Explore a new direction"}</small>
                       <h3>{item.title}</h3>
+                      <div className="match-quick-facts"><span><Icon name="path"/> {category === "Scholarship" ? "Funding support" : "Multiple locations"}</span><span><Icon name="user"/> {age}</span></div>
                       <p>{item.text}</p>
-                      <Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View opportunity →</Link>
+                      <div className="editorial-match-actions"><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View Details →</Link><span>Strong Match</span></div>
                     </div>
                     <SaveButton id={`opportunity:${item.title}`} label={item.title} />
-                  </article>
-                ))}
+                  </article>;
+                })}
               </div>
             </div>
 
