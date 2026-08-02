@@ -67,7 +67,7 @@
 .gateway-map{display:grid;place-items:center;min-height:520px;background:radial-gradient(circle at 53% 48%,rgba(122,188,243,.18),transparent 50%),linear-gradient(180deg,#f4faff,#e8f4fd)}
 .gateway-map::before{opacity:.16;background-size:60px 60px}
 .gateway-map::after{inset:23% 9% 17%;border:2px dashed rgba(87,159,226,.3);transform:rotate(-6deg)}
-.us-opportunity-map{position:relative;z-index:1;width:88%;height:auto;opacity:.38;mix-blend-mode:multiply;filter:sepia(.15) saturate(1.4) hue-rotate(168deg) drop-shadow(0 14px 22px rgba(50,112,166,.1))}
+.us-opportunity-map{position:relative;z-index:1;width:88%;height:auto;opacity:.92;filter:drop-shadow(0 14px 22px rgba(50,112,166,.1))}
 .pin-one{left:25%;top:39%}.pin-two{left:53%;top:45%}.pin-three{right:24%;top:55%}.pin-four{right:13%;bottom:18%}
 .nearby-results-panel{padding:20px 17px;background:rgba(255,255,255,.94)}
 .nearby-results-panel article{grid-template-columns:80px 1fr;min-height:126px;padding:10px 38px 10px 10px;border-radius:11px;background:#fff;box-shadow:none}
@@ -92,9 +92,9 @@
 .roadmap-month li{padding:9px;background:#f1f6fb}.roadmap-saved>span{padding:10px 0}
 .roadmap-score>b{width:68px;height:68px}
 .roadmap-continue{position:absolute;left:34px;bottom:30px;margin:0;padding:15px 28px;border:0;box-shadow:0 9px 24px rgba(15,112,231,.2)}
+
 @media(max-width:1100px){.nearby-layout{grid-template-columns:220px 1fr}.nearby-results-panel{grid-column:1/-1}.gateway-roadmap-builder{min-height:auto}.roadmap-builder-layout{grid-template-columns:1fr}.roadmap-side-panel{grid-template-columns:repeat(3,1fr)}.roadmap-continue{position:static;margin:20px auto 0}.roadmap-path article,.roadmap-path article:nth-child(n){min-height:215px}}
 @media(max-width:680px){.nearby-layout{grid-template-columns:1fr}.gateway-map{min-height:390px}.us-opportunity-map{width:96%}.roadmap-path{grid-template-columns:1fr;min-height:0;gap:10px}.roadmap-path::before{left:40px;right:auto;top:5%;bottom:5%;width:2px;height:auto;border-top:0;border-left:2px dashed #78b1eb;transform:none}.roadmap-path article,.roadmap-path article:nth-child(n){grid-template-columns:58px 1fr;min-height:0;margin:0;padding:13px;border:1px solid rgba(190,211,231,.75);border-radius:12px;background:rgba(255,255,255,.78)}.roadmap-side-panel{grid-template-columns:1fr}}
-
 
 /* Compact, polished Explore journey */
 .explore-form-panel{width:min(1080px,100%);padding:40px clamp(28px,4vw,54px) 46px}
@@ -139,3 +139,24 @@
 .nearby-layout{grid-template-columns:215px minmax(400px,1fr) 285px;min-height:430px}.nearby-controls{padding:20px 17px}.gateway-map{min-height:430px}.nearby-results-panel{padding:14px}.nearby-results-panel article{grid-template-columns:66px 1fr;min-height:105px}.nearby-result-icon .icon{width:23px}
 .gateway-roadmap-builder{min-height:570px;margin-top:34px;padding:29px 28px 28px}.roadmap-builder-heading h2{font-size:30px}.roadmap-builder-layout{grid-template-columns:minmax(0,1fr) 255px;margin-top:25px}.roadmap-path{min-height:385px}.roadmap-path article,.roadmap-path article:nth-child(n){min-height:210px}.roadmap-path article:nth-child(2){margin-bottom:35px}.roadmap-path article:nth-child(3){margin-bottom:70px}.roadmap-path article:nth-child(4){margin-bottom:105px}.roadmap-path article:nth-child(5){margin-bottom:140px}.roadmap-node{width:54px;height:54px}.roadmap-node .icon{width:26px}.roadmap-continue{left:28px;bottom:24px;padding:12px 21px;font-size:11px}
 @media(max-width:680px){.explore-form-panel{padding:30px 18px 38px}.explore-form-progress{margin-bottom:26px}.explore-step-card{padding:20px 16px}.interest-choice-group{padding:16px!important}.interest-tile-grid{grid-template-columns:repeat(2,1fr)}.gateway-dashboard{padding:26px 14px 40px}.explore-journey-steps{grid-template-columns:1fr 1fr;gap:11px}.explore-journey-steps::before{display:none}.gateway-dashboard-welcome{grid-template-columns:1fr}.gateway-stat-grid{grid-template-columns:1fr 1fr}.gateway-stat-grid article{border-bottom:1px solid rgba(255,255,255,.13)}.editorial-match-grid{grid-template-columns:1fr}.nearby-layout{grid-template-columns:1fr}.gateway-roadmap-builder{min-height:auto}}
+
+/* Refined interest selection: quieter, more compact, and aligned with Gateway. */
+.explore-builder.showing-form{background:linear-gradient(180deg,#f4f8fc 0%,#edf4fb 100%)}
+.explore-form-panel{border:1px solid #d9e5f0;border-radius:18px;box-shadow:0 18px 46px rgba(5,35,74,.08)}
+.explore-section-heading h2{font-weight:620;letter-spacing:-.015em}
+.explore-profile-summary{max-width:760px;padding:12px 15px;border-color:#d8e3ed;background:#f8fbfe;box-shadow:none}
+.explore-profile-summary span{font-weight:620}
+.explore-profile-summary button{padding:7px 10px;border-radius:7px;background:#edf5fd;font-weight:620}
+.interest-choice-group.explore-interests-step{max-width:760px;padding:24px!important;border-color:#d8e3ed!important;border-radius:14px;background:#fff;box-shadow:0 9px 25px rgba(5,35,74,.055)}
+.interest-choice-group.explore-interests-step legend{padding:0 8px;color:#173654;font-size:16px;font-weight:620}
+.interest-choice-group.explore-interests-step legend small{font-size:11px;font-weight:450}
+.explore-interests-step .interest-tile-grid{gap:11px}
+.explore-interests-step .interest-tile-grid button{min-height:88px;gap:6px;padding:10px 28px 10px 10px;border-color:#dce5ee;border-radius:10px;box-shadow:0 3px 10px rgba(5,35,74,.035)}
+.explore-interests-step .interest-tile-grid button:hover{transform:translateY(-2px);border-color:#8dbbea;box-shadow:0 8px 18px rgba(15,91,164,.09)}
+.explore-interests-step .interest-tile-grid button.selected{border-color:#3989df;background:#f0f7ff;box-shadow:inset 0 0 0 1px #3989df}
+.explore-interests-step .interest-tile-grid .icon{width:28px;height:28px}
+.explore-interests-step .interest-tile-grid button span{font-size:11px;font-weight:620;line-height:1.2}
+.explore-step-actions{max-width:760px;grid-template-columns:120px minmax(250px,330px);margin-top:18px}
+.explore-back-button{min-height:44px;padding:10px 15px;border:1px solid #ccdae8;border-radius:8px;background:#fff;font-weight:620}
+.explore-step-actions .primary-button{min-height:48px;padding:12px 22px;font-size:14px;font-weight:620;letter-spacing:.015em}
+@media(max-width:680px){.explore-form-panel{border-radius:0}.explore-profile-summary{gap:6px}.interest-choice-group.explore-interests-step{padding:17px!important}.explore-interests-step .interest-tile-grid{gap:8px}.explore-interests-step .interest-tile-grid button{min-height:82px;padding-right:24px}.explore-step-actions{grid-template-columns:1fr}.explore-step-actions .primary-button{grid-row:1}.explore-back-button{width:100%}}
