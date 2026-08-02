@@ -158,6 +158,14 @@ function matchLogo(title: string) {
   return "";
 }
 
+function directoryBrand(item: NearbyResource) {
+  if (item.organization_slug === "civil-air-patrol") return { short:"CAP", icon:"people", tone:"cap-mark", name:"Civil Air Patrol" };
+  if (item.organization_slug === "federal-aviation-administration") return { short:"FAA", icon:"airplane", tone:"faa-mark", name:"Federal Aviation Administration" };
+  if (item.organization_slug === "experimental-aircraft-association") return { short:"EAA", icon:"airplane", tone:"eaa-mark", name:"Experimental Aircraft Association" };
+  if (item.location_type === "flight_school") return { short:"FLY", icon:"airplane", tone:"school-mark", name:item.organization_name };
+  return { short:"STEM", icon:"spacecraft", tone:"program-mark", name:item.organization_name };
+}
+
 export default function ExplorePage() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -511,10 +519,10 @@ export default function ExplorePage() {
                 <aside className="nearby-results-panel">
                   <div><strong>{nearbyBusy ? "Searching..." : `${nearbyVisible.length} trusted results`}</strong><span>Exact pins + official finders</span></div>
                   {!nearbyBusy && nearbyVisible.length===0 && <p className="nearby-empty">No verified locations match this radius and filter yet. Increase the distance or choose All Locations.</p>}
-                  {nearbyVisible.map((item,index)=><article key={item.id}>
-                    <div className={`nearby-result-logo ${item.organization_slug === "civil-air-patrol" ? "cap-mark" : "eaa-mark"}`}><Icon name={item.organization_slug === "civil-air-patrol" ? "people" : "plane"}/><strong>{item.organization_slug === "civil-air-patrol" ? "CAP" : "EAA"}</strong></div>
-                    <div><small>{index+1} · {item.location_type.replaceAll("_"," ")}</small><h3>{item.location_name}</h3><span>{item.city}, {item.state}{Number.isFinite(item.distance)?` · ${item.distance.toFixed(1)} miles`:""}</span><p>{item.description}</p><a href={item.official_url} target="_blank" rel="noreferrer">View official details ↗</a></div>
-                  </article>)}
+                  {nearbyVisible.map((item,index)=>{ const brand=directoryBrand(item); return <article key={item.id}>
+                    <div className={`nearby-result-logo ${brand.tone}`}><Icon name={brand.icon}/><strong>{brand.short}</strong></div>
+                    <div className="nearby-result-copy"><div className="nearby-result-topline"><small>{item.location_type === "official_finder" ? "STATEWIDE DIRECTORY" : `MAP PIN ${index+1}`}</small><b>{brand.name}</b></div><h3>{item.location_name}</h3><span><Icon name="path"/>{item.city}, {item.state}{Number.isFinite(item.distance)?` · ${item.distance.toFixed(1)} miles`:""}</span><p>{item.description}</p><a href={item.official_url} target="_blank" rel="noreferrer">Open official resource <b>↗</b></a></div>
+                  </article>;})}
                   <Link className="nearby-view-all" href="/organizations">View all opportunities</Link>
                 </aside>
               </div>
