@@ -27,6 +27,7 @@ export default function AccountPage() {
   const [messageType, setMessageType] = useState<"info" | "error" | "success">("info");
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function AccountPage() {
 
     const form = new FormData(event.currentTarget);
     const submittedEmail = String(form.get("email") || email).trim();
+    const submittedName = String(form.get("name") || name).trim();
     const password = String(form.get("password") || "");
     const supabase = createClient();
     const next = safeNext();
@@ -96,7 +98,10 @@ export default function AccountPage() {
     const { data, error } = await supabase.auth.signUp({
       email: submittedEmail,
       password,
-      options: { emailRedirectTo: callback },
+      options: {
+        emailRedirectTo: callback,
+        data: { display_name: submittedName, full_name: submittedName },
+      },
     });
     setBusy(false);
     if (error) showMessage(friendlyError(error.message), "error");
@@ -132,7 +137,7 @@ export default function AccountPage() {
     <div className="account-brand"><BrandLogo /></div>
     <section className="account-panel">
       <span className="eyebrow">YOUR GATEWAY PROFILE</span>
-      <h1 style={mode === "signup" ? { fontWeight: 560, letterSpacing: ".025em" } : undefined}>{title}</h1>
+      <h1 style={{ fontWeight: mode === "signup" ? 550 : 600, letterSpacing: mode === "signup" ? ".025em" : ".005em", lineHeight: 1.08 }}>{title}</h1>
       <p>{description}</p>
 
       {(mode === "login" || mode === "signup") && <div className="account-tabs">
@@ -141,6 +146,9 @@ export default function AccountPage() {
       </div>}
 
       <form onSubmit={submit}>
+        {mode === "signup" && <label>Name
+          <input name="name" type="text" required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" autoComplete="name" />
+        </label>}
         {mode !== "update-password" && <label>Email
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
         </label>}
@@ -163,10 +171,12 @@ export default function AccountPage() {
         <button style={{ minHeight: 44, padding: "10px 12px", border: "1px solid #cbdced", borderRadius: 8, background: "#f7faff", color: "#1269d3", fontSize: 13, fontWeight: 650 }} type="button" onClick={() => { setMode("forgot"); setMessage(""); }}>Forgot password?</button>
         <button style={{ minHeight: 44, padding: "10px 12px", border: "1px solid #cbdced", borderRadius: 8, background: "#f7faff", color: "#1269d3", fontSize: 13, fontWeight: 650 }} type="button" onClick={resendConfirmation} disabled={busy}>Resend confirmation</button>
       </div>}
-      {(mode === "forgot" || mode === "update-password") && <button className="account-back-button" type="button" onClick={() => { setMode("login"); setMessage(""); }}>← Back to login</button>}
       {message && <div className={`account-message ${messageType}`} role="status">{message}</div>}
       {!configured && <p className="account-setup-note">Supabase connection required for live accounts. The rest of the website works without it.</p>}
-      <Link href="/">← Return home</Link>
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12, marginTop: 20, paddingTop: 18, borderTop: "1px solid #e2eaf3" }}>
+        {(mode === "forgot" || mode === "update-password") && <button style={{ minHeight: 42, padding: "9px 14px", border: "1px solid #cbdced", borderRadius: 8, background: "#f7faff", color: "#1269d3", fontSize: 13, fontWeight: 650 }} type="button" onClick={() => { setMode("login"); setMessage(""); }}>← Back to login</button>}
+        <Link style={{ minHeight: 42, display: "inline-flex", alignItems: "center", padding: "9px 14px", border: "1px solid #cbdced", borderRadius: 8, background: "white", color: "#244a74", fontSize: 13, fontWeight: 650 }} href="/">← Return home</Link>
+      </div>
     </section>
   </main>;
 }
