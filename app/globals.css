@@ -774,9 +774,11 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .match-category-tabs button.active { border-color: #0f70e7; background: #0f70e7; color: white; }
 .match-category-tabs button.active span { background: rgba(255,255,255,.2); color: white; }
 .editorial-match-grid { grid-template-columns: repeat(2,1fr); gap: 13px; }
-.editorial-match-card { display: grid; grid-template-columns: 82px 1fr; min-height: 220px; overflow: hidden; border-radius: 14px; }
+.editorial-match-card { display: grid; grid-template-columns: 118px 1fr; min-height: 205px; overflow: hidden; border-radius: 14px; }
 .compact-match-icon { display: grid; place-items: center; background: linear-gradient(160deg,#eef7ff,#cce7ff); color: #1269c8; }
 .compact-match-icon .icon { width: 38px; height: 38px; }
+.option-c-brand { padding: 20px 16px; background: #f3f8fd; }
+.option-c-brand img { width: 100%; max-width: 88px; max-height: 82px; object-fit: contain; }
 .category-scholarship .compact-match-icon { background: linear-gradient(160deg,#fff8e8,#ffe4ac); color: #a9670b; }
 .category-career-path .compact-match-icon { background: linear-gradient(160deg,#f0f2ff,#d9dfff); color: #405eb5; }
 .editorial-match-card .editorial-match-photo { position: relative; height: 168px; background-image: linear-gradient(180deg,rgba(2,24,50,.05),rgba(2,24,50,.48)),url('/hero-gateway-live.jpg'); background-position: center 62%; background-size: cover; }
@@ -786,13 +788,19 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .category-scholarship .match-type-badge { background: #e39a1d; }.category-career-path .match-type-badge { background: #405eb5; }.category-opportunity .match-type-badge { background: #168979; }
 .editorial-match-photo > b { position: absolute; right: 13px; bottom: 13px; padding: 6px 9px; border-radius: 999px; background: rgba(255,255,255,.93); color: #16724f; font-size: 9px; text-transform: uppercase; }
 .editorial-match-card > .heart-save-button { top: 12px; right: 12px; border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.94); }
-.gateway-match-card.editorial-match-card > div.editorial-match-copy { padding: 17px 48px 16px 17px; }
+.gateway-match-card.editorial-match-card > div.editorial-match-copy { padding: 17px 48px 15px 18px; }
 .editorial-match-card small { display: block; color: #4d79a5; }
 .editorial-match-card h3 { min-height: 0; margin: 5px 0 7px; font-size: 17px; }
 .match-quick-facts { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
 .match-quick-facts span { display: flex; align-items: center; gap: 4px; color: #637b92; font-size: 9px; }
 .match-quick-facts .icon { width: 13px; height: 13px; color: #276ea9; }
 .editorial-match-card p { min-height: 0; margin-bottom: 10px; }
+.option-c-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+.option-c-meta span { padding: 5px 9px; border-radius: 6px; background: #eef3f8; color: #496783; font-size: 8.5px; }
+.option-c-fit { display: grid; grid-template-columns: 24px 1fr auto; gap: 8px; align-items: center; padding-top: 11px; border-top: 1px solid #e0e8ef; color: #60778d; font-size: 9px; line-height: 1.4; }
+.option-c-fit > .icon { width: 24px; height: 24px; padding: 5px; border-radius: 7px; background: #e9f3ff; color: #0f70e7; box-sizing: border-box; }
+.option-c-fit strong { color: #294f72; }
+.option-c-fit a { color: var(--blue); font-size: 10px; font-weight: 650; white-space: nowrap; }
 .why-match { display: flex; flex-wrap: wrap; gap: 5px; margin: 9px 0 11px; }
 .why-match strong { width: 100%; color: #285578; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 .why-match span { padding: 5px 7px; border-radius: 999px; background: #eef5fb; color: #496984; font-size: 8.5px; }
@@ -1119,6 +1127,22 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .organization-card-copy { padding: 28px; }
 .organization-directory-card .tag-row span { border: 1px solid #d7e1ec; background: #f4f7fa; }
 .organization-directory-card .card-actions a { color: var(--blue); }
+.directory-profile-card { position: relative; display: grid !important; grid-template-columns: 150px 1fr !important; min-height: 270px !important; overflow: hidden; padding: 0 !important; border: 1px solid #d5dfe9 !important; border-radius: 9px !important; background: white; box-shadow: 0 12px 30px rgba(4,25,52,.06) !important; }
+.directory-profile-brand { min-height: 100%; display: grid; place-items: center; align-content: center; gap: 15px; padding: 24px 20px; border-right: 1px solid #dce5ee !important; border-bottom: 0 !important; background: #eef3f8 !important; }
+.directory-profile-brand img { width: 100%; max-width: 118px !important; max-height: 82px !important; object-fit: contain; }
+.directory-profile-copy { padding: 26px !important; }
+.directory-profile-copy h3 { min-height: 0 !important; margin: 7px 38px 10px 0 !important; font-size: 19px !important; }
+.directory-profile-copy p { margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.directory-profile-copy .card-actions { margin-top: 16px; padding-top: 13px; border-top: 1px solid #e0e8ef; }
+.directory-profile-copy .card-actions a { padding: 0; border: 0; background: transparent; color: var(--blue); font-size: 11px; font-weight: 650; letter-spacing: .02em; }
+.runway-scholar-grid { grid-template-columns: repeat(2,1fr); gap: 18px; }
+.directory-profile-card .runway-scholar-facts { padding: 10px 0; }
+.scholarship-card-intro { margin-bottom: 10px !important; }
+.organization-style-career-grid { grid-template-columns: repeat(2,1fr); gap: 18px; }
+.career-family .career-grid.organization-style-career-grid article { grid-template-columns: 140px 1fr; min-height: 270px; }
+.career-profile-brand { background: linear-gradient(160deg,#edf6ff,#dcecff) !important; color: #0d67c5; }
+.career-profile-brand .icon { width: 50px; height: 50px; }
+.career-profile-brand > span { color: #547493; font-size: 9px; font-weight: 650; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
 .org-grid h3, .org-grid p { margin-top: 0; }
 .org-grid p, .career-grid p, .collection-grid p { color: var(--muted); line-height: 1.55; }
 .tag-row span { display: inline-block; margin-right: 5px; padding: 5px 9px; border-radius: 20px; background: var(--sky); font-size: 11px; }
