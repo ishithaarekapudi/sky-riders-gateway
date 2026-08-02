@@ -393,7 +393,7 @@ export default function ExplorePage() {
                   <p className="nearby-location-message">{locationMessage || `Showing ${nearFilter.toLowerCase()} within 250 miles of ${nearQuery || state}.`}</p>
                 </aside>
                 <div className="gateway-map" aria-label={`Map of opportunities near ${nearQuery || state}`}>
-                  <div className="map-landmass"><span>WEST</span><span>MIDWEST</span><span>EAST</span><span>SOUTH</span></div>
+                  <img className="us-opportunity-map" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Blank_US_Map_%28states_only%29.svg" alt="United States opportunity map" />
                   <button className="map-pin pin-one" aria-label="Flight program"><Icon name="airplane"/></button>
                   <button className="map-pin pin-two" aria-label="Scholarship"><Icon name="cap"/></button>
                   <button className="map-pin pin-three" aria-label="Mentor"><Icon name="people"/></button>
