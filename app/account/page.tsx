@@ -132,7 +132,7 @@ export default function AccountPage() {
     <div className="account-brand"><BrandLogo /></div>
     <section className="account-panel">
       <span className="eyebrow">YOUR GATEWAY PROFILE</span>
-      <h1>{title}</h1>
+      <h1 style={mode === "signup" ? { fontWeight: 560, letterSpacing: ".025em" } : undefined}>{title}</h1>
       <p>{description}</p>
 
       {(mode === "login" || mode === "signup") && <div className="account-tabs">
@@ -159,9 +159,9 @@ export default function AccountPage() {
         </button>
       </form>
 
-      {mode === "login" && <div className="account-help-links">
-        <button type="button" onClick={() => { setMode("forgot"); setMessage(""); }}>Forgot password?</button>
-        <button type="button" onClick={resendConfirmation} disabled={busy}>Resend confirmation</button>
+      {mode === "login" && <div className="account-help-links" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, margin: "-2px 0 22px" }}>
+        <button style={{ minHeight: 44, padding: "10px 12px", border: "1px solid #cbdced", borderRadius: 8, background: "#f7faff", color: "#1269d3", fontSize: 13, fontWeight: 650 }} type="button" onClick={() => { setMode("forgot"); setMessage(""); }}>Forgot password?</button>
+        <button style={{ minHeight: 44, padding: "10px 12px", border: "1px solid #cbdced", borderRadius: 8, background: "#f7faff", color: "#1269d3", fontSize: 13, fontWeight: 650 }} type="button" onClick={resendConfirmation} disabled={busy}>Resend confirmation</button>
       </div>}
       {(mode === "forgot" || mode === "update-password") && <button className="account-back-button" type="button" onClick={() => { setMode("login"); setMessage(""); }}>← Back to login</button>}
       {message && <div className={`account-message ${messageType}`} role="status">{message}</div>}
