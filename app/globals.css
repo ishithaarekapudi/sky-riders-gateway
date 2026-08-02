@@ -838,6 +838,11 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .nearby-controls > label { display: flex; align-items: center; gap: 8px; height: 45px; padding: 0 11px; border: 1px solid #cbd9e7; border-radius: 8px; background: white; }
 .nearby-controls label .icon { width: 18px; color: #5d7895; }
 .nearby-controls input,.nearby-controls select { width: 100%; border: 0; outline: 0; background: transparent; font: inherit; font-size: 11px; }
+.nearby-search-form { display: grid; gap: 10px; margin-bottom: 10px; }
+.nearby-search-form > label { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 11px; border: 1px solid #cbd9e7; border-radius: 10px; background: white; box-shadow: 0 3px 10px rgba(8,45,80,.04); }
+.nearby-search-form .nearby-radius { display: grid; grid-template-columns: 1fr 105px; }.nearby-radius > span { color: #526f8a; font-size: 10px; font-weight: 650; }.nearby-radius select { color: #0a294a; font-weight: 650; }
+.nearby-search-form > button { min-height: 43px; border: 0; border-radius: 9px; background: linear-gradient(135deg,#1681f4,#0c61ca); color: white; font: inherit; font-size: 10px; font-weight: 650; letter-spacing: .08em; box-shadow: 0 8px 18px rgba(15,112,231,.2); }
+.nearby-search-form > button:disabled { opacity: .65; }
 .accessible-location-map { position: relative; display: grid; place-items: center; overflow: hidden; padding: 24px; }
 .accessible-location-map .us-opportunity-map { width: 94%; height: auto; opacity: .82; filter: drop-shadow(0 14px 22px rgba(55,113,166,.13)); }
 .live-map-pin { position: absolute; z-index: 2; display: grid; place-items: center; width: 38px; height: 38px; border: 4px solid #fff; border-radius: 50% 50% 50% 8px; background: #1477e8; color: #fff; box-shadow: 0 8px 18px rgba(4,49,98,.25); transform: rotate(-45deg); }
@@ -847,6 +852,12 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .map-accessible-note .icon { width: 34px; color: #0f70e7; }
 .map-accessible-note strong { color: var(--ink); font-size: 15px; }
 .map-accessible-note span { grid-column: 2; font-size: 9px; line-height: 1.4; }
+.live-location-map { position: relative; min-height: 520px; padding: 0; background: #dcecf7; }
+.live-location-map::before,.live-location-map::after { display: none; }
+.live-location-map iframe { display: block; width: 100%; height: 100%; min-height: 520px; border: 0; filter: saturate(.78) contrast(.98) brightness(1.03); }
+.live-map-badge { position: absolute; z-index: 2; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 9px; max-width: 250px; padding: 11px 14px; border: 1px solid rgba(183,210,234,.9); border-radius: 11px; background: rgba(255,255,255,.95); box-shadow: 0 10px 25px rgba(5,42,78,.15); backdrop-filter: blur(8px); }
+.live-map-badge .icon { width: 25px; color: #0f70e7; }.live-map-badge div { display: grid; }.live-map-badge strong { overflow: hidden; max-width: 180px; color: #092a4d; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }.live-map-badge span { color: #617b93; font-size: 9px; }
+.open-large-map { position: absolute; z-index: 2; right: 14px; top: 14px; padding: 8px 11px; border: 1px solid #c7dbea; border-radius: 8px; background: rgba(255,255,255,.95); color: #0d67c5; font-size: 9px; font-weight: 650; box-shadow: 0 7px 18px rgba(4,35,69,.1); }
 .nearby-empty { padding: 20px 8px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .nearby-result-logo { display: grid; place-items: center; padding: 8px; border-radius: 8px; background: #eef6fd; }
 .nearby-result-logo img { width: 100%; max-height: 55px; object-fit: contain; }
@@ -896,7 +907,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .nearby-heading { align-items: center; padding: 30px 34px 25px; background: linear-gradient(105deg,#fff 0%,#f5f9fd 100%); }
 .nearby-heading h2 { margin-top: 9px; font-size: 34px; letter-spacing: -.025em; }
 .nearby-heading > small { padding: 7px 12px; border: 1px solid #d6e3ef; border-radius: 999px; background: #fff; color: #345b7f; font-size: 11px; }
-.nearby-layout { grid-template-columns: 225px minmax(410px,1fr) 292px; min-height: 465px; }
+.nearby-layout { grid-template-columns: 280px minmax(440px,1fr) 330px; min-height: 520px; }
 .nearby-controls { padding: 22px 18px; background: #f8fbfe; }
 .nearby-controls > label { height: 48px; border-radius: 10px; box-shadow: 0 3px 10px rgba(8,45,80,.04); }
 .nearby-location-button { min-height: 47px; margin-bottom: 22px; border-radius: 10px; box-shadow: 0 5px 14px rgba(15,112,231,.08); }
