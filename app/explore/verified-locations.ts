@@ -18,3 +18,27 @@ export const verifiedLocations: VerifiedLocation[] = [
   { id:"ca-eaa-14", organization_slug:"experimental-aircraft-association", organization_name:"Experimental Aircraft Association", location_name:"EAA Chapter 14 Young Eagles", location_type:"chapter", city:"San Diego", state:"California", postal_code:"92154", latitude:32.5723, longitude:-116.9802, official_url:"https://chapters.eaa.org/eaa14/young-eagles", source_url:"https://chapters.eaa.org/eaa14/young-eagles", description:"Monthly Young Eagles rallies at Brown Field introduce youth ages 8–17 to general aviation." },
   { id:"ca-eaa-1", organization_slug:"experimental-aircraft-association", organization_name:"Experimental Aircraft Association", location_name:"EAA Chapter 1 Young Eagles", location_type:"chapter", city:"Riverside", state:"California", postal_code:"92509", latitude:33.9887, longitude:-117.4105, official_url:"https://chapters.eaa.org/eaa1", source_url:"https://chapters.eaa.org/eaa1/about-us", description:"EAA Chapter One offers Young Eagles, seminars, workshops, and aviation community programs." },
 ];
+
+export function nationwideDirectories(state: string): VerifiedLocation[] {
+  const key=state.toLowerCase().replaceAll(" ","-");
+  return [
+    {
+      id:`${key}-faa-pilot-schools`, organization_slug:"federal-aviation-administration", organization_name:"Federal Aviation Administration",
+      location_name:`FAA-Certificated Pilot Schools in ${state}`, location_type:"official_finder", city:"Statewide", state, postal_code:"",
+      latitude:Number.NaN, longitude:Number.NaN, official_url:"https://www.faa.gov/av-info/facility-dashboard", source_url:"https://www.faa.gov/av-info/facility-dashboard",
+      description:`Use the FAA facility dashboard to find certificated pilot schools and training facilities throughout ${state}.`,
+    },
+    {
+      id:`${key}-cap-squadrons`, organization_slug:"civil-air-patrol", organization_name:"Civil Air Patrol",
+      location_name:`Civil Air Patrol Squadrons in ${state}`, location_type:"official_finder", city:"Statewide", state, postal_code:"",
+      latitude:Number.NaN, longitude:Number.NaN, official_url:"https://www.gocivilairpatrol.com/cap-unit-locator", source_url:"https://www.gocivilairpatrol.com/cap-unit-locator",
+      description:`Search Civil Air Patrol's official unit locator for cadet, senior, and composite squadrons across ${state}.`,
+    },
+    {
+      id:`${key}-eaa-chapters`, organization_slug:"experimental-aircraft-association", organization_name:"Experimental Aircraft Association",
+      location_name:`EAA and Young Eagles Chapters in ${state}`, location_type:"official_finder", city:"Statewide", state, postal_code:"",
+      latitude:Number.NaN, longitude:Number.NaN, official_url:"https://www.eaa.org/eaa/eaa-chapters/find-an-eaa-chapter", source_url:"https://www.eaa.org/eaa/eaa-chapters/find-an-eaa-chapter",
+      description:`Find EAA chapters, Young Eagles activities, aviation workshops, and chapter programs throughout ${state}.`,
+    },
+  ];
+}
