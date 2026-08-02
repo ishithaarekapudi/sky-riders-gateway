@@ -1141,8 +1141,17 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .organization-style-career-grid { grid-template-columns: repeat(2,1fr); gap: 18px; }
 .career-family .career-grid.organization-style-career-grid article { grid-template-columns: 140px 1fr; min-height: 270px; }
 .career-profile-brand { background: linear-gradient(160deg,#edf6ff,#dcecff) !important; color: #0d67c5; }
-.career-profile-brand .icon { width: 50px; height: 50px; }
+.career-profile-brand .career-brand-icon { width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 1px solid #c9dff3; box-shadow: 0 10px 24px rgba(9,42,77,.08); }
+.career-profile-brand .icon { width: 44px; height: 44px; }
+.career-profile-brand > strong { color: #0d67c5; font-size: 11px; font-weight: 700; letter-spacing: .16em; }
 .career-profile-brand > span { color: #547493; font-size: 9px; font-weight: 650; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
+.scholarship-wordmark { text-align: center; }
+.scholarship-wordmark .icon { width: 42px; height: 42px; color: #0d67c5; margin: 0 auto 4px; }
+.scholarship-wordmark strong { color: #072546; font-size: clamp(25px,2vw,34px); letter-spacing: .08em; line-height: 1; }
+.scholarship-wordmark span { font-size: 9px; letter-spacing: .16em; color: #66809a; }
+.nearby-result-logo { display: grid; place-items: center; align-content: center; gap: 6px; color: #0d67c5; }
+.nearby-result-logo .icon { width: 34px; height: 34px; }
+.nearby-result-logo strong { font-size: 12px; letter-spacing: .12em; }
 .org-grid h3, .org-grid p { margin-top: 0; }
 .org-grid p, .career-grid p, .collection-grid p { color: var(--muted); line-height: 1.55; }
 .tag-row span { display: inline-block; margin-right: 5px; padding: 5px 9px; border-radius: 20px; background: var(--sky); font-size: 11px; }
