@@ -33,14 +33,13 @@ export default function Scholarships() {
   }), [query, filter]);
 
   return <PageShell active="scholarships">
-    <section className="directory-landing-hero scholarship-runway-hero"><div>
-      <span>SCHOLARSHIPS</span>
+    <section className="sub-hero resources-hero directory-resource-hero"><div>
+      <span className="eyebrow">FUND YOUR NEXT STEP.</span>
       <h1>Fund Your Future in Flight</h1>
       <p>Discover aviation and aerospace scholarships, compare your options, and take the next step toward your goals.</p>
-      <Link className="primary-button" href="/explore">Find My Matches →</Link>
+      <label className="search-box"><Icon name="search"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search scholarships by name, pathway, or eligibility"/></label>
     </div></section>
     <section className="scholarship-search-deck">
-      <label className="scholarship-search"><Icon name="search"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search scholarships by name, pathway, or eligibility"/></label>
       <div className="scholarship-filter-row">{filters.map(x=><button className={filter===x?"active":""} onClick={()=>setFilter(x)} key={x}>{x}</button>)}</div>
     </section>
     <section className="directory scholarship-directory runway-directory">
