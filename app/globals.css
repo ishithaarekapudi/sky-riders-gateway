@@ -779,6 +779,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .compact-match-icon .icon { width: 38px; height: 38px; }
 .option-c-brand { min-height: 190px; padding: 18px 14px; background: #f3f8fd; }
 .option-c-brand img { width: 100%; max-width: 88px; max-height: 82px; object-fit: contain; }
+.option-c-brand.official-brand { background: #fff; border-right: 1px solid #d8e5f1; }
+.option-c-brand.official-brand img { max-width: 104px; max-height: 92px; filter: none; }
+.option-c-brand.pathway-brand { background: linear-gradient(160deg,#f1f6ff,#e5effb); }
 .category-scholarship .compact-match-icon { background: linear-gradient(160deg,#fff8e8,#ffe4ac); color: #a9670b; }
 .category-career-path .compact-match-icon { background: linear-gradient(160deg,#f0f2ff,#d9dfff); color: #405eb5; }
 .editorial-match-card .editorial-match-photo { position: relative; height: 168px; background-image: linear-gradient(180deg,rgba(2,24,50,.05),rgba(2,24,50,.48)),url('/hero-gateway-live.jpg'); background-position: center 62%; background-size: cover; }
