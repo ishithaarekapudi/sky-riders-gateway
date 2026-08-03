@@ -154,11 +154,11 @@ function matchCategory(item: (typeof opportunities)[number]) {
 }
 
 function matchBrand(title: string) {
-  if (/Young Eagles/.test(title)) return { src: "/organization-logos/young-eagles.png", alt: "EAA Young Eagles official logo" };
-  if (/Civil Air Patrol/.test(title)) return { src: "/organization-logos/civil-air-patrol.png", alt: "Civil Air Patrol official logo" };
+  if (/Young Eagles/.test(title)) return { src: "/organization-logos/young-eagles-official.svg", alt: "EAA Young Eagles official logo" };
+  if (/Civil Air Patrol/.test(title)) return { src: "/organization-logos/civil-air-patrol-official.svg", alt: "Civil Air Patrol official logo" };
   if (/AOPA/.test(title)) return { src: "/organization-logos/aopa.svg", alt: "Aircraft Owners and Pilots Association official logo" };
   if (/OBAP/.test(title)) return { src: "https://obap.org/wp-content/uploads/2019/07/OBAP_Logo_280x280.png", alt: "Organization of Black Aerospace Professionals official logo" };
-  if (/Girls in Aviation/.test(title)) return { src: "/organization-logos/women-in-aviation.png", alt: "Women in Aviation International official logo" };
+  if (/Girls in Aviation/.test(title)) return { src: "/organization-logos/women-in-aviation-official.svg", alt: "Women in Aviation International official logo" };
   if (/FAA ACE/.test(title)) return { src: "/organization-logos/faa.svg", alt: "Federal Aviation Administration official logo" };
   if (/NASA/.test(title)) return { src: "/organization-logos/nasa.svg", alt: "NASA official logo" };
   return null;
