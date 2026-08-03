@@ -1199,6 +1199,52 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .scholarship-tracker.compact { grid-template-columns: minmax(0,1fr) 180px; align-items: center; padding: 14px 16px; background: white; }
 .scholarship-tracker.compact label { display: contents; }.scholarship-tracker.compact label > span { overflow: hidden; color: #0a294a; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width:700px){.dashboard-application-list{grid-template-columns:1fr}.scholarship-tracker.compact{grid-template-columns:1fr}.scholarship-tracker.compact label{display:grid}}
+
+/* Unified career, scholarship, and Explore presentation */
+.gateway-guide-mark .icon { width: 54px; height: 54px; color: #0d67c5; }
+.gateway-guide-scholarship .organization-profile-sky { background-position: center 54%; }
+.gateway-guide-career .organization-profile-sky { background-position: center 68%; }
+.gateway-guide-content { display: grid; gap: 48px; }
+.gateway-guide-overview { display: grid; grid-template-columns: minmax(0,1fr) 280px; gap: 12px 46px; align-items: start; }
+.gateway-guide-overview > .eyebrow,.gateway-guide-overview > h2 { grid-column: 1; }
+.gateway-guide-overview > p { grid-column: 1; margin: 0; color: #536b84; font-size: 16px; line-height: 1.75; }
+.gateway-source-note { grid-column: 2; grid-row: 1 / span 3; display: grid; grid-template-columns: 76px 1fr; gap: 16px; align-items: center; padding: 22px; border: 1px solid #d6e2ed; border-radius: 14px; background: white; box-shadow: 0 10px 28px rgba(5,35,74,.07); }
+.gateway-source-note > img { width: 76px; max-height: 62px; object-fit: contain; }
+.gateway-source-note > .icon { width: 42px; color: var(--blue); }
+.gateway-source-note div { display: grid; gap: 4px; }
+.gateway-source-note span { color: #68819a; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
+.gateway-source-note strong { color: var(--ink); font-size: 14px; }
+.gateway-source-note a { color: var(--blue); font-size: 10px; font-weight: 650; }
+.gateway-guide-start > .scholarship-tracker { max-width: 520px; margin: 0 0 20px; }
+
+.career-family .directory-profile-card,.runway-scholar-card.directory-profile-card { min-height: 235px !important; }
+.career-family .career-grid.organization-style-career-grid article { min-height: 235px; }
+.directory-profile-copy { display: flex; flex-direction: column; justify-content: center; }
+.directory-profile-copy .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.directory-profile-copy .tag-row span { margin: 0; padding: 5px 8px; font-size: 9px; }
+.runway-scholar-card { min-height: 260px !important; }
+.runway-scholar-card .scholar-sponsor { height: auto; min-height: 100%; border-right: 1px solid #dce5ef; border-bottom: 0; }
+.runway-scholar-card h3 { min-height: 0; }
+
+.gateway-match-grid.editorial-match-grid { grid-auto-rows: auto; align-items: stretch; }
+.gateway-match-card.editorial-match-card { min-height: 0 !important; height: 100%; grid-template-columns: 88px minmax(0,1fr); }
+.editorial-match-card .option-c-brand { min-height: 0; padding: 14px 11px; }
+.gateway-match-card.editorial-match-card > div.editorial-match-copy { padding: 16px 45px 15px 17px; }
+.editorial-match-card h3 { font-size: 16px; line-height: 1.25; }
+.editorial-match-card p { -webkit-line-clamp: 2; }
+.option-c-fit { grid-template-columns: 22px minmax(0,1fr); }
+.option-c-fit > a { grid-column: 1 / -1; justify-self: end; margin-top: 2px; }
+
+.nearby-results-panel article { grid-template-columns: 58px minmax(0,1fr) !important; min-height: 0 !important; padding: 12px !important; }
+.nearby-result-logo { min-height: 76px; padding: 8px; }
+.nearby-result-logo .icon { width: 22px; height: 22px; }
+.nearby-result-logo strong { font-size: 8px; }
+
+@media (max-width:800px){
+  .gateway-guide-overview { grid-template-columns:1fr; }
+  .gateway-guide-overview > .eyebrow,.gateway-guide-overview > h2,.gateway-guide-overview > p,.gateway-source-note { grid-column:1; grid-row:auto; }
+  .gateway-match-card.editorial-match-card { grid-template-columns:72px minmax(0,1fr); }
+}
 .org-grid h3, .org-grid p { margin-top: 0; }
 .org-grid p, .career-grid p, .collection-grid p { color: var(--muted); line-height: 1.55; }
 .tag-row span { display: inline-block; margin-right: 5px; padding: 5px 9px; border-radius: 20px; background: var(--sky); font-size: 11px; }
