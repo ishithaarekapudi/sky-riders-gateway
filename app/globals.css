@@ -1048,14 +1048,16 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .match-card { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 18px; border: 1px solid #a9cdf8; border-radius: 14px; background: #eef6ff; text-align: center; }
 .match-card p { color: var(--muted); line-height: 1.5; }
 
-/* Scholarship Runway */
-.scholarship-runway-hero { min-height: 500px; display: grid; place-items: center; padding: 70px 20px 115px; background: linear-gradient(180deg,rgba(235,244,251,.2),rgba(3,25,53,.18)),url('/hero-gateway-live.jpg') center 70%/cover; color: var(--ink); text-align: center; }
-.scholarship-runway-hero > div { max-width: 720px; }
-.scholarship-runway-hero > div > span { color: #0c6bd5; font-size: 12px; font-weight: 650; letter-spacing: .22em; }
-.scholarship-runway-hero h1 { margin: 12px 0 14px; font-family: Georgia,'Times New Roman',serif; font-size: clamp(48px,6vw,76px); font-weight: 500; line-height: .98; letter-spacing: -.035em; }
-.scholarship-runway-hero p { max-width: 610px; margin: 0 auto 25px; color: #294762; font-size: 17px; line-height: 1.55; }
-.scholarship-runway-hero .primary-button { display: inline-flex; }
-.scholarship-search-deck { position: relative; z-index: 2; width: min(1180px,92%); margin: -54px auto 0; padding: 18px; border: 1px solid #ccd9e7; border-radius: 14px; background: white; box-shadow: 0 16px 36px rgba(5,30,61,.13); }
+/* Compact directory landing style shared by Scholarships, Organizations, and Careers */
+.directory-landing-hero { min-height: 410px; display: grid; place-items: center; padding: 58px 20px 68px; background: linear-gradient(180deg,rgba(244,248,251,.3),rgba(5,29,57,.3)),url('/hero-gateway-live.jpg') center 66%/cover; color: var(--ink); text-align: center; }
+.directory-landing-hero > div { width: min(760px,100%); max-width: 760px; }
+.directory-landing-hero > div > span { color: #0c6bd5; font-size: 11px; font-weight: 560; letter-spacing: .25em; }
+.directory-landing-hero h1 { margin: 12px 0 14px; font-family: Georgia,'Times New Roman',serif; font-size: clamp(42px,5vw,62px); font-weight: 500; line-height: 1.02; letter-spacing: -.025em; }
+.directory-landing-hero p { max-width: 650px; margin: 0 auto 22px; color: #294762; font-size: 16px; line-height: 1.5; }
+.directory-landing-hero .primary-button { display: inline-flex; padding: 13px 27px; font-size: 15px; font-weight: 560; letter-spacing: .055em; }
+.org-hero,.careers-hero { color: var(--ink); background-image: linear-gradient(180deg,rgba(244,248,251,.3),rgba(5,29,57,.3)),url('/hero-gateway-live.jpg'); }
+.org-hero p,.careers-hero p { color: #294762; }
+.scholarship-search-deck { position: relative; z-index: 2; width: min(1040px,90%); margin: -38px auto 0; padding: 14px; border: 1px solid #ccd9e7; border-radius: 12px; background: white; box-shadow: 0 12px 28px rgba(5,30,61,.11); }
 .scholarship-search { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 14px; border: 1px solid #cbd7e4; border-radius: 9px; }
 .scholarship-search .icon { width: 20px; color: #5d7792; }
 .scholarship-search input { width: 100%; border: 0; outline: 0; color: var(--ink); font: inherit; }
@@ -1868,7 +1870,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .mentor-role-switch button { padding: 12px 8px; font-size: 13px; }
   .community-submit-callout { grid-template-columns: 1fr; padding: 26px 22px; }
   .community-submit-callout .small-button { width: 100%; text-align: center; }
-  .scholarship-runway-hero { min-height: 430px; padding: 55px 20px 95px; }
+  .directory-landing-hero { min-height: 350px; padding: 45px 20px 62px; }
+  .directory-landing-hero h1 { font-size: clamp(38px,12vw,50px); }
+  .directory-landing-hero p { font-size: 15px; }
   .scholarship-search-deck { width: calc(100% - 28px); }
   .runway-scholar-grid { grid-template-columns: 1fr; }
   .scholarship-account-cta { grid-template-columns: 1fr; }
