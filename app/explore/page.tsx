@@ -160,6 +160,7 @@ function matchBrand(title: string) {
   if (/OBAP/.test(title)) return { src: "https://obap.org/wp-content/uploads/2019/07/OBAP_Logo_280x280.png", alt: "Organization of Black Aerospace Professionals official logo" };
   if (/Girls in Aviation/.test(title)) return { src: "/organization-logos/women-in-aviation-official.svg", alt: "Women in Aviation International official logo" };
   if (/FAA ACE/.test(title)) return { src: "/organization-logos/faa.svg", alt: "Federal Aviation Administration official logo" };
+  if (/Academy of Model Aeronautics/.test(title)) return { src: "/organization-logos/ama-official.svg", alt: "Academy of Model Aeronautics official logo" };
   if (/NASA/.test(title)) return { src: "/organization-logos/nasa.svg", alt: "NASA official logo" };
   return null;
 }
