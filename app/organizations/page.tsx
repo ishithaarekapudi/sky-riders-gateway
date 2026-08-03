@@ -23,8 +23,8 @@ const shortNames: Record<string, string> = {
 
 export default function Organizations() {
   return <PageShell active="organizations">
-    <section className="sub-hero org-hero"><div>
-      <span className="eyebrow">COMMUNITY OPENS DOORS</span>
+    <section className="directory-landing-hero org-hero"><div>
+      <span>ORGANIZATIONS</span>
       <h1>Find Your Aviation Community</h1>
       <p>Educational opportunities, mentors, flights, scholarships, and welcoming communities can make the first step much clearer.</p>
       <a className="primary-button" href="#organization-directory">Explore Organizations →</a>
