@@ -90,6 +90,18 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["location_directory"]["Insert"]>;
         Relationships: [];
       };
+      contact_inquiries: {
+        Row: { id: string; name: string; email: string; organization: string | null; topic: string; message: string; status: string; created_at: string };
+        Insert: { id?: string; name: string; email: string; organization?: string | null; topic: string; message: string; status?: string };
+        Update: never;
+        Relationships: [];
+      };
+      newsletter_subscribers: {
+        Row: { id: string; email: string; first_name: string | null; source: string; status: string; created_at: string; updated_at: string };
+        Insert: { id?: string; email: string; first_name?: string | null; source?: string; status?: string; created_at?: string; updated_at?: string };
+        Update: { first_name?: string | null; source?: string; status?: string; updated_at?: string };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
