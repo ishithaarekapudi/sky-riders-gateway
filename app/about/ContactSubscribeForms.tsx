@@ -46,13 +46,13 @@ export function SubscribeForm({ compact = false }: { compact?: boolean }) {
     if (!configured) { setStatus("error"); return; }
     setStatus("busy");
     const form = new FormData(event.currentTarget);
-    const { error } = await createClient().from("newsletter_subscribers").upsert({
+    const { error } = await createClient().from("newsletter_subscribers").insert({
       email: String(form.get("email") || "").trim().toLowerCase(),
       first_name: String(form.get("first_name") || "").trim() || null,
       source: "about-ishitha",
       status: "subscribed",
-    }, { onConflict: "email" });
-    if (error) { setStatus("error"); return; }
+    });
+    if (error && error.code !== "23505") { setStatus("error"); return; }
     event.currentTarget.reset();
     setStatus("sent");
   }
