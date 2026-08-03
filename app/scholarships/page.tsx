@@ -33,9 +33,9 @@ export default function Scholarships() {
   }), [query, filter]);
 
   return <PageShell active="scholarships">
-    <section className="scholarship-runway-hero"><div>
+    <section className="directory-landing-hero scholarship-runway-hero"><div>
       <span>SCHOLARSHIPS</span>
-      <h1>Fund Your Future<br/>in Flight</h1>
+      <h1>Fund Your Future in Flight</h1>
       <p>Discover aviation and aerospace scholarships, compare your options, and take the next step toward your goals.</p>
       <Link className="primary-button" href="/explore">Find My Matches →</Link>
     </div></section>
