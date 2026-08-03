@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageShell } from "../ui";
+import { SubscribeForm } from "./ContactSubscribeForms";
 
 const milestones = [
   ["Sixth grade", "A classroom conversation about astrophysics helped Ishitha recognize her goal of becoming an astronaut."],
@@ -57,5 +58,6 @@ export default function AboutPage() {
       <div><span className="eyebrow">CONNECT WITH ISHITHA</span><h2>For media, speaking, and collaboration.</h2><p>Connect with Ishitha about youth aviation, aerospace pathways, research, representation, the book, or the Sky Riders Gateway mission.</p></div>
       <div className="founder-connect-actions"><Link className="primary-button" href="/about/contact">Contact Ishitha →</Link><Link className="ghost-button" href="/about/media">View Media & Press →</Link></div>
     </section>
+    <section className="section subscribe-section"><div><span className="eyebrow">STAY CONNECTED</span><h2>Follow what comes next.</h2><p>Get occasional updates about Gateway, new opportunities, the book, and Ishitha’s work.</p></div><SubscribeForm /></section>
   </PageShell>;
 }
