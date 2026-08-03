@@ -12,8 +12,8 @@ const families = [
 
 export default function Careers() {
   return <PageShell active="careers">
-    <section className="sub-hero careers-hero"><div>
-      <span className="eyebrow">MORE THAN THE COCKPIT</span>
+    <section className="directory-landing-hero careers-hero"><div>
+      <span>CAREERS</span>
       <h1>There’s a Place for You in Aviation</h1>
       <p>The aviation world connects flight with engineering, healthcare, law, business, technology, weather, safety, and service.</p>
       <Link className="primary-button" href="/explore">Find My Best Fit →</Link>
