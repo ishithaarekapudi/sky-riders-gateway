@@ -153,9 +153,15 @@ function matchCategory(item: (typeof opportunities)[number]) {
   return "Opportunity";
 }
 
-function matchLogo(title: string) {
-  if (/NASA/.test(title)) return "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg";
-  return "";
+function matchBrand(title: string) {
+  if (/Young Eagles/.test(title)) return { src: "/organization-logos/young-eagles.png", alt: "EAA Young Eagles official logo" };
+  if (/Civil Air Patrol/.test(title)) return { src: "/organization-logos/civil-air-patrol.png", alt: "Civil Air Patrol official logo" };
+  if (/AOPA/.test(title)) return { src: "/organization-logos/aopa.svg", alt: "Aircraft Owners and Pilots Association official logo" };
+  if (/OBAP/.test(title)) return { src: "https://obap.org/wp-content/uploads/2019/07/OBAP_Logo_280x280.png", alt: "Organization of Black Aerospace Professionals official logo" };
+  if (/Girls in Aviation/.test(title)) return { src: "/organization-logos/women-in-aviation.png", alt: "Women in Aviation International official logo" };
+  if (/FAA ACE/.test(title)) return { src: "/organization-logos/faa.svg", alt: "Federal Aviation Administration official logo" };
+  if (/NASA/.test(title)) return { src: "/organization-logos/nasa.svg", alt: "NASA official logo" };
+  return null;
 }
 
 function directoryBrand(item: NearbyResource) {
@@ -469,9 +475,9 @@ export default function ExplorePage() {
                 {visibleMatches.map((item) => {
                   const category=matchCategory(item);
                   const matchedInterests=item.interests.filter((interest)=>selectedInterests.includes(interest));
-                  const logo=matchLogo(item.title);
+                  const brand=matchBrand(item.title);
                   return <article className={`gateway-match-card editorial-match-card category-${category.toLowerCase().replace(" ","-")}`} key={item.title}>
-                    <div className="compact-match-icon option-c-brand">{logo ? <img src={logo} alt=""/> : <Icon name={item.icon}/>}</div>
+                    <div className={`compact-match-icon option-c-brand ${brand ? "official-brand" : "pathway-brand"}`}>{brand ? <img src={brand.src} alt={brand.alt}/> : <Icon name={item.icon}/>}</div>
                     <div className="editorial-match-copy">
                       <small>{category}</small>
                       <h3>{item.title}</h3>
