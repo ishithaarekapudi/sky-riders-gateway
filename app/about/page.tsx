@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageShell } from "../ui";
 import { SubscribeForm } from "./ContactSubscribeForms";
+import { mediaLogos } from "./media-logos";
 
 const milestones = [
   ["Sixth grade", "A classroom conversation about astrophysics helped Ishitha recognize her goal of becoming an astronaut."],
@@ -47,12 +48,9 @@ export default function AboutPage() {
       </div>
     </section>
     <section className="section founder-media">
-      <div className="section-heading"><span>MEDIA & PRESS</span><h2>Ideas That Travel Beyond the Flight Line</h2><p>Explore Ishitha’s interviews, advocacy, writing, and public work across aviation, aerospace, access, and representation.</p></div>
-      <div className="founder-media-grid">
-        <Link href="/about/media#press"><span>PRESS</span><h3>Interviews & Features</h3><p>Read and watch conversations about flying, youth access, and the future of aviation.</p><b>View Media Coverage →</b></Link>
-        <Link href="/about/media#writing"><span>WRITING</span><h3>On the Flight Line</h3><p>Follow reflections, updates, and lessons from Ishitha’s aviation and aerospace journey.</p><b>Read Ishitha’s Writing →</b></Link>
-        <Link href="/about/media#portfolio"><span>PORTFOLIO</span><h3>Projects & Research</h3><p>See the work connecting aviation, space, advocacy, research, and education.</p><b>Explore the Portfolio →</b></Link>
-      </div>
+      <div className="section-heading"><span>MEDIA & PRESS</span><h2>Featured Across Media</h2><p>Selected outlets that have interviewed or featured Ishitha and her work in aviation, aerospace, and youth access.</p></div>
+      <div className="founder-media-logo-row">{mediaLogos.slice(0, 6).map(outlet => <div key={outlet.name}><img src={outlet.src} alt={`${outlet.name} logo`} /></div>)}</div>
+      <Link className="founder-media-link" href="/about/media">View All Media & Press →</Link>
     </section>
     <section className="section founder-connect">
       <div><span className="eyebrow">CONNECT WITH ISHITHA</span><h2>For media, speaking, and collaboration.</h2><p>Connect with Ishitha about youth aviation, aerospace pathways, research, representation, the book, or the Sky Riders Gateway mission.</p></div>
