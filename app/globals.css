@@ -1238,10 +1238,17 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .option-c-fit { grid-template-columns: 22px minmax(0,1fr); }
 .option-c-fit > a { grid-column: 1 / -1; justify-self: end; margin-top: 2px; }
 
-.nearby-results-panel article { grid-template-columns: 58px minmax(0,1fr) !important; min-height: 0 !important; padding: 12px !important; }
+.nearby-results-panel article { display: block !important; min-height: 0 !important; padding: 14px !important; }
 .nearby-result-logo { min-height: 76px; padding: 8px; }
 .nearby-result-logo .icon { width: 22px; height: 22px; }
 .nearby-result-logo strong { font-size: 8px; }
+.nearby-result-topline { justify-content: flex-start; }
+.nearby-result-topline small { margin-left: auto; }
+.nearby-type-tag { display: inline-flex; align-items: center; min-height: 22px; padding: 4px 9px; border: 1px solid #b9d8f5; border-radius: 999px; background: #eaf5ff; color: #0868c6; font-size: 7.5px; font-weight: 700; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
+.nearby-type-tag.cap-mark { border-color: #b8cde5; background: #e8f0fa; color: #174a82; }
+.nearby-type-tag.eaa-mark,.nearby-type-tag.faa-mark,.nearby-type-tag.finder-mark { border-color: #b8d2ec; background: #edf6ff; color: #145c9e; }
+.nearby-type-tag.program-mark { border-color: #b8dedb; background: #e8f7f5; color: #0b756d; }
+.nearby-result-organization { display: block; margin-top: 8px; overflow: hidden; color: #6a8095; font-size: 7.5px; font-weight: 600; letter-spacing: .03em; text-overflow: ellipsis; white-space: nowrap; }
 
 @media (max-width:800px){
   .gateway-guide-overview { grid-template-columns:1fr; }
