@@ -34,7 +34,7 @@ export function MobileNav({ active }: { active?: string }) {
             <Link className={active === "explore" ? "active" : ""} href="/explore" onClick={() => setOpen(false)}>Explore</Link>
             <span className="mobile-about-label">About</span>
             <Link className={active === "gateway" ? "active mobile-about-link" : "mobile-about-link"} href="/about/gateway" onClick={() => setOpen(false)}>Gateway</Link>
-            <Link className={active === "about" ? "active mobile-about-link" : "mobile-about-link"} href="/about" onClick={() => setOpen(false)}>Ishitha Arekapudi</Link>
+            <Link className={active === "about" ? "active mobile-about-link" : "mobile-about-link"} href="/about" onClick={() => setOpen(false)}>Ishitha Arekapudi, Founder</Link>
             {links.map(([label, href]) => (
               <Link className={active === label.toLowerCase().replace(" ", "-") ? "active" : ""} href={href} onClick={() => setOpen(false)} key={href}>{label}</Link>
             ))}
