@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { SaveButton } from "../components/SaveButton";
 import { organizations, slugify } from "../content";
@@ -22,16 +25,19 @@ const shortNames: Record<string, string> = {
 };
 
 export default function Organizations() {
+  const [query, setQuery] = useState("");
+  const visible = useMemo(() => organizations.filter(([title,text,tags]) => `${title} ${text} ${tags.join(" ")}`.toLowerCase().includes(query.toLowerCase())), [query]);
   return <PageShell active="organizations">
-    <section className="directory-landing-hero org-hero"><div>
-      <span>ORGANIZATIONS</span>
+    <section className="sub-hero resources-hero directory-resource-hero"><div>
+      <span className="eyebrow">COMMUNITY OPENS DOORS.</span>
       <h1>Find Your Aviation Community</h1>
       <p>Educational opportunities, mentors, flights, scholarships, and welcoming communities can make the first step much clearer.</p>
-      <a className="primary-button" href="#organization-directory">Explore Organizations →</a>
+      <label className="search-box"><Icon name="search"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search organizations by name, program, or community"/></label>
+      <a className="directory-down-button" href="#organization-directory">Browse Organizations Below <span aria-hidden="true">↓</span></a>
     </div></section>
     <section className="section editorial-directory" id="organization-directory">
       <div className="section-heading"><span>TRUSTED STARTING POINTS</span><h2>Opportunity Starts With Connection</h2><p>National organizations can open a door. Local chapters, clubs, airports, and flight schools can help you walk through it.</p></div>
-      <div className="org-grid">{organizations.map(([title,text,tags], index)=>{
+      <div className="org-grid">{visible.map(([title,text,tags], index)=>{
         const logo = officialLogos[title];
         return <article className="organization-directory-card" key={title}>
           <div className="organization-directory-brand">
