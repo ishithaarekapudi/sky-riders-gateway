@@ -24,19 +24,34 @@ const shortNames: Record<string, string> = {
   "Women's Soaring Pilots Association": "WSPA",
 };
 
+const organizationFilters = ["All Organizations", "Youth & Education", "Flight & Training", "Mentorship", "Scholarships", "Aerospace & STEM"] as const;
+
 export default function Organizations() {
   const [query, setQuery] = useState("");
-  const visible = useMemo(() => organizations.filter(([title,text,tags]) => `${title} ${text} ${tags.join(" ")}`.toLowerCase().includes(query.toLowerCase())), [query]);
+  const [filter, setFilter] = useState<(typeof organizationFilters)[number]>("All Organizations");
+  const visible = useMemo(() => organizations.filter(([title,text,tags]) => {
+    const searchable = `${title} ${text} ${tags.join(" ")}`.toLowerCase();
+    const matchesQuery = searchable.includes(query.toLowerCase());
+    const matchesFilter = filter === "All Organizations"
+      || (filter === "Youth & Education" && /youth|student|cadet|education|academy|junior|young/i.test(searchable))
+      || (filter === "Flight & Training" && /flight|pilot|flying|soaring|training|aircraft/i.test(searchable))
+      || (filter === "Mentorship" && /mentor|network|community|leadership|representation/i.test(searchable))
+      || (filter === "Scholarships" && /scholarship|funding/i.test(searchable))
+      || (filter === "Aerospace & STEM" && /aerospace|space|stem|model|engineering/i.test(searchable));
+    return matchesQuery && matchesFilter;
+  }), [query, filter]);
   return <PageShell active="organizations">
     <section className="sub-hero resources-hero directory-resource-hero"><div>
       <span className="eyebrow">COMMUNITY OPENS DOORS.</span>
       <h1>Find Your Aviation Community</h1>
       <p>Educational opportunities, mentors, flights, scholarships, and welcoming communities can make the first step much clearer.</p>
       <label className="search-box"><Icon name="search"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search organizations by name, program, or community"/></label>
-      <a className="directory-down-button" href="#organization-directory">Browse Organizations Below <span aria-hidden="true">↓</span></a>
     </div></section>
+    <section className="scholarship-search-deck directory-category-deck" aria-label="Organization categories">
+      <div className="scholarship-filter-row">{organizationFilters.map(item=><button className={filter===item?"active":""} onClick={()=>setFilter(item)} key={item}>{item}</button>)}</div>
+    </section>
     <section className="section editorial-directory" id="organization-directory">
-      <div className="section-heading"><span>TRUSTED STARTING POINTS</span><h2>Opportunity Starts With Connection</h2><p>National organizations can open a door. Local chapters, clubs, airports, and flight schools can help you walk through it.</p></div>
+      <div className="section-heading"><span>TRUSTED STARTING POINTS</span><h2>Opportunity Starts With Connection</h2><p>National organizations can open a door. Local chapters, clubs, airports, and flight schools can help you walk through it.</p><small className="directory-result-count">{visible.length} organizations found</small></div>
       <div className="org-grid">{visible.map(([title,text,tags], index)=>{
         const logo = officialLogos[title];
         return <article className="organization-directory-card" key={title}>
