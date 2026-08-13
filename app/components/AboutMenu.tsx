@@ -21,7 +21,7 @@ export function AboutMenu({ active }: { active?: string }) {
       {open && (
         <div className="about-nav-dropdown" role="menu">
           <Link href="/about/gateway" role="menuitem" onClick={() => setOpen(false)}>Gateway</Link>
-          <Link href="/about" role="menuitem" onClick={() => setOpen(false)}>Ishitha Arekapudi, Founder</Link>
+          <Link href="/about" role="menuitem" onClick={() => setOpen(false)}>Meet the Founder</Link>
         </div>
       )}
     </div>
