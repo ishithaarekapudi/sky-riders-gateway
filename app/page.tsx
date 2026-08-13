@@ -109,18 +109,18 @@ export default function Home() {
 
       <section className="homepage-partner-section" aria-labelledby="homepage-partner-title">
         <div className="homepage-partner-heading">
-          <span>TRUSTED STARTING POINTS</span>
-          <h2 id="homepage-partner-title">Explore Organizations Opening Doors</h2>
-          <p>Discover established aviation and aerospace communities offering education, mentorship, scholarships, and hands-on experiences.</p>
+          <span>BUILDING THE GATEWAY TOGETHER</span>
+          <h2 id="homepage-partner-title">Partnered Organizations</h2>
+          <p>Meet aviation and aerospace organizations helping expand access to education, mentorship, scholarships, and hands-on experiences.</p>
         </div>
         <div className="homepage-partner-logos">
           <Link href="/organizations/experimental-aircraft-association-and-young-eagles" aria-label="Learn about the Experimental Aircraft Association and Young Eagles"><img src="/organization-logos/young-eagles-official.svg" alt="Experimental Aircraft Association and Young Eagles" /></Link>
-          <Link href="/organizations/women-s-soaring-pilots-association" aria-label="Learn about the Women's Soaring Pilots Association"><img src="/organization-logos/wspa.svg" alt="Women's Soaring Pilots Association" /></Link>
+          <Link href="/organizations/women-s-soaring-pilots-association" aria-label="Learn about the Women's Soaring Pilots Association"><img src="/organization-logos/wspa-official-upload.svg" alt="Women's Soaring Pilots Association" /></Link>
           <Link href="/organizations/civil-air-patrol" aria-label="Learn about Civil Air Patrol"><img src="/organization-logos/civil-air-patrol-official.svg" alt="Civil Air Patrol" /></Link>
           <Link href="/organizations/women-in-aviation-international" aria-label="Learn about Women in Aviation International"><img src="/organization-logos/women-in-aviation-official.svg" alt="Women in Aviation International" /></Link>
           <Link href="/organizations/organization-of-black-aerospace-professionals" aria-label="Learn about the Organization of Black Aerospace Professionals"><img src="/organization-logos/obap-official.svg" alt="Organization of Black Aerospace Professionals" /></Link>
         </div>
-        <Link className="homepage-partner-link" href="/organizations">Explore All Organizations →</Link>
+        <Link className="homepage-partner-link" href="/organizations">Meet Our Partnered Organizations →</Link>
       </section>
       <Footer />
     </main>
