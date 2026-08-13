@@ -446,6 +446,16 @@ button { cursor: pointer; }
 .journey-preview-card small { display: block; color: var(--ink); font-size: 9px; }
 .homepage-narrative { margin-top: 0; background: linear-gradient(120deg, #02152c, #062746 58%, #09365c); }
 .homepage-narrative .mission-visual { background: radial-gradient(circle at 50% 35%, rgba(40,132,224,.2), transparent 62%); }
+.homepage-partner-section { padding: 64px max(4vw,calc((100% - 1320px)/2)) 70px; border-top: 1px solid #dce6f0; background: linear-gradient(180deg,#f8fbff,#eef5fb); text-align: center; }
+.homepage-partner-heading { max-width: 780px; margin: 0 auto 30px; }
+.homepage-partner-heading > span { color: var(--blue); font-size: 11px; font-weight: 560; letter-spacing: .27em; }
+.homepage-partner-heading h2 { margin: 10px 0 12px; font-family: Georgia,"Times New Roman",serif; font-size: clamp(34px,4vw,48px); font-weight: 400; letter-spacing: -.025em; }
+.homepage-partner-heading p { margin: 0; color: var(--muted); line-height: 1.65; }
+.homepage-partner-logos { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+.homepage-partner-logos a { min-height: 118px; display: grid; place-items: center; padding: 20px; border: 1px solid #dbe6f0; border-radius: 14px; background: white; box-shadow: 0 7px 22px rgba(5,35,74,.05); transition: transform .18s ease,box-shadow .18s ease; }
+.homepage-partner-logos a:hover { transform: translateY(-3px); box-shadow: 0 13px 27px rgba(5,35,74,.1); }
+.homepage-partner-logos img { width: 100%; height: 72px; object-fit: contain; }
+.homepage-partner-link { display: inline-flex; margin-top: 25px; color: var(--blue); font-size: 13px; font-weight: 650; letter-spacing: .035em; }
 .featured-organizations { padding: 17px 20px 22px; border: 1px solid #e7edf5; border-radius: 15px; background: white; box-shadow: 0 7px 22px rgba(5,35,74,.06); }
 .featured-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
 .featured-heading h3 { text-align: left; }
@@ -1058,6 +1068,12 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .org-hero,.careers-hero { color: var(--ink); background-image: linear-gradient(180deg,rgba(244,248,251,.3),rgba(5,29,57,.3)),url('/hero-gateway-live.jpg'); }
 .org-hero p,.careers-hero p { color: #294762; }
 .scholarship-search-deck { position: relative; z-index: 2; width: min(1040px,90%); margin: -38px auto 0; padding: 14px; border: 1px solid #ccd9e7; border-radius: 12px; background: white; box-shadow: 0 12px 28px rgba(5,30,61,.11); }
+.directory-resource-hero { min-height: 430px; padding-block: 58px; background-position: center 64%; }
+.directory-resource-hero > div { width: min(850px,100%); max-width: 850px; }
+.directory-resource-hero h1 { max-width: 820px; margin-bottom: 18px; font-family: Inter,"Avenir Next","Segoe UI",Arial,sans-serif; font-size: clamp(44px,5vw,66px); font-weight: 620; letter-spacing: -.035em; }
+.directory-resource-hero p { max-width: 800px; margin-bottom: 26px; font-size: 19px; }
+.directory-resource-hero .search-box { width: min(640px,100%); }
+.directory-resource-hero + .scholarship-search-deck { width: min(1040px,calc(100% - 40px)); margin: 0 auto; border-top: 0; border-radius: 0 0 12px 12px; box-shadow: 0 10px 24px rgba(5,30,61,.08); }
 .scholarship-search { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 14px; border: 1px solid #cbd7e4; border-radius: 9px; }
 .scholarship-search .icon { width: 20px; color: #5d7792; }
 .scholarship-search input { width: 100%; border: 0; outline: 0; color: var(--ink); font: inherit; }
@@ -1672,6 +1688,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .sub-hero { padding: 45px 25px; }
   .sub-hero h1 { font-size: 39px; }
   .homepage-pathways { padding: 44px 18px 28px; }
+  .homepage-partner-section { padding: 45px 18px 50px; }
+  .homepage-partner-logos { grid-template-columns: 1fr 1fr; }
+  .homepage-partner-logos a:last-child { grid-column: 1 / -1; }
   .homepage-guide { padding: 30px 18px 44px; }
   .gateway-benefit-strip { position: relative; left: auto; right: auto; bottom: auto; height: auto; grid-template-columns: 1fr 1fr; padding: 10px; background: #031a36; }
   .gateway-benefit-strip article { min-height: 145px; padding: 20px 10px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
