@@ -5,21 +5,6 @@ import { SaveButton } from "./SaveButton";
 import { organizationLogos } from "../logo-library";
 import "../organization-branding.css";
 
-const organizationMarks: Record<string, string> = {
-  "Experimental Aircraft Association & Young Eagles": "EAA",
-  "Aircraft Owners and Pilots Association": "AOPA",
-  "Civil Air Patrol": "CAP",
-  "Junior ROTC": "JROTC",
-  "Aviation Career Education Academy": "ACE",
-  "Academy of Model Aeronautics": "AMA",
-  "Red-Tailed Hawks Flying Club": "RTH",
-  "Women in Aviation International": "WAI",
-  "The Ninety-Nines": "99s",
-  "Organization of Black Aerospace Professionals": "OBAP",
-  "Soaring Society of America": "SSA",
-  "Women's Soaring Pilots Association": "WSPA",
-};
-
 const highlightIcons = ["telescope", "people", "globe", "handshake"] as const;
 
 export function OrganizationProfile({ title, summary, tags, info }: {
@@ -28,7 +13,6 @@ export function OrganizationProfile({ title, summary, tags, info }: {
   tags: readonly string[];
   info: DetailInfo;
 }) {
-  const mark = organizationMarks[title] || title.split(" ").map((word) => word[0]).join("").slice(0, 4);
   const logo = organizationLogos[title];
 
   return (
@@ -40,12 +24,12 @@ export function OrganizationProfile({ title, summary, tags, info }: {
         </div>
 
         <div className="organization-profile-header">
-          <div className={`organization-profile-mark${logo ? " has-logo" : ""}`}>
+          <div className={`organization-profile-mark${logo ? " has-logo" : " organization-name-mark"}`}>
             {logo
               ? <span className={logo.length > 1 ? "organization-logo-pair" : "organization-logo-single"}>
                   {logo.map((source, index) => <img src={source} alt={`${title} official logo${logo.length > 1 ? ` ${index + 1}` : ""}`} width="180" height="100" key={source} />)}
                 </span>
-              : <span aria-hidden="true">{mark}</span>}
+              : <span>{title}</span>}
           </div>
           <div className="organization-profile-title">
             <span>FEATURED ORGANIZATION</span>

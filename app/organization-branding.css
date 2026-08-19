@@ -26,6 +26,20 @@
   object-fit: contain;
 }
 
+.organization-profile-mark.organization-name-mark {
+  padding: 18px;
+  background: #f7faff;
+}
+
+.organization-profile-mark.organization-name-mark > span {
+  color: #173a60;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: .04em;
+  text-align: center;
+}
+
 .organization-logo-pair {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
