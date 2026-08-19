@@ -1262,6 +1262,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .gateway-guide-start > .scholarship-tracker { max-width: 520px; margin: 0 0 20px; }
 
 .career-family .directory-profile-card,.runway-scholar-card.directory-profile-card { min-height: 235px !important; }
+.runway-scholar-card.directory-profile-card { display: block !important; grid-template-columns: 1fr !important; }
 .career-family .career-grid.organization-style-career-grid article { min-height: 235px; }
 .directory-profile-copy { display: flex; flex-direction: column; justify-content: center; }
 .directory-profile-copy .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
