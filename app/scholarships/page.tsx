@@ -15,21 +15,21 @@ const sponsor = (title:string) => /EAA|Ray Aviation|Harrison Ford|Adapt to Fly/.
   : /Women’s Soaring/.test(title) ? "WSPA"
   : /Astronaut/.test(title) ? "ASF" : "FLIGHT FUNDING";
 const scholarshipSponsor = (title: string) => {
-  if (/EAA|Ray Aviation|Harrison Ford|Adapt to Fly|John S\. Bradbury|Noah Favaregh|Jason Kurt Lohr|Elgin Wells|Florence Coffy|WomenSoar|Top Gun Naval|Ceci Stratford/.test(title)) return { name: "Experimental Aircraft Association", logo: "/organization-logos/eaa.png" };
+  if (/EAA|Ray Aviation|Harrison Ford|Adapt to Fly|John S\. Bradbury|Noah Favaregh|Jason Kurt Lohr|Elgin Wells|Florence Coffy|WomenSoar|Top Gun Naval|Ceci Stratford/.test(title)) return { name: "Experimental Aircraft Association", logo: "/organization-logos/eaa.svg" };
   if (/AOPA/.test(title)) return { name: "Aircraft Owners and Pilots Association", logo: "/scholarship-logos/aopa.svg" };
-  if (/Civil Air Patrol/.test(title)) return { name: "Civil Air Patrol", logo: "/organization-logos/civil-air-patrol.png" };
+  if (/Civil Air Patrol/.test(title)) return { name: "Civil Air Patrol", logo: "/organization-logos/civil-air-patrol.svg" };
   if (/Ninety-Nines|Amelia Earhart|Vicki Cruse|Kitty Houghton/.test(title)) return { name: "The Ninety-Nines", logo: "/scholarship-logos/ninety-nines.svg" };
   if (/WSPA|Women.?s Soaring/.test(title)) return { name: "Women’s Soaring Pilots Association", logo: "/organization-logos/wspa-official-upload.svg" };
   if (/SSA|Soaring|Purduski|Stoffel|1-26 Association|Kolstad/.test(title)) return { name: "Soaring Society of America", logo: "/scholarship-logos/ssa.svg" };
   if (/Astronaut Scholarship/.test(title)) return { name: "Astronaut Scholarship Foundation", logo: "/scholarship-logos/asf.svg" };
   if (/LeRoy W\. Homer/.test(title)) return { name: "LeRoy W. Homer Jr. Foundation", logo: "/scholarship-logos/leroy-homer.svg" };
-  if (/Women in Aviation International/.test(title)) return { name: "Women in Aviation International", logo: "/organization-logos/women-in-aviation.png" };
+  if (/Women in Aviation International/.test(title)) return { name: "Women in Aviation International", logo: "/organization-logos/women-in-aviation.svg" };
   if (/Sling Pilot Academy/.test(title)) return { name: "Sling Pilot Academy", logo: "/scholarship-logos/sling.svg" };
   if (/Alaska Airlines|Benjamin L\. Ellison|Frank Sam and Betty Houston|Red-Tailed Hawks/.test(title)) return { name: "Red-Tailed Hawks Flying Club", logo: "/scholarship-logos/red-tailed-hawks.svg" };
   if (/NBAA/.test(title)) return { name: "National Business Aviation Association", logo: "/scholarship-logos/nbaa.svg" };
   if (/GAMA/.test(title)) return { name: "General Aviation Manufacturers Association", logo: "/scholarship-logos/gama.svg" };
   if (/Air & Space Forces/.test(title)) return { name: "Air & Space Forces Association", logo: "/scholarship-logos/afa.svg" };
-  return { name: sponsor(title), logo: "/organization-logos/eaa.png" };
+  return { name: sponsor(title), logo: "/organization-logos/eaa.svg" };
 };
 
 export default function Scholarships() {
