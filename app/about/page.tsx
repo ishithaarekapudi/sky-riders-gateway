@@ -21,11 +21,12 @@ export default function AboutPage() {
       <p>A young pilot and future astronaut turning her experience in aviation into clearer pathways for the next generation.</p>
     </div></section>
     <section className="section founder-introduction">
+      <figure className="founder-portrait"><img src="/ishitha-founder.jpg" alt="Ishitha Arekapudi, founder of Sky Riders Gateway"/></figure>
       <div>
         <span className="eyebrow">THE FOUNDER BEHIND GATEWAY</span>
         <h2>A Pilot Building the Gateway She Wished Existed</h2>
       </div>
-      <div>
+      <div className="founder-introduction-copy">
         <p>Ishitha’s path began with a passion for space and a Young Eagles flight at age 14. As she learned to fly, she also learned how difficult it can be for a young person to find trustworthy information, mentors, scholarships, and a clear place to begin.</p>
         <p>Sky Riders Gateway transforms those lessons into a resource for others. Her goal is to make aviation and aerospace easier to enter, and easier for every young person to imagine themselves in.</p>
         <div className="founder-role-row"><span>Private Pilot</span><span>Author</span><span>Youth Advocate</span><span>Aerospace Researcher</span></div>
