@@ -10,6 +10,12 @@
   --shadow: 0 14px 42px rgba(4, 25, 54, .11);
 }
 
+/* Scholarship sponsor identities */
+.scholarship-logo-lockup{width:100%;height:100%;min-height:210px;padding:30px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
+.scholarship-logo-lockup img{display:block;width:100%;max-width:190px;max-height:112px;object-fit:contain;filter:none}
+.scholarship-logo-lockup span{max-width:210px;color:#506987;font-size:.72rem;font-weight:600;line-height:1.35;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:760px){.scholarship-logo-lockup{min-height:142px;padding:22px 18px}.scholarship-logo-lockup img{max-width:170px;max-height:82px}}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { max-width: 100%; overflow-x: hidden; margin: 0; background: #f7f9fc; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
@@ -1416,7 +1422,9 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .about-book > div:last-child p { color: var(--muted); font-size: 18px; line-height: 1.65; }
 .about-book blockquote { margin: 28px 0; padding-left: 22px; border-left: 3px solid #e8ae3d; font-size: 22px; line-height: 1.5; }
 .about-hero .founder-title { margin: 12px 0 4px; color: #8bc3ff; font-size: clamp(20px, 2.2vw, 29px); font-weight: 700; }
-.founder-introduction { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(45px, 7vw, 100px); align-items: start; background: white; }
+.founder-introduction { display: grid; grid-template-columns: minmax(230px,.68fr) minmax(300px,.9fr) minmax(340px,1.18fr); gap: clamp(30px, 4.5vw, 70px); align-items: center; background: white; }
+.founder-portrait { min-height: 500px; height: 100%; margin: 0; overflow: hidden; border-radius: 20px; box-shadow: 0 22px 55px rgba(5,31,67,.14); }
+.founder-portrait img { width: 100%; height: 100%; min-height: 500px; display: block; object-fit: cover; object-position: 50% 48%; }
 .founder-introduction h2 { max-width: 620px; margin: 12px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(40px, 4.7vw, 62px); font-weight: 400; line-height: 1.02; letter-spacing: -.04em; }
 .founder-introduction > div:last-child > p { margin: 0 0 18px; color: var(--muted); font-size: 17px; line-height: 1.75; }
 .founder-role-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; }

@@ -3,15 +3,7 @@ import type { DetailInfo } from "../detail-content";
 import { Icon, PageShell } from "../ui";
 import { SaveButton } from "./SaveButton";
 import { ScholarshipTracker } from "./ScholarshipTracker";
-
-const sourceLogos: Record<string, string> = {
-  EAA: "/organization-logos/eaa.png",
-  "EAA Scholarships": "/organization-logos/eaa.png",
-  "Civil Air Patrol": "/organization-logos/civil-air-patrol.png",
-  "Women in Aviation International": "/organization-logos/women-in-aviation.png",
-  NASA: "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg",
-  "NASA STEM Gateway": "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg",
-};
+import { sourceLogo } from "../logo-library";
 
 const factIcons = ["telescope", "document", "people", "plane"] as const;
 
@@ -36,7 +28,7 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref 
   info: DetailInfo;
   backHref: string;
 }) {
-  const logo = sourceLogos[info.sourceLabel];
+  const logo = sourceLogo[info.sourceLabel];
   const typeLabel = kind === "Career" ? "CAREER PATH" : kind === "Scholarship" ? "FUNDING OPPORTUNITY" : "COMMUNITY GUIDE";
   const startTitle = kind === "Career" ? "Build Your Path" : "Prepare a Strong Application";
   const actionLabel = kind === "Career" ? "Explore Official Career Source ↗" : "Visit Official Scholarship ↗";

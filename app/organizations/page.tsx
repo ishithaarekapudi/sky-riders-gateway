@@ -5,12 +5,7 @@ import Link from "next/link";
 import { SaveButton } from "../components/SaveButton";
 import { organizations, slugify } from "../content";
 import { Icon, PageShell } from "../ui";
-
-const officialLogos: Record<string, string> = {
-  "Experimental Aircraft Association & Young Eagles": "https://www.eaa.org/-/media/Images/EAA/Chapters/resources/YE_logo_color-png.png?o=1",
-  "Civil Air Patrol": "https://www.gocivilairpatrol.com/local/public/shared/assets/images/websites/CAP-2017-logo-horizontal-optimized-d73f31575f10142a77f0888cdfb36256.png",
-  "Women in Aviation International": "https://assets.noviams.com/novi-file-uploads/wai/structure/wai-full-color-logo.png",
-};
+import { organizationLogos } from "../logo-library";
 
 const shortNames: Record<string, string> = {
   "Aircraft Owners and Pilots Association": "AOPA",
@@ -53,7 +48,7 @@ export default function Organizations() {
     <section className="section editorial-directory" id="organization-directory">
       <div className="section-heading"><span>TRUSTED STARTING POINTS</span><h2>Opportunity Starts With Connection</h2><p>National organizations can open a door. Local chapters, clubs, airports, and flight schools can help you walk through it.</p><small className="directory-result-count">{visible.length} organizations found</small></div>
       <div className="org-grid">{visible.map(([title,text,tags], index)=>{
-        const logo = officialLogos[title];
+        const logo = organizationLogos[title]?.[0];
         return <article className="organization-directory-card" key={title}>
           <div className="organization-directory-brand">
             {logo ? <img src={logo} alt={`${title} official logo`} loading="lazy" /> : <div className="organization-wordmark"><span>ORGANIZATION</span><strong>{shortNames[title] || title}</strong></div>}
