@@ -24,7 +24,7 @@ export function OrganizationProfile({ title, summary, tags, info }: {
         </div>
 
         <div className="organization-profile-header">
-          <div className={`organization-profile-mark${logo ? " has-logo" : " organization-name-mark"}`}>
+          <div data-organization={title} className={`organization-profile-mark${logo ? " has-logo" : " organization-name-mark"}`}>
             {logo
               ? <span className={logo.length > 1 ? "organization-logo-pair" : "organization-logo-single"}>
                   {logo.map((source, index) => <img src={source} alt={`${title} official logo${logo.length > 1 ? ` ${index + 1}` : ""}`} width="180" height="100" key={source} />)}

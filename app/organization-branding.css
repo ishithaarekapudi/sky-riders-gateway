@@ -16,6 +16,12 @@
   background: #fff;
 }
 
+/* These two organizations publish white transparent marks for dark use. */
+.organization-profile-mark.has-logo[data-organization="The Ninety-Nines"],
+.organization-profile-mark.has-logo[data-organization="National Air Transportation Association"] {
+  background: #082c56;
+}
+
 .organization-profile-mark.has-logo img {
   display: block;
   width: auto;
