@@ -10,6 +10,121 @@
   --shadow: 0 14px 42px rgba(4, 25, 54, .11);
 }
 
+/* Unified, lightweight directory cards */
+.runway-scholar-card.directory-profile-card,
+.org-grid .organization-directory-card,
+.career-family .career-grid.organization-style-career-grid article {
+  display: block !important;
+  grid-template-columns: 1fr !important;
+  min-height: 0 !important;
+  overflow: hidden;
+  border: 1px solid #dce5ee !important;
+  border-radius: 16px !important;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(6, 31, 63, .055) !important;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.runway-scholar-card.directory-profile-card:hover,
+.org-grid .organization-directory-card:hover,
+.career-family .career-grid.organization-style-career-grid article:hover {
+  transform: translateY(-3px);
+  border-color: #b9cde0 !important;
+  box-shadow: 0 15px 34px rgba(6, 31, 63, .085) !important;
+}
+.runway-scholar-card .scholar-copy,
+.organization-card-copy,
+.career-profile-card .directory-profile-copy {
+  min-height: 100%;
+  padding: 27px 64px 25px 28px !important;
+}
+.organization-card-heading,
+.career-card-heading {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 42px 16px 0;
+}
+.organization-card-heading img {
+  width: auto;
+  max-width: 116px;
+  height: auto;
+  max-height: 50px;
+  object-fit: contain;
+}
+.organization-card-heading > strong {
+  color: #173b61;
+  font-size: 16px;
+  font-weight: 600;
+}
+.organization-card-heading .organization-type,
+.career-card-heading .organization-type {
+  color: #66819b;
+  font-size: 9px;
+  font-weight: 560;
+  letter-spacing: .15em;
+}
+.career-card-heading .career-brand-icon {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid #d4e3f1;
+  border-radius: 50%;
+  background: #f4f9fe;
+  color: #176fc9;
+}
+.career-card-heading .career-brand-icon .icon { width: 25px; height: 25px; stroke-width: 1.45; }
+.organization-card-copy h3,
+.organization-card-copy h3 a,
+.career-profile-card h3,
+.career-profile-card h3 a,
+.runway-scholar-card h3,
+.runway-scholar-card h3 a {
+  font-weight: 590 !important;
+  letter-spacing: -.015em;
+  line-height: 1.22;
+}
+.organization-card-copy > p,
+.career-profile-card .directory-profile-copy > p,
+.runway-scholar-card .scholarship-card-intro {
+  color: #5e748a;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.organization-directory-card .tag-row span,
+.career-profile-card .tag-row span {
+  padding: 5px 9px;
+  border: 0;
+  background: #f1f5f9;
+  color: #48637e;
+  font-size: 10px;
+  font-weight: 500;
+}
+.runway-scholar-card .card-actions,
+.organization-directory-card .card-actions,
+.career-profile-card .card-actions { margin-top: 17px; padding-top: 14px; border-top: 1px solid #e4ebf2; }
+.runway-scholar-card .card-actions a,
+.organization-directory-card .card-actions a,
+.career-profile-card .card-actions a { font-size: 11px; font-weight: 590; letter-spacing: .025em; }
+.scholar-card > .heart-save-button,
+.organization-directory-card > .heart-save-button,
+.career-profile-card > .heart-save-button {
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  box-shadow: 0 7px 18px rgba(7, 34, 66, .07);
+}
+@media(max-width:760px) {
+  .runway-scholar-card .scholar-copy,
+  .organization-card-copy,
+  .career-profile-card .directory-profile-copy { padding: 23px 54px 22px 20px !important; }
+  .organization-card-heading,
+  .career-card-heading { margin-right: 34px; }
+}
+
 /* Scholarship sponsor identities */
 .scholarship-logo-lockup{width:100%;height:100%;min-height:210px;padding:30px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
 .scholarship-logo-lockup img{display:block;width:100%;max-width:190px;max-height:112px;object-fit:contain;filter:none}

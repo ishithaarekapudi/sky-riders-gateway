@@ -50,11 +50,11 @@ export default function Organizations() {
       <div className="org-grid">{visible.map(([title,text,tags], index)=>{
         const logo = organizationLogos[title]?.[0];
         return <article className="organization-directory-card" key={title}>
-          <div className="organization-directory-brand">
-            {logo ? <img src={logo} alt={`${title} official logo`} loading="lazy" /> : <div className="organization-wordmark"><span>ORGANIZATION</span><strong>{shortNames[title] || title}</strong></div>}
-          </div>
           <div className="organization-card-copy">
-            <span className="organization-type">AVIATION COMMUNITY</span>
+            <div className="organization-card-heading">
+              {logo ? <img src={logo} alt={`${title} official logo`} loading="lazy" /> : <strong>{shortNames[title] || title}</strong>}
+              <span className="organization-type">AVIATION COMMUNITY</span>
+            </div>
             <h3><Link href={`/organizations/${slugify(title)}`}>{title}</Link></h3>
             <p>{text}</p>
             <div className="tag-row">{tags.map(tag=><span key={tag}>{tag}</span>)}</div>
