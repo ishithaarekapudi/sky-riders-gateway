@@ -5,19 +5,7 @@ import Link from "next/link";
 import { SaveButton } from "../components/SaveButton";
 import { organizations, slugify } from "../content";
 import { Icon, PageShell } from "../ui";
-import { organizationLogos } from "../logo-library";
-
-const shortNames: Record<string, string> = {
-  "Aircraft Owners and Pilots Association": "AOPA",
-  "Junior ROTC": "JROTC",
-  "Aviation Career Education Academy": "ACE Academy",
-  "Academy of Model Aeronautics": "AMA",
-  "Red-Tailed Hawks Flying Club": "Red-Tailed Hawks",
-  "The Ninety-Nines": "The 99s",
-  "Organization of Black Aerospace Professionals": "OBAP",
-  "Soaring Society of America": "SSA",
-  "Women's Soaring Pilots Association": "WSPA",
-};
+import "../organization-branding.css";
 
 const organizationFilters = ["All Organizations", "Youth & Education", "Flight & Training", "Mentorship", "Scholarships", "Aerospace & STEM"] as const;
 
@@ -47,14 +35,10 @@ export default function Organizations() {
     </section>
     <section className="section editorial-directory" id="organization-directory">
       <div className="section-heading"><span>TRUSTED STARTING POINTS</span><h2>Opportunity Starts With Connection</h2><p>National organizations can open a door. Local chapters, clubs, airports, and flight schools can help you walk through it.</p><small className="directory-result-count">{visible.length} organizations found</small></div>
-      <div className="org-grid">{visible.map(([title,text,tags], index)=>{
-        const logo = organizationLogos[title]?.[0];
+      <div className="org-grid">{visible.map(([title,text,tags])=>{
         return <article className="organization-directory-card" key={title}>
           <div className="organization-card-copy">
-            <div className="organization-card-heading">
-              {logo ? <img src={logo} alt={`${title} official logo`} loading="lazy" /> : <strong>{shortNames[title] || title}</strong>}
-              <span className="organization-type">AVIATION COMMUNITY</span>
-            </div>
+            <span className="organization-type">AVIATION COMMUNITY</span>
             <h3><Link href={`/organizations/${slugify(title)}`}>{title}</Link></h3>
             <p>{text}</p>
             <div className="tag-row">{tags.map(tag=><span key={tag}>{tag}</span>)}</div>

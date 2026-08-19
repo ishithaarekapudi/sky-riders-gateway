@@ -3,6 +3,7 @@ import type { DetailInfo } from "../detail-content";
 import { Icon, PageShell } from "../ui";
 import { SaveButton } from "./SaveButton";
 import { organizationLogos } from "../logo-library";
+import "../organization-branding.css";
 
 const organizationMarks: Record<string, string> = {
   "Experimental Aircraft Association & Young Eagles": "EAA",

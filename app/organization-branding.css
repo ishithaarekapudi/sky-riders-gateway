@@ -1,0 +1,48 @@
+/* Organization directory cards intentionally stay unbranded. Official logos
+   appear only after a visitor opens an individual organization profile. */
+.organization-card-copy > .organization-type {
+  display: block;
+  margin: 1px 42px 12px 0;
+  color: #66819b;
+  font-size: 9px;
+  font-weight: 560;
+  letter-spacing: .15em;
+}
+
+/* Preserve the source artwork's proportions for wide, tall, and paired logos. */
+.organization-profile-mark.has-logo {
+  padding: 16px 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.organization-profile-mark.has-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 72px;
+  margin: auto;
+  object-fit: contain;
+}
+
+.organization-logo-pair {
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.organization-logo-pair img {
+  min-width: 0;
+  max-height: 62px;
+}
+
+@media (max-width: 1100px) {
+  .organization-profile-mark.has-logo { padding: 12px 14px; }
+  .organization-profile-mark.has-logo img { max-height: 58px; }
+}
+
+@media (max-width: 520px) {
+  .organization-profile-mark.has-logo { padding: 9px 11px; }
+  .organization-profile-mark.has-logo img { max-height: 46px; }
+  .organization-logo-pair { gap: 7px; }
+}
