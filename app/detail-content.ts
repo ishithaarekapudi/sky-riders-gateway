@@ -37,8 +37,8 @@ export const organizationDetails: Record<string, DetailInfo> = {
     nextSteps: ["Find a local squadron", "Attend a prospective-member meeting", "Ask about orientation flights and Cadet Wings"],
   },
   "junior-rotc": {
-    officialUrl: "https://www.airuniversity.af.edu/Holm-Center/AFJROTC/",
-    sourceLabel: "Air Force Junior ROTC",
+    officialUrl: "https://www.usarmyjrotc.com/",
+    sourceLabel: "U.S. Army Junior ROTC",
     overview: "Junior ROTC programs help high-school students develop leadership, citizenship, discipline, teamwork, and, in many units, exposure to aerospace education and aviation careers.",
     highlights: ["School-based leadership development", "Community service and team activities", "Aerospace and aviation exposure in participating programs", "No requirement to enter military service"],
     nextSteps: ["Ask whether your school offers JROTC", "Review the program’s activities and expectations", "Look for aviation or flight-focused opportunities"],
