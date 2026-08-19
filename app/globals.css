@@ -1046,7 +1046,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .scholar-layout { display: grid; grid-template-columns: 1fr 270px; gap: 28px; align-items: start; }
 .data-note { max-width: 980px; margin: -12px 0 24px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .scholar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-.scholar-card { position: relative; display: grid; grid-template-columns: 128px 1fr; min-height: 235px; overflow: hidden; border: 1px solid #d8e2ec; border-radius: 8px; background: white; box-shadow: 0 10px 24px rgba(6,26,53,.07); }
+.scholar-card { position: relative; display: block; min-height: 235px; overflow: hidden; border: 1px solid #d8e2ec; border-radius: 8px; background: white; box-shadow: 0 10px 24px rgba(6,26,53,.07); }
 .scholar-card > .heart-save-button, .organization-directory-card > .heart-save-button, .career-grid article > .heart-save-button { position: absolute; top: 14px; right: 14px; z-index: 3; margin: 0; }
 .scholar-card > .heart-save-button, .organization-directory-card > .heart-save-button { display: grid; padding: 0; border: 1px solid #cbd9e7; border-radius: 50%; background: rgba(255,255,255,.96); }
 .scholar-sponsor { display: grid; place-items: center; padding: 20px; border-right: 1px solid #dce5ef; background: #f2f6fa; color: #153a64; }
@@ -1103,7 +1103,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .runway-scholar-card .scholar-sponsor { height: 105px; border-right: 0; border-bottom: 1px solid #dce5ef; background: linear-gradient(145deg,#f7fafc,#edf3f8); }
 .runway-scholar-card .scholar-sponsor img { max-width: 180px; max-height: 66px; }
 .runway-scholar-card .scholar-sponsor strong { font-size: 17px; }
-.runway-scholar-card .scholar-copy { padding: 20px; }
+.runway-scholar-card .scholar-copy { min-height: 100%; padding: 26px 66px 24px 28px; }
 .runway-scholar-card h3 { min-height: 48px; margin: 7px 34px 14px 0; font-size: 17px; line-height: 1.35; }
 .runway-scholar-facts { display: grid; gap: 9px; padding: 13px 0; border-top: 1px solid #e1e8ef; border-bottom: 1px solid #e1e8ef; }
 .runway-scholar-facts > div { display: grid; grid-template-columns: 70px 1fr; gap: 8px; align-items: baseline; }
@@ -1267,7 +1267,6 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .directory-profile-copy .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
 .directory-profile-copy .tag-row span { margin: 0; padding: 5px 8px; font-size: 9px; }
 .runway-scholar-card { min-height: 260px !important; }
-.runway-scholar-card .scholar-sponsor { height: auto; min-height: 100%; border-right: 1px solid #dce5ef; border-bottom: 0; }
 .runway-scholar-card h3 { min-height: 0; }
 
 .gateway-match-grid.editorial-match-grid { grid-auto-rows: auto; align-items: stretch; }
@@ -1814,8 +1813,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
   .career-family .career-grid, .scholar-grid { grid-template-columns: 1fr; }
   .career-family .career-grid article { grid-template-columns: 52px 1fr; }
   .career-family > header { grid-template-columns: 45px 1fr; }
-  .scholar-card { grid-template-columns: 96px 1fr; }
-  .scholar-sponsor { padding: 12px; }
+  .runway-scholar-card .scholar-copy { padding: 22px 54px 22px 20px; }
   .resource-groups > section > div { grid-template-columns: 1fr; }
   .resource-groups article { grid-template-columns: 48px 1fr; }
   .book-resource-feature, .about-book, .book-page-hero, .book-purchase { grid-template-columns: 1fr; padding: 38px 22px; }
