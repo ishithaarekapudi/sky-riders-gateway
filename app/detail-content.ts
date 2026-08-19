@@ -92,7 +92,7 @@ export const organizationDetails: Record<string, DetailInfo> = {
     highlights: ["Find soaring clubs and commercial operators", "Youth and junior scholarships", "Safety, training, and educational resources", "Competitions and a national soaring community"],
     nextSteps: ["Find a gliderport or soaring club", "Arrange an introductory flight", "Review junior scholarships"],
   },
-  "womens-soaring-pilots-association": {
+  "women-s-soaring-pilots-association": {
     officialUrl: "https://womensoaring.org/",
     sourceLabel: "Women’s Soaring Pilots Association",
     overview: "WSPA promotes soaring for women through scholarships, mentoring, seminars, fly-ins, education, and an international community of glider pilots.",
