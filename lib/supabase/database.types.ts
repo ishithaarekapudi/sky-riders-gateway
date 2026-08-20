@@ -61,8 +61,8 @@ export type Database = {
         Relationships: [];
       };
       mentee_applications: {
-        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email: string | null; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null };
-        Insert: { id?: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas?: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email?: string | null; conduct_consent: boolean; status?: string; review_notes?: string | null; reviewed_at?: string | null };
+        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email: string | null; guardian_consent_confirmed: boolean; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null };
+        Insert: { id?: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas?: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email?: string | null; guardian_consent_confirmed?: boolean; conduct_consent: boolean; status?: string; review_notes?: string | null; reviewed_at?: string | null };
         Update: never;
         Relationships: [];
       };

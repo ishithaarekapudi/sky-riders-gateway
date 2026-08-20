@@ -236,6 +236,7 @@ export default function ExplorePage() {
 
   const aboutReady = Boolean(age && state);
   const ready = Boolean(aboutReady && selectedInterests.length);
+  const isUnder13 = age === "5–7" || age === "8–12";
   const stage = stageForAge(age);
   const firstName = name.trim().split(/\s+/)[0];
   const matchedCount = recommendations.filter((item) =>
@@ -334,11 +335,17 @@ export default function ExplorePage() {
 
   async function buildRoadmap() {
     if (!ready) return;
-    localStorage.setItem(
+    sessionStorage.setItem(
       "sky-riders-roadmap",
-      JSON.stringify({ name, age, state, interests: selectedInterests, stage }),
+      JSON.stringify({
+        name: isUnder13 ? null : name.trim() || null,
+        age,
+        state,
+        interests: selectedInterests,
+        stage,
+      }),
     );
-    if (userId) {
+    if (userId && !isUnder13) {
       setSaving(true);
       await createClient().from("explore_profiles").upsert({
         user_id: userId, display_name: name.trim() || null, age_range: age, state,
@@ -376,12 +383,17 @@ export default function ExplorePage() {
               </div>
               <div className="explore-step-card about-you-details">
                 <label className="name-field">
-                  <span>Name <small>optional</small></span>
+                  <span>First name or nickname <small>optional</small></span>
                   <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
                   <small className={`live-name-greeting${name.trim() ? " has-name" : ""}`}>
-                    {name.trim() ? `Hi, ${name.trim()}! Let’s find a path that feels like you.` : "Add your name for a more personal Gateway."}
+                    {name.trim() ? `Hi, ${name.trim()}! Let’s find a path that feels like you.` : "You can use Explore without sharing your name."}
                   </small>
                 </label>
+
+                {(age === "5–7" || age === "8–12") && <div className="explore-youth-privacy-note" role="note">
+                  <strong>Private Explore mode</strong>
+                  <p>Your answers stay only in this browser session. We do not save your name or create a profile. Please explore with a parent or guardian.</p>
+                </div>}
 
                 <fieldset className="explore-choice-group age-choice-group">
                   <legend>Age</legend>
@@ -451,7 +463,7 @@ export default function ExplorePage() {
                   <p>Here are the strongest starting points for your interests, age, and location.</p>
                   <div className="gateway-profile-chips"><b>{age}</b><b>{state}</b><b>{selectedInterests.length} interests</b></div>
                 </div>
-                {!userId && <div className="gateway-dashboard-account">
+                {!userId && age !== "5–7" && age !== "8–12" && <div className="gateway-dashboard-account">
                   <strong>Keep your full Gateway</strong>
                   <p>Create an account to unlock every match and save favorites.</p>
                   <div><Link href="/account">Sign Up</Link><Link href="/account">Log In</Link></div>
@@ -493,7 +505,7 @@ export default function ExplorePage() {
               </div>
             </div>
 
-            {!userId && <div className="gateway-unlock-strip">
+            {!userId && age !== "5–7" && age !== "8–12" && <div className="gateway-unlock-strip">
               <div><span>READY FOR THE FULL LIST?</span><h3>Save your matches and keep building your path.</h3></div>
               <Link className="primary-button" href="/account">Create My Account →</Link>
             </div>}
@@ -507,7 +519,7 @@ export default function ExplorePage() {
                     <label className="nearby-radius"><span>Search radius</span><select aria-label="Search radius" value={radiusMiles} onChange={(event)=>setRadiusMiles(event.target.value)}><option value="25">25 miles</option><option value="50">50 miles</option><option value="100">100 miles</option><option value="250">250 miles</option><option value="500">500 miles</option></select></label>
                     <button type="submit" disabled={mapSearching}>{mapSearching ? "Searching..." : "Search Area"}</button>
                   </form>
-                  <button type="button" className="nearby-location-button" onClick={useLocation}><Icon name="path"/> Use My Location</button>
+                  <button type="button" className="nearby-location-button" onClick={useLocation} disabled={isUnder13} title={isUnder13 ? "Precise location is unavailable in private youth mode." : undefined}><Icon name="path"/> {isUnder13 ? "Location Disabled in Youth Mode" : "Use My Location"}</button>
                   <strong>Filter by</strong>
                   <div className="nearby-filters">{[["map","All Locations"],["people","Squadrons"],["airplane","Flight Schools"],["spacecraft","Youth Programs"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
                   <p className="nearby-location-message" role="status">{locationMessage || (nearQuery || state ? `Showing exact verified locations plus official statewide directories for ${nearQuery || state}.` : "Choose a state to find verified local resources.")}</p>

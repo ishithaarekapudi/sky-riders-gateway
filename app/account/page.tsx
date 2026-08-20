@@ -28,6 +28,7 @@ export default function AccountPage() {
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [ageGroup, setAgeGroup] = useState("");
   const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 
   useEffect(() => {
@@ -94,13 +95,23 @@ export default function AccountPage() {
       return;
     }
 
+    if (!ageGroup) {
+      setBusy(false);
+      showMessage("Please choose your age group.", "error");
+      return;
+    }
+    if (ageGroup === "under-13") {
+      setBusy(false);
+      showMessage("Accounts are currently available for ages 13 and older. Younger explorers can use Explore privately with a parent or guardian.", "error");
+      return;
+    }
     const callback = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
     const { data, error } = await supabase.auth.signUp({
       email: submittedEmail,
       password,
       options: {
         emailRedirectTo: callback,
-        data: { display_name: submittedName, full_name: submittedName },
+        data: { display_name: submittedName, full_name: submittedName, age_group: ageGroup },
       },
     });
     setBusy(false);
@@ -149,6 +160,16 @@ export default function AccountPage() {
         {mode === "signup" && <label>Name
           <input name="name" type="text" required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" autoComplete="name" />
         </label>}
+        {mode === "signup" && <label>Age group
+          <select name="age_group" required value={ageGroup} onChange={(event) => setAgeGroup(event.target.value)}>
+            <option value="" disabled>Select your age group</option>
+            <option value="under-13">Under 13</option>
+            <option value="13-15">13–15</option>
+            <option value="16-17">16–17</option>
+            <option value="18-plus">18 or older</option>
+          </select>
+          <small>Accounts are currently for ages 13+. Mentorship has additional guardian and safety requirements.</small>
+        </label>}
         {mode !== "update-password" && <label>Email
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
         </label>}
@@ -173,6 +194,7 @@ export default function AccountPage() {
       </div>}
       {message && <div className={`account-message ${messageType}`} role="status">{message}</div>}
       {!configured && <p className="account-setup-note">Supabase connection required for live accounts. The rest of the website works without it.</p>}
+      <p className="account-privacy-note">By continuing, you agree to our <Link href="/privacy">Privacy Policy</Link> and <Link href="/youth-safety">Youth Safety Policy</Link>.</p>
       <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12, marginTop: 20, paddingTop: 18, borderTop: "1px solid #e2eaf3" }}>
         {(mode === "forgot" || mode === "update-password") && <button style={{ minHeight: 42, padding: "9px 14px", border: "1px solid #cbdced", borderRadius: 8, background: "#f7faff", color: "#1269d3", fontSize: 13, fontWeight: 650 }} type="button" onClick={() => { setMode("login"); setMessage(""); }}>← Back to login</button>}
         <Link style={{ minHeight: 42, display: "inline-flex", alignItems: "center", padding: "9px 14px", border: "1px solid #cbdced", borderRadius: 8, background: "white", color: "#244a74", fontSize: 13, fontWeight: 650 }} href="/">← Return home</Link>

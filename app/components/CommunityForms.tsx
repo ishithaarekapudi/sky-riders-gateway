@@ -78,6 +78,7 @@ export function MentorshipApplicationForms() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [ageRange, setAgeRange] = useState("");
+  const isMinor = role === "mentee" && ["13–15", "16–17"].includes(ageRange);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -85,6 +86,10 @@ export function MentorshipApplicationForms() {
     const form = new FormData(event.currentTarget);
     const areas = form.getAll("interest_areas").map(String);
     if (!areas.length) { setError("Please choose at least one interest area."); return; }
+    if (role === "mentee" && ageRange === "Under 13") {
+      setError("Mentorship requests for children under 13 are not open yet. Explore may still be used privately with a parent or guardian.");
+      return;
+    }
     setBusy(true); setError("");
     const common = {
       first_name: String(form.get("first_name") || ""), last_name: String(form.get("last_name") || ""),
@@ -102,6 +107,7 @@ export function MentorshipApplicationForms() {
       : await createClient().from("mentee_applications").insert({ ...common,
           guidance_requested: String(form.get("guidance_requested") || ""), current_stage: String(form.get("current_stage") || ""),
           guardian_email: String(form.get("guardian_email") || "") || null,
+          guardian_consent_confirmed: form.get("guardian_consent_confirmed") === "on",
         });
     setBusy(false);
     if (result.error) { setError("We could not save this application. Check the required fields or complete the database setup, then try again."); return; }
@@ -138,7 +144,7 @@ export function MentorshipApplicationForms() {
         <label><span>Email</span><input name="email" required type="email" /></label>
         <label><span>Age range</span><select name="age_range" required value={ageRange} onChange={event => setAgeRange(event.target.value)}>
           <option value="" disabled>Select one</option>
-          {role === "mentee" && <><option>Under 13, parent or guardian completing form</option><option>13–15</option><option>16–17</option></>}
+          {role === "mentee" && <><option>Under 13</option><option>13–15</option><option>16–17</option></>}
           <option>18–24</option><option>25–39</option><option>40+</option>
         </select></label>
         <label><span>City and state</span><input name="city_state" required placeholder="Virtual matches are available" /></label>
@@ -156,12 +162,14 @@ export function MentorshipApplicationForms() {
           <label className="full"><span>What would you like help with?</span><textarea name="guidance_requested" required placeholder="Tell us about your goals, questions, and what a helpful mentor could help you understand or do next." /></label>
           <label><span>Current school or career stage</span><input name="current_stage" required /></label>
           <label><span>Meeting availability</span><input name="availability" required placeholder="Days, times, and time zone" /></label>
-          <label className="full"><span>Parent or guardian email, required for minors</span><input name="guardian_email" required={ageRange === "Under 13, parent or guardian completing form" || ageRange === "13–15" || ageRange === "16–17"} type="email" /></label>
+          {ageRange === "Under 13" && <div className="full youth-form-stop" role="alert"><strong>Mentorship is not yet available for children under 13.</strong><p>You can use the Explore pathway finder privately with a parent or guardian. We will not collect a mentorship application until a verified parental-consent system is active.</p></div>}
+          <label className="full"><span>Parent or guardian email, required for ages 13–17</span><input name="guardian_email" required={isMinor} disabled={ageRange === "Under 13"} type="email" /></label>
+          {isMinor && <label className="full consent-check"><input name="guardian_consent_confirmed" required type="checkbox" /><span>I confirm that my parent or guardian knows I am submitting this request and may be contacted before any mentorship activity begins.</span></label>}
         </>}
         <label className="full consent-check"><input name="conduct_consent" required type="checkbox" /><span>I agree to the Gateway mentorship code of conduct and understand that matches are reviewed and facilitated by an approved coordinator.</span></label>
       </div>
       {error && <p className="form-error" role="alert">{error}</p>}
-      <button className="primary-button" type="submit" disabled={busy || !configured}>{busy ? "Sending..." : role === "mentor" ? "Apply to Mentor →" : "Request a Mentor →"}</button>
+      <button className="primary-button" type="submit" disabled={busy || !configured || (role === "mentee" && ageRange === "Under 13")}>{busy ? "Sending..." : role === "mentor" ? "Apply to Mentor →" : "Request a Mentor →"}</button>
     </form>}
   </div>;
 }
