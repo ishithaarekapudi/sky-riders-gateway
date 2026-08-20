@@ -15,13 +15,23 @@ alter table public.mentee_applications
       and length(trim(guardian_email)) > 3
       and guardian_consent_confirmed
     )
-  );
+  ) not valid;
 
 alter table public.mentee_applications
-  add constraint no_under_13_mentorship_requests check (age_range <> 'Under 13');
+  drop constraint if exists no_under_13_mentorship_requests;
+
+alter table public.mentee_applications
+  add constraint no_under_13_mentorship_requests check (
+    age_range not in ('Under 13', 'Under 13, parent or guardian completing form')
+  ) not valid;
 
 alter table public.mentor_applications
-  add constraint mentors_must_be_adults check (age_range in ('18–24', '25–39', '40+'));
+  drop constraint if exists mentors_must_be_adults;
+
+alter table public.mentor_applications
+  add constraint mentors_must_be_adults check (
+    age_range in ('18–24', '25–39', '40+')
+  ) not valid;
 
 drop policy if exists "Anyone can request a mentor" on public.mentee_applications;
 create policy "Anyone can request a mentor" on public.mentee_applications
@@ -29,7 +39,7 @@ create policy "Anyone can request a mentor" on public.mentee_applications
   with check (
     status = 'pending'
     and conduct_consent
-    and age_range <> 'Under 13'
+    and age_range not in ('Under 13', 'Under 13, parent or guardian completing form')
     and (
       age_range not in ('13–15', '16–17')
       or (guardian_email is not null and guardian_consent_confirmed)
