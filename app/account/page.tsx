@@ -160,7 +160,8 @@ export default function AccountPage() {
         {mode === "signup" && <label>Name
           <input name="name" type="text" required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" autoComplete="name" />
         </label>}
-        {mode === "signup" && <label>Age group
+        {mode === "signup" && <label className="account-age-field"><span>Age group</span>
+          <div className="account-select-wrap">
           <select name="age_group" required value={ageGroup} onChange={(event) => setAgeGroup(event.target.value)}>
             <option value="" disabled>Select your age group</option>
             <option value="under-13">Under 13</option>
@@ -168,7 +169,8 @@ export default function AccountPage() {
             <option value="16-17">16–17</option>
             <option value="18-plus">18 or older</option>
           </select>
-          <small>Accounts are currently for ages 13+. Mentorship has additional guardian and safety requirements.</small>
+          </div>
+          <small className="account-field-note"><span aria-hidden="true">i</span><span>Gateway accounts are available for ages 13 and older. Mentorship for teens includes additional guardian consent and safety review.</span></small>
         </label>}
         {mode !== "update-password" && <label>Email
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
