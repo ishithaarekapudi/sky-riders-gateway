@@ -441,6 +441,11 @@ button { cursor: pointer; }
 .account-panel label { display: grid; gap: 7px; color: var(--ink); font-size: 13px; font-weight: 650; }
 .account-panel input { padding: 13px 14px; border: 1px solid #ccd8e6; border-radius: 8px; outline: none; }
 .account-panel input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(20,117,233,.1); }
+.account-password-field { position: relative; }
+.account-password-field input { width: 100%; padding-right: 70px; }
+.account-password-toggle { position: absolute; top: 50%; right: 9px; min-width: 52px; padding: 7px 9px; transform: translateY(-50%); border: 0; border-radius: 7px; background: #edf5ff; color: #176fc9; font: inherit; font-size: 12px; font-weight: 550; letter-spacing: .02em; cursor: pointer; }
+.account-password-toggle:hover { background: #dfedfc; }
+.account-password-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .account-select-wrap { position: relative; }
 .account-select-wrap::after { content: ""; position: absolute; top: 50%; right: 16px; width: 8px; height: 8px; border-right: 1.5px solid #49647f; border-bottom: 1.5px solid #49647f; transform: translateY(-68%) rotate(45deg); pointer-events: none; }
 .account-panel select { width: 100%; min-height: 50px; padding: 12px 44px 12px 14px; appearance: none; border: 1px solid #ccd8e6; border-radius: 9px; outline: none; background: #fbfdff; color: #173a5e; font: inherit; font-size: 14px; font-weight: 450; }
