@@ -49,21 +49,21 @@ export type Database = {
         Relationships: [];
       };
       opportunity_submissions: {
-        Row: { id: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages: string | null; location: string | null; deadline_or_availability: string | null; cost_or_award: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null };
+        Row: { id: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages: string | null; location: string | null; deadline_or_availability: string | null; cost_or_award: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null };
         Insert: { id?: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages?: string | null; location?: string | null; deadline_or_availability?: string | null; cost_or_award?: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status?: string; review_notes?: string | null; reviewed_at?: string | null };
-        Update: never;
+        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null };
         Relationships: [];
       };
       mentor_applications: {
-        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; current_role_organization: string; experience_qualifications: string; preferred_mentee_age: string; availability: string; screening_consent: boolean; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null };
+        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; current_role_organization: string; experience_qualifications: string; preferred_mentee_age: string; availability: string; screening_consent: boolean; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null };
         Insert: { id?: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas?: string[]; current_role_organization: string; experience_qualifications: string; preferred_mentee_age: string; availability: string; screening_consent: boolean; conduct_consent: boolean; status?: string; review_notes?: string | null; reviewed_at?: string | null };
-        Update: never;
+        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null };
         Relationships: [];
       };
       mentee_applications: {
-        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email: string | null; guardian_consent_confirmed: boolean; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null };
+        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email: string | null; guardian_consent_confirmed: boolean; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null };
         Insert: { id?: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas?: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email?: string | null; guardian_consent_confirmed?: boolean; conduct_consent: boolean; status?: string; review_notes?: string | null; reviewed_at?: string | null };
-        Update: never;
+        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null; guardian_email?: string | null; guardian_consent_confirmed?: boolean };
         Relationships: [];
       };
       mentorship_matches: {
@@ -91,9 +91,15 @@ export type Database = {
         Relationships: [];
       };
       contact_inquiries: {
-        Row: { id: string; name: string; email: string; organization: string | null; topic: string; message: string; status: string; created_at: string };
+        Row: { id: string; name: string; email: string; organization: string | null; topic: string; message: string; status: string; created_at: string; review_notes: string | null; reviewed_at: string | null; reviewed_by: string | null };
         Insert: { id?: string; name: string; email: string; organization?: string | null; topic: string; message: string; status?: string };
-        Update: never;
+        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null };
+        Relationships: [];
+      };
+      admin_users: {
+        Row: { user_id: string; email: string; created_at: string };
+        Insert: { user_id: string; email: string; created_at?: string };
+        Update: { email?: string };
         Relationships: [];
       };
       newsletter_subscribers: {
