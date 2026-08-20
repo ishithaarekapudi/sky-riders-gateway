@@ -1663,6 +1663,61 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .subscribe-form input { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid #bdd0e2; border-radius: 9px; background: white; color: var(--ink); font: inherit; }
 .subscribe-form .primary-button { min-height: 50px; white-space: nowrap; }
 .subscribe-form > p { grid-column: 1 / -1; margin: 3px 0 0; font-size: 13px; font-weight: 650; }
+
+/* Protected administrator review */
+.admin-page { min-height: 100vh; padding: 58px clamp(20px, 5vw, 78px) 90px; background: #eef5fc; color: var(--ink); }
+.admin-header { display: flex; justify-content: space-between; gap: 40px; align-items: end; max-width: 1480px; margin: 0 auto 30px; }
+.admin-header h1 { margin: 9px 0 10px; font-size: clamp(38px, 5vw, 66px); letter-spacing: -.04em; }
+.admin-header p { max-width: 720px; margin: 0; color: var(--muted); font-size: 17px; }
+.admin-identity { display: grid; justify-items: end; gap: 4px; color: var(--muted); font-size: 13px; }
+.admin-identity strong { color: var(--ink); font-size: 14px; }
+.admin-identity a { margin-top: 8px; color: var(--blue); font-weight: 700; }
+.admin-tabs { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #c9dbea; border-radius: 16px; overflow: hidden; background: white; box-shadow: 0 15px 45px rgba(11, 43, 76, .07); }
+.admin-tabs button { min-height: 75px; padding: 16px 20px; border: 0; border-right: 1px solid #dce7f1; background: white; display: flex; justify-content: space-between; align-items: center; color: #49647f; font: inherit; cursor: pointer; }
+.admin-tabs button:last-child { border-right: 0; }
+.admin-tabs button.active { background: #082d58; color: white; }
+.admin-tabs button b { display: grid; place-items: center; min-width: 29px; height: 29px; padding: 0 7px; border-radius: 999px; background: #e5f1fd; color: #176dcc; font-size: 12px; }
+.admin-tabs button.active b { background: #2c82de; color: white; }
+.admin-toolbar { max-width: 1480px; margin: 38px auto 18px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.admin-toolbar h2 { margin: 0; font-size: 25px; text-transform: capitalize; }
+.admin-toolbar > div { display: flex; padding: 4px; border: 1px solid #cadbea; border-radius: 999px; background: white; }
+.admin-toolbar button { padding: 9px 15px; border: 0; border-radius: 999px; background: transparent; color: #5c7590; cursor: pointer; }
+.admin-toolbar button.active { background: #dcebfa; color: #0a5db8; }
+.admin-message { max-width: 1480px; margin: 0 auto 14px; padding: 12px 15px; border-radius: 10px; background: #dff5e8; color: #17683b; }
+.admin-review-list { max-width: 1480px; margin: 0 auto; display: grid; gap: 18px; }
+.admin-review-card, .admin-empty { padding: 28px; border: 1px solid #c9dbea; border-radius: 17px; background: white; box-shadow: 0 12px 35px rgba(17, 56, 94, .06); }
+.admin-card-heading { display: flex; justify-content: space-between; gap: 22px; padding-bottom: 18px; border-bottom: 1px solid #dfebf4; }
+.admin-card-heading span { color: #2478cf; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.admin-card-heading h3 { margin: 5px 0; font-size: 24px; }
+.admin-card-heading a { color: #4d6a86; font-size: 14px; }
+.admin-card-heading time { flex: none; color: #71879c; font-size: 12px; }
+.admin-review-card > p { color: #405e7a; line-height: 1.65; }
+.admin-review-card dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 22px; margin: 20px 0; }
+.admin-review-card dl div { display: grid; gap: 4px; padding: 12px 0; border-bottom: 1px solid #e5edf5; }
+.admin-review-card dt { color: #70879c; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.admin-review-card dd { margin: 0; color: #183a5c; line-height: 1.45; }
+.admin-review-card dd a { color: #176fd0; font-weight: 650; }
+.admin-review-controls { display: grid; grid-template-columns: minmax(180px, .35fr) 1fr auto; gap: 14px; align-items: end; padding-top: 9px; }
+.admin-review-controls label { display: grid; gap: 6px; color: #496780; font-size: 12px; font-weight: 700; }
+.admin-review-controls select, .admin-review-controls textarea { min-height: 48px; padding: 11px 13px; border: 1px solid #c4d6e6; border-radius: 9px; background: #f8fbfe; color: var(--ink); font: inherit; }
+.admin-review-controls textarea { min-height: 72px; resize: vertical; }
+.admin-review-controls .primary-button { min-height: 48px; border: 0; cursor: pointer; }
+.admin-review-controls .primary-button:disabled { opacity: .58; }
+.admin-empty { text-align: center; color: var(--muted); }
+.admin-empty h3 { margin: 0 0 7px; color: var(--ink); }
+
+@media (max-width: 800px) {
+  .admin-page { padding: 35px 15px 65px; }
+  .admin-header { display: grid; align-items: start; }
+  .admin-identity { justify-items: start; }
+  .admin-tabs { grid-template-columns: 1fr 1fr; }
+  .admin-tabs button:nth-child(2) { border-right: 0; }
+  .admin-tabs button:nth-child(-n+2) { border-bottom: 1px solid #dce7f1; }
+  .admin-toolbar { display: grid; }
+  .admin-card-heading { display: grid; }
+  .admin-review-card dl { grid-template-columns: 1fr; }
+  .admin-review-controls { grid-template-columns: 1fr; }
+}
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 .involved-hero { background: linear-gradient(90deg, rgba(2,20,44,.96), rgba(4,37,74,.6)), url('/hero-gateway-live.jpg') center 56%/cover; color: white; }
