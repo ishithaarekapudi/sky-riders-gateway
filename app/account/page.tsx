@@ -29,6 +29,7 @@ export default function AccountPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [ageGroup, setAgeGroup] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 
   useEffect(() => {
@@ -116,6 +117,10 @@ export default function AccountPage() {
     });
     setBusy(false);
     if (error) showMessage(friendlyError(error.message), "error");
+    else if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      setMode("login");
+      showMessage("An account already exists for this email. Log in below, or use Forgot password if you do not remember your password.", "info");
+    }
     else if (data.session) window.location.assign(next);
     else showMessage("Your account is almost ready. Check your email and select the confirmation link.", "success");
   }
@@ -157,8 +162,8 @@ export default function AccountPage() {
       </div>}
 
       <form onSubmit={submit}>
-        {mode === "signup" && <label>Name
-          <input name="name" type="text" required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" autoComplete="name" />
+        {mode === "signup" && <label>First name
+          <input name="name" type="text" required minLength={2} maxLength={50} value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your first name" autoComplete="given-name" />
         </label>}
         {mode === "signup" && <label className="account-age-field"><span>Age group</span>
           <div className="account-select-wrap">
@@ -176,14 +181,23 @@ export default function AccountPage() {
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
         </label>}
         {mode !== "forgot" && <label>{mode === "update-password" ? "New password" : "Password"}
-          <input
-            name="password"
-            type="password"
-            required
-            minLength={mode === "login" ? 6 : 8}
-            placeholder={mode === "login" ? "Enter your password" : "At least 8 characters"}
-            autoComplete={mode === "login" ? "current-password" : "new-password"}
-          />
+          <div className="account-password-field">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              required
+              minLength={mode === "login" ? 6 : 8}
+              placeholder={mode === "login" ? "Enter your password" : "At least 8 characters"}
+              autoComplete={mode === "login" ? "current-password" : "new-password"}
+            />
+            <button
+              type="button"
+              className="account-password-toggle"
+              aria-pressed={showPassword}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              onClick={() => setShowPassword((visible) => !visible)}
+            >{showPassword ? "Hide" : "Show"}</button>
+          </div>
         </label>}
         <button className="primary-button wide" type="submit" disabled={busy}>
           {busy ? "Please wait..." : mode === "login" ? "Log In →" : mode === "signup" ? "Create Account →" : mode === "forgot" ? "Send Reset Link →" : "Update Password →"}
