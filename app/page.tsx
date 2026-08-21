@@ -113,6 +113,11 @@ export default function Home() {
           <h2 id="homepage-partner-title">Partnered Organizations</h2>
           <p>Meet aviation and aerospace organizations helping expand access to education, mentorship, scholarships, and hands-on experiences.</p>
         </div>
+        <div className="homepage-partner-logos homepage-partner-placeholders" aria-hidden="true">
+          {Array.from({ length: 5 }, (_, index) => (
+            <div className="homepage-partner-placeholder" key={index} />
+          ))}
+        </div>
         <Link className="homepage-partner-link" href="/organizations">Meet Our Partnered Organizations →</Link>
       </section>
       <Footer />
