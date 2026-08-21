@@ -153,18 +153,6 @@ function matchCategory(item: (typeof opportunities)[number]) {
   return "Opportunity";
 }
 
-function matchBrand(title: string) {
-  if (/Young Eagles/.test(title)) return { src: "/organization-logos/young-eagles.svg", alt: "EAA Young Eagles logo" };
-  if (/Civil Air Patrol/.test(title)) return { src: "/organization-logos/civil-air-patrol.svg", alt: "Civil Air Patrol logo" };
-  if (/AOPA/.test(title)) return { src: "/organization-logos/aopa.svg", alt: "Aircraft Owners and Pilots Association official logo" };
-  if (/OBAP/.test(title)) return { src: "/organization-logos/obap.svg", alt: "Organization of Black Aerospace Professionals logo" };
-  if (/Girls in Aviation/.test(title)) return { src: "/organization-logos/women-in-aviation.svg", alt: "Women in Aviation International logo" };
-  if (/FAA ACE/.test(title)) return { src: "/organization-logos/faa.svg", alt: "Federal Aviation Administration official logo" };
-  if (/Academy of Model Aeronautics/.test(title)) return { src: "/organization-logos/ama.svg", alt: "Academy of Model Aeronautics official logo" };
-  if (/NASA/.test(title)) return { src: "/organization-logos/nasa.svg", alt: "NASA official logo" };
-  return null;
-}
-
 function directoryBrand(item: NearbyResource) {
   if (item.organization_slug === "civil-air-patrol") return { label:item.location_type === "official_finder" ? "CAP Squadron Finder" : "CAP Squadron", tone:"cap-mark", name:"Civil Air Patrol" };
   if (item.organization_slug === "federal-aviation-administration") return { label:"FAA Directory", tone:"faa-mark", name:"Federal Aviation Administration" };
@@ -383,7 +371,7 @@ export default function ExplorePage() {
               </div>
               <div className="explore-step-card about-you-details">
                 <label className="name-field">
-                  <span>First name or nickname <small>optional</small></span>
+                  <span>First name or nickname <small>(optional)</small></span>
                   <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Enter your name" />
                   <small className={`live-name-greeting${name.trim() ? " has-name" : ""}`}>
                     {name.trim() ? `Hi, ${name.trim()}! Let’s find a path that feels like you.` : "You can use Explore without sharing your name."}
@@ -489,9 +477,7 @@ export default function ExplorePage() {
                 {visibleMatches.map((item) => {
                   const category=matchCategory(item);
                   const matchedInterests=item.interests.filter((interest)=>selectedInterests.includes(interest));
-                  const brand=matchBrand(item.title);
                   return <article className={`gateway-match-card editorial-match-card category-${category.toLowerCase().replace(" ","-")}`} key={item.title}>
-                    <div className={`compact-match-icon option-c-brand ${brand ? "official-brand" : "pathway-brand"}`}>{brand ? <img src={brand.src} alt={brand.alt}/> : <Icon name={item.icon}/>}</div>
                     <div className="editorial-match-copy">
                       <small>{category}</small>
                       <h3>{item.title}</h3>

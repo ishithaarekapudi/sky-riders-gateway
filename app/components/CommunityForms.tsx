@@ -5,9 +5,12 @@ import { createClient } from "../../lib/supabase/client";
 
 const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 
-function ConnectionNotice() {
+function ConnectionNotice({ mentorshipRole }: { mentorshipRole?: "mentor" | "mentee" }) {
+  const safetyText = mentorshipRole
+    ? "Mentor and mentee applications are privately reviewed and vetted before a match is made. Approved participants are introduced by email. Every mentor is 18 or older and consents to identity, reference, and, when appropriate, background screening. When a mentee is under 18, their parent or guardian is included in introductions and ongoing communication."
+      : "Your information goes to Gateway's review queue and is not displayed publicly.";
   return configured
-    ? <p className="form-connection-notice"><strong>Private submission:</strong> Your information goes to Gateway's review queue and is not displayed publicly.</p>
+    ? <p className="form-connection-notice"><strong>Private submission:</strong> {safetyText}</p>
     : <p className="form-preview-notice"><strong>Setup incomplete:</strong> The form cannot save until the Gateway database tables are created.</p>;
 }
 
@@ -132,7 +135,7 @@ export function MentorshipApplicationForms() {
       <p>Your application is securely stored for review. Gateway will contact you before suggesting a match, and no profile will be publicly searchable.</p>
       <button type="button" className="small-button" onClick={() => setComplete(false)}>Review the Form</button>
     </div> : <form className="community-form" onSubmit={submit}>
-      <ConnectionNotice />
+      <ConnectionNotice mentorshipRole={role} />
       <div className="community-form-heading">
         <span>{role === "mentor" ? "SHARE YOUR EXPERIENCE" : "BUILD YOUR SUPPORT SYSTEM"}</span>
         <h2>{role === "mentor" ? "Mentor Application" : "Mentee Application"}</h2>

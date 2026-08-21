@@ -25,7 +25,7 @@ export default function DashboardPage() {
       if (!user) { setLoading(false); return; }
       setSignedIn(true);
       setEmail(user.email || "");
-      setAccountName(String(user.user_metadata?.display_name || user.user_metadata?.full_name || ""));
+      setAccountName(String(user.user_metadata?.first_name || user.user_metadata?.display_name || user.user_metadata?.full_name || ""));
       const [profileResult, savesResult] = await Promise.all([
         supabase.from("explore_profiles").select("display_name,age_range,state,interests").eq("user_id", user.id).maybeSingle(),
         supabase.from("saved_items").select("item_id,item_label,created_at").eq("user_id", user.id).order("created_at", { ascending: false }),

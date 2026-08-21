@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { createClient } from "../../lib/supabase/client";
 import type { Database } from "../../lib/supabase/database.types";
+import { BrandLogo } from "../ui";
 
 type Opportunity = Database["public"]["Tables"]["opportunity_submissions"]["Row"];
 type Mentor = Database["public"]["Tables"]["mentor_applications"]["Row"];
@@ -90,7 +91,7 @@ export function AdminReviewDashboard({ adminId, adminEmail, initial }: {
   const counts = (Object.keys(records) as QueueKey[]).reduce((result, key) => ({ ...result, [key]: records[key].filter((item) => key === "contacts" ? item.status !== "closed" : !["approved", "declined", "matched"].includes(item.status)).length }), {} as Record<QueueKey, number>);
 
   return <main className="admin-page">
-    <header className="admin-header"><div><span className="eyebrow">PRIVATE ADMINISTRATOR AREA</span><h1>Submission Review</h1><p>Review applications and community submissions without placing private details in email.</p></div><div className="admin-identity"><span>Signed in securely as</span><strong>{adminEmail}</strong><Link href="/dashboard">My Gateway</Link></div></header>
+    <header className="admin-header"><div className="admin-brand"><BrandLogo /></div><div className="admin-heading"><span className="eyebrow">PRIVATE ADMINISTRATOR AREA</span><h1>Gateway Review Center</h1><p>Review mentorship applications, community submissions, and inquiries in one secure place.</p></div><div className="admin-identity"><span>Signed in securely as</span><strong>{adminEmail}</strong><Link href="/dashboard">Return to My Gateway →</Link></div></header>
     <nav className="admin-tabs" aria-label="Review queues">
       {(Object.keys(records) as QueueKey[]).map((key) => <button key={key} className={queue === key ? "active" : ""} onClick={() => setQueue(key)}><span>{key === "opportunities" ? "Submissions" : key[0].toUpperCase() + key.slice(1)}</span><b>{counts[key]}</b></button>)}
     </nav>

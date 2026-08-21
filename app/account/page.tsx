@@ -103,7 +103,7 @@ export default function AccountPage() {
     }
     if (ageGroup === "under-13") {
       setBusy(false);
-      showMessage("Accounts are currently available for ages 13 and older. Younger explorers can use Explore privately with a parent or guardian.", "error");
+      showMessage("If you are under 13, please ask a parent or guardian to create and manage a Gateway account for you.", "error");
       return;
     }
     const callback = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
@@ -112,7 +112,7 @@ export default function AccountPage() {
       password,
       options: {
         emailRedirectTo: callback,
-        data: { display_name: submittedName, full_name: submittedName, age_group: ageGroup },
+        data: { display_name: submittedName, first_name: submittedName, age_group: ageGroup },
       },
     });
     setBusy(false);
@@ -175,7 +175,7 @@ export default function AccountPage() {
             <option value="18-plus">18 or older</option>
           </select>
           </div>
-          <small className="account-field-note"><span aria-hidden="true">i</span><span>Gateway accounts are available for ages 13 and older. Mentorship for teens includes additional guardian consent and safety review.</span></small>
+          <small className="account-field-note"><span aria-hidden="true">i</span><span>Gateway accounts are available for ages 13 and older. If you are under 13, please ask a parent or guardian to create and manage an account for you. Mentorship for teens includes additional guardian consent and safety review.</span></small>
         </label>}
         {mode !== "update-password" && <label>Email
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
