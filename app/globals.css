@@ -805,6 +805,8 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .profile-fields label { display: grid; gap: 8px; }
 .profile-fields label > span { color: var(--ink); font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
 .profile-fields label small { color: var(--muted); font-weight: 500; letter-spacing: 0; text-transform: none; }
+.profile-fields .name-field > span { font-weight: 600; }
+.profile-fields .name-field > span small { font-weight: 400; }
 .profile-fields input, .profile-fields select { width: 100%; height: 50px; padding: 0 14px; border: 1px solid #cbd6e3; border-radius: 8px; outline: none; background: #fbfcfe; color: var(--ink); font: inherit; }
 .profile-fields input:focus, .profile-fields select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(15,112,231,.12); }
 .explore-choice-group { margin: 30px 0 0; padding: 0; border: 0; }
