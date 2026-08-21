@@ -19,9 +19,10 @@ function secureEqual(left: string, right: string) {
 export async function POST(request: NextRequest) {
   const webhookSecret = process.env.SUPABASE_WEBHOOK_SECRET;
   const resendKey = process.env.RESEND_API_KEY;
+  const recipient = process.env.ADMIN_ALERT_EMAIL;
   const providedSecret = request.headers.get("x-webhook-secret") || "";
 
-  if (!webhookSecret || !resendKey) return NextResponse.json({ error: "Email alerts are not configured." }, { status: 503 });
+  if (!webhookSecret || !resendKey || !recipient) return NextResponse.json({ error: "Email alerts are not configured." }, { status: 503 });
   if (!secureEqual(providedSecret, webhookSecret)) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
 
   const payload = await request.json().catch(() => null) as { type?: string; table?: string } | null;
@@ -32,7 +33,6 @@ export async function POST(request: NextRequest) {
   const alert = alertTypes[payload.table];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ishitha.us";
   const adminUrl = `${siteUrl.replace(/\/$/, "")}/admin`;
-  const recipient = process.env.ADMIN_ALERT_EMAIL || "ishithaarekapudi@gmail.com";
   const sender = process.env.ALERT_FROM_EMAIL || "Sky Riders Gateway <onboarding@resend.dev>";
 
   const response = await fetch("https://api.resend.com/emails", {

@@ -10,8 +10,14 @@ export function AccountActions({ mobile = false, onNavigate }: { mobile?: boolea
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => { setSignedIn(Boolean(data.user)); setAdmin(data.user?.email?.toLowerCase() === "ishithaarekapudi@gmail.com"); });
-    const { data } = supabase.auth.onAuthStateChange((_event, session) => { setSignedIn(Boolean(session?.user)); setAdmin(session?.user?.email?.toLowerCase() === "ishithaarekapudi@gmail.com"); });
+    const updateAccountState = async (userId?: string) => {
+      setSignedIn(Boolean(userId));
+      if (!userId) return setAdmin(false);
+      const { data: adminUser } = await supabase.from("admin_users").select("user_id").eq("user_id", userId).maybeSingle();
+      setAdmin(Boolean(adminUser));
+    };
+    supabase.auth.getUser().then(({ data }) => updateAccountState(data.user?.id));
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => { void updateAccountState(session?.user?.id); });
     return () => data.subscription.unsubscribe();
   }, []);
 

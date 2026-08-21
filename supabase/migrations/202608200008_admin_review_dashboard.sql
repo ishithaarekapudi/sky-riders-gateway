@@ -25,11 +25,8 @@ $$;
 revoke all on function public.is_gateway_admin() from public;
 grant execute on function public.is_gateway_admin() to authenticated;
 
-insert into public.admin_users (user_id, email)
-select id, lower(email)
-from auth.users
-where lower(email) = 'ishithaarekapudi@gmail.com'
-on conflict (user_id) do update set email = excluded.email;
+-- Add administrators privately from the Supabase SQL editor after deployment.
+-- Do not commit personal administrator email addresses to the public repository.
 
 drop policy if exists "Administrators can view their role" on public.admin_users;
 create policy "Administrators can view their role" on public.admin_users
