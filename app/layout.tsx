@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./explore-refinement.css";
 
@@ -29,5 +30,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       { "@type":"WebSite", "@id":"https://sky-riders-gateway.vercel.app/#website", url:"https://sky-riders-gateway.vercel.app", name:"Sky Riders Gateway", publisher:{"@id":"https://sky-riders-gateway.vercel.app/#organization"}, inLanguage:"en-US", audience:{"@type":"EducationalAudience",educationalRole:"student"} }
     ]
   };
-  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}}/>{children}</body></html>;
+  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}}/>{children}<Analytics /></body></html>;
 }
