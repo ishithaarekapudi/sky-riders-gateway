@@ -40,5 +40,11 @@ export function nationwideDirectories(state: string): VerifiedLocation[] {
       latitude:Number.NaN, longitude:Number.NaN, official_url:"https://www.eaa.org/eaa/eaa-chapters/find-an-eaa-chapter", source_url:"https://www.eaa.org/eaa/eaa-chapters/find-an-eaa-chapter",
       description:`Find EAA chapters, Young Eagles activities, aviation workshops, and chapter programs throughout ${state}.`,
     },
+    {
+      id:`${key}-ssa-soaring`, organization_slug:"soaring-society-of-america", organization_name:"Soaring Society of America",
+      location_name:`Soaring Clubs and Glider Schools in ${state}`, location_type:"official_finder", city:"Statewide", state, postal_code:"",
+      latitude:Number.NaN, longitude:Number.NaN, official_url:"https://www.ssa.org/where-to-fly-map/", source_url:"https://www.ssa.org/where-to-fly-map/",
+      description:`Use the Soaring Society of America’s official map to find glider clubs, commercial soaring sites, and training near you in ${state}.`,
+    },
   ];
 }

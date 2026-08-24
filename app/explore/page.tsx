@@ -10,6 +10,7 @@ import { nationwideDirectories, verifiedLocations } from "./verified-locations";
 
 const interests = [
   ["airplane", "Pilot"],
+  ["airplane", "Gliding & Soaring"],
   ["spacecraft", "Space Exploration"],
   ["gear", "Aerospace Engineering"],
   ["cloud", "Weather & Meteorology"],
@@ -41,6 +42,18 @@ const states = [
 ];
 
 const opportunities = [
+  {
+    icon: "airplane", title: "Learn to Soar",
+    text: "Find glider instruction, soaring clubs, youth camps, and a path toward your first solo flight.",
+    href: "/gliding",
+    interests: ["Gliding & Soaring", "Pilot", "Still Exploring"],
+  },
+  {
+    icon: "school", title: "SSA Discover Soaring Scholarship",
+    text: "Explore training support that helps young non-pilots begin learning to fly gliders.",
+    href: "/scholarships/ssa-discover-soaring-scholarship",
+    interests: ["Gliding & Soaring", "Pilot", "Still Exploring"],
+  },
   {
     icon: "airplane", title: "EAA Young Eagles",
     text: "Discover free introductory flights and a welcoming first step into aviation.",
@@ -201,6 +214,13 @@ export default function ExplorePage() {
   }, []);
 
   useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("interest");
+    if (requested && interests.some(([, label]) => label === requested)) {
+      setSelectedInterests((current) => current.includes(requested) ? current : [...current, requested]);
+    }
+  }, []);
+
+  useEffect(() => {
     const chosenState = nearQuery.trim() || state;
     if (!chosenState || !states.includes(chosenState)) { setNearbyResources([]); return; }
     setNearbyBusy(true);
@@ -252,6 +272,7 @@ export default function ExplorePage() {
       if(nearFilter==="Squadrons") return item.location_type==="squadron" || item.organization_slug==="civil-air-patrol";
       if(nearFilter==="Flight Schools") return item.location_type==="flight_school" || item.organization_slug==="federal-aviation-administration";
       if(nearFilter==="Youth Programs") return item.location_type==="chapter" || item.location_type==="program" || item.organization_slug==="experimental-aircraft-association";
+      if(nearFilter==="Soaring Clubs") return item.organization_slug==="soaring-society-of-america" || item.organization_slug==="women-s-soaring-pilots-association";
       return true;
     };
     const radius=Number(radiusMiles);
@@ -496,7 +517,7 @@ export default function ExplorePage() {
               <Link className="primary-button" href="/account">Create My Account →</Link>
             </div>}
 
-            <section className="explore-nearby">
+            <section className="explore-nearby" id="near-you">
               <div className="nearby-heading"><div><span>NEAR YOU</span><h2>Opportunities Near You</h2><p>Discover programs, events, mentors, and resources in your area.</p></div><small>{state || "Choose a location"}</small></div>
               <div className="nearby-layout">
                 <aside className="nearby-controls">
@@ -507,7 +528,7 @@ export default function ExplorePage() {
                   </form>
                   <button type="button" className="nearby-location-button" onClick={useLocation} disabled={isUnder13} title={isUnder13 ? "Precise location is unavailable in private youth mode." : undefined}><Icon name="path"/> {isUnder13 ? "Location Disabled in Youth Mode" : "Use My Location"}</button>
                   <strong>Filter by</strong>
-                  <div className="nearby-filters">{[["map","All Locations"],["people","Squadrons"],["airplane","Flight Schools"],["spacecraft","Youth Programs"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
+                  <div className="nearby-filters">{[["map","All Locations"],["people","Squadrons"],["airplane","Flight Schools"],["spacecraft","Youth Programs"],["airplane","Soaring Clubs"]].map(([icon,label])=><button type="button" className={nearFilter===label?"active":""} onClick={()=>setNearFilter(label)} key={label}><Icon name={icon}/>{label}</button>)}</div>
                   <p className="nearby-location-message" role="status">{locationMessage || (nearQuery || state ? `Showing exact verified locations plus official statewide directories for ${nearQuery || state}.` : "Choose a state to find verified local resources.")}</p>
                 </aside>
                 <div className="gateway-map live-location-map">

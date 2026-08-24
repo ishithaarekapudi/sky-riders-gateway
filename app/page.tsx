@@ -107,6 +107,29 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="gliding-spotlight" aria-labelledby="gliding-spotlight-title">
+        <div className="gliding-spotlight-art" aria-hidden="true">
+          <span className="glider-wing" />
+          <span className="glider-trail" />
+          <small>PATHWAY SPOTLIGHT</small>
+        </div>
+        <div className="gliding-spotlight-copy">
+          <span>DISCOVER SOARING</span>
+          <h2 id="gliding-spotlight-title">Your First Flight Could Be Without an Engine.</h2>
+          <p>Start flying sooner than you think. Gliding gives young people a hands-on introduction to aircraft control, weather, judgment, and the aviation community.</p>
+          <div className="gliding-age-row" aria-label="United States glider age milestones">
+            <div><strong>No FAA minimum</strong><small>Begin lessons with an instructor</small></div>
+            <div><strong>14</strong><small>Eligible to solo a glider</small></div>
+            <div><strong>16</strong><small>Eligible for a private glider certificate</small></div>
+          </div>
+          <div className="gliding-spotlight-actions">
+            <Link className="primary-button" href="/gliding">Explore Gliding →</Link>
+            <Link className="gliding-secondary-link" href="/explore?interest=Gliding%20%26%20Soaring#near-you">Find a Soaring Club Near Me</Link>
+          </div>
+          <small className="gliding-source-note">U.S. age milestones. Training and local program requirements vary.</small>
+        </div>
+      </section>
+
       <section className="homepage-partner-section" aria-labelledby="homepage-partner-title">
         <div className="homepage-partner-heading">
           <span>BUILDING THE GATEWAY TOGETHER</span>

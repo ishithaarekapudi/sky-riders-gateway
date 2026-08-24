@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { SaveButton } from "../components/SaveButton";
 import { scholarships, slugify } from "../content";
@@ -18,6 +18,12 @@ const sponsor = (title:string) => /EAA|Ray Aviation|Harrison Ford|Adapt to Fly/.
 export default function Scholarships() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<(typeof filters)[number]>("All Opportunities");
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("filter");
+    if (requested && filters.includes(requested as (typeof filters)[number])) {
+      setFilter(requested as (typeof filters)[number]);
+    }
+  }, []);
   const visible = useMemo(() => scholarships.filter(([,title,,tags]) => {
     const text = `${title} ${tags}`.toLowerCase();
     const matchesQuery = text.includes(query.toLowerCase());
