@@ -589,25 +589,25 @@ button { cursor: pointer; }
 .homepage-narrative .mission-visual { background: radial-gradient(circle at 50% 35%, rgba(40,132,224,.2), transparent 62%); }
 
 /* Gliding pathway spotlight and guide */
-.gliding-spotlight{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(520px,1.1fr);min-height:620px;background:#061f3d;color:#fff;overflow:hidden}
+.gliding-spotlight{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(520px,1.1fr);min-height:620px;background:#061f3d;color:#fff;overflow:hidden;font-family:Inter,"Avenir Next","Segoe UI",Arial,sans-serif}
 .gliding-spotlight-art{position:relative;min-height:620px;background:linear-gradient(135deg,rgba(2,25,52,.18),rgba(2,25,52,.78)),url('/hero-gateway-live.jpg') center/cover;isolation:isolate}
 .gliding-spotlight-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 58%,#061f3d 100%);z-index:-1}
-.gliding-spotlight-art small{position:absolute;left:8%;top:8%;font-size:11px;letter-spacing:.28em;font-weight:560;color:#a9d6ff}
+.gliding-spotlight-art small{position:absolute;left:8%;top:8%;font-family:inherit;font-size:11px;letter-spacing:.28em;font-weight:500;color:#a9d6ff}
 .glider-wing{position:absolute;width:min(72%,520px);height:66px;left:11%;top:42%;border-top:5px solid rgba(255,255,255,.96);border-radius:50%;transform:rotate(-8deg);filter:drop-shadow(0 10px 18px rgba(0,0,0,.28))}
 .glider-wing::before{content:"";position:absolute;width:44%;height:22px;left:28%;top:-14px;border-top:5px solid #fff;border-radius:50%;transform:rotate(8deg)}
 .glider-wing::after{content:"";position:absolute;width:5px;height:70px;left:50%;top:-24px;background:#fff;border-radius:100%;transform:rotate(8deg)}
 .glider-trail{position:absolute;width:46%;height:190px;left:37%;top:48%;border:2px solid transparent;border-left-color:rgba(130,195,255,.75);border-radius:50%;transform:rotate(-34deg)}
 .gliding-spotlight-copy{display:flex;flex-direction:column;justify-content:center;padding:70px clamp(38px,6vw,92px) 70px clamp(28px,5vw,70px)}
-.gliding-spotlight-copy>span,.gliding-page-hero>div>span,.gliding-milestones>div>span{color:#74b9ff;font-size:12px;font-weight:560;letter-spacing:.25em}
+.gliding-spotlight-copy>span,.gliding-page-hero>div>span,.gliding-milestones>div>span{color:#74b9ff;font-family:Inter,"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12px;font-weight:500;letter-spacing:.25em}
 .gliding-spotlight-copy h2{max-width:680px;margin:15px 0 22px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(42px,5vw,68px);font-weight:500;line-height:1.02;letter-spacing:-.035em}
-.gliding-spotlight-copy>p{max-width:680px;margin:0;color:#c3d5e8;font-size:18px;line-height:1.7}
+.gliding-spotlight-copy>p{max-width:680px;margin:0;color:#c3d5e8;font-family:inherit;font-size:18px;font-weight:400;line-height:1.7}
 .gliding-age-row{display:grid;grid-template-columns:repeat(3,1fr);margin:34px 0 30px;border-block:1px solid rgba(154,199,241,.25)}
 .gliding-age-row>div{padding:22px 18px;border-right:1px solid rgba(154,199,241,.25)}
 .gliding-age-row>div:first-child{padding-left:0}.gliding-age-row>div:last-child{border-right:0}
-.gliding-age-row strong,.gliding-age-row small{display:block}.gliding-age-row strong{font-size:22px;font-weight:580;color:#fff}.gliding-age-row small{margin-top:7px;color:#9fb8d1;line-height:1.45}
-.gliding-spotlight-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}.gliding-spotlight-actions .primary-button{font-weight:560;letter-spacing:.055em}
-.gliding-secondary-link{color:#bfe0ff;text-decoration:none;border-bottom:1px solid rgba(191,224,255,.5);padding-bottom:5px}
-.gliding-source-note{margin-top:20px;color:#7f9bb6;line-height:1.5}
+.gliding-age-row strong,.gliding-age-row small{display:block;font-family:inherit}.gliding-age-row strong{font-size:22px;font-weight:540;color:#fff}.gliding-age-row small{margin-top:7px;color:#9fb8d1;font-weight:400;line-height:1.45}
+.gliding-spotlight-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}.gliding-spotlight-actions .primary-button{font-family:inherit;font-weight:520;letter-spacing:.055em}
+.gliding-secondary-link{color:#bfe0ff;font-family:inherit;font-weight:450;text-decoration:none;border-bottom:1px solid rgba(191,224,255,.5);padding-bottom:5px}
+.gliding-source-note{margin-top:20px;color:#7f9bb6;font-family:inherit;font-weight:400;line-height:1.5}
 .gliding-page-hero{min-height:570px;display:flex;align-items:center;padding:70px max(7vw,calc((100% - 1320px)/2));color:#fff;background:linear-gradient(90deg,rgba(2,25,52,.92),rgba(2,25,52,.35)),url('/hero-gateway-live.jpg') center 65%/cover}
 .gliding-page-hero>div{max-width:780px}.gliding-page-hero h1{margin:14px 0 20px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(52px,7vw,88px);font-weight:500;line-height:.98;letter-spacing:-.04em}.gliding-page-hero p{max-width:680px;color:#d5e2ef;font-size:19px;line-height:1.65}.gliding-page-hero>div>div{display:flex;gap:25px;align-items:center;flex-wrap:wrap;margin-top:30px}.gliding-page-hero>div>div>a:not(.primary-button){color:#d5eaff;text-decoration:none;border-bottom:1px solid #83bdf2;padding-bottom:5px}
 .gliding-intro,.gliding-opportunities{padding:90px max(5vw,calc((100% - 1260px)/2));background:#fff}.gliding-intro .section-heading,.gliding-opportunities .section-heading{max-width:820px;margin:0 auto 46px;text-align:center}.gliding-intro .section-heading h2,.gliding-opportunities .section-heading h2{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:clamp(38px,5vw,58px);margin:12px 0}.gliding-intro .section-heading p{color:#60748c;line-height:1.7;font-size:17px}.gliding-intro .section-heading>span,.gliding-opportunities .section-heading>span{color:#1478e8;font-size:11px;letter-spacing:.25em;font-weight:560}
