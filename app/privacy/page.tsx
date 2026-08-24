@@ -1,5 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { PageShell } from "../ui";
+
+export const metadata: Metadata = { title: "Privacy Policy", description: "Learn how Sky Riders Gateway collects, uses, safeguards, retains, and deletes personal information, including protections for young people.", alternates: { canonical: "/privacy" } };
 
 export default function PrivacyPage() {
   return <PageShell active="resources">

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./explore-refinement.css";
 
+const siteUrl = "https://www.ishitha.us";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sky-riders-gateway.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: { default: "Sky Riders Gateway", template: "%s | Sky Riders Gateway" },
   description: "Explore aviation and aerospace careers, scholarships, mentors, organizations, and youth opportunities with a personalized pathway from Sky Riders Gateway.",
   keywords: ["aviation careers","aerospace careers","aviation scholarships","youth aviation programs","student pilot resources","aerospace opportunities","aviation mentors","Sky Riders Gateway"],
@@ -11,6 +13,17 @@ export const metadata: Metadata = {
   creator: "Sky Riders Gateway",
   publisher: "Sky Riders Gateway",
   alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website", locale: "en_US", url: "/", siteName: "Sky Riders Gateway",
     title: "Sky Riders Gateway | Aviation and Aerospace Pathways",
@@ -25,8 +38,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     "@context":"https://schema.org", "@graph":[
-      { "@type":"Organization", "@id":"https://sky-riders-gateway.vercel.app/#organization", name:"Sky Riders Gateway", url:"https://sky-riders-gateway.vercel.app", logo:"https://sky-riders-gateway.vercel.app/brand/sky-riders-mark-v3.png", founder:{"@type":"Person",name:"Ishitha Arekapudi"}, description:"A gateway connecting young people with aviation and aerospace pathways, scholarships, organizations, mentors, and practical next steps." },
-      { "@type":"WebSite", "@id":"https://sky-riders-gateway.vercel.app/#website", url:"https://sky-riders-gateway.vercel.app", name:"Sky Riders Gateway", publisher:{"@id":"https://sky-riders-gateway.vercel.app/#organization"}, inLanguage:"en-US", audience:{"@type":"EducationalAudience",educationalRole:"student"} }
+      { "@type":"Organization", "@id":`${siteUrl}/#organization`, name:"Sky Riders Gateway", url:siteUrl, logo:`${siteUrl}/brand/sky-riders-mark-v3.png`, founder:{"@type":"Person",name:"Ishitha Arekapudi",url:`${siteUrl}/about`}, description:"A gateway connecting young people with aviation and aerospace pathways, scholarships, organizations, mentors, and practical next steps." },
+      { "@type":"WebSite", "@id":`${siteUrl}/#website`, url:siteUrl, name:"Sky Riders Gateway", publisher:{"@id":`${siteUrl}/#organization`}, inLanguage:"en-US", audience:{"@type":"EducationalAudience",educationalRole:"student"} }
     ]
   };
   return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}}/>{children}</body></html>;

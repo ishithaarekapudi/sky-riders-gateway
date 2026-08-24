@@ -1,6 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { OpportunitySubmissionForm } from "../../components/CommunityForms";
 import { PageShell } from "../../ui";
+
+export const metadata: Metadata = { title: "Submit an Aviation Opportunity", description: "Recommend a trustworthy aviation or aerospace organization, scholarship, program, event, or resource for Gateway review.", alternates: { canonical: "/get-involved/submit" } };
 
 export default function SubmitOpportunityPage() {
   return <PageShell active="get-involved">

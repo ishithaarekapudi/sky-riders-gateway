@@ -1,5 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Icon, PageShell } from "../ui";
+
+export const metadata: Metadata = { title: "Get Involved", description: "Share a trusted aviation or aerospace opportunity, become a mentor, or request guidance through Sky Riders Gateway.", alternates: { canonical: "/get-involved" } };
 
 export default function GetInvolvedPage() {
   return <PageShell active="get-involved">

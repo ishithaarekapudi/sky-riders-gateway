@@ -1,5 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Icon, PageShell } from "../../ui";
+
+export const metadata: Metadata = { title: "About Sky Riders Gateway", description: "Learn how Sky Riders Gateway makes aviation and aerospace opportunities easier for young people to see, understand, and pursue.", alternates: { canonical: "/about/gateway" } };
 
 const gatewayPillars = [
   ["search", "See What Is Possible", "Discover aviation and aerospace careers, programs, scholarships, and communities in one clear place."],

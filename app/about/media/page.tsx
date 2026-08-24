@@ -1,7 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { PageShell } from "../../ui";
 import { SubscribeForm } from "../ContactSubscribeForms";
 import { mediaLogos } from "../media-logos";
+
+export const metadata: Metadata = { title: "Ishitha Arekapudi Media and Press", description: "Explore selected interviews and media features about Ishitha Arekapudi, aviation, aerospace, youth access, and Sky Riders Gateway.", alternates: { canonical: "/about/media" } };
 
 export default function MediaPage() {
   return <PageShell active="about">

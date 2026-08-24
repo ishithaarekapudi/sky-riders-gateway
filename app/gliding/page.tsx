@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Icon, PageShell } from "../ui";
 
 export const metadata: Metadata = {
-  title: "Gliding and Soaring for Young Pilots | Sky Riders Gateway",
+  title: "Gliding and Soaring for Young Pilots",
   description: "Learn how to begin glider training, find soaring clubs, and discover youth gliding scholarships and programs.",
+  alternates: { canonical: "/gliding" },
+  openGraph: { title: "Gliding and Soaring for Young Pilots | Sky Riders Gateway", description: "Learn how to begin glider training, find soaring clubs, and discover youth gliding scholarships and programs.", url: "/gliding" },
 };
 
 const reasons = [

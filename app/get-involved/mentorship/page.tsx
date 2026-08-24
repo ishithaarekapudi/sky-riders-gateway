@@ -1,6 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { MentorshipApplicationForms } from "../../components/CommunityForms";
 import { Icon, PageShell } from "../../ui";
+
+export const metadata: Metadata = { title: "Aviation and Aerospace Mentorship", description: "Apply to become a reviewed Sky Riders Gateway mentor or request aviation and aerospace guidance through a safeguarded matching process.", alternates: { canonical: "/get-involved/mentorship" } };
 
 export default function MentorshipPage() {
   return <PageShell active="get-involved">
