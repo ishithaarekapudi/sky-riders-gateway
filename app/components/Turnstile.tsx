@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -9,6 +8,9 @@ type TurnstileApi = {
   render: (container: HTMLElement, options: Record<string, unknown>) => string;
   remove: (widgetId: string) => void;
 };
+
+const scriptId = "cloudflare-turnstile-script";
+const scriptSrc = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 
 declare global {
   interface Window {
@@ -53,15 +55,48 @@ export function Turnstile() {
 
   useEffect(() => {
     if (!siteKey) return;
-    const timer = window.setInterval(() => {
-      if (window.turnstile) {
-        window.clearInterval(timer);
-        renderWidget();
+
+    let cancelled = false;
+    let timeout = 0;
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    const handleLoad = () => {
+      if (!cancelled && window.turnstile) renderWidget();
+    };
+
+    const handleError = () => {
+      if (!cancelled) setStatus("error");
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      // A stale script element can remain after client-side navigation even when
+      // the browser did not execute it. Replace it so the verification can retry.
+      if (script && !window.turnstile) {
+        script.remove();
+        script = null;
       }
-    }, 150);
+
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = scriptSrc;
+      script.async = true;
+      script.defer = true;
+      script.addEventListener("load", handleLoad);
+      script.addEventListener("error", handleError);
+      document.head.appendChild(script);
+
+      timeout = window.setTimeout(() => {
+        if (!cancelled && !window.turnstile) setStatus("error");
+      }, 10000);
+    }
 
     return () => {
-      window.clearInterval(timer);
+      cancelled = true;
+      window.clearTimeout(timeout);
+      script?.removeEventListener("load", handleLoad);
+      script?.removeEventListener("error", handleError);
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.remove(widgetIdRef.current);
         widgetIdRef.current = null;
@@ -74,13 +109,6 @@ export function Turnstile() {
   }
 
   return <div className="turnstile-field" aria-live="polite">
-    <Script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-      strategy="afterInteractive"
-      onLoad={renderWidget}
-      onReady={renderWidget}
-      onError={() => setStatus("error")}
-    />
     <span className="turnstile-label">Security check</span>
     <input type="hidden" name="cf-turnstile-response" value={token} />
     <div ref={containerRef} className="turnstile-widget" />
