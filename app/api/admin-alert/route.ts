@@ -7,6 +7,7 @@ const alertTypes: Record<string, { label: string; queue: string }> = {
   mentor_applications: { label: "mentor application", queue: "Mentors" },
   mentee_applications: { label: "mentee application", queue: "Mentees" },
   contact_inquiries: { label: "contact inquiry", queue: "Contacts" },
+  data_deletion_requests: { label: "privacy or deletion request", queue: "Privacy" },
 };
 
 function secureEqual(left: string, right: string) {

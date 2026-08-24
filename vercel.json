@@ -1,0 +1,6 @@
+{
+  "crons": [
+    { "path": "/api/parent-consent/send-followups", "schedule": "15 17 * * *" }
+  ]
+}
+

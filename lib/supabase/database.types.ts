@@ -61,9 +61,9 @@ export type Database = {
         Relationships: [];
       };
       mentee_applications: {
-        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email: string | null; guardian_consent_confirmed: boolean; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null };
+        Row: { id: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email: string | null; guardian_consent_confirmed: boolean; guardian_consent_verified_at: string | null; guardian_consent_verified_by: string | null; guardian_consent_verification_method: string | null; conduct_consent: boolean; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null; retention_delete_after: string | null };
         Insert: { id?: string; first_name: string; last_name: string; email: string; age_range: string; city_state: string; meeting_format: string; interest_areas?: string[]; guidance_requested: string; current_stage: string; availability: string; guardian_email?: string | null; guardian_consent_confirmed?: boolean; conduct_consent: boolean; status?: string; review_notes?: string | null; reviewed_at?: string | null };
-        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null; guardian_email?: string | null; guardian_consent_confirmed?: boolean };
+        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null; guardian_email?: string | null; guardian_consent_confirmed?: boolean; guardian_consent_verified_at?: string | null; guardian_consent_verified_by?: string | null; guardian_consent_verification_method?: string | null; retention_delete_after?: string | null };
         Relationships: [];
       };
       mentorship_matches: {
@@ -106,6 +106,24 @@ export type Database = {
         Row: { id: string; email: string; first_name: string | null; source: string; status: string; created_at: string; updated_at: string };
         Insert: { id?: string; email: string; first_name?: string | null; source?: string; status?: string; created_at?: string; updated_at?: string };
         Update: { first_name?: string | null; source?: string; status?: string; updated_at?: string };
+        Relationships: [];
+      };
+      parental_consents: {
+        Row: { id: string; parent_user_id: string; parent_email: string; parent_name: string; relationship_to_child: string; status: string; privacy_notice_version: string; consent_token_hash: string; revocation_token_hash: string; initial_notice_sent_at: string; parent_affirmed_at: string | null; second_notice_due_at: string | null; second_notice_sent_at: string | null; revoked_at: string | null; expires_at: string; created_at: string; updated_at: string };
+        Insert: { id?: string; parent_user_id: string; parent_email: string; parent_name: string; relationship_to_child: string; status?: string; privacy_notice_version: string; consent_token_hash: string; revocation_token_hash: string; initial_notice_sent_at?: string; parent_affirmed_at?: string | null; second_notice_due_at?: string | null; second_notice_sent_at?: string | null; revoked_at?: string | null; expires_at?: string; created_at?: string; updated_at?: string };
+        Update: Partial<Database["public"]["Tables"]["parental_consents"]["Insert"]>;
+        Relationships: [];
+      };
+      parent_managed_explore_profiles: {
+        Row: { id: string; parent_user_id: string; parental_consent_id: string; child_nickname: string | null; age_range: string; state: string; interests: string[]; current_stage: string; created_at: string; updated_at: string };
+        Insert: { id?: string; parent_user_id: string; parental_consent_id: string; child_nickname?: string | null; age_range: string; state: string; interests: string[]; current_stage: string; created_at?: string; updated_at?: string };
+        Update: { child_nickname?: string | null; age_range?: string; state?: string; interests?: string[]; current_stage?: string; updated_at?: string };
+        Relationships: [];
+      };
+      data_deletion_requests: {
+        Row: { id: string; user_id: string | null; requester_name: string; requester_email: string; request_scope: string; details: string | null; status: string; review_notes: string | null; reviewed_at: string | null; reviewed_by: string | null; created_at: string };
+        Insert: { id?: string; user_id?: string | null; requester_name: string; requester_email: string; request_scope: string; details?: string | null; status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null; created_at?: string };
+        Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null };
         Relationships: [];
       };
     };

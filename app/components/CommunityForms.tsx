@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { createClient } from "../../lib/supabase/client";
+import { submitProtectedForm, Turnstile } from "./Turnstile";
 
 const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 
@@ -25,7 +25,7 @@ export function OpportunitySubmissionForm() {
     if (!configured) { setError("The database connection is not active yet."); return; }
     setBusy(true); setError("");
     const form = new FormData(event.currentTarget);
-    const { error: submitError } = await createClient().from("opportunity_submissions").insert({
+    try { await submitProtectedForm("opportunity", {
       submission_type: kind,
       name: String(form.get("name") || ""),
       official_url: String(form.get("official_url") || ""),
@@ -37,9 +37,8 @@ export function OpportunitySubmissionForm() {
       submitter_name: String(form.get("submitter_name") || ""),
       submitter_email: String(form.get("submitter_email") || ""),
       submitter_connection: String(form.get("submitter_connection") || ""),
-    });
+    }, form); } catch (submitError) { setBusy(false); setError(submitError instanceof Error ? submitError.message : "We could not save this submission."); return; }
     setBusy(false);
-    if (submitError) { setError("We could not save this submission. Please try again after the database setup is completed."); return; }
     setComplete(true);
   }
 
@@ -68,6 +67,7 @@ export function OpportunitySubmissionForm() {
       <label className="full"><span>Your connection to this opportunity</span><input name="submitter_connection" required placeholder="Organizer, participant, educator, community member, or other" /></label>
       <label className="full consent-check"><input required type="checkbox" /><span>I confirm that this information is accurate to the best of my knowledge and may be reviewed by Sky Riders Gateway.</span></label>
     </div>
+    <Turnstile />
     {error && <p className="form-error" role="alert">{error}</p>}
     <button className="primary-button" type="submit" disabled={busy || !configured}>{busy ? "Sending..." : "Send for Review →"}</button>
   </form>;
@@ -100,20 +100,19 @@ export function MentorshipApplicationForms() {
       city_state: String(form.get("city_state") || ""), meeting_format: String(form.get("meeting_format") || ""),
       interest_areas: areas, availability: String(form.get("availability") || ""), conduct_consent: form.get("conduct_consent") === "on",
     };
-    const result = role === "mentor"
-      ? await createClient().from("mentor_applications").insert({ ...common,
+    try { await submitProtectedForm(role, role === "mentor"
+      ? { ...common,
           current_role_organization: String(form.get("current_role_organization") || ""),
           experience_qualifications: String(form.get("experience_qualifications") || ""),
           preferred_mentee_age: String(form.get("preferred_mentee_age") || ""),
           screening_consent: form.get("screening_consent") === "on",
-        })
-      : await createClient().from("mentee_applications").insert({ ...common,
+        }
+      : { ...common,
           guidance_requested: String(form.get("guidance_requested") || ""), current_stage: String(form.get("current_stage") || ""),
           guardian_email: String(form.get("guardian_email") || "") || null,
           guardian_consent_confirmed: form.get("guardian_consent_confirmed") === "on",
-        });
+        }, form); } catch (submitError) { setBusy(false); setError(submitError instanceof Error ? submitError.message : "We could not save this application."); return; }
     setBusy(false);
-    if (result.error) { setError("We could not save this application. Check the required fields or complete the database setup, then try again."); return; }
     setComplete(true);
   }
 
@@ -141,6 +140,7 @@ export function MentorshipApplicationForms() {
         <h2>{role === "mentor" ? "Mentor Application" : "Mentee Application"}</h2>
         <p>{role === "mentor" ? "Tell us where your experience could help someone take a confident next step." : "Tell us what you want to explore and what kind of guidance would help."}</p>
       </div>
+      <Turnstile />
       <div className="community-form-grid">
         <label><span>First name</span><input name="first_name" required /></label>
         <label><span>Last name</span><input name="last_name" required /></label>

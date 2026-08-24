@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { createClient } from "../../lib/supabase/client";
 import { BrandLogo } from "../ui";
+import { Turnstile } from "../components/Turnstile";
 
 type AccountMode = "login" | "signup" | "forgot" | "update-password";
 
@@ -14,6 +15,7 @@ function friendlyError(message: string) {
   if (normalized.includes("user already registered") || normalized.includes("already been registered")) return "An account already exists for this email. Try logging in or resetting your password.";
   if (normalized.includes("password should be")) return "Please choose a password with at least 8 characters.";
   if (normalized.includes("rate limit")) return "Please wait a moment before trying again.";
+  if (normalized.includes("captcha")) return "Please complete the security check before continuing.";
   return message;
 }
 
@@ -62,14 +64,22 @@ export default function AccountPage() {
     const submittedEmail = String(form.get("email") || email).trim();
     const submittedName = String(form.get("name") || name).trim();
     const password = String(form.get("password") || "");
+    const captchaToken = String(form.get("cf-turnstile-response") || "");
     const supabase = createClient();
     const next = safeNext();
     setBusy(true);
     setMessage("");
 
+    if (mode !== "update-password" && !captchaToken) {
+      setBusy(false);
+      showMessage("Please complete the security check before continuing.", "error");
+      return;
+    }
+
     if (mode === "forgot") {
       const { error } = await supabase.auth.resetPasswordForEmail(submittedEmail, {
         redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent("/account?mode=update-password")}`,
+        captchaToken,
       });
       setBusy(false);
       if (error) showMessage(friendlyError(error.message), "error");
@@ -89,7 +99,7 @@ export default function AccountPage() {
     }
 
     if (mode === "login") {
-      const { error } = await supabase.auth.signInWithPassword({ email: submittedEmail, password });
+      const { error } = await supabase.auth.signInWithPassword({ email: submittedEmail, password, options: { captchaToken } });
       setBusy(false);
       if (error) showMessage(friendlyError(error.message), "error");
       else window.location.assign(next);
@@ -112,6 +122,7 @@ export default function AccountPage() {
       password,
       options: {
         emailRedirectTo: callback,
+        captchaToken,
         data: { display_name: submittedName, first_name: submittedName, age_group: ageGroup },
       },
     });
@@ -132,10 +143,16 @@ export default function AccountPage() {
     }
     setBusy(true);
     const next = safeNext();
+    const captchaToken = (document.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value || "";
+    if (!captchaToken) {
+      setBusy(false);
+      showMessage("Please complete the security check before resending your confirmation.", "error");
+      return;
+    }
     const { error } = await createClient().auth.resend({
       type: "signup",
       email: email.trim(),
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` },
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`, captchaToken },
     });
     setBusy(false);
     if (error) showMessage(friendlyError(error.message), "error");
@@ -175,7 +192,7 @@ export default function AccountPage() {
             <option value="18-plus">18 or older</option>
           </select>
           </div>
-          <small className="account-field-note"><span aria-hidden="true">i</span><span>Gateway accounts are available for ages 13 and older. If you are under 13, please ask a parent or guardian to create and manage an account for you. Mentorship for teens includes additional guardian consent and safety review.</span></small>
+          <small className="account-field-note"><span aria-hidden="true">i</span><span>Gateway accounts are available for ages 13 and older. If you are under 13, ask a parent or guardian to create an adult account, then use the <Link href="/parent-consent">parent-managed Explore controls</Link>. Mentorship for teens includes additional guardian consent and safety review.</span></small>
         </label>}
         {mode !== "update-password" && <label>Email
           <input name="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
@@ -199,6 +216,7 @@ export default function AccountPage() {
             >{showPassword ? "Hide" : "Show"}</button>
           </div>
         </label>}
+        {mode !== "update-password" && <Turnstile key={mode} />}
         <button className="primary-button wide" type="submit" disabled={busy}>
           {busy ? "Please wait..." : mode === "login" ? "Log In →" : mode === "signup" ? "Create Account →" : mode === "forgot" ? "Send Reset Link →" : "Update Password →"}
         </button>
