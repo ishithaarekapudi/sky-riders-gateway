@@ -1,13 +1,17 @@
+import { withPageSeo } from "../lib/seo";
+
 import Link from "next/link";
 import { Footer, Header, Icon } from "./ui";
 
+export const metadata = withPageSeo({ title: "Aviation Careers, Scholarships & Youth Programs", description: "Find aviation and aerospace careers, flight-training scholarships, youth programs, and mentors. Plan your next step with Sky Riders Gateway.", alternates: { canonical: "/" } });
+
 const aviationPaths = [
-  ["airplane", "Pilot", "Learn how to begin a path toward the flight deck."],
-  ["spacecraft", "Space", "Explore spacecraft, missions, and careers beyond Earth."],
-  ["gear", "Aerospace Engineering", "Design and build the systems that make flight possible."],
-  ["cloud", "Weather & Climate", "Understand the atmosphere that shapes every mission."],
-  ["wrench", "Aircraft Maintenance", "Help keep aircraft safe, reliable, and ready to fly."],
-  ["drone", "Drones & Robotics", "Build and operate the next generation of flight technology."],
+  ["airplane", "Pilot", "Learn how to begin a path toward the flight deck.", "/careers/professional-pilot-careers"],
+  ["spacecraft", "Space", "Explore spacecraft, missions, and careers beyond Earth.", "/careers/space-science-and-astronautics"],
+  ["gear", "Aerospace Engineering", "Design and build the systems that make flight possible.", "/careers/aeronautical-engineering"],
+  ["cloud", "Weather & Climate", "Understand the atmosphere that shapes every mission.", "/careers/meteorology"],
+  ["wrench", "Aircraft Maintenance", "Help keep aircraft safe, reliable, and ready to fly.", "/careers/aircraft-maintenance"],
+  ["drone", "Drones & Robotics", "Build and operate the next generation of flight technology.", "/careers/drone-pilot"],
 ] as const;
 
 const journeySteps = [
@@ -31,7 +35,7 @@ export default function Home() {
       <section className="live-home" aria-label="Sky Riders Gateway introduction">
         <Header active="home" originalLogo />
         <div className="gateway-stage">
-          <img className="gateway-art" src="/hero-gateway-live.jpg" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
+          <img width={1672} height={941} fetchPriority="high" className="gateway-art" src="/hero-gateway-live.jpg" alt="A runway beneath a monumental gateway arch, with an airplane approaching at sunrise" />
           <div className="gateway-shade" aria-hidden="true" />
           <div className="hero-copy">
             <h1>Welcome to<br />Sky Riders Gateway</h1>
@@ -82,12 +86,12 @@ export default function Home() {
       <section className="homepage-pathways">
         <div className="section-heading"><span>EXPLORE YOUR PATH</span><h2>Find Your Place in Aviation and Aerospace</h2><p>These six areas are starting points, not limits. Choose what catches your attention to understand the work, skills, and possibilities connected to it.</p></div>
         <div className="aviation-path-grid">
-          {aviationPaths.map(([icon, title, text]) => (
-            <article className="aviation-path-card" key={title}>
+          {aviationPaths.map(([icon, title, text, href]) => (
+            <Link className="aviation-path-card" style={{ color: "inherit", textDecoration: "none" }} key={title} href={href}>
               <span className="path-symbol" aria-hidden="true"><Icon name={icon} /></span>
               <strong>{title}</strong>
               <small>{text}</small>
-            </article>
+            </Link>
           ))}
         </div>
         <div className="homepage-journey-preview">

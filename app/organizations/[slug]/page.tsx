@@ -1,3 +1,4 @@
+import { withPageSeo } from "../../../lib/seo";
 import { notFound } from "next/navigation";
 import { OrganizationProfile } from "../../components/OrganizationProfile";
 import { organizations, slugify } from "../../content";
@@ -11,7 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
   const {slug}=await params; const organization=organizations.find(([title])=>slugify(title)===slug); const info=organizationDetails[slug];
   if(!organization||!info)return{};
-  return {title:organization[0],description:organization[1],alternates:{canonical:`/organizations/${slug}`},openGraph:{title:`${organization[0]} | Sky Riders Gateway`,description:organization[1],url:`/organizations/${slug}`,type:"article",images:[]},twitter:{card:"summary",title:organization[0],description:organization[1],images:[]}};
+  return withPageSeo({title:organization[0],description:organization[1],alternates:{canonical:`/organizations/${slug}`},openGraph:{type:"article"}});
 }
 
 export default async function OrganizationDetail({params}:{params:Promise<{slug:string}>}) {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./explore-refinement.css";
 
-const siteUrl = "https://www.ishitha.us";
+import { siteUrl, socialImage } from "../lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,19 +16,15 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
   },
   openGraph: {
     type: "website", locale: "en_US", url: "/", siteName: "Sky Riders Gateway",
     title: "Sky Riders Gateway | Aviation and Aerospace Pathways",
     description: "Turn curiosity into a clear aviation or aerospace path through trusted careers, scholarships, programs, mentors, and next steps.",
-    images: [{ url: "/hero-gateway-live.jpg", width: 2048, height: 1024, alt: "Sky Riders Gateway aviation and aerospace pathway" }],
+    images: [socialImage],
   },
   twitter: { card: "summary_large_image", title: "Sky Riders Gateway", description: "Find aviation and aerospace careers, scholarships, programs, mentors, and practical next steps.", images: ["/hero-gateway-live.jpg"] },
   icons: { icon: "/brand/sky-riders-mark-v3.png", apple: "/brand/sky-riders-mark-v3.png" },
