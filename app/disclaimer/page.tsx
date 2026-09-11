@@ -1,8 +1,9 @@
+import { withPageSeo } from "../../lib/seo";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PageShell } from "../ui";
 
-export const metadata: Metadata = { title: "Terms and Disclaimer", description: "Read the educational-use, external-link, accuracy, mentorship, privacy, and verification terms for Sky Riders Gateway.", alternates: { canonical: "/disclaimer" } };
+export const metadata: Metadata = withPageSeo({ title: "Terms and Disclaimer", description: "Read the educational-use, external-link, accuracy, mentorship, privacy, and verification terms for Sky Riders Gateway.", alternates: { canonical: "/disclaimer" } });
 
 export default function DisclaimerPage() {
   return <PageShell active="resources">

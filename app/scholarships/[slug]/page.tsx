@@ -1,3 +1,4 @@
+import { withPageSeo } from "../../../lib/seo";
 import { notFound } from "next/navigation";
 import { DetailPage } from "../../components/DetailPage";
 import { scholarships, slugify } from "../../content";
@@ -12,7 +13,7 @@ export async function generateMetadata({params}:{params:Promise<{slug:string}>})
   const {slug}=await params; const scholarship=scholarships.find(([,title])=>slugify(title)===slug); const info=scholarshipDetails[slug];
   if(!scholarship||!info)return{};
   const description=`${scholarship[1]}: ${scholarship[2]}. Review eligibility, key details, application steps, and the official source.`;
-  return {title:scholarship[1],description,alternates:{canonical:`/scholarships/${slug}`},openGraph:{title:`${scholarship[1]} | Sky Riders Gateway`,description:info.overview,url:`/scholarships/${slug}`,type:"article",images:[]},twitter:{card:"summary",title:scholarship[1],description,images:[]}};
+  return withPageSeo({title:scholarship[1],description,alternates:{canonical:`/scholarships/${slug}`},openGraph:{type:"article"}});
 }
 
 export default async function ScholarshipDetail({params}:{params:Promise<{slug:string}>}) {

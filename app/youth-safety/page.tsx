@@ -1,8 +1,9 @@
+import { withPageSeo } from "../../lib/seo";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PageShell } from "../ui";
 
-export const metadata: Metadata = { title: "Youth Safety Policy", description: "Review Sky Riders Gateway mentorship safeguards, guardian requirements, communication boundaries, and youth reporting procedures.", alternates: { canonical: "/youth-safety" } };
+export const metadata: Metadata = withPageSeo({ title: "Youth Safety Policy", description: "Review Sky Riders Gateway mentorship safeguards, guardian requirements, communication boundaries, and youth reporting procedures.", alternates: { canonical: "/youth-safety" } });
 
 export default function YouthSafetyPage() {
   return <PageShell active="get-involved">

@@ -1,3 +1,4 @@
+import { withPageSeo } from "../../../lib/seo";
 import { notFound } from "next/navigation";
 import { DetailPage } from "../../components/DetailPage";
 import { careerPaths, slugify } from "../../content";
@@ -11,7 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
   const {slug}=await params; const career=careerPaths.find(([,title])=>slugify(title)===slug); const info=careerDetails[slug];
   if(!career||!info)return{};
-  return {title:`${career[1]} Career Guide`,description:career[2],alternates:{canonical:`/careers/${slug}`},openGraph:{title:`${career[1]} Career Guide | Sky Riders Gateway`,description:career[2],url:`/careers/${slug}`,type:"article",images:[]},twitter:{card:"summary",title:`${career[1]} Career Guide`,description:career[2],images:[]}};
+  return withPageSeo({title:`${career[1]} Career Guide`,description:career[2],alternates:{canonical:`/careers/${slug}`},openGraph:{type:"article"}});
 }
 
 export default async function CareerDetail({params}:{params:Promise<{slug:string}>}) {
