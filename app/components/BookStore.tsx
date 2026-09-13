@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const prices = { Paperback: 14.99, Digital: 1.99 } as const;
+const paperbackPrice = 14.99;
 
 export function BookStore() {
-  const [format, setFormat] = useState<"Paperback" | "Digital">("Paperback");
   const [quantity, setQuantity] = useState(1);
   const [cartOpen, setCartOpen] = useState(false);
   const [inCart, setInCart] = useState(false);
@@ -16,11 +15,8 @@ export function BookStore() {
     return () => { document.body.style.overflow = ""; };
   }, [cartOpen]);
 
-  const price = prices[format];
-  const total = (price * quantity).toFixed(2);
-  const checkoutLink = format === "Paperback"
-    ? process.env.NEXT_PUBLIC_STRIPE_PRINT_LINK
-    : process.env.NEXT_PUBLIC_STRIPE_DIGITAL_LINK;
+  const total = (paperbackPrice * quantity).toFixed(2);
+  const checkoutLink = process.env.NEXT_PUBLIC_STRIPE_PRINT_LINK;
   const addToCart = () => {
     setInCart(true);
     setCartOpen(true);
@@ -45,13 +41,9 @@ export function BookStore() {
       </div>
       <aside className="book-buy-card">
         <h3>Cleared for Takeoff</h3>
-        <label>Format</label>
-        <div className="format-options">
-          <button className={format === "Paperback" ? "active" : ""} onClick={() => setFormat("Paperback")}>Paperback</button>
-          <button className={format === "Digital" ? "active" : ""} onClick={() => setFormat("Digital")}>Digital</button>
-        </div>
-        <strong className="book-price">${price.toFixed(2)}</strong>
-        <small>{format === "Paperback" ? "Print edition" : "Digital edition"}</small>
+        <span className="book-format">Paperback edition</span>
+        <strong className="book-price">${paperbackPrice.toFixed(2)}</strong>
+        <small>Shipping is calculated securely at checkout.</small>
         <label>Quantity</label>
         <div className="quantity-stepper">
           <button onClick={() => setQuantity(value => Math.max(1, value - 1))} aria-label="Decrease quantity">−</button>
@@ -71,7 +63,7 @@ export function BookStore() {
         <div className="cart-success">✓ <span>Added to your cart</span></div>
         <div className="cart-product">
           <img src="/cleared-for-takeoff-cover.jpg" alt="Cleared for Takeoff"/>
-          <div><h3>Cleared for Takeoff</h3><span>{format}</span><strong>${price.toFixed(2)}</strong><div className="quantity-stepper"><button onClick={() => setQuantity(value => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button onClick={() => setQuantity(value => value + 1)}>+</button></div></div>
+          <div><h3>Cleared for Takeoff</h3><span>Paperback</span><strong>${paperbackPrice.toFixed(2)}</strong><div className="quantity-stepper"><button onClick={() => setQuantity(value => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button onClick={() => setQuantity(value => value + 1)}>+</button></div></div>
           <button className="cart-remove" onClick={() => setInCart(false)} aria-label="Remove from cart">Remove</button>
         </div>
       </> : <div className="empty-cart"><h3>Your cart is empty.</h3><button onClick={() => setCartOpen(false)}>Continue Shopping</button></div>}
@@ -79,7 +71,7 @@ export function BookStore() {
         <button className="promo-toggle" onClick={() => setPromoOpen(value => !value)}>Enter a promo code <span>{promoOpen ? "−" : "+"}</span></button>
         {promoOpen && <div className="promo-entry"><input placeholder="Promo code"/><button>Apply</button></div>}
         <div className="cart-summary"><span>Subtotal <b>${total}</b></span><span>Shipping <b>Calculated at checkout</b></span><strong>Estimated total <b>${total}</b></strong></div>
-        {checkoutLink ? <a className="checkout-button" href={checkoutLink} target="_blank" rel="noreferrer">Secure Checkout ↗</a> : <button className="checkout-button" onClick={() => alert("Add the Stripe payment link for this format in Vercel to activate checkout.")}>Secure Checkout</button>}
+        {checkoutLink ? <a className="checkout-button" href={checkoutLink}>Secure Checkout ↗</a> : <button className="checkout-button" onClick={() => alert("Add the Stripe paperback payment link in Vercel to activate checkout.")}>Secure Checkout</button>}
         <button className="continue-button" onClick={() => setCartOpen(false)}>Continue Shopping</button>
         <small>🔒 Secure checkout</small>
       </div>}
