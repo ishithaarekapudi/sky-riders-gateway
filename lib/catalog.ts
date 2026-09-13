@@ -32,9 +32,15 @@ export const getCatalog = unstable_cache(async (kind: CatalogKind): Promise<Cata
   // provider outage. Published database records take over automatically once
   // the query succeeds again.
   if (error) return seededCatalog(kind);
-  const saved = (data || []).map(row => fromRow(kind, row));
+  const seed = seededCatalog(kind);
+  const saved = (data || []).map(row => fromRow(kind, row)).map(item => {
+    const original = seed.find(entry => entry.slug === item.slug);
+    // Keep the curated detail-page logo when an editable record has not added
+    // its own image yet.
+    return original && !item.logoUrl ? { ...item, logoUrl: original.logoUrl } : item;
+  });
   // The original directory remains available while individual entries are
   // progressively moved into the editable database.
-  return [...seededCatalog(kind).filter(seed => !saved.some(item => item.slug === seed.slug)), ...saved]
+  return [...seed.filter(seed => !saved.some(item => item.slug === seed.slug)), ...saved]
     .sort((a,b) => a.order - b.order || a.title.localeCompare(b.title));
 }, ["gateway-catalog-v1"], { revalidate: 60, tags: ["gateway-catalog"] });
