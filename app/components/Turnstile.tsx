@@ -125,11 +125,22 @@ export async function submitProtectedForm(kind: string, payload: Record<string, 
   const data = JSON.stringify({ kind, payload, captchaToken });
   const multipart = new FormData(); multipart.set("data", data);
   if (file instanceof File && file.size) multipart.set("logo", file);
-  const response = await fetch("/api/public-submissions", {
-    method: "POST",
-    headers: file instanceof File && file.size ? undefined : { "Content-Type": "application/json" },
-    body: file instanceof File && file.size ? multipart : data,
-  });
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 20000);
+  let response: Response;
+  try {
+    response = await fetch("/api/public-submissions", {
+      method: "POST",
+      headers: file instanceof File && file.size ? undefined : { "Content-Type": "application/json" },
+      body: file instanceof File && file.size ? multipart : data,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") throw new Error("The request took too long. Please try again.");
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
   const result = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(result.error || "We could not verify this submission. Please try again.");
   return result;
