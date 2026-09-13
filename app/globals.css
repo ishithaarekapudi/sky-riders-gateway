@@ -2195,6 +2195,19 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .turnstile-label { display: block; margin-bottom: 10px; color: #092044; font-size: .9rem; font-weight: 600; letter-spacing: .02em; }
 .turnstile-widget { width: 100%; min-height: 65px; }
 .turnstile-status { display: block; margin-top: 7px; color: #667b96; font-size: .82rem; }
+.privacy-request-form { max-width: 760px; margin-top: 34px; }
+.privacy-request-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.privacy-request-form label { display: grid; gap: 8px; color: #173858; font-size: 14px; font-weight: 600; }
+.privacy-request-form input, .privacy-request-form select, .privacy-request-form textarea { width: 100%; min-width: 0; border: 1px solid #bfd1e5; border-radius: 9px; background: #fff; color: #0a2344; font: inherit; font-weight: 400; line-height: 1.45; }
+.privacy-request-form input, .privacy-request-form select { min-height: 48px; padding: 10px 12px; }
+.privacy-request-form textarea { min-height: 126px; padding: 12px; resize: vertical; }
+.privacy-request-form input:focus, .privacy-request-form select:focus, .privacy-request-form textarea:focus { outline: 3px solid rgba(22,116,232,.2); border-color: #1674e8; }
+.privacy-request-form small { color: #627892; font-size: 12px; font-weight: 400; }
+.privacy-request-wide { grid-column: 1 / -1; }
+.privacy-request-message { margin: 0 0 16px !important; padding: 12px 14px; border-radius: 9px; background: #eef6ff; color: #173858 !important; font-size: 14px !important; }
+.privacy-request-form .primary-button { margin-top: 10px; }
+@media (max-width: 620px) { .privacy-request-fields { grid-template-columns: 1fr; } .privacy-request-wide { grid-column: auto; } }
+
 .turnstile-status.error { color: #a52832; }
 .captcha-setup-note { color: #6b7d96; font-size: .9rem; margin: 16px 0; }
 .subscribe-form .turnstile-field { flex-basis: 100%; }
