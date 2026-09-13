@@ -1,23 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { createClient } from "../../lib/supabase/client";
 import { BrandLogo } from "../ui";
+import { friendlyAuthError } from "../../lib/auth-errors";
 import { Turnstile } from "../components/Turnstile";
 
 type AccountMode = "login" | "signup" | "forgot" | "update-password";
-
-function friendlyError(message: string) {
-  const normalized = message.toLowerCase();
-  if (normalized.includes("invalid login credentials")) return "That email or password does not match. Please try again, or reset your password.";
-  if (normalized.includes("email not confirmed")) return "Please confirm your email before logging in. You can resend the confirmation below.";
-  if (normalized.includes("user already registered") || normalized.includes("already been registered")) return "An account already exists for this email. Try logging in or resetting your password.";
-  if (normalized.includes("password should be")) return "Please choose a password with at least 8 characters.";
-  if (normalized.includes("rate limit")) return "Please wait a moment before trying again.";
-  if (normalized.includes("captcha")) return "Please complete the security check before continuing.";
-  return message;
-}
 
 export default function AccountPage() {
   const [mode, setMode] = useState<AccountMode>(() => {
@@ -27,6 +17,8 @@ export default function AccountPage() {
   });
   const [message, setMessage] = useState(() => typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("message") || "");
   const [messageType, setMessageType] = useState<"info" | "error" | "success">("info");
+  const requestInFlight = useRef(false);
+  const [captchaAttempt, setCaptchaAttempt] = useState(0);
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -55,6 +47,7 @@ export default function AccountPage() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (requestInFlight.current) return;
     if (!configured) {
       showMessage("Account features are ready, but the Supabase project still needs to be connected.", "error");
       return;
@@ -65,78 +58,90 @@ export default function AccountPage() {
     const submittedName = String(form.get("name") || name).trim();
     const password = String(form.get("password") || "");
     const captchaToken = String(form.get("cf-turnstile-response") || "");
-    const supabase = createClient();
     const next = safeNext();
     setBusy(true);
     setMessage("");
+    requestInFlight.current = true;
+    let attempted = false;
+    try {
+      const supabase = createClient();
 
-    if (mode !== "update-password" && !captchaToken) {
-      setBusy(false);
-      showMessage("Please complete the security check before continuing.", "error");
-      return;
-    }
-
-    if (mode === "forgot") {
-      const { error } = await supabase.auth.resetPasswordForEmail(submittedEmail, {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent("/account?mode=update-password")}`,
-        captchaToken,
-      });
-      setBusy(false);
-      if (error) showMessage(friendlyError(error.message), "error");
-      else showMessage("Check your email for a secure password-reset link.", "success");
-      return;
-    }
-
-    if (mode === "update-password") {
-      const { error } = await supabase.auth.updateUser({ password });
-      setBusy(false);
-      if (error) showMessage(friendlyError(error.message), "error");
-      else {
-        showMessage("Your password has been updated. Taking you to your Gateway...", "success");
-        window.setTimeout(() => window.location.assign("/dashboard"), 900);
+      if (mode !== "update-password" && !captchaToken) {
+        showMessage("Please complete the security check before continuing.", "error");
+        return;
       }
-      return;
-    }
 
-    if (mode === "login") {
-      const { error } = await supabase.auth.signInWithPassword({ email: submittedEmail, password, options: { captchaToken } });
-      setBusy(false);
-      if (error) showMessage(friendlyError(error.message), "error");
-      else window.location.assign(next);
-      return;
-    }
+      if (mode === "forgot") {
+        attempted = true;
+        const { error } = await supabase.auth.resetPasswordForEmail(submittedEmail, {
+          redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent("/account?mode=update-password")}`,
+          captchaToken,
+        });
+        if (error) showMessage(friendlyAuthError(error), "error");
+        else showMessage("Check your email for a secure password-reset link.", "success");
+        return;
+      }
 
-    if (!ageGroup) {
+      if (mode === "update-password") {
+        attempted = true;
+        const { error } = await supabase.auth.updateUser({ password });
+        if (error) showMessage(friendlyAuthError(error), "error");
+        else {
+          showMessage("Your password has been updated. Taking you to your Gateway...", "success");
+          window.setTimeout(() => window.location.assign("/dashboard"), 900);
+        }
+        return;
+      }
+
+      if (mode === "login") {
+        attempted = true;
+        const { error } = await supabase.auth.signInWithPassword({ email: submittedEmail, password, options: { captchaToken } });
+        if (error) showMessage(friendlyAuthError(error), "error");
+        else window.location.assign(next);
+        return;
+      }
+
+      if (!ageGroup) {
+        showMessage("Please choose your age group.", "error");
+        return;
+      }
+      if (ageGroup === "under-13") {
+        showMessage("If you are under 13, please ask a parent or guardian to create and manage a Gateway account for you.", "error");
+        return;
+      }
+      const callback = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+      attempted = true;
+      const { data, error } = await supabase.auth.signUp({
+        email: submittedEmail,
+        password,
+        options: {
+          emailRedirectTo: callback,
+          captchaToken,
+          data: { display_name: submittedName, first_name: submittedName, age_group: ageGroup },
+        },
+      });
+      if (error) showMessage(friendlyAuthError(error), "error");
+      else if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+        setMode("login");
+        showMessage("An account already exists for this email. Log in below, or use Forgot password if you do not remember your password.", "info");
+      }
+      else if (data.session) window.location.assign(next);
+      else showMessage("Your account is almost ready. Check your email and select the confirmation link.", "success");
+    } catch (error) {
+      showMessage(friendlyAuthError(error), "error");
+    } finally {
+      requestInFlight.current = false;
       setBusy(false);
-      showMessage("Please choose your age group.", "error");
-      return;
+      if (attempted && mode !== "update-password") setCaptchaAttempt((value) => value + 1);
     }
-    if (ageGroup === "under-13") {
-      setBusy(false);
-      showMessage("If you are under 13, please ask a parent or guardian to create and manage a Gateway account for you.", "error");
-      return;
-    }
-    const callback = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
-    const { data, error } = await supabase.auth.signUp({
-      email: submittedEmail,
-      password,
-      options: {
-        emailRedirectTo: callback,
-        captchaToken,
-        data: { display_name: submittedName, first_name: submittedName, age_group: ageGroup },
-      },
-    });
-    setBusy(false);
-    if (error) showMessage(friendlyError(error.message), "error");
-    else if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
-      setMode("login");
-      showMessage("An account already exists for this email. Log in below, or use Forgot password if you do not remember your password.", "info");
-    }
-    else if (data.session) window.location.assign(next);
-    else showMessage("Your account is almost ready. Check your email and select the confirmation link.", "success");
   }
 
   async function resendConfirmation() {
+    if (requestInFlight.current) return;
+    if (!configured) {
+      showMessage("Account service is not configured. Please try again later.", "error");
+      return;
+    }
     if (!email.trim()) {
       showMessage("Enter your email above first, then resend the confirmation.", "error");
       return;
@@ -149,14 +154,23 @@ export default function AccountPage() {
       showMessage("Please complete the security check before resending your confirmation.", "error");
       return;
     }
+    requestInFlight.current = true;
+    try {
     const { error } = await createClient().auth.resend({
       type: "signup",
       email: email.trim(),
       options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`, captchaToken },
     });
     setBusy(false);
-    if (error) showMessage(friendlyError(error.message), "error");
+    if (error) showMessage(friendlyAuthError(error), "error");
     else showMessage("A new confirmation email is on its way.", "success");
+    } catch (error) {
+      showMessage(friendlyAuthError(error), "error");
+    } finally {
+      requestInFlight.current = false;
+      setBusy(false);
+      setCaptchaAttempt((value) => value + 1);
+    }
   }
 
   const title = mode === "login" ? "Welcome back" : mode === "signup" ? "Create your account" : mode === "forgot" ? "Reset your password" : "Choose a new password";
@@ -174,8 +188,8 @@ export default function AccountPage() {
       <p>{description}</p>
 
       {(mode === "login" || mode === "signup") && <div className="account-tabs">
-        <button type="button" className={mode === "login" ? "active" : ""} onClick={() => { setMode("login"); setMessage(""); }}>Log In</button>
-        <button type="button" className={mode === "signup" ? "active" : ""} onClick={() => { setMode("signup"); setMessage(""); }}>Sign Up</button>
+        <button type="button" disabled={busy} className={mode === "login" ? "active" : ""} onClick={() => { setMode("login"); setMessage(""); }}>Log In</button>
+        <button type="button" disabled={busy} className={mode === "signup" ? "active" : ""} onClick={() => { setMode("signup"); setMessage(""); }}>Sign Up</button>
       </div>}
 
       <form onSubmit={submit}>
@@ -216,7 +230,7 @@ export default function AccountPage() {
             >{showPassword ? "Hide" : "Show"}</button>
           </div>
         </label>}
-        {mode !== "update-password" && <Turnstile key={mode} />}
+        {mode !== "update-password" && <Turnstile key={`${mode}:${captchaAttempt}`} />}
         <button className="primary-button wide" type="submit" disabled={busy}>
           {busy ? "Please wait..." : mode === "login" ? "Log In →" : mode === "signup" ? "Create Account →" : mode === "forgot" ? "Send Reset Link →" : "Update Password →"}
         </button>
