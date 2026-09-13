@@ -2217,6 +2217,10 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 @media(max-width:680px){.parent-controls-page{padding:55px 16px 80px}.parent-privacy-summary,.parent-control-card{padding:22px 18px}.parent-control-card form{grid-template-columns:1fr}.parent-interest-grid{grid-template-columns:1fr 1fr}.parent-profile-list article,.admin-security-note{align-items:flex-start;flex-direction:column}.admin-security-note strong{white-space:normal}}
 .parent-revoke-button{margin-top:22px;border:1px solid #d6aebb;background:#fff8fa;color:#8c2f49;border-radius:11px;padding:11px 14px;font:inherit;font-weight:550;cursor:pointer}
 
+/* Keep organization-directory logos calm and consistent, regardless of source dimensions. */
+.organization-card-copy .organization-card-brand { width: 145px !important; height: 48px !important; display: flex !important; align-items: center !important; margin: 0 42px 13px 0 !important; overflow: hidden !important; }
+.organization-card-copy .organization-card-brand img { display: block !important; width: 100% !important; max-width: none !important; height: 48px !important; max-height: 48px !important; object-fit: contain !important; object-position: left center !important; }
+
 /* Editable partner section and directory management */
 .homepage-partner-heading h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
 .homepage-partner-heading > span, .homepage-partner-heading p, .homepage-partner-link, .homepage-partner-logos strong, .homepage-partner-placeholder small { font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif; }
