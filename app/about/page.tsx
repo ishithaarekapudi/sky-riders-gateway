@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PageShell } from "../ui";
 import { SubscribeForm } from "./ContactSubscribeForms";
-import { mediaLogos } from "./media-logos";
+import { getMediaOutlets } from "../../lib/media-outlets";
 
 const milestones = [
   ["Sixth grade", "A classroom conversation about astrophysics helped Ishitha recognize her goal of becoming an astronaut."],
@@ -12,7 +12,8 @@ const milestones = [
   ["Today", "Sky Riders Gateway turns the lessons, organizations, and opportunities she gathered into a clearer starting point for other students."],
 ] as const;
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const mediaLogos = await getMediaOutlets();
   return <PageShell active="about">
     <section className="sub-hero about-hero"><div>
       <span className="eyebrow">TEEN PILOT · ADVOCATE · RESEARCHER · AUTHOR</span>
@@ -50,7 +51,7 @@ export default function AboutPage() {
     </section>
     <section className="section founder-media">
       <div className="section-heading"><span>MEDIA & PRESS</span><h2>Featured Across Media</h2><p>Selected outlets that have interviewed or featured Ishitha and her work in aviation, aerospace, and youth access.</p></div>
-      <div className="founder-media-logo-row">{mediaLogos.slice(0, 6).map(outlet => <div key={outlet.name}><img src={outlet.src} alt={`${outlet.name} logo`} /></div>)}</div>
+      <div className="founder-media-logo-row">{mediaLogos.slice(0, 6).map(outlet => <div key={outlet.id}><img src={outlet.logoUrl} alt={`${outlet.name} logo`} /></div>)}</div>
       <Link className="founder-media-link" href="/about/media">View All Media & Press →</Link>
     </section>
     <section className="section founder-connect">
