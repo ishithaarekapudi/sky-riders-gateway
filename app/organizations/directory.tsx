@@ -37,9 +37,10 @@ export default function Organizations({ records }: { records: CatalogItem[] }) {
     <section className="section editorial-directory" id="organization-directory">
       <div className="section-heading"><span>TRUSTED STARTING POINTS</span><h2>Opportunity Starts With Connection</h2><p>National organizations can open a door. Local chapters, clubs, airports, and flight schools can help you walk through it.</p><small className="directory-result-count">{visible.length} organizations found</small></div>
       <div className="org-grid">{visible.map(([title,text,tags])=>{
+        const record = records.find(row => row.title === title);
         return <article className="organization-directory-card" key={title}>
           <div className="organization-card-copy">
-            {records.find(row => row.title === title)?.logoUrl && <img className="directory-managed-logo" src={records.find(row => row.title === title)!.logoUrl} alt={`${title} logo`} loading="lazy"/>}<span className="organization-type">AVIATION COMMUNITY</span>
+            {record?.logoUrl && <div className="organization-card-brand"><img src={record.logoUrl} alt={`${title} logo`} loading="lazy"/></div>}<span className="organization-type">AVIATION COMMUNITY</span>
             <h3><Link href={`/organizations/${slugify(title)}`}>{title}</Link></h3>
             <p>{text}</p>
             <div className="tag-row">{tags.map(tag=><span key={tag}>{tag}</span>)}</div>
