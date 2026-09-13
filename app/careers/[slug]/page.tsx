@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCatalog } from "../../../lib/catalog";
 import { DetailPage } from "../../components/DetailPage";
 import type { Metadata } from "next";
+import { careerGuides } from "../career-guides";
 export const revalidate = 60;
 export async function generateStaticParams() { return (await getCatalog("careers")).map(row => ({ slug: row.slug })); }
 export async function generateMetadata({ params }: { params: Promise<{slug: string}> }): Promise<Metadata> {
@@ -11,5 +12,5 @@ export async function generateMetadata({ params }: { params: Promise<{slug: stri
 }
 export default async function Page({ params }: { params: Promise<{slug: string}> }) {
   const { slug } = await params; const row = (await getCatalog("careers")).find(item => item.slug === slug); if (!row) notFound();
-  return <DetailPage active="careers" kind="Career" title={row.title} summary={row.summary} tags={[row.award, row.deadline && `Deadline: ${row.deadline}`, row.location, row.education, ...row.tags].filter(Boolean)} info={row.info} logoUrl={row.logoUrl} backHref="/careers"/>;
+  return <DetailPage active="careers" kind="Career" title={row.title} summary={row.summary} tags={[row.award, row.deadline && `Deadline: ${row.deadline}`, row.location, row.education, ...row.tags].filter(Boolean)} info={row.info} logoUrl={row.logoUrl} backHref="/careers" careerGuide={careerGuides[row.slug]}/>;
 }

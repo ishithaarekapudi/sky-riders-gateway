@@ -4,6 +4,8 @@ import { Icon, PageShell } from "../ui";
 import { SaveButton } from "./SaveButton";
 import { ScholarshipTracker } from "./ScholarshipTracker";
 import { sourceLogo } from "../logo-library";
+import type { CareerGuide } from "../careers/career-guides";
+import { CareerGuideSections } from "../careers/CareerGuideSections";
 
 const factIcons = ["telescope", "document", "people", "plane"] as const;
 
@@ -19,7 +21,8 @@ function guideIcon(kind: "Career" | "Organization" | "Scholarship", title: strin
   return "plane";
 }
 
-export function DetailPage({ active, kind, title, summary, tags, info, backHref, logoUrl }: {
+export function DetailPage({ active, kind, title, summary, tags, info, backHref, logoUrl, careerGuide }: {
+  careerGuide?: CareerGuide;
   logoUrl?: string;
   active: string;
   kind: "Career" | "Organization" | "Scholarship";
@@ -55,14 +58,16 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref,
 
       <div className="organization-profile-facts">
         {(tags?.length ? tags : info.highlights.slice(0, 3)).map((tag, index) => <span key={tag}><Icon name={factIcons[index % factIcons.length]}/>{tag}</span>)}
-        <span><Icon name="document"/> Verified against {info.sourceLabel}</span>
+        <span><Icon name="document"/> {careerGuide ? "Book-informed guide · official sources linked below" : `Verified against ${info.sourceLabel}`}</span>
       </div>
 
       <nav className="organization-profile-tabs" aria-label={`${kind} page sections`}>
         <a href="#overview">Overview</a>
         <a href="#key-details">Key Details</a>
+        {careerGuide && <a href="#training">Training</a>}
+        {careerGuide && <a href="#career-terms">Terms Explained</a>}
         <a href="#next-steps">Next Steps</a>
-        <a href={info.officialUrl} target="_blank" rel="noreferrer">Official Source ↗</a>
+        {careerGuide ? <a href="#career-sources">Sources</a> : <a href={info.officialUrl} target="_blank" rel="noreferrer">Official Source ↗</a>}
       </nav>
     </section>
 
@@ -70,13 +75,14 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref,
       <article id="overview" className="organization-overview gateway-guide-overview">
         <span className="eyebrow">OVERVIEW</span>
         <h2>What to Know</h2>
-        <p>{info.overview}</p>
-        <div className="gateway-source-note">
+        <p>{careerGuide ? careerGuide.introduction : info.overview}</p>
+        {!careerGuide && <div className="gateway-source-note">
           {logo ? <img src={logo} alt=""/> : <Icon name="document"/>}
           <div><span>OFFICIAL INFORMATION</span><strong>{info.sourceLabel}</strong><a href={info.officialUrl} target="_blank" rel="noreferrer">Open official source ↗</a></div>
-        </div>
+        </div>}
       </article>
 
+      {careerGuide ? <CareerGuideSections guide={careerGuide}/> : <>
       <section id="key-details" className="organization-programs gateway-guide-details">
         <div className="organization-section-heading"><div><span className="eyebrow">KEY DETAILS</span><h2>{kind === "Career" ? "What This Path Can Include" : "What This Opportunity Offers"}</h2></div></div>
         <div className="organization-program-grid">
@@ -96,6 +102,7 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref,
           <Link className="ghost-button" href="/dashboard">Open My Gateway</Link>
         </div>
       </section>
+      </>}
     </section>
   </PageShell>;
 }
