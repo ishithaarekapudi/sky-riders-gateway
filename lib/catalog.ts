@@ -28,6 +28,9 @@ export const getCatalog = unstable_cache(async (kind: CatalogKind): Promise<Cata
   let query = client.from(catalogTables[kind]).select("*").eq("published", true);
   if (kind === "scholarships") query = query.eq("type", "scholarship");
   const { data, error } = await query;
-  if (error) throw new Error("The directory is temporarily unavailable. Please try again.");
+  // Keep the public directory available during a database rollout or a brief
+  // provider outage. Published database records take over automatically once
+  // the query succeeds again.
+  if (error) return seededCatalog(kind);
   return (data || []).map(row => fromRow(kind, row)).sort((a,b) => a.order - b.order || a.title.localeCompare(b.title));
 }, ["gateway-catalog-v1"], { revalidate: 60, tags: ["gateway-catalog"] });
