@@ -147,7 +147,7 @@ export default async function Home() {
         </div>
         <div className="homepage-partner-logos">
           {partners.map(row => <Link href={`/organizations/${row.slug}`} key={row.id || row.slug}>{row.logoUrl && <img src={row.logoUrl} alt={`${row.title} logo`} loading="lazy"/>}<strong>{row.title}</strong></Link>)}
-          {Array.from({ length: Math.max(0, 5 - partners.length) }, (_, index) => <Link className="homepage-partner-placeholder" href="/get-involved/submit" key={`coming-${index}`}><span aria-hidden="true">{index === 0 ? "+" : "✦"}</span><strong>{index === 0 ? "Become a partner" : "More partners coming soon"}</strong><small>{index === 0 ? "Help open the next door →" : "Build the future with us →"}</small></Link>)}
+          {Array.from({ length: Math.max(0, 5 - partners.length) }, (_, index) => <Link className="homepage-partner-placeholder" href="/get-involved/submit" key={`coming-${index}`}><span aria-hidden="true">+</span><strong>Become a partner</strong><small>Help open the next door →</small></Link>)}
         </div>
         <Link className="homepage-partner-link" href="/organizations">Explore Our Organization Directory →</Link>
       </section>
