@@ -32,6 +32,9 @@ export const getCatalog = unstable_cache(async (kind: CatalogKind): Promise<Cata
   // provider outage. Published database records take over automatically once
   // the query succeeds again.
   if (error) return seededCatalog(kind);
-  if (!data?.length) return seededCatalog(kind);
-  return data.map(row => fromRow(kind, row)).sort((a,b) => a.order - b.order || a.title.localeCompare(b.title));
+  const saved = (data || []).map(row => fromRow(kind, row));
+  // The original directory remains available while individual entries are
+  // progressively moved into the editable database.
+  return [...seededCatalog(kind).filter(seed => !saved.some(item => item.slug === seed.slug)), ...saved]
+    .sort((a,b) => a.order - b.order || a.title.localeCompare(b.title));
 }, ["gateway-catalog-v1"], { revalidate: 60, tags: ["gateway-catalog"] });

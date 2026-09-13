@@ -15,12 +15,20 @@ export async function POST(request: NextRequest) {
     const fields = item.kind === "organizations" ? { ...common, name: item.title, description: item.summary, website_url: item.info.officialUrl || null, logo_url: item.logoUrl || null, homepage_partner: item.partner, partner_order: item.order }
       : item.kind === "careers" ? { ...common, title: item.title, summary: item.summary, education: item.education, skills: item.tags, icon: item.icon, sort_order: item.order }
       : { ...common, title: item.title, summary: item.summary, type: "scholarship" as const, eligibility: item.tags, deadline: item.deadline || null, location: item.location, application_url: item.info.officialUrl || null };
-    if (id) {
-      const { data: existing } = await client.from(table).select("*").eq("id", id).single();
+    let targetId = id;
+    if (!targetId) {
+      // Static directory entries may already have an older database record.
+      // Reuse it so editing or selecting a homepage partner never creates a
+      // duplicate-slug error.
+      const { data: existingBySlug } = await client.from(table).select("id").eq("slug", item.slug).maybeSingle();
+      targetId = existingBySlug?.id || "";
+    }
+    if (targetId) {
+      const { data: existing } = await client.from(table).select("*").eq("id", targetId).single();
       if (!existing || (item.kind === "scholarships" && "type" in existing && existing.type !== "scholarship")) throw new Error("This listing could not be found.");
       if (fromRow(item.kind, existing).slug !== item.slug) throw new Error("Keep the existing page address so saved links continue to work.");
     }
-    const result = id ? await client.from(table).update(fields).eq("id", id).select("*").single()
+    const result = targetId ? await client.from(table).update(fields).eq("id", targetId).select("*").single()
       : await client.from(table).insert({ ...fields, slug: item.slug }).select("*").single();
     if (result.error) return NextResponse.json({ error: result.error.code === "23505" ? "That page address already exists. Choose another." : "Could not save. Check the database setup and try again." }, { status: 400 });
     revalidateTag("gateway-catalog", { expire: 0 });
