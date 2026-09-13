@@ -3,6 +3,8 @@ import { fromRow } from "../../lib/catalog";
 import { redirect } from "next/navigation";
 import { createClient } from "../../lib/supabase/server";
 import { AdminReviewDashboard } from "./review-dashboard";
+import { MediaOutletManager } from "./media-outlet-manager";
+import type { MediaOutlet } from "../../lib/media-outlets";
 
 export const metadata = { title: "Administrator Review", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -23,10 +25,14 @@ export default async function AdminPage() {
     supabase.from("data_deletion_requests").select("*").order("created_at", { ascending: false }),
   ]);
 
-  const catalog = await Promise.all([supabase.from("organizations").select("*"), supabase.from("career_paths").select("*"), supabase.from("opportunities").select("*").eq("type", "scholarship")]);
+  const [catalog, media] = await Promise.all([
+    Promise.all([supabase.from("organizations").select("*"), supabase.from("career_paths").select("*"), supabase.from("opportunities").select("*").eq("type", "scholarship")]),
+    (supabase as any).from("media_outlets").select("*").order("sort_order", { ascending: true }),
+  ]);
   const kinds = ["organizations", "careers", "scholarships"] as const;
   const setupError = catalog.some(result => result.error || result.data?.some(row => !("directory_content" in row)));
-  return <><div className="admin-content-shell"><ContentManager initial={catalog.flatMap((result, index) => (result.data || []).map(row => fromRow(kinds[index], row)))} submissions={opportunities.data || []} setupError={setupError}/></div><AdminReviewDashboard
+  const mediaItems: MediaOutlet[] = (media.data || []).map((row: any) => ({ id: row.id, name: row.name, logoUrl: row.logo_url, websiteUrl: row.website_url || "", published: row.published, sortOrder: row.sort_order || 0 }));
+  return <><div className="admin-content-shell"><ContentManager initial={catalog.flatMap((result, index) => (result.data || []).map(row => fromRow(kinds[index], row)))} submissions={opportunities.data || []} setupError={setupError}/><MediaOutletManager initial={mediaItems} setupError={Boolean(media.error)}/></div><AdminReviewDashboard
     adminId={user.id}
     adminEmail={admin.email}
     initial={{
