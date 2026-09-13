@@ -32,5 +32,6 @@ export const getCatalog = unstable_cache(async (kind: CatalogKind): Promise<Cata
   // provider outage. Published database records take over automatically once
   // the query succeeds again.
   if (error) return seededCatalog(kind);
-  return (data || []).map(row => fromRow(kind, row)).sort((a,b) => a.order - b.order || a.title.localeCompare(b.title));
+  if (!data?.length) return seededCatalog(kind);
+  return data.map(row => fromRow(kind, row)).sort((a,b) => a.order - b.order || a.title.localeCompare(b.title));
 }, ["gateway-catalog-v1"], { revalidate: 60, tags: ["gateway-catalog"] });
