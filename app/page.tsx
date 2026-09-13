@@ -1,6 +1,7 @@
 import { withPageSeo } from "../lib/seo";
 
 import Link from "next/link";
+import { AuthLandingRedirect } from "./components/AuthLandingRedirect";
 import { Footer, Header, Icon } from "./ui";
 
 export const metadata = withPageSeo({ title: "Aviation Careers, Scholarships & Youth Programs", description: "Find aviation and aerospace careers, flight-training scholarships, youth programs, and mentors. Plan your next step with Sky Riders Gateway.", alternates: { canonical: "/" } });
@@ -32,6 +33,7 @@ const gatewayBenefits = [
 export default function Home() {
   return (
     <main>
+      <AuthLandingRedirect />
       <section className="live-home" aria-label="Sky Riders Gateway introduction">
         <Header active="home" originalLogo />
         <div className="gateway-stage">

@@ -41,7 +41,14 @@ for (const url of urls) {
 }
 const robots = readFileSync(`${root}/robots.txt.body`, 'utf8');
 for (const path of ['account', 'dashboard', 'parent-consent', 'privacy/delete', 'about/contact']) {
-  const html = readFileSync(`${root}/${path}.html`, 'utf8');
+  const html = existsSync(`${root}/${path}.html`)
+    ? readFileSync(`${root}/${path}.html`, 'utf8')
+    : await (async () => {
+        assert(process.env.SEO_BASE_URL, `Set SEO_BASE_URL to a running build to verify dynamic page: ${path}`);
+        const response = await fetch(new URL(`/${path}`, process.env.SEO_BASE_URL));
+        assert(response.ok, `Dynamic page failed: ${path}`);
+        return response.text();
+      })();
   const meta = tags(html, 'meta');
   assert(meta.some(tag => tag.name === 'robots' && tag.content.includes('noindex')), `Missing noindex: ${path}`);
   assert(!meta.some(tag => tag.name === 'googlebot' && /(^|,\s*)index(,|$)/.test(tag.content)), `Conflicting Googlebot directive: ${path}`);
