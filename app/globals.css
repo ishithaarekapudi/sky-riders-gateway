@@ -1262,7 +1262,7 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .scholarship-search .icon { width: 20px; color: #5d7792; }
 .scholarship-search input { width: 100%; border: 0; outline: 0; color: var(--ink); font: inherit; }
 .scholarship-filter-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 0; }
-.scholarship-filter-row button { min-height: 58px; padding: 13px 26px; border: 1px solid #c4d3e2; border-radius: 10px; background: #f8fafc; color: #38536f; font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; }
+.scholarship-filter-row button { min-height: 52px; padding: 11px 21px; border: 1px solid #c4d3e2; border-radius: 10px; background: #f8fafc; color: #38536f; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; }
 .scholarship-filter-row button.active { border-color: #0f70e7; background: #e8f3ff; color: #075bb9; }
 .runway-directory { padding-top: 52px; background: linear-gradient(180deg,#f8fbfe,#fff 260px); }
 .runway-scholar-grid { grid-template-columns: repeat(3,1fr); gap: 16px; }
