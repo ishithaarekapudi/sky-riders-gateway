@@ -40,7 +40,8 @@ export function ContentManager({ initial, submissions, setupError }: { initial: 
   }
   const visible = items.filter(row => row.kind === kind && `${row.title} ${row.summary}`.toLowerCase().includes(query.toLowerCase()));
   return <section className="content-manager" aria-labelledby="content-manager-title">
-    <div className="section-heading"><span>YOUR WEBSITE CONTENT</span><h2 id="content-manager-title">Manage directories & homepage partners</h2><p>Add or edit listings, publish them when ready, and select which organizations appear on the homepage.</p></div>
+    <div className="section-heading"><span>YOUR WEBSITE CONTENT</span><h2 id="content-manager-title">Update your website content</h2><p>Choose a category, find an existing listing, then edit it or add a new one. For organizations, you can also choose whether it appears as a homepage partner.</p></div>
+    <ol className="content-manager-steps"><li>Choose a category</li><li>Search or add a listing</li><li>Save when you are ready</li></ol>
     {setupError && <p role="alert" className="form-error">Content tools need the database update before they can save. Existing review queues are still available below.</p>}
     <div className="admin-tabs">{(["organizations", "careers", "scholarships"] as const).map(tab => <button disabled={busy} type="button" className={kind === tab ? "active" : ""} key={tab} onClick={() => {setKind(tab); setEditing(null);}}>{tab[0].toUpperCase() + tab.slice(1)}</button>)}</div>
     <div className="content-toolbar"><label>Search listings<input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search by name" /></label><button className="primary-button" disabled={busy || setupError} onClick={() => {setEditing(blank(kind)); setSubmissionId(""); setMessage("");}}>+ Add {kind === "organizations" ? "organization" : kind === "careers" ? "career" : "scholarship"}</button></div>
