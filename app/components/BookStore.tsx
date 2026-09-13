@@ -43,7 +43,7 @@ export function BookStore() {
         <h3>Cleared for Takeoff</h3>
         <span className="book-format">Paperback edition</span>
         <strong className="book-price">${paperbackPrice.toFixed(2)}</strong>
-        <small>Shipping is calculated securely at checkout.</small>
+        <small>Enter your address at checkout to see the exact shipping and tax before you pay.</small>
         <label>Quantity</label>
         <div className="quantity-stepper">
           <button onClick={() => setQuantity(value => Math.max(1, value - 1))} aria-label="Decrease quantity">−</button>
@@ -52,7 +52,7 @@ export function BookStore() {
         </div>
         <button className="book-add-button" onClick={addToCart}>Add to Cart</button>
         <button className="book-buy-button" onClick={addToCart}>Buy Now</button>
-        <small>Secure checkout · Shipping calculated at checkout</small>
+        <small>Secure checkout · Exact shipping and tax appear before payment</small>
       </aside>
     </div>
 
@@ -68,9 +68,9 @@ export function BookStore() {
         </div>
       </> : <div className="empty-cart"><h3>Your cart is empty.</h3><button onClick={() => setCartOpen(false)}>Continue Shopping</button></div>}
       {inCart && <div className="cart-footer">
-        <button className="promo-toggle" onClick={() => setPromoOpen(value => !value)}>Enter a promo code <span>{promoOpen ? "−" : "+"}</span></button>
-        {promoOpen && <div className="promo-entry"><input placeholder="Promo code"/><button>Apply</button></div>}
-        <div className="cart-summary"><span>Subtotal <b>${total}</b></span><span>Shipping <b>Calculated at checkout</b></span><strong>Estimated total <b>${total}</b></strong></div>
+        <button className="promo-toggle" onClick={() => setPromoOpen(value => !value)}>Have a discount code? <span>{promoOpen ? "−" : "+"}</span></button>
+        {promoOpen && <p className="promo-entry">Enter your discount code securely at Stripe checkout. It will update your total before payment.</p>}
+        <div className="cart-summary"><span>Subtotal <b>${total}</b></span><span>Shipping & tax <b>Shown after address</b></span><strong>Estimated total <b>${total} + shipping & tax</b></strong></div>
         {checkoutLink ? <a className="checkout-button" href={checkoutLink}>Secure Checkout ↗</a> : <button className="checkout-button" onClick={() => alert("Add the Stripe paperback payment link in Vercel to activate checkout.")}>Secure Checkout</button>}
         <button className="continue-button" onClick={() => setCartOpen(false)}>Continue Shopping</button>
         <small>🔒 Secure checkout</small>
