@@ -16,7 +16,7 @@ export function BookStore() {
   }, [cartOpen]);
 
   const total = (paperbackPrice * quantity).toFixed(2);
-  const checkoutLink = process.env.NEXT_PUBLIC_STRIPE_PRINT_LINK;
+  const checkoutLink = process.env.NEXT_PUBLIC_STRIPE_PRINT_LINK || "https://buy.stripe.com/4gM00jcugeKK6vP02F6EU00";
   const addToCart = () => {
     setInCart(true);
     setCartOpen(true);
