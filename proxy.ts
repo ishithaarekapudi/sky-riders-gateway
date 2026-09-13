@@ -1,8 +1,19 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { safeNext } from "./lib/auth-navigation";
 import type { Database } from "./lib/supabase/database.types";
 
 export async function proxy(request: NextRequest) {
+  // Supabase may send older email links to Site URL instead of the callback.
+  // Redirect before browser clients can consume the one-time PKCE code.
+  if (request.nextUrl.pathname === "/" && request.nextUrl.searchParams.has("code")) {
+    const target = request.nextUrl.clone();
+    target.pathname = "/auth/callback";
+    target.search = "";
+    target.searchParams.set("code", request.nextUrl.searchParams.get("code")!);
+    target.searchParams.set("next", safeNext(request.nextUrl.searchParams.get("next")));
+    return NextResponse.redirect(target, { headers: { "Cache-Control": "no-store" } });
+  }
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient<Database>(
