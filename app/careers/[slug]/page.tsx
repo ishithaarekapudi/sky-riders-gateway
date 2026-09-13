@@ -1,24 +1,15 @@
 import { withPageSeo } from "../../../lib/seo";
 import { notFound } from "next/navigation";
+import { getCatalog } from "../../../lib/catalog";
 import { DetailPage } from "../../components/DetailPage";
-import { careerPaths, slugify } from "../../content";
-import { careerDetails } from "../../detail-content";
 import type { Metadata } from "next";
-
-export function generateStaticParams() {
-  return careerPaths.map(([,title])=>({slug:slugify(title)}));
+export const revalidate = 60;
+export async function generateStaticParams() { return (await getCatalog("careers")).map(row => ({ slug: row.slug })); }
+export async function generateMetadata({ params }: { params: Promise<{slug: string}> }): Promise<Metadata> {
+  const { slug } = await params; const row = (await getCatalog("careers")).find(item => item.slug === slug);
+  return row ? withPageSeo({title: row.title, description: row.summary, alternates: {canonical: `/careers/${row.slug}`}, openGraph: {type: "article"}}) : {};
 }
-
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
-  const {slug}=await params; const career=careerPaths.find(([,title])=>slugify(title)===slug); const info=careerDetails[slug];
-  if(!career||!info)return{};
-  return withPageSeo({title:`${career[1]} Career Guide`,description:career[2],alternates:{canonical:`/careers/${slug}`},openGraph:{type:"article"}});
-}
-
-export default async function CareerDetail({params}:{params:Promise<{slug:string}>}) {
-  const {slug}=await params;
-  const career=careerPaths.find(([,title])=>slugify(title)===slug);
-  const info=careerDetails[slug];
-  if(!career||!info) notFound();
-  return <DetailPage active="careers" kind="Career" title={career[1]} summary={career[2]} info={info} backHref="/careers"/>;
+export default async function Page({ params }: { params: Promise<{slug: string}> }) {
+  const { slug } = await params; const row = (await getCatalog("careers")).find(item => item.slug === slug); if (!row) notFound();
+  return <DetailPage active="careers" kind="Career" title={row.title} summary={row.summary} tags={[row.award, row.deadline && `Deadline: ${row.deadline}`, row.location, row.education, ...row.tags].filter(Boolean)} info={row.info} logoUrl={row.logoUrl} backHref="/careers"/>;
 }

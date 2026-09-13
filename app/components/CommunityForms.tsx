@@ -16,6 +16,7 @@ function ConnectionNotice({ mentorshipRole }: { mentorshipRole?: "mentor" | "men
 
 export function OpportunitySubmissionForm() {
   const [kind, setKind] = useState("Organization");
+  const [captchaAttempt, setCaptchaAttempt] = useState(0);
   const [complete, setComplete] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -27,6 +28,7 @@ export function OpportunitySubmissionForm() {
     const form = new FormData(event.currentTarget);
     try { await submitProtectedForm("opportunity", {
       submission_type: kind,
+      logo_url: String(form.get("logo_url") || ""),
       name: String(form.get("name") || ""),
       official_url: String(form.get("official_url") || ""),
       description: String(form.get("description") || ""),
@@ -37,15 +39,16 @@ export function OpportunitySubmissionForm() {
       submitter_name: String(form.get("submitter_name") || ""),
       submitter_email: String(form.get("submitter_email") || ""),
       submitter_connection: String(form.get("submitter_connection") || ""),
-    }, form); } catch (submitError) { setBusy(false); setError(submitError instanceof Error ? submitError.message : "We could not save this submission."); return; }
+    }, form); } catch (submitError) { setCaptchaAttempt(value => value + 1); setBusy(false); setError(submitError instanceof Error ? submitError.message : "We could not save this submission."); return; }
     setBusy(false);
     setComplete(true);
+    setCaptchaAttempt(value => value + 1);
   }
 
   if (complete) return <div className="form-success" role="status">
     <span>SUBMISSION RECEIVED</span>
     <h2>Thank you for helping Gateway grow.</h2>
-    <p>Your recommendation is now in Gateway's private review queue. It will be verified before anything is published.</p>
+    <p>Your recommendation is now in Gateway&apos;s private review queue. It will be verified before anything is published.</p>
     <button type="button" className="small-button" onClick={() => setComplete(false)}>Submit Another Opportunity</button>
   </div>;
 
@@ -57,6 +60,8 @@ export function OpportunitySubmissionForm() {
       </select></label>
       <label><span>{kind} name</span><input name="name" required placeholder={`Official ${kind.toLowerCase()} name`} /></label>
       <label className="full"><span>Official website</span><input name="official_url" required type="url" placeholder="https://" /></label>
+      <label><span>Organization logo (optional)</span><input type="file" name="logo" accept="image/png,image/jpeg,image/webp"/><small>PNG, JPEG, or WebP · maximum 2 MB. Uploaded logos stay private until reviewed.</small></label>
+      <label><span>Or provide a logo URL</span><input name="logo_url" type="url" placeholder="https://…"/><small>Only submit a logo you have permission to share.</small></label>
       <label className="full"><span>What does it offer?</span><textarea name="description" required placeholder="Describe the opportunity, who it serves, and why it would help the Gateway community." /></label>
       <label><span>Eligible ages</span><input name="eligible_ages" placeholder="Example: ages 13–18, college, or all ages" /></label>
       <label><span>Location</span><input name="location" placeholder="City, state, nationwide, or virtual" /></label>
@@ -67,7 +72,7 @@ export function OpportunitySubmissionForm() {
       <label className="full"><span>Your connection to this opportunity</span><input name="submitter_connection" required placeholder="Organizer, participant, educator, community member, or other" /></label>
       <label className="full consent-check"><input required type="checkbox" /><span>I confirm that this information is accurate to the best of my knowledge and may be reviewed by Sky Riders Gateway.</span></label>
     </div>
-    <Turnstile />
+    <Turnstile key={captchaAttempt} />
     {error && <p className="form-error" role="alert">{error}</p>}
     <button className="primary-button" type="submit" disabled={busy || !configured}>{busy ? "Sending..." : "Send for Review →"}</button>
   </form>;

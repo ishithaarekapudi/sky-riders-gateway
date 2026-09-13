@@ -1,8 +1,10 @@
+import { readLogo } from "../../../lib/logo-upload";
+import { safeImageUrl } from "../../../lib/catalog-model";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 const submissions = {
-  opportunity: { table: "opportunity_submissions", fields: ["submission_type", "name", "official_url", "description", "eligible_ages", "location", "deadline_or_availability", "cost_or_award", "submitter_name", "submitter_email", "submitter_connection"] },
+  opportunity: { table: "opportunity_submissions", fields: ["logo_url", "submission_type", "name", "official_url", "description", "eligible_ages", "location", "deadline_or_availability", "cost_or_award", "submitter_name", "submitter_email", "submitter_connection"] },
   mentor: { table: "mentor_applications", fields: ["first_name", "last_name", "email", "age_range", "city_state", "meeting_format", "interest_areas", "availability", "conduct_consent", "current_role_organization", "experience_qualifications", "preferred_mentee_age", "screening_consent"] },
   mentee: { table: "mentee_applications", fields: ["first_name", "last_name", "email", "age_range", "city_state", "meeting_format", "interest_areas", "availability", "conduct_consent", "guidance_requested", "current_stage", "guardian_email", "guardian_consent_confirmed"] },
   contact: { table: "contact_inquiries", fields: ["name", "email", "organization", "topic", "message"] },
@@ -12,7 +14,10 @@ const submissions = {
 
 export async function POST(request: NextRequest) {
   try {
-    const { kind, payload, captchaToken } = await request.json();
+    if (Number(request.headers.get("content-length")) > 2300000) return NextResponse.json({ error: "Logo must be smaller than 2 MB." }, { status: 413 });
+    const multipart = request.headers.get("content-type")?.includes("multipart/form-data") ? await request.formData() : null;
+    const { kind, payload, captchaToken } = multipart ? JSON.parse(String(multipart.get("data"))) : await request.json();
+    const logo = multipart?.get("logo");
     const config = submissions[kind as keyof typeof submissions];
     if (!config || !payload || typeof payload !== "object") return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
 
@@ -38,8 +43,20 @@ export async function POST(request: NextRequest) {
 
     const clean = Object.fromEntries(config.fields.filter(field => field in payload).map(field => [field, payload[field]]));
     const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
+    let logoPath = "";
+    if (kind === "opportunity") {
+      if (payload.logo_url && (typeof payload.logo_url !== "string" || !safeImageUrl(payload.logo_url) || !payload.logo_url.startsWith("https://"))) return NextResponse.json({ error: "Use an HTTPS URL for the logo." }, { status: 400 });
+      if (logo instanceof File && logo.size) {
+        const image = await readLogo(logo);
+        logoPath = `${crypto.randomUUID()}.${image.extension}`;
+        const { error: uploadError } = await supabase.storage.from("submission-logos").upload(logoPath, image.data, { contentType: image.mime });
+        if (uploadError) return NextResponse.json({ error: "Could not store the logo. Please try again." }, { status: 500 });
+        clean.logo_path = logoPath;
+      }
+    }
     const { error } = await supabase.from(config.table).insert(clean);
     if (error) {
+      if (logoPath) await supabase.storage.from("submission-logos").remove([logoPath]);
       if (kind === "newsletter" && error.code === "23505") return NextResponse.json({ ok: true });
       console.error("Protected form insert failed", { kind, code: error.code });
       return NextResponse.json({ error: "We could not save this submission. Please try again." }, { status: 500 });

@@ -69,7 +69,8 @@ export function Turnstile() {
     };
 
     if (window.turnstile) {
-      renderWidget();
+      // The widget callback updates React state once Turnstile is ready.
+      renderWidget(); // eslint-disable-line react-hooks/set-state-in-effect
     } else {
       // A stale script element can remain after client-side navigation even when
       // the browser did not execute it. Replace it so the verification can retry.
@@ -120,10 +121,14 @@ export function Turnstile() {
 export async function submitProtectedForm(kind: string, payload: Record<string, unknown>, form: FormData) {
   const captchaToken = String(form.get("cf-turnstile-response") || "");
   if (!captchaToken) throw new Error("Please complete the security check before submitting.");
+  const file = form.get("logo");
+  const data = JSON.stringify({ kind, payload, captchaToken });
+  const multipart = new FormData(); multipart.set("data", data);
+  if (file instanceof File && file.size) multipart.set("logo", file);
   const response = await fetch("/api/public-submissions", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ kind, payload, captchaToken }),
+    headers: file instanceof File && file.size ? undefined : { "Content-Type": "application/json" },
+    body: file instanceof File && file.size ? multipart : data,
   });
   const result = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(result.error || "We could not verify this submission. Please try again.");

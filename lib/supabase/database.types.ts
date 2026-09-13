@@ -49,8 +49,8 @@ export type Database = {
         Relationships: [];
       };
       opportunity_submissions: {
-        Row: { id: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages: string | null; location: string | null; deadline_or_availability: string | null; cost_or_award: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null };
-        Insert: { id?: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages?: string | null; location?: string | null; deadline_or_availability?: string | null; cost_or_award?: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status?: string; review_notes?: string | null; reviewed_at?: string | null };
+        Row: { logo_path: string | null; logo_url: string | null; id: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages: string | null; location: string | null; deadline_or_availability: string | null; cost_or_award: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status: string; review_notes: string | null; created_at: string; reviewed_at: string | null; reviewed_by: string | null };
+        Insert: { logo_path?: string | null; logo_url?: string | null; id?: string; submission_type: string; name: string; official_url: string; description: string; eligible_ages?: string | null; location?: string | null; deadline_or_availability?: string | null; cost_or_award?: string | null; submitter_name: string; submitter_email: string; submitter_connection: string; status?: string; review_notes?: string | null; reviewed_at?: string | null };
         Update: { status?: string; review_notes?: string | null; reviewed_at?: string | null; reviewed_by?: string | null };
         Relationships: [];
       };
