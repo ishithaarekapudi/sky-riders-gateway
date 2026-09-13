@@ -31,7 +31,7 @@ export function ContactForm() {
     <label className="full">What would you like to discuss?<select name="topic" required defaultValue=""><option value="" disabled>Select a topic</option><option>Media or interview</option><option>Speaking opportunity</option><option>Partnership or collaboration</option><option>Research</option><option>Book inquiry</option><option>Sky Riders Gateway</option><option>Other</option></select></label>
     <label className="full">Message<textarea name="message" required /></label>
     <Turnstile />
-    <button className="primary-button" type="submit" disabled={status === "busy"}>{status === "busy" ? "Sending..." : "Send Inquiry →"}</button>
+    <button className="primary-button" type="submit" disabled={status === "busy" || status === "sent"}>{status === "busy" ? "Sending..." : status === "sent" ? "Sent! ✓" : "Send Inquiry →"}</button>
     {status === "sent" && <p className="form-success-message" role="status">Thank you. Your message has been securely received.</p>}
     {status === "error" && <p className="form-error" role="alert">We could not send your message. Please try again in a moment.</p>}
     <small>Please do not include sensitive personal information.</small>
@@ -60,7 +60,7 @@ export function SubscribeForm({ compact = false }: { compact?: boolean }) {
     {!compact && <label>First name<input name="first_name" autoComplete="given-name" placeholder="First name" /></label>}
     <label><span className="sr-only">Email address</span><input name="email" type="email" autoComplete="email" required placeholder="Email address" /></label>
     <Turnstile />
-    <button className="primary-button" type="submit" disabled={status === "busy"}>{status === "busy" ? "Joining..." : "Subscribe →"}</button>
+    <button className="primary-button" type="submit" disabled={status === "busy" || status === "sent"}>{status === "busy" ? "Joining..." : status === "sent" ? "You’re subscribed! ✓" : "Subscribe →"}</button>
     {status === "sent" && <p role="status">You’re on the list. Welcome to Gateway.</p>}
     {status === "error" && <p className="form-error" role="alert">We could not add you right now. Please try again.</p>}
   </form>;
