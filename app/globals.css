@@ -2221,10 +2221,10 @@ footer { padding: 58px max(5vw, calc((100% - 1260px)/2)) 22px; background: var(-
 .homepage-partner-heading h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
 .homepage-partner-heading p, .homepage-partner-link { font-family: inherit; }
 .homepage-partner-logos a { text-decoration: none; color: var(--ink); align-content: center; gap: 12px; }
-.homepage-partner-logos strong { font-size: 14px; line-height: 1.4; }
+.homepage-partner-logos strong { font-size: 15px; font-weight: 600; line-height: 1.4; }
 .homepage-partner-logos a img, .homepage-partner-logos a:nth-child(2) img { width: 100%; height: 72px; }
 .homepage-partner-placeholder > span { color: var(--blue); font-size: 28px; }
-.homepage-partner-placeholder small { color: var(--muted); line-height: 1.5; }
+.homepage-partner-placeholder small { color: var(--muted); font-size: 14px; font-weight: 400; line-height: 1.5; }
 .admin-workspace { min-height: 100vh; padding: 0 max(20px, calc((100% - 1200px)/2)) 80px; background: linear-gradient(180deg,#f5f9fd 0,#fff 58%); color: var(--ink); }
 .admin-workspace-header { display: flex; justify-content: space-between; gap: 30px; align-items: end; padding: 56px 0 34px; border-bottom: 1px solid #d7e4f0; }
 .admin-workspace-header h1 { margin: 9px 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px,5vw,58px); font-weight: 500; letter-spacing: -.035em; }
