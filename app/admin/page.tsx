@@ -5,6 +5,7 @@ import { createClient } from "../../lib/supabase/server";
 import { AdminReviewDashboard } from "./review-dashboard";
 import { MediaOutletManager } from "./media-outlet-manager";
 import type { MediaOutlet } from "../../lib/media-outlets";
+import { AdminWorkspace } from "./admin-workspace";
 
 export const metadata = { title: "Administrator Review", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -32,7 +33,7 @@ export default async function AdminPage() {
   const kinds = ["organizations", "careers", "scholarships"] as const;
   const setupError = catalog.some(result => result.error || result.data?.some(row => !("directory_content" in row)));
   const mediaItems: MediaOutlet[] = (media.data || []).map((row: any) => ({ id: row.id, name: row.name, logoUrl: row.logo_url, websiteUrl: row.website_url || "", published: row.published, sortOrder: row.sort_order || 0 }));
-  return <><div className="admin-content-shell"><ContentManager initial={catalog.flatMap((result, index) => (result.data || []).map(row => fromRow(kinds[index], row)))} submissions={opportunities.data || []} setupError={setupError}/><MediaOutletManager initial={mediaItems} setupError={Boolean(media.error)}/></div><AdminReviewDashboard
+  return <AdminWorkspace content={<ContentManager initial={catalog.flatMap((result, index) => (result.data || []).map(row => fromRow(kinds[index], row)))} submissions={opportunities.data || []} setupError={setupError}/>} media={<MediaOutletManager initial={mediaItems} setupError={Boolean(media.error)}/>} inbox={<AdminReviewDashboard
     adminId={user.id}
     adminEmail={admin.email}
     initial={{
@@ -42,5 +43,5 @@ export default async function AdminPage() {
       contacts: contacts.data ?? [],
       privacy: privacy.data ?? [],
     }}
-  /></>;
+  />}/>;
 }
