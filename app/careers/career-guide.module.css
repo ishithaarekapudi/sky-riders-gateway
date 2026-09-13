@@ -1,0 +1,15 @@
+.guide { width: 100%; min-width: 0; display: grid; gap: 24px; font-family: inherit; }
+.section { min-width: 0; padding: clamp(24px, 4vw, 40px); background: white; border: 1px solid #dce7f2; border-radius: 18px; scroll-margin-top: 30px; }
+.section h2 { margin: 8px 0 20px; font-size: clamp(25px, 3vw, 34px); line-height: 1.25; }
+.section h3 { margin: 26px 0 10px; font-size: 19px; font-weight: 600; }
+.section p, .terms dd { max-width: 78ch; color: var(--muted); font-size: 17px; line-height: 1.8; margin: 0; }
+.section .note { margin-top: 22px; font-size: 14px; line-height: 1.7; }
+.terms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 0; }
+.terms dt { margin-bottom: 8px; font-size: 18px; font-weight: 600; }
+.terms dd { margin: 0; }
+.start { background: #eff6ff; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px 24px; margin-top: 26px; }
+.section a { color: #0965cf; text-underline-offset: 4px; }
+.section ul { padding-left: 22px; line-height: 1.8; }
+.section li + li { margin-top: 10px; }
+@media (max-width: 600px) { .terms { grid-template-columns: 1fr; } }
