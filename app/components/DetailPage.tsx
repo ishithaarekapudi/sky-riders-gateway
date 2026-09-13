@@ -19,7 +19,8 @@ function guideIcon(kind: "Career" | "Organization" | "Scholarship", title: strin
   return "plane";
 }
 
-export function DetailPage({ active, kind, title, summary, tags, info, backHref }: {
+export function DetailPage({ active, kind, title, summary, tags, info, backHref, logoUrl }: {
+  logoUrl?: string;
   active: string;
   kind: "Career" | "Organization" | "Scholarship";
   title: string;
@@ -28,7 +29,7 @@ export function DetailPage({ active, kind, title, summary, tags, info, backHref 
   info: DetailInfo;
   backHref: string;
 }) {
-  const logo = sourceLogo[info.sourceLabel];
+  const logo = logoUrl === undefined ? sourceLogo[info.sourceLabel] : logoUrl;
   const typeLabel = kind === "Career" ? "CAREER PATH" : kind === "Scholarship" ? "FUNDING OPPORTUNITY" : "COMMUNITY GUIDE";
   const startTitle = kind === "Career" ? "Build Your Path" : "Prepare a Strong Application";
   const actionLabel = kind === "Career" ? "Explore Official Career Source ↗" : "Visit Official Scholarship ↗";

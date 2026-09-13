@@ -1,3 +1,5 @@
+import { getCatalog } from "../lib/catalog";
+export const revalidate = 60;
 import { withPageSeo } from "../lib/seo";
 
 import Link from "next/link";
@@ -30,7 +32,8 @@ const gatewayBenefits = [
   ["calendar", "Events", "Find events and opportunities."],
 ] as const;
 
-export default function Home() {
+export default async function Home() {
+  const partners = (await getCatalog("organizations")).filter(row => row.partner);
   return (
     <main>
       <AuthLandingRedirect />
@@ -140,14 +143,13 @@ export default function Home() {
         <div className="homepage-partner-heading">
           <span>BUILDING THE GATEWAY TOGETHER</span>
           <h2 id="homepage-partner-title">Partnered Organizations</h2>
-          <p>Meet aviation and aerospace organizations helping expand access to education, mentorship, scholarships, and hands-on experiences.</p>
+          <p>Together, we help the next generation discover aviation, find support, and take their next step. Explore our partners—or help us open another door.</p>
         </div>
-        <div className="homepage-partner-logos homepage-partner-placeholders" aria-hidden="true">
-          {Array.from({ length: 5 }, (_, index) => (
-            <div className="homepage-partner-placeholder" key={index} />
-          ))}
+        <div className="homepage-partner-logos">
+          {partners.map(row => <Link href={`/organizations/${row.slug}`} key={row.id || row.slug}>{row.logoUrl && <img src={row.logoUrl} alt={`${row.title} logo`} loading="lazy"/>}<strong>{row.title}</strong></Link>)}
+          {Array.from({ length: Math.max(0, 5 - partners.length) }, (_, index) => <Link className="homepage-partner-placeholder" href="/get-involved/submit" key={`coming-${index}`}><span aria-hidden="true">{index === 0 ? "+" : "✦"}</span><strong>{index === 0 ? "Become a partner" : "More partners coming soon"}</strong><small>{index === 0 ? "Help open the next door →" : "Build the future with us →"}</small></Link>)}
         </div>
-        <Link className="homepage-partner-link" href="/organizations">Meet Our Partnered Organizations →</Link>
+        <Link className="homepage-partner-link" href="/organizations">Explore Our Organization Directory →</Link>
       </section>
       <Footer />
     </main>

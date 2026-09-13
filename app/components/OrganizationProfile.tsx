@@ -7,13 +7,14 @@ import "../organization-branding.css";
 
 const highlightIcons = ["telescope", "people", "globe", "handshake"] as const;
 
-export function OrganizationProfile({ title, summary, tags, info }: {
+export function OrganizationProfile({ title, summary, tags, info, logoUrl }: {
+  logoUrl?: string;
   title: string;
   summary: string;
   tags: readonly string[];
   info: DetailInfo;
 }) {
-  const logo = organizationLogos[title];
+  const logo = logoUrl !== undefined ? (logoUrl ? [logoUrl] : undefined) : organizationLogos[title];
 
   return (
     <PageShell active="organizations">

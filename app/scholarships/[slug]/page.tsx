@@ -1,25 +1,15 @@
 import { withPageSeo } from "../../../lib/seo";
 import { notFound } from "next/navigation";
+import { getCatalog } from "../../../lib/catalog";
 import { DetailPage } from "../../components/DetailPage";
-import { scholarships, slugify } from "../../content";
-import { scholarshipDetails } from "../../detail-content";
 import type { Metadata } from "next";
-
-export function generateStaticParams() {
-  return scholarships.map(([,title])=>({slug:slugify(title)}));
+export const revalidate = 60;
+export async function generateStaticParams() { return (await getCatalog("scholarships")).map(row => ({ slug: row.slug })); }
+export async function generateMetadata({ params }: { params: Promise<{slug: string}> }): Promise<Metadata> {
+  const { slug } = await params; const row = (await getCatalog("scholarships")).find(item => item.slug === slug);
+  return row ? withPageSeo({title: row.title, description: row.summary, alternates: {canonical: `/scholarships/${row.slug}`}, openGraph: {type: "article"}}) : {};
 }
-
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
-  const {slug}=await params; const scholarship=scholarships.find(([,title])=>slugify(title)===slug); const info=scholarshipDetails[slug];
-  if(!scholarship||!info)return{};
-  const description=`${scholarship[1]}: ${scholarship[2]}. Review eligibility, key details, application steps, and the official source.`;
-  return withPageSeo({title:scholarship[1],description,alternates:{canonical:`/scholarships/${slug}`},openGraph:{type:"article"}});
-}
-
-export default async function ScholarshipDetail({params}:{params:Promise<{slug:string}>}) {
-  const {slug}=await params;
-  const scholarship=scholarships.find(([,title])=>slugify(title)===slug);
-  const info=scholarshipDetails[slug];
-  if(!scholarship||!info) notFound();
-  return <DetailPage active="scholarships" kind="Scholarship" title={scholarship[1]} summary={`${scholarship[2]} · ${scholarship[3]}`} tags={[scholarship[2],scholarship[3]]} info={info} backHref="/scholarships"/>;
+export default async function Page({ params }: { params: Promise<{slug: string}> }) {
+  const { slug } = await params; const row = (await getCatalog("scholarships")).find(item => item.slug === slug); if (!row) notFound();
+  return <DetailPage active="scholarships" kind="Scholarship" title={row.title} summary={row.summary} tags={[row.award, row.deadline && `Deadline: ${row.deadline}`, row.location, row.education, ...row.tags].filter(Boolean)} info={row.info} logoUrl={row.logoUrl} backHref="/scholarships"/>;
 }
