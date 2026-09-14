@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://www.ishitha.us";
+export const siteUrl = "https://www.skyriders.org";
 export const socialImage = {
   url: "/hero-gateway-live.jpg",
   width: 1672,
