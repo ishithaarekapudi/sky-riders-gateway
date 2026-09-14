@@ -8,7 +8,7 @@ export const metadata: Metadata = withPageSeo({ title: "Aviation and Aerospace M
 
 export default function MentorshipPage() {
   return <PageShell active="get-involved">
-    <section className="community-page-heading mentorship-heading"><Link href="/get-involved">← Get Involved</Link><span>GATEWAY MENTORSHIP</span><h1>Experience Becomes a Path Forward</h1><p>Gateway brings thoughtful mentors and motivated mentees together through reviewed, supported, and goal-focused matches.</p></section>
+    <section className="community-page-heading mentorship-heading"><Link href="/get-involved">← Get Involved</Link><span>GATEWAY MENTORSHIP</span><h1>Experience Becomes a Path Forward</h1><p>Gateway is building a reviewed, supported, and goal-focused way to connect thoughtful mentors and motivated mentees.</p></section>
     <section className="mentor-process">
       <div><span>1</span><Icon name="document" /><strong>Apply</strong><p>Tell us about your experience, interests, goals, and availability.</p></div>
       <div><span>2</span><Icon name="search" /><strong>Review</strong><p>Gateway reviews applications, references, safety requirements, and fit.</p></div>

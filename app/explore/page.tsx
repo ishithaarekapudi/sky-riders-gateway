@@ -388,7 +388,7 @@ export default function ExplorePage() {
               <div className="explore-section-heading">
                 <span>YOUR GATEWAY</span>
                 <h2><Icon name="user" /> About You</h2>
-                <p>A few quick details help us highlight paths that fit your age and location.</p>
+                <p>A few quick details help you explore opportunities and find resources near you.</p>
               </div>
               <div className="explore-step-card about-you-details">
                 <label className="name-field">
@@ -469,7 +469,7 @@ export default function ExplorePage() {
               <div className="gateway-dashboard-welcome">
                 <div>
                   <h2>{firstName ? `Welcome, ${firstName}!` : "Your Gateway is ready."}</h2>
-                  <p>Here are the strongest starting points for your interests, age, and location.</p>
+                  <p>These starting points are based on the interests you selected. Your location helps you find nearby resources.</p>
                   <div className="gateway-profile-chips"><b>{age}</b><b>{state}</b><b>{selectedInterests.length} interests</b></div>
                 </div>
                 {!userId && age !== "5–7" && age !== "8–12" && <div className="gateway-dashboard-account">
@@ -488,8 +488,8 @@ export default function ExplorePage() {
 
             <div className="gateway-recommendations">
               <div className="gateway-results-title">
-                <div><span>RECOMMENDED FOR YOU</span><h2>Your strongest matches</h2></div>
-                <small>{userId ? "Your complete personalized list" : "A preview of your personalized list"}</small>
+                <div><span>RECOMMENDED FOR YOU</span><h2>Paths matching your interests</h2></div>
+                <small>{userId ? "A full list based on your selected interests" : "A preview based on your selected interests"}</small>
               </div>
               <div className="match-category-tabs" aria-label="Filter personalized matches">
                 {["All Matches","Scholarships","Careers","Opportunities"].map((label)=><button type="button" className={matchFilter===label?"active":""} onClick={()=>setMatchFilter(label)} key={label}>{label}<span>{label==="All Matches"?recommendations.length:opportunities.filter(item=>matchCategory(item)===(label==="Scholarships"?"Scholarship":label==="Careers"?"Career Path":"Opportunity")).length}</span></button>)}
@@ -502,9 +502,9 @@ export default function ExplorePage() {
                     <div className="editorial-match-copy">
                       <small>{category}</small>
                       <h3>{item.title}</h3>
-                      <div className="option-c-meta"><span>{matchedInterests[0] || item.interests[0]}</span><span>Ages {age}</span></div>
+                      <div className="option-c-meta"><span>{matchedInterests[0] || item.interests[0]}</span><span>Verify eligibility</span></div>
                       <p>{item.text}</p>
-                      <div className="option-c-fit"><Icon name="star"/><span><strong>Strong fit</strong> · {matchedInterests.length ? `You selected ${matchedInterests.join(" and ")}.` : "This adds a useful direction to your Gateway."}</span><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View details →</Link></div>
+                      <div className="option-c-fit"><Icon name="star"/><span><strong>Matches your interests</strong> · {matchedInterests.length ? `You selected ${matchedInterests.join(" and ")}.` : "This adds a useful direction to your Gateway."}</span><Link href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>View details →</Link></div>
                     </div>
                     <SaveButton id={`opportunity:${item.title}`} label={item.title} />
                   </article>;
@@ -518,7 +518,7 @@ export default function ExplorePage() {
             </div>}
 
             <section className="explore-nearby" id="near-you">
-              <div className="nearby-heading"><div><span>NEAR YOU</span><h2>Opportunities Near You</h2><p>Discover programs, events, mentors, and resources in your area.</p></div><small>{state || "Choose a location"}</small></div>
+              <div className="nearby-heading"><div><span>NEAR YOU</span><h2>Opportunities Near You</h2><p>Discover verified programs, flight schools, clubs, and directories in your area.</p></div><small>{state || "Choose a location"}</small></div>
               <div className="nearby-layout">
                 <aside className="nearby-controls">
                   <form className="nearby-search-form" onSubmit={searchLocation}>

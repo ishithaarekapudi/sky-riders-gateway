@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
     const logo = multipart?.get("logo");
     const config = submissions[kind as keyof typeof submissions];
     if (!config || !payload || typeof payload !== "object") return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
+    if (kind === "mentor" && !["18–24", "25–39", "40+"].includes(String(payload.age_range || ""))) return NextResponse.json({ error: "Mentor applicants must be 18 or older." }, { status: 400 });
 
     const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
     if (!turnstileSecret) return NextResponse.json({ error: "Spam protection is not configured yet." }, { status: 503 });

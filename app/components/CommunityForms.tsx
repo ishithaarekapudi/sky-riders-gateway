@@ -7,7 +7,7 @@ const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.N
 
 function ConnectionNotice({ mentorshipRole }: { mentorshipRole?: "mentor" | "mentee" }) {
   const safetyText = mentorshipRole
-    ? "Mentor and mentee applications are privately reviewed and vetted before a match is made. Approved participants are introduced by email. Every mentor is 18 or older and consents to identity, reference, and, when appropriate, background screening. When a mentee is under 18, their parent or guardian is included in introductions and ongoing communication."
+    ? "Mentor and mentee applications are privately reviewed before a match is considered. Mentor applicants must be 18 or older and agree to identity, reference, and, when appropriate, background screening. When a mentee is under 18, their parent or guardian is included in introductions and ongoing communication."
       : "Your information goes to Gateway's review queue and is not displayed publicly.";
   return configured
     ? <p className="form-connection-notice"><strong>Private submission:</strong> {safetyText}</p>
