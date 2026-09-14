@@ -5,6 +5,30 @@ import { careerDetails, organizationDetails, scholarshipDetails } from "../app/d
 import { organizationLogos } from "../app/logo-library";
 import { catalogTables, type CatalogItem, type CatalogKind } from "./catalog-model";
 
+// These three listings have time-sensitive eligibility or award details that
+// were corrected against their current official scholarship pages. Keep the
+// public directory accurate while the editable database content is refreshed.
+const currentScholarshipFacts: Record<string, Pick<CatalogItem, "award" | "tags" | "summary" | "info">> = {
+  "aopa-high-school-flight-training": {
+    award: "Up to $12,000*",
+    tags: ["Ages 16–18 · GPA and test requirements"],
+    summary: "AOPA's current cycle offers flight-training awards for eligible high-school students. Confirm the current cycle before applying.",
+    info: scholarshipDetails["aopa-high-school-flight-training"],
+  },
+  "wspa-sky-ghost-scholarship": {
+    award: "Award varies*",
+    tags: ["Women ages 15–24 · Glider certificate"],
+    summary: "The Sky Ghost Scholarship supports eligible young women pursuing glider training toward a private certificate.",
+    info: scholarshipDetails["wspa-sky-ghost-scholarship"],
+  },
+  "wspa-mid-kolstad-scholarship": {
+    award: "Award varies*",
+    tags: ["Women age 25+ · Glider certificate or add-on"],
+    summary: "The Mid Kolstad Scholarship supports eligible women age 25 or older pursuing a private glider certificate or add-on rating.",
+    info: scholarshipDetails["wspa-mid-kolstad-scholarship"],
+  },
+};
+
 export function seededCatalog(kind: CatalogKind): CatalogItem[] {
   const base = { published: true, partner: false, order: 0, award: "", deadline: "", location: "", education: "", logoUrl: "", category: "", icon: "plane" };
   if (kind === "organizations") return organizations.map(([title, summary, tags]) => ({ ...base, id: "", kind, slug: slugify(title), title, summary, tags: [...tags], logoUrl: organizationLogos[title]?.[0] || "", info: organizationDetails[slugify(title)] }));
@@ -37,7 +61,10 @@ export const getCatalog = unstable_cache(async (kind: CatalogKind): Promise<Cata
     const original = seed.find(entry => entry.slug === item.slug);
     // Keep the curated detail-page logo when an editable record has not added
     // its own image yet.
-    return original && !item.logoUrl ? { ...item, logoUrl: original.logoUrl } : item;
+    const withLogo = original && !item.logoUrl ? { ...item, logoUrl: original.logoUrl } : item;
+    return kind === "scholarships" && currentScholarshipFacts[withLogo.slug]
+      ? { ...withLogo, ...currentScholarshipFacts[withLogo.slug] }
+      : withLogo;
   });
   // The original directory remains available while individual entries are
   // progressively moved into the editable database.
