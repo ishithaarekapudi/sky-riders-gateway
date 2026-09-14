@@ -20,7 +20,7 @@ export function tokenHash(token: string) {
 }
 
 export function publicSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://www.ishitha.us").replace(/\/$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://www.skyriders.org").replace(/\/$/, "");
 }
 
 export const completeParentNotice = `Sky Riders Gateway offers an optional parent-managed Explore profile for children ages 5–12. Before verified consent, Gateway does not collect the child's nickname, interests, state, or Explore answers. After consent is active, a parent may create a private profile containing an optional nickname, broad age range, state, interests, and current stage. The profile is used only to personalize Gateway Explore recommendations. It is not public, is not used for behavioral advertising, and is not shared with mentors. Under-13 mentorship is unavailable. Parents can review or delete the profile and revoke consent at any time. Gateway uses Supabase for protected database storage, Vercel for hosting, Resend for consent email, Cloudflare Turnstile for abuse prevention, and Stripe only when a separate purchase is made.`;
@@ -42,4 +42,3 @@ export async function sendConsentEmail(args: { to: string; subject: string; head
   });
   if (!response.ok) throw new Error("The email provider rejected the message.");
 }
-

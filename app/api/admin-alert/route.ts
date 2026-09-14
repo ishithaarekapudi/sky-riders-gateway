@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
   }
 
   const alert = alertTypes[payload.table];
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ishitha.us";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.skyriders.org";
   const adminUrl = `${siteUrl.replace(/\/$/, "")}/admin`;
   const sender = process.env.ALERT_FROM_EMAIL || "Sky Riders Gateway <onboarding@resend.dev>";
 
