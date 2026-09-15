@@ -4,6 +4,13 @@ import { safeNext } from "./lib/auth-navigation";
 import type { Database } from "./lib/supabase/database.types";
 
 export async function proxy(request: NextRequest) {
+  const hostname = request.headers.get("host")?.split(":")[0].toLowerCase();
+  if ((hostname === "ishitha.us" || hostname === "www.ishitha.us") && request.nextUrl.pathname !== "/about") {
+    const destination = request.nextUrl.clone();
+    destination.pathname = "/about";
+    destination.search = "";
+    return NextResponse.redirect(destination, 308);
+  }
   // Supabase may send older email links to Site URL instead of the callback.
   // Redirect before browser clients can consume the one-time PKCE code.
   if (request.nextUrl.pathname === "/" && request.nextUrl.searchParams.has("code")) {
