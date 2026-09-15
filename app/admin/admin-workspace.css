@@ -43,3 +43,9 @@
 /* Keep directory tabs inside the admin panel */
 .admin-workspace-panel .admin-tabs { width: 100%; max-width: 100%; box-sizing: border-box; }
 .admin-workspace-panel .admin-tabs button { min-width: 0; }
+
+/* Keep Inbox controls and review cards inside the panel */
+.admin-workspace-panel .admin-toolbar, .admin-workspace-panel .admin-review-list { width: 100%; max-width: 100%; box-sizing: border-box; }
+.admin-workspace-panel .admin-toolbar { flex-wrap: wrap; }
+.admin-workspace-panel .admin-toolbar > div { max-width: 100%; overflow-x: auto; }
+.admin-workspace-panel .admin-empty { width: 100%; box-sizing: border-box; }
