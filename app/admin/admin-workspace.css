@@ -1,0 +1,31 @@
+/* Calm, task-first administrator workspace */
+.admin-workspace { max-width: 1180px; margin: 0 auto; min-height: 100vh; padding: 38px 24px 88px; background: transparent; font-family: Inter, "Avenir Next", "Segoe UI", Arial, sans-serif; }
+.admin-workspace-header { align-items: center; padding: 0 0 26px; border-bottom: 1px solid #dbe6f0; }
+.admin-workspace-header h1 { margin: 8px 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px, 4.6vw, 54px); font-weight: 400; line-height: 1; letter-spacing: -.04em; }
+.admin-workspace-header p { max-width: 620px; font-size: 15px; }
+.admin-return-link { padding: 11px 16px; box-shadow: none; transition: background .15s ease, border-color .15s ease; }
+.admin-return-link:hover { border-color: #90b9df; background: #f4f9fd; }
+.admin-workspace-nav { width: fit-content; max-width: 100%; display: flex; gap: 4px; margin: 22px 0; padding: 5px; border: 1px solid #d7e4ef; border-radius: 13px; background: #edf4fa; }
+.admin-workspace-nav button { min-height: 0; min-width: 172px; display: flex; align-items: baseline; gap: 8px; padding: 12px 14px; border: 0; border-radius: 9px; background: transparent; color: #395b7e; transition: background .15s ease, color .15s ease; }
+.admin-workspace-nav button:hover { transform: none; border: 0; box-shadow: none; background: rgba(255,255,255,.72); }
+.admin-workspace-nav button.active { border: 0; background: #083a70; color: #fff; box-shadow: 0 7px 17px rgba(6,47,91,.16); }
+.admin-workspace-nav strong { font-size: 14px; font-weight: 650; }.admin-workspace-nav span { font-size: 11px; white-space: nowrap; }
+.admin-workspace-panel { padding: 30px; border: 1px solid #dbe6f0; border-radius: 20px; background: #fff; box-shadow: 0 16px 42px rgba(11,47,83,.06); }
+.admin-workspace-panel > .content-manager { max-width: none; margin: 0; padding: 0; }
+.admin-section-intro { display: flex; justify-content: space-between; gap: 28px; align-items: end; margin: 0 0 24px; }
+.admin-section-intro h2 { margin: 8px 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 3.5vw, 42px); font-weight: 400; line-height: 1.05; letter-spacing: -.03em; }
+.admin-section-intro p { max-width: 650px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.admin-section-intro .admin-helper { max-width: 270px; padding: 12px 14px; border-left: 3px solid #78aee4; background: #f2f8fd; border-radius: 0 10px 10px 0; color: #436484; font-size: 12px; }
+.content-manager-steps { display: none; }
+.admin-tabs { display: flex; overflow-x: auto; gap: 0; margin: 0; border: 1px solid #d4e1ec; border-radius: 11px; background: #f8fbfd; }
+.admin-tabs button { min-width: max-content; flex: 1; padding: 12px 17px; border: 0; border-right: 1px solid #dce7f0; background: transparent; color: #4c6b88; font-size: 13px; font-weight: 600; }
+.admin-tabs button:last-child { border-right: 0; }.admin-tabs button.active { background: #e8f3fe; color: #075fb8; box-shadow: inset 0 -2px #1475e9; }
+.content-toolbar { margin: 20px 0; }.content-toolbar label { min-width: min(100%, 330px); color: #385978; font-size: 12px; }.content-toolbar input:not([type=checkbox]) { min-height: 44px; border-radius: 10px; background: #fbfdff; }
+.content-editor { margin: 22px 0; padding: 25px; border: 1px solid #93c1ea; border-radius: 15px; background: #f5faff; box-shadow: none; }.content-editor h3 { margin-top: 0; font-family: Georgia, "Times New Roman", serif; font-size: 26px; font-weight: 400; }
+.content-list { gap: 9px; }.content-list article { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 18px; border-radius: 12px; }.content-list article .card-actions { margin: 0; justify-content: flex-end; }.content-list h3 { font-size: 15px; }.content-list article > div:first-child > span { padding: 4px 8px; border-radius: 999px; background: #eef5fb; color: #52718e; font-size: 11px; }
+.submission-import { margin-top: 14px; border: 1px solid #d9e7f2; border-radius: 11px; background: #f7fbff; }.submission-import summary { color: #24577f; font-size: 13px; font-weight: 600; }
+.admin-workspace-panel .admin-page { min-height: 0; padding: 0; background: transparent; font-family: inherit; }.admin-workspace-panel .admin-header { display: none; }
+.admin-review-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin: 0 0 20px; }.admin-review-heading h2 { margin: 8px 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 3.5vw, 42px); font-weight: 400; line-height: 1.05; }.admin-review-heading p { margin: 0; color: var(--muted); font-size: 15px; }.admin-signed-in { color: #647d95; font-size: 12px; }
+.admin-workspace-panel .admin-security-note { width: auto; margin: 0 0 18px; border-radius: 11px; background: #f5faff; font-size: 12px; }.admin-workspace-panel .admin-toolbar { margin-top: 18px; padding: 0 0 14px; border-bottom: 1px solid #e1ebf3; }.admin-workspace-panel .admin-toolbar h2 { font-size: 17px; }.admin-workspace-panel .admin-review-card { border-radius: 13px; box-shadow: none; }.admin-workspace-panel .admin-review-card h3 { font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-weight: 400; }
+@media (max-width: 720px) { .admin-workspace { padding: 28px 16px 56px; }.admin-workspace-header { align-items: start; flex-direction: column; }.admin-workspace-nav { width: 100%; }.admin-workspace-nav button { min-width: 0; flex: 1; flex-direction: column; align-items: flex-start; gap: 3px; }.admin-workspace-nav span { white-space: normal; }.admin-workspace-panel { padding: 20px 16px; border-radius: 16px; }.admin-section-intro,.admin-review-heading { align-items: start; flex-direction: column; gap: 12px; }.admin-section-intro .admin-helper { max-width: none; }.content-list article { align-items: flex-start; flex-direction: column; }.content-list article .card-actions { justify-content: flex-start; }.admin-workspace-panel .admin-security-note { align-items: flex-start; flex-direction: column; } }
+

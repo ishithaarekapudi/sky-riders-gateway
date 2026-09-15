@@ -1,10 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { createClient } from "../../lib/supabase/client";
 import type { Database } from "../../lib/supabase/database.types";
-import { BrandLogo } from "../ui";
 
 type Opportunity = Database["public"]["Tables"]["opportunity_submissions"]["Row"];
 type Mentor = Database["public"]["Tables"]["mentor_applications"]["Row"];
@@ -66,7 +64,7 @@ export function AdminReviewDashboard({ adminId, adminEmail, initial }: { adminId
   }
 
   return <main className="admin-page">
-    <header className="admin-header"><div className="admin-brand"><BrandLogo /></div><div className="admin-heading"><span className="eyebrow">PRIVATE ADMINISTRATOR AREA</span><h1>Gateway Review Center</h1><p>Review mentorship applications, community submissions, privacy requests, and inquiries in one secure place.</p></div><div className="admin-identity"><span>Signed in securely as</span><strong>{adminEmail}</strong><Link href="/dashboard">Return to My Gateway →</Link></div></header>
+    <header className="admin-review-heading"><div><span className="eyebrow">REVIEW INBOX</span><h2>What needs your attention</h2><p>Review submissions, messages, mentorship applications, and privacy requests.</p></div><span className="admin-signed-in">Signed in as {adminEmail}</span></header>
     <aside className="admin-security-note"><strong>Safety checklist</strong><span>Use MFA on every administrator service, verify guardian consent outside the teen application, keep sensitive identity documents out of notes and email, and review the administrator allowlist regularly.</span></aside>
     <nav className="admin-tabs" aria-label="Review queues">{(Object.keys(records) as QueueKey[]).map((key) => <button key={key} className={queue === key ? "active" : ""} onClick={() => setQueue(key)}><span>{key === "opportunities" ? "Submissions" : key[0].toUpperCase() + key.slice(1)}</span><b>{counts[key]}</b></button>)}</nav>
     <section className="admin-toolbar"><h2>{queue === "opportunities" ? "Opportunity and organization submissions" : queue === "privacy" ? "Privacy and deletion requests" : queue}</h2><div><button className={filter === "open" ? "active" : ""} onClick={() => setFilter("open")}>Needs review</button><button className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>All records</button></div></section>

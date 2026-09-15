@@ -10,7 +10,7 @@ export function MediaOutletManager({ initial, setupError }: { initial: MediaOutl
     try { const response = await fetch("/api/admin/media", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(editing) }); const result = await response.json(); if (!response.ok) throw new Error(result.error || "Could not save."); setItems(current => [...current.filter(item => item.id !== result.item.id), result.item]); setEditing(null); setMessage("Saved. Refresh the media page to see the update."); }
     catch (error) { setMessage(error instanceof Error ? error.message : "Could not save."); } finally { setBusy(false); }
   }
-  return <section className="content-manager media-outlet-manager"><div className="section-heading"><span>MEDIA & PRESS</span><h2>Manage media logos</h2><p>Add a logo for a new interview, feature, podcast, newspaper, or television outlet. Publish it when it is ready to appear on the media and founder pages.</p></div>
+  return <section className="content-manager media-outlet-manager"><div className="admin-section-intro"><div><span className="eyebrow">MEDIA & PRESS</span><h2>Manage press features</h2><p>Add a logo and link for an interview, feature, podcast, newspaper, or television outlet.</p></div></div>
     {setupError && <p className="form-error">Media-logo controls need the database update before they can save.</p>}
     <button className="primary-button" disabled={setupError || busy} onClick={() => { setEditing(blank()); setMessage(""); }}>+ Add media outlet</button>
     {message && <p className="admin-message" role="status">{message}</p>}
