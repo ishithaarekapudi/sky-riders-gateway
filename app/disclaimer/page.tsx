@@ -10,7 +10,7 @@ export default function DisclaimerPage() {
     <main className="policy-page">
       <span>TERMS &amp; DISCLAIMER</span>
       <h1>Use Gateway as a starting point, then verify every next step.</h1>
-      <p className="policy-updated">Informational-use notice · Updated August 19, 2026</p>
+      <p className="policy-updated">Informational-use notice · Updated September 15, 2026</p>
 
       <section>
         <h2>Educational information</h2>
@@ -35,6 +35,21 @@ export default function DisclaimerPage() {
       <section>
         <h2>Accounts and acceptable use</h2>
         <p>Users are responsible for providing accurate information, protecting account access, and using Gateway lawfully and respectfully. Do not submit sensitive personal information, confidential records, precise schedules, financial account information, government identification numbers, or another person’s information without authorization.</p>
+      </section>
+
+      <section>
+        <h2>Book purchases</h2>
+        <p><i>Cleared for Takeoff</i> is offered as a paperback through Stripe checkout. The listed book price does not include shipping or applicable taxes; Stripe presents the final amount after you provide the delivery address and before payment is submitted. Stripe processes payment and sends the purchase receipt. Before purchasing, review the checkout details carefully and contact Gateway through the <Link href="/about/contact">contact form</Link> with order questions. Any returns, replacements, or fulfillment decisions are handled individually and may depend on the order and delivery status.</p>
+      </section>
+
+      <section>
+        <h2>Content ownership and fair use</h2>
+        <p>Unless otherwise stated, Gateway&apos;s written content, design, and original materials are owned by Sky Riders Gateway or their respective creators. Do not reproduce substantial portions without permission. Third-party names, logos, and links belong to their respective owners and are used only to identify the referenced organization or resource.</p>
+      </section>
+
+      <section>
+        <h2>Disclosures</h2>
+        <p>Gateway will clearly identify paid placements, sponsorships, affiliate links, gifted products, or other material relationships near the related recommendation or promotion. A partner listing alone does not mean the organization has paid Gateway.</p>
       </section>
 
       <section>
