@@ -39,3 +39,7 @@
 .content-toolbar > button { min-height: 44px; white-space: nowrap; }
 .media-outlet-manager > .admin-section-intro { margin-bottom: 0; }
 @media (max-width: 720px) { .admin-section-intro { min-height: 0; }.content-toolbar { grid-template-columns: 1fr; }.content-toolbar label { width: 100%; }.content-toolbar > button { width: 100%; } }
+
+/* Keep directory tabs inside the admin panel */
+.admin-workspace-panel .admin-tabs { width: 100%; max-width: 100%; box-sizing: border-box; }
+.admin-workspace-panel .admin-tabs button { min-width: 0; }
