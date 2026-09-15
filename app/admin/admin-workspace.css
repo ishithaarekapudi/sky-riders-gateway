@@ -29,3 +29,13 @@
 .admin-workspace-panel .admin-security-note { width: auto; margin: 0 0 18px; border-radius: 11px; background: #f5faff; font-size: 12px; }.admin-workspace-panel .admin-toolbar { margin-top: 18px; padding: 0 0 14px; border-bottom: 1px solid #e1ebf3; }.admin-workspace-panel .admin-toolbar h2 { font-size: 17px; }.admin-workspace-panel .admin-review-card { border-radius: 13px; box-shadow: none; }.admin-workspace-panel .admin-review-card h3 { font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-weight: 400; }
 @media (max-width: 720px) { .admin-workspace { padding: 28px 16px 56px; }.admin-workspace-header { align-items: start; flex-direction: column; }.admin-workspace-nav { width: 100%; }.admin-workspace-nav button { min-width: 0; flex: 1; flex-direction: column; align-items: flex-start; gap: 3px; }.admin-workspace-nav span { white-space: normal; }.admin-workspace-panel { padding: 20px 16px; border-radius: 16px; }.admin-section-intro,.admin-review-heading { align-items: start; flex-direction: column; gap: 12px; }.admin-section-intro .admin-helper { max-width: none; }.content-list article { align-items: flex-start; flex-direction: column; }.content-list article .card-actions { justify-content: flex-start; }.admin-workspace-panel .admin-security-note { align-items: flex-start; flex-direction: column; } }
 
+
+/* Align content and media controls */
+.admin-section-intro { min-height: 118px; align-items: start; }
+.admin-section-intro > div { flex: 1; }
+.admin-section-intro .admin-helper { align-self: end; margin: 0; }
+.content-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 18px; }
+.content-toolbar label { width: min(100%, 330px); }
+.content-toolbar > button { min-height: 44px; white-space: nowrap; }
+.media-outlet-manager > .admin-section-intro { margin-bottom: 0; }
+@media (max-width: 720px) { .admin-section-intro { min-height: 0; }.content-toolbar { grid-template-columns: 1fr; }.content-toolbar label { width: 100%; }.content-toolbar > button { width: 100%; } }
