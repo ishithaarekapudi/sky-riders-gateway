@@ -22,7 +22,7 @@ export default async function AboutPage() {
       <p>A young pilot and future astronaut turning her experience in aviation into clearer pathways for the next generation.</p>
     </div></section>
     <section className="section founder-introduction">
-      <figure className="founder-portrait"><img src="/ishitha-founder.jpg" alt="Ishitha Arekapudi, founder of Sky Riders Gateway"/></figure>
+      <figure className="founder-portrait"><img src="/ishitha-founder.jpg?v=20260916" alt="Ishitha Arekapudi, founder of Sky Riders Gateway"/></figure>
       <div>
         <span className="eyebrow">THE FOUNDER BEHIND GATEWAY</span>
         <h2>A Pilot Building the Gateway She Wished Existed</h2>
