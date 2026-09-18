@@ -7,8 +7,8 @@ import { siteUrl, socialImage } from "../lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "Sky Riders Gateway", template: "%s | Sky Riders Gateway" },
-  description: "Explore aviation and aerospace careers, scholarships, mentors, organizations, and youth opportunities with a personalized pathway from Sky Riders Gateway.",
-  keywords: ["aviation careers","aerospace careers","aviation scholarships","youth aviation programs","student pilot resources","aerospace opportunities","aviation mentors","Sky Riders Gateway"],
+  description: "Explore youth aviation, aerospace, flight, drones, computer science, engineering, STEM careers, scholarships, mentors, and organizations with a personalized pathway from Sky Riders Gateway.",
+  keywords: ["aviation careers","aerospace careers","aviation scholarships","youth aviation programs","student pilot resources","flight training scholarships","drone careers","UAS programs","aerospace engineering","computer science careers","engineering opportunities","STEM opportunities","aviation mentors","Sky Riders Gateway"],
   authors: [{ name: "Sky Riders Gateway" }, { name: "Ishitha Arekapudi" }],
   creator: "Sky Riders Gateway",
   publisher: "Sky Riders Gateway",
@@ -23,10 +23,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website", locale: "en_US", url: "/", siteName: "Sky Riders Gateway",
     title: "Sky Riders Gateway | Aviation and Aerospace Pathways",
-    description: "Turn curiosity into a clear aviation or aerospace path through trusted careers, scholarships, programs, mentors, and next steps.",
+    description: "Turn curiosity into a clear aviation, aerospace, drone, computer science, engineering, or STEM path through trusted careers, scholarships, programs, mentors, and next steps.",
     images: [socialImage],
   },
-  twitter: { card: "summary_large_image", title: "Sky Riders Gateway", description: "Find aviation and aerospace careers, scholarships, programs, mentors, and practical next steps.", images: ["/hero-gateway-live.jpg"] },
+  twitter: { card: "summary_large_image", title: "Sky Riders Gateway", description: "Find aviation, aerospace, drone, computer science, engineering, and STEM careers, scholarships, programs, mentors, and practical next steps.", images: ["/hero-gateway-live.jpg"] },
   icons: { icon: "/brand/sky-riders-mark-v3.png", apple: "/brand/sky-riders-mark-v3.png" },
   category: "education",
 };
