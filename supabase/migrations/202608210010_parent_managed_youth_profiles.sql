@@ -72,6 +72,11 @@ alter table public.parental_consents enable row level security;
 alter table public.parent_managed_explore_profiles enable row level security;
 alter table public.data_deletion_requests enable row level security;
 
+-- Keep Data API access explicit for new public-schema tables.
+grant select on public.parental_consents to authenticated;
+grant select, insert, update, delete on public.parent_managed_explore_profiles to authenticated;
+grant select, insert, update, delete on public.data_deletion_requests to authenticated;
+
 drop policy if exists "Parents can read their consent records" on public.parental_consents;
 create policy "Parents can read their consent records" on public.parental_consents
   for select to authenticated using (auth.uid() = parent_user_id);
