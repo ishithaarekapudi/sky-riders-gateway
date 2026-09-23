@@ -11,3 +11,4 @@ alter table public.media_outlets enable row level security;
 create policy "Public reads published media outlets" on public.media_outlets for select using (published = true);
 create policy "Administrators manage media outlets" on public.media_outlets for all to authenticated using ((select public.is_gateway_admin())) with check ((select public.is_gateway_admin()));
 grant select, insert, update, delete on public.media_outlets to authenticated;
+grant select on public.media_outlets to anon;
