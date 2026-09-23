@@ -21,6 +21,7 @@ create index if not exists location_directory_state_idx on public.location_direc
 alter table public.location_directory enable row level security;
 drop policy if exists "Published location records are public" on public.location_directory;
 create policy "Published location records are public" on public.location_directory for select using (published = true);
+grant select on public.location_directory to anon, authenticated;
 
 insert into public.location_directory
   (organization_slug, organization_name, location_name, location_type, state, official_url, source_url, description)
